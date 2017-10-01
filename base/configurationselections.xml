@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- selections with options for configuration -->
+<Selections>
+	<Selection name="ScreenWidth" display="Screen Width">
+		<Options name="ScreenWidth">
+			<Option display="Low Resolution (800)" value="800"/>
+			<Option display="Medium Resolution (1024)" value="1024"/>
+			<Option display="High Resolution (1600)" value="1600"/>
+		</Options>
+	</Selection>
+	
+	<Selection name="ScreenHeight" display="Screen Height">
+		<Options name="ScreenHeight">
+			<Option display="Low Resolution (600)" value="600"/>
+			<Option display="Medium Resolution (768)" value="768"/>
+			<Option display="High Resolution (900)" value="900"/>
+		</Options>
+	</Selection>
+
+	<Selection name="GameDifficulty" display="Game Difficulty">
+		<Options name="GameDifficulty">
+			<Option display="Easy Mode" value="1"/>
+			<Option display="Medium Mode" value="2"/>
+			<Option display="Hard Mode" value="3"/>
+		</Options>
+	</Selection>
+
+	<Selection name="exit" display="Exit Configuration" type="EXIT"/>
+</Selections>

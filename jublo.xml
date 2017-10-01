@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Boss name="Jublo" dir="jublo" turn="3" attack="20" reduce="2">
+	<PreferredTheme>Desktop</PreferredTheme>
+	<Media>
+    	<ResourceRef type="texture" name="boss_color0">color0.png</ResourceRef>
+    	<ResourceRef type="texture" name="boss_color1">color1.png</ResourceRef>
+    	<ResourceRef type="texture" name="boss_attack_bg">attackbg.png</ResourceRef>
+    	<ResourceRef type="texture" name="boss_attack_fg">attackfg.png</ResourceRef>
+    	<ResourceRef type="texture" name="boss_attack_bg_mask">attackbg-mask.png</ResourceRef>
+    	<ResourceRef type="texture" name="boss_attack_fg_mask">attackfg-mask.png</ResourceRef>
+    	<ResourceRef type="texture" name="boss_icon">jublo-icon.png</ResourceRef>
+    	<ResourceRef type="texture" name="boss_icon_mask">jublo-icon-mask.png</ResourceRef>
+		<ResourceRef type="audio" name="boss_attack">zombie-attack.wav</ResourceRef>
+		<ResourceRef type="audio" name="boss_damage">iceball.wav</ResourceRef>
+		<ResourceRef type="audio" name="boss_die">deatha.wav</ResourceRef>	    
+		<ResourceRef type="audio" name="boss_win">dwarf-laugh.wav</ResourceRef>	
+	</Media>
+	<Shape>
+		          
+	<!--   Treegor -->
+	<!--
+		<ShapeRow>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</ShapeRow>
+		<ShapeRow>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</ShapeRow>
+		<ShapeRow>.,.,.,.,.,.,0,0,0,0,0,.,.,.,.,.</ShapeRow>
+		<ShapeRow>.,.,.,.,0,0,.,.,.,.,.,0,0,.,.,.</ShapeRow>
+		<ShapeRow>.,.,.,0,.,.,.,.,.,.,.,.,.,0,.,.</ShapeRow>
+		<ShapeRow>.,.,.,.,0,0,.,.,0,.,.,0,0,.,.,.</ShapeRow>
+		<ShapeRow>.,.,.,.,.,.,0,0,.,0,0,.,.,.,.,.</ShapeRow>
+		<ShapeRow>.,.,.,.,.,.,.,0,.,0,.,.,.,.,.,.</ShapeRow>
+		<ShapeRow>.,.,.,.,.,.,.,0,.,0,.,.,.,.,.,.</ShapeRow>
+		<ShapeRow>.,.,.,.,.,.,0,.,0,.,0,.,.,.,.,.</ShapeRow>
+	-->          
+		<ShapeRow>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</ShapeRow>
+		<ShapeRow>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</ShapeRow>
+		<ShapeRow>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</ShapeRow>
+		<ShapeRow>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</ShapeRow>
+		<ShapeRow>.,.,.,.,.,.,0,.,.,0,.,.,.,.,.,.</ShapeRow>
+		<ShapeRow>.,.,.,.,.,0,0,0,0,0,0,.,.,.,.,.</ShapeRow>
+		<ShapeRow>.,.,.,.,0,0,0,0,0,0,0,0,.,.,.,.</ShapeRow>
+		<ShapeRow>.,.,.,.,.,0,.,.,.,.,0,.,.,.,.,.</ShapeRow>
+		<ShapeRow>.,.,.,0,.,.,0,0,0,0,.,.,0,.,.,.</ShapeRow>
+		<ShapeRow>.,.,.,.,0,0,.,.,.,.,0,0,.,.,.,.</ShapeRow>
+	<!-- Test Pattern -->
+	<!-- 
+		<ShapeRow>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</ShapeRow>
+		<ShapeRow>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</ShapeRow>
+		<ShapeRow>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</ShapeRow>
+		<ShapeRow>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</ShapeRow>
+		<ShapeRow>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</ShapeRow>
+		<ShapeRow>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</ShapeRow>
+		<ShapeRow>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</ShapeRow>
+		<ShapeRow>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</ShapeRow>
+		<ShapeRow>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</ShapeRow>
+		<ShapeRow>.,.,.,.,.,.,0,.,.,.,.,.,.,.,.,.</ShapeRow>
+	-->
+	</Shape>
+	<Pattern>
+        <PatternRow>X,X</PatternRow>
+	<PatternRow>O,0</PatternRow>
+	</Pattern>
+</Boss>

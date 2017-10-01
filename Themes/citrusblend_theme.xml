@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Theme name="CitrusBlend">
+	<ThemeDir name="citrus_blend"/>	
+	<ResourceRef type="audio" name="audio_drop" altdir="base">toggled.wav</ResourceRef>
+	<ResourceRef type="audio" name="audio_scan" altdir="base">button.wav</ResourceRef>
+	<ResourceRef type="audio" name="audio_special" altdir="base">expand.wav</ResourceRef>
+	<ResourceRef type="audio" name="audio_move" altdir="base">slider.wav</ResourceRef>
+	<ResourceRef type="audio" name="audio_rotate" altdir="base">clicked.wav</ResourceRef>
+	<ResourceRef type="audio" name="audio_levelup" altdir="base">nudge.wav</ResourceRef>
+	<ResourceRef type="audio" name="audio_magic" altdir="base">question.wav</ResourceRef>
+	<ResourceRef type="texture" name="texture_piecemask0">spritely-mask.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_piecemask1">spritely-mask.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_color0">spritely-0.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_color1">spritely-1.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_special0">spritely-0-special.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_special1">spritely-1-special.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_scanned0">spritely-0-scan.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_scanned1">spritely-1-scan.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_grid">spritely-grid.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_grid_mask">spritely-grid-mask.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_magicbox">spritely-magic.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_magicbox_mask">spritely-magic-mask.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_spark">spritely-bee.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_spark_mask">spritely-bee-mask.png</ResourceRef>		
+	<ResourceRef type="texture" name="texture_stars">spritely-magic.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_stars_mask">spritely-magic-mask.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_holder">holder.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_scanner">scanner.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_flag">spritely-flag.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_flag_mask">spritely-flag-mask.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_bg">spritely-bg.png</ResourceRef>	
+	<ResourceRef type="texture" name="texture_block0">spritely-block-1.png</ResourceRef>
+  	<ResourceRef type="texture" name="texture_block1">spritely-block-0.png</ResourceRef>	
+	<ResourceRef type="texture" name="texture_icon">spritely-icon.png</ResourceRef>
+  	<ResourceRef type="texture" name="texture_icon_mask">spritely-icon-mask.png</ResourceRef>	
+	<ResourceRef type="font" name="hud_font" pointsize="42" red="0.32" green="0.60" blue="0.1">Chick.ttf</ResourceRef>
+	<ResourceRef type="string" name="hud_file">spritely_hud.xml</ResourceRef>
+	<SongRef name="audio_song">
+	  <TrackName>WhereAreYou.mp3</TrackName>
+		<AudioInfo type="mp3" tracklength="219" unit="seconds" artist="St. Adam" track="Where Are You">		
+			<BeatSequence unit="seconds">
+				<Beat>20.151000</Beat>
+				<Beat>20.473000</Beat>
+				<Beat>21.409000</Beat>
+				<Beat>21.719000</Beat>
+				<Beat>22.344000</Beat>
+				<Beat>22.385000</Beat>
+				<Beat>30.165000</Beat>
+				<Beat>30.483000</Beat>
+				<Beat>30.488000</Beat>
+				<Beat>31.417000</Beat>
+				<Beat>31.730000</Beat>
+				<Beat>31.766000</Beat>
+				<Beat>32.348000</Beat>
+				<Beat>40.169000</Beat>
+				<Beat>40.207000</Beat>
+				<Beat>40.234000</Beat>
+				<Beat>40.488000</Beat>
+				<Beat>41.421000</Beat>
+				<Beat>41.482000</Beat>
+				<Beat>41.734000</Beat>
+				<Beat>41.798000</Beat>
+				<Beat>42.357000</Beat>
+				<Beat>46.429000</Beat>
+				<Beat>48.930000</Beat>
+				<Beat>50.180000</Beat>
+				<Beat>50.241000</Beat>
+				<Beat>50.497000</Beat>
+				<Beat>50.521000</Beat>
+				<Beat>51.429000</Beat>
+				<Beat>51.489000</Beat>
+				<Beat>51.742000</Beat>
+				<Beat>51.806000</Beat>
+				<Beat>52.365000</Beat>
+				<Beat>55.185000</Beat>
+				<Beat>55.245000</Beat>
+				<Beat>55.500000</Beat>
+				<Beat>55.535000</Beat>
+				<Beat>56.432000</Beat>
+				<Beat>56.493000</Beat>
+				<Beat>56.517000</Beat>
+				<Beat>56.737000</Beat>
+				<Beat>56.809000</Beat>
+				<Beat>57.369000</Beat>
+				<Beat>60.188000</Beat>
+				<Beat>60.248000</Beat>
+				<Beat>60.505000</Beat>
+				<Beat>61.436000</Beat>
+				<Beat>61.496000</Beat>
+				<Beat>61.743000</Beat>
+				<Beat>61.748000</Beat>
+				<Beat>61.814000</Beat>
+				<Beat>62.370000</Beat>
+				<Beat>65.192000</Beat>
+				<Beat>65.253000</Beat>
+				<Beat>65.507000</Beat>
+				<Beat>66.440000</Beat>
+				<Beat>66.501000</Beat>
+				<Beat>66.526000</Beat>
+				<Beat>66.745000</Beat>
+				<Beat>66.816000</Beat>
+				<Beat>67.376000</Beat>
+				<Beat>67.420000</Beat>
+				<Beat>70.195000</Beat>
+				<Beat>70.256000</Beat>
+				<Beat>70.285000</Beat>
+				<Beat>70.511000</Beat>
+				<Beat>70.528000</Beat>
+				<Beat>71.444000</Beat>
+				<Beat>71.505000</Beat>
+				<Beat>71.751000</Beat>
+				<Beat>71.756000</Beat>
+				<Beat>71.821000</Beat>
+				<Beat>72.380000</Beat>
+				<Beat>75.199000</Beat>
+				<Beat>75.260000</Beat>
+				<Beat>75.514000</Beat>
+				<Beat>76.448000</Beat>
+				<Beat>76.508000</Beat>
+				<Beat>76.533000</Beat>
+				<Beat>76.754000</Beat>
+				<Beat>76.760000</Beat>
+				<Beat>76.824000</Beat>
+				<Beat>77.378000</Beat>
+				<Beat>80.203000</Beat>
+				<Beat>80.264000</Beat>
+				<Beat>80.519000</Beat>
+				<Beat>81.452000</Beat>
+				<Beat>81.512000</Beat>
+				<Beat>81.764000</Beat>
+				<Beat>81.829000</Beat>
+				<Beat>82.388000</Beat>
+				<Beat>85.206000</Beat>
+				<Beat>85.268000</Beat>
+				<Beat>85.522000</Beat>
+				<Beat>86.455000</Beat>
+				<Beat>86.515000</Beat>
+				<Beat>86.540000</Beat>
+				<Beat>86.759000</Beat>
+				<Beat>86.832000</Beat>
+				<Beat>87.391000</Beat>
+				<Beat>90.211000</Beat>
+				<Beat>90.271000</Beat>
+				<Beat>90.526000</Beat>
+				<Beat>91.459000</Beat>
+				<Beat>91.519000</Beat>
+				<Beat>91.773000</Beat>
+				<Beat>91.837000</Beat>
+				<Beat>92.395000</Beat>
+				<Beat>95.210000</Beat>
+				<Beat>95.524000</Beat>
+				<Beat>96.463000</Beat>
+				<Beat>96.779000</Beat>
+				<Beat>96.783000</Beat>
+				<Beat>97.393000</Beat>
+				<Beat>100.218000</Beat>
+				<Beat>100.278000</Beat>
+				<Beat>100.306000</Beat>
+				<Beat>100.533000</Beat>
+				<Beat>101.467000</Beat>
+				<Beat>101.527000</Beat>
+				<Beat>101.780000</Beat>
+				<Beat>101.844000</Beat>
+				<Beat>102.403000</Beat>
+				<Beat>102.447000</Beat>
+				<Beat>105.222000</Beat>
+				<Beat>105.531000</Beat>
+				<Beat>106.469000</Beat>
+				<Beat>106.783000</Beat>
+				<Beat>106.849000</Beat>
+				<Beat>107.401000</Beat>
+				<Beat>110.225000</Beat>
+				<Beat>110.287000</Beat>
+				<Beat>110.542000</Beat>
+				<Beat>111.475000</Beat>
+				<Beat>111.535000</Beat>
+				<Beat>111.788000</Beat>
+				<Beat>111.852000</Beat>
+				<Beat>112.410000</Beat>
+				<Beat>115.230000</Beat>
+				<Beat>115.543000</Beat>
+				<Beat>116.477000</Beat>
+				<Beat>116.791000</Beat>
+				<Beat>116.857000</Beat>
+				<Beat>117.409000</Beat>
+				<Beat>135.244000</Beat>
+				<Beat>135.305000</Beat>
+				<Beat>135.561000</Beat>
+				<Beat>136.493000</Beat>
+				<Beat>136.554000</Beat>
+				<Beat>136.807000</Beat>
+				<Beat>136.871000</Beat>
+				<Beat>137.428000</Beat>
+				<Beat>140.248000</Beat>
+				<Beat>140.562000</Beat>
+				<Beat>140.625000</Beat>
+				<Beat>141.493000</Beat>
+				<Beat>141.809000</Beat>
+				<Beat>141.875000</Beat>
+				<Beat>142.427000</Beat>
+				<Beat>145.252000</Beat>
+				<Beat>145.313000</Beat>
+				<Beat>145.570000</Beat>
+				<Beat>146.501000</Beat>
+				<Beat>146.561000</Beat>
+				<Beat>146.814000</Beat>
+				<Beat>146.879000</Beat>
+				<Beat>147.436000</Beat>
+				<Beat>150.570000</Beat>
+				<Beat>151.492000</Beat>
+				<Beat>151.505000</Beat>
+				<Beat>153.071000</Beat>
+				<Beat>153.275000</Beat>
+				<Beat>153.285000</Beat>
+				<Beat>154.012000</Beat>
+				<Beat>155.260000</Beat>
+				<Beat>155.320000</Beat>
+				<Beat>155.348000</Beat>
+				<Beat>155.578000</Beat>
+				<Beat>155.584000</Beat>
+				<Beat>155.592000</Beat>
+				<Beat>156.509000</Beat>
+				<Beat>156.569000</Beat>
+				<Beat>156.822000</Beat>
+				<Beat>156.886000</Beat>
+				<Beat>157.445000</Beat>
+				<Beat>160.578000</Beat>
+				<Beat>161.502000</Beat>
+				<Beat>161.513000</Beat>
+				<Beat>163.078000</Beat>
+				<Beat>163.281000</Beat>
+				<Beat>163.292000</Beat>
+				<Beat>164.020000</Beat>
+				<Beat>165.268000</Beat>
+				<Beat>165.329000</Beat>
+				<Beat>166.517000</Beat>
+				<Beat>166.576000</Beat>
+				<Beat>166.830000</Beat>
+				<Beat>166.894000</Beat>
+				<Beat>167.451000</Beat>
+				<Beat>170.584000</Beat>
+				<Beat>171.521000</Beat>
+				<Beat>173.086000</Beat>
+				<Beat>173.290000</Beat>
+				<Beat>173.302000</Beat>
+				<Beat>174.027000</Beat>
+				<Beat>174.059000</Beat>
+				<Beat>175.274000</Beat>
+				<Beat>175.336000</Beat>
+				<Beat>175.599000</Beat>
+				<Beat>175.608000</Beat>
+				<Beat>176.524000</Beat>
+				<Beat>176.585000</Beat>
+				<Beat>176.838000</Beat>
+				<Beat>176.901000</Beat>
+				<Beat>177.461000</Beat>
+				<Beat>180.592000</Beat>
+				<Beat>181.517000</Beat>
+				<Beat>181.528000</Beat>
+				<Beat>183.094000</Beat>
+				<Beat>183.298000</Beat>
+				<Beat>183.308000</Beat>
+				<Beat>184.035000</Beat>
+				<Beat>184.068000</Beat>
+				<Beat>185.283000</Beat>
+				<Beat>185.344000</Beat>
+				<Beat>185.600000</Beat>
+				<Beat>185.606000</Beat>
+				<Beat>186.532000</Beat>
+				<Beat>186.592000</Beat>
+				<Beat>186.845000</Beat>
+				<Beat>186.909000</Beat>
+				<Beat>187.468000</Beat>
+				<Beat>190.600000</Beat>
+				<Beat>191.537000</Beat>
+				<Beat>193.101000</Beat>
+				<Beat>193.305000</Beat>
+				<Beat>193.316000</Beat>
+				<Beat>194.043000</Beat>
+				<Beat>200.295000</Beat>
+				<Beat>200.610000</Beat>
+				<Beat>200.646000</Beat>
+				<Beat>201.545000</Beat>
+				<Beat>201.864000</Beat>
+				<Beat>201.886000</Beat>
+				<Beat>202.478000</Beat>
+				<Beat>205.611000</Beat>
+				<Beat>208.112000</Beat>
+			</BeatSequence>
+		</AudioInfo>
+	</SongRef>	
+</Theme>

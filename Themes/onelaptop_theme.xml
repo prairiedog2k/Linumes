@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Theme name="default">
+	<ThemeDir name="onelaptop"/>
+	<ResourceRef type="texture" name="texture_color0">color0.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_color1">color1.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_special0">special0.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_special1">special1.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_scanned0">scan0.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_scanned1">scan1.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_grid">grid_original.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_grid_mask">grid_originalmask.png</ResourceRef> -->
+	<ResourceRef type="texture" name="texture_magicbox" altdir="base" >shrinker.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_magicbox_mask" altdir="base">shrinker-mask.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_stars" altdir="base" >star.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_stars_mask" altdir="base">star-mask.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_spark">spark.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_spark_mask">spark-mask.png</ResourceRef>		
+	<ResourceRef type="texture" name="texture_holder">holder.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_scanner">scanner.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_flag">flag.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_flag_mask">flag-mask.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_bg">ol-bg-green.png</ResourceRef>	
+	<ResourceRef type="texture" name="texture_block0">block0.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_block1">block1.png</ResourceRef>	
+	<ResourceRef type="texture" name="texture_icon">olpc.png</ResourceRef>
+	<ResourceRef type="texture" name="texture_icon_mask">olpc-mask.png</ResourceRef>
+	<ResourceRef type="font" name="hud_font" pointsize="24" red="1.0" green="1.0" blue="1.0">slkscrb.ttf</ResourceRef>
+	<ResourceRef type="string" name="hud_file">olpc_hud.xml</ResourceRef>
+	<SongRef name="audio_song">
+	  <TrackName>onelaptop-1.mp3</TrackName>
+		<AudioInfo type="mp3" tracklength="139" unit="seconds" artist="DJ Spooky" track="One Laptop">		
+			<BeatSequence unit="seconds" >
+				<Beat>8.254000</Beat>
+				<Beat>8.395000</Beat>
+				<Beat>9.102000</Beat>
+				<Beat>10.496000</Beat>
+				<Beat>11.338000</Beat>
+				<Beat>11.780000</Beat>
+				<Beat>11.808000</Beat>
+				<Beat>12.740000</Beat>
+				<Beat>13.580000</Beat>
+				<Beat>14.982000</Beat>
+				<Beat>15.824000</Beat>
+				<Beat>16.266000</Beat>
+				<Beat>16.294000</Beat>
+				<Beat>17.226000</Beat>
+				<Beat>18.066000</Beat>
+				<Beat>19.468000</Beat>
+				<Beat>20.310000</Beat>
+				<Beat>20.752000</Beat>
+				<Beat>20.780000</Beat>
+				<Beat>21.712000</Beat>
+				<Beat>22.552000</Beat>
+				<Beat>23.954000</Beat>
+				<Beat>24.796000</Beat>
+				<Beat>25.238000</Beat>
+				<Beat>25.266000</Beat>
+				<Beat>26.198000</Beat>
+				<Beat>27.043000</Beat>
+				<Beat>28.440000</Beat>
+				<Beat>29.288000</Beat>
+				<Beat>29.722000</Beat>
+				<Beat>30.684000</Beat>
+				<Beat>31.529000</Beat>
+				<Beat>32.926000</Beat>
+				<Beat>33.774000</Beat>
+				<Beat>34.208000</Beat>
+				<Beat>35.170000</Beat>
+				<Beat>36.015000</Beat>
+				<Beat>37.412000</Beat>
+				<Beat>38.260000</Beat>
+				<Beat>38.694000</Beat>
+				<Beat>39.656000</Beat>
+				<Beat>40.501000</Beat>
+				<Beat>41.898000</Beat>
+				<Beat>42.746000</Beat>
+				<Beat>43.180000</Beat>
+				<Beat>44.990000</Beat>
+				<Beat>46.384000</Beat>
+				<Beat>47.226000</Beat>
+				<Beat>47.669000</Beat>
+				<Beat>47.695000</Beat>
+				<Beat>48.628000</Beat>
+				<Beat>49.468000</Beat>
+				<Beat>50.870000</Beat>
+				<Beat>51.712000</Beat>
+				<Beat>52.154000</Beat>
+				<Beat>52.181000</Beat>
+				<Beat>53.114000</Beat>
+				<Beat>53.954000</Beat>
+				<Beat>55.356000</Beat>
+				<Beat>56.198000</Beat>
+				<Beat>56.641000</Beat>
+				<Beat>56.667000</Beat>
+				<Beat>57.600000</Beat>
+				<Beat>58.440000</Beat>
+				<Beat>59.842000</Beat>
+				<Beat>60.684000</Beat>
+				<Beat>61.126000</Beat>
+				<Beat>61.153000</Beat>
+				<Beat>62.086000</Beat>
+				<Beat>62.226000</Beat>
+				<Beat>62.934000</Beat>
+				<Beat>64.328000</Beat>
+				<Beat>65.170000</Beat>
+				<Beat>65.612000</Beat>
+				<Beat>65.639000</Beat>
+				<Beat>66.578000</Beat>
+				<Beat>67.420000</Beat>
+				<Beat>68.814000</Beat>
+				<Beat>69.655000</Beat>
+				<Beat>70.098000</Beat>
+				<Beat>70.125000</Beat>
+				<Beat>71.064000</Beat>
+				<Beat>71.906000</Beat>
+				<Beat>73.300000</Beat>
+				<Beat>74.141000</Beat>
+				<Beat>74.584000</Beat>
+				<Beat>74.611000</Beat>
+				<Beat>75.550000</Beat>
+				<Beat>76.392000</Beat>
+				<Beat>77.786000</Beat>
+				<Beat>78.627000</Beat>
+				<Beat>79.070000</Beat>
+				<Beat>79.097000</Beat>
+				<Beat>80.032000</Beat>
+				<Beat>80.878000</Beat>
+				<Beat>82.272000</Beat>
+				<Beat>83.114000</Beat>
+				<Beat>83.556000</Beat>
+				<Beat>83.583000</Beat>
+				<Beat>84.522000</Beat>
+				<Beat>85.364000</Beat>
+				<Beat>86.758000</Beat>
+				<Beat>87.599000</Beat>
+				<Beat>88.042000</Beat>
+				<Beat>88.069000</Beat>
+				<Beat>89.008000</Beat>
+				<Beat>89.850000</Beat>
+				<Beat>91.244000</Beat>
+				<Beat>92.086000</Beat>
+				<Beat>92.528000</Beat>
+				<Beat>92.555000</Beat>
+				<Beat>93.494000</Beat>
+				<Beat>94.335000</Beat>
+				<Beat>95.730000</Beat>
+				<Beat>96.572000</Beat>
+				<Beat>97.014000</Beat>
+				<Beat>97.041000</Beat>
+				<Beat>98.824000</Beat>
+				<Beat>98.838000</Beat>
+				<Beat>100.216000</Beat>
+				<Beat>101.058000</Beat>
+				<Beat>101.501000</Beat>
+				<Beat>101.527000</Beat>
+				<Beat>102.466000</Beat>
+				<Beat>103.308000</Beat>
+				<Beat>104.702000</Beat>
+				<Beat>105.544000</Beat>
+				<Beat>105.986000</Beat>
+				<Beat>106.013000</Beat>
+				<Beat>106.952000</Beat>
+				<Beat>107.795000</Beat>
+				<Beat>109.187000</Beat>
+				<Beat>110.030000</Beat>
+				<Beat>110.472000</Beat>
+				<Beat>110.499000</Beat>
+				<Beat>111.437000</Beat>
+				<Beat>112.280000</Beat>
+				<Beat>113.674000</Beat>
+				<Beat>114.516000</Beat>
+				<Beat>114.958000</Beat>
+				<Beat>114.985000</Beat>
+				<Beat>115.921000</Beat>
+				<Beat>116.059000</Beat>
+				<Beat>116.759000</Beat>
+				<Beat>118.159000</Beat>
+				<Beat>119.001000</Beat>
+				<Beat>119.444000</Beat>
+				<Beat>119.471000</Beat>
+				<Beat>120.403000</Beat>
+				<Beat>121.244000</Beat>
+				<Beat>122.645000</Beat>
+				<Beat>123.487000</Beat>
+				<Beat>123.930000</Beat>
+				<Beat>123.957000</Beat>
+				<Beat>124.889000</Beat>
+				<Beat>125.730000</Beat>
+				<Beat>127.131000</Beat>
+				<Beat>127.974000</Beat>
+				<Beat>128.416000</Beat>
+				<Beat>128.443000</Beat>
+				<Beat>129.375000</Beat>
+				<Beat>130.216000</Beat>
+				<Beat>131.617000</Beat>
+				<Beat>132.460000</Beat>
+				<Beat>132.902000</Beat>
+				<Beat>132.929000</Beat>
+				<Beat>133.861000</Beat>
+				<Beat>134.002000</Beat>
+				<Beat>134.709000</Beat>
+			</BeatSequence>
+		</AudioInfo>
+	</SongRef>	
+</Theme>

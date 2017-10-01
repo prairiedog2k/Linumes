@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Selections>
+	<Selection display="Boss Mode">
+		<param name="mode" value="BOSS"/>
+	</Selection>
+	<Selection display="Time Limited Mode (1 Minute)">
+		<param name="mode" value="TIMELIMITED"/>
+		<param name="duration" value="60"/>
+	</Selection>
+	<Selection display="Time Limited Mode (3 Minutes)">
+		<param name="mode" value="TIMELIMITED"/>
+		<param name="duration" value="180"/>
+	</Selection>
+	<Selection display="Time Limited Mode (5 Minutes)">
+		<param name="mode" value="TIMELIMITED"/>
+		<param name="duration" value="300"/>
+	</Selection>
+	<Selection display="Time Limited Mode (10 Minutes)">
+		<param name="mode" value="TIMELIMITED"/>
+		<param name="duration" value="600"/>
+	</Selection>
+	<Selection display="Free-Style Mode">
+		<param name="mode" value="GAME"/>
+	</Selection>
+	<Selection display="Configuration">
+		<param name="mode" value="CONFIG"/>
+	</Selection>
+	<Selection display="Exit linumes" type="EXIT"/>
+</Selections>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HudConfig>
+	<TextDisplayItems>		
+		<TextDisplay name="center_info_txt" type="string" x="512" y="384"> </TextDisplay>
+		<TextDisplay name="top_info_txt" type="string" x="512" y="690"> </TextDisplay>
+		<TextDisplay name="bottom_info_txt" type="string" x="512" y="20"> </TextDisplay>		
+	</TextDisplayItems>
+</HudConfig>

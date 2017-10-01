@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HudConfig>
+	<TextDisplayItems>
+		<TextDisplay name="hiscore_txt" type="int" x="890" y="700">High</TextDisplay>
+		<TextDisplay name="hiscore_val" type="int" x="890" y="650"> </TextDisplay>
+		<TextDisplay name="score_txt" type="int" x="890" y="600">Score</TextDisplay>
+		<TextDisplay name="score_val" type="int" x="890" y="550"> </TextDisplay>
+		<TextDisplay name="count_txt" type="int" x="890" y="500">Block</TextDisplay>
+		<TextDisplay name="count_val" type="int" x="890" y="450"> </TextDisplay>
+		<TextDisplay name="time_txt" type="int" x="890" y="400">Time</TextDisplay>
+		<TextDisplay name="time_val" type="int" x="890" y="350"> </TextDisplay>
+		<TextDisplay name="announce" type="string" x="300" y="680"> </TextDisplay>
+	</TextDisplayItems>
+</HudConfig>

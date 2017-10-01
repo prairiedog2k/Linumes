@@ -1,0 +1,56 @@
+Themes README
+-------------
+Until an automated process for installing themes into Linumes is developed it 
+is necessary to manual configure the new theme for use in Linumes.
+
+Background -
+All themes come with a theme named XML File that should reside outside of the 
+actual directory where the theme resources are located.  The theme XML file 
+contains the names to be used for key elements to be used by the Linumes
+framework.  These resources include visual, audio and formatting elements. 
+
+In order for the theme to be recognized by Linumes its name needs to be 
+present in the themelist.xml.
+
+Installation -
+
+Unpack the theme's distribution file to the Linumes directions.
+For example purpose Theme_name is a place holder for the downloaded or
+created Theme Bundle
+
+cp Theme_name.tar.bz2 <Linumes Dir>
+tar xjf Theme_name.tar.bz2
+
+Once expanded a new file and a folder should appear.  They can be named 
+differently but resources referenced in the Theme_name.XML reside within
+new unpacked directory. 
+
+The name of this theme file (e.g. onelaptop_theme.xml) should be added to
+the core Linumes themelist.xml file as a new ThemeInfo entry.
+ 
+ For example:
+ 
+ <ThemeList>
+	<ThemeInfo name="OneLaptop" file="onelaptop_theme.xml"/>
+	<ThemeInfo name="Desktop" file="desktop_theme.xml"/>
+    <ThemeInfo name="Nature" file="nature_theme.xml"/> 
+</ThemeList>
+
+can be modified to include Theme_name by adding a new line:
+ 
+ <ThemeInfo name="NEW THEME" file="Theme_name.xml"/>
+ 
+ 
+ resulting in
+ 
+ <ThemeList>
+	<ThemeInfo name="OneLaptop" file="onelaptop_theme.xml"/>
+	<ThemeInfo name="Desktop" file="desktop_theme.xml"/>
+    <ThemeInfo name="Nature" file="nature_theme.xml"/>
+    <!-- new theme inserted here -->
+    <ThemeInfo name="NEW THEME" file="Theme_name.xml"/>  
+</ThemeList> 
+
+
+Anyway, this crap should be automated and that is something I 
+am considering working on later.

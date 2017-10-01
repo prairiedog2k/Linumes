@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ThemeList>
+	<Theme name="basetheme">
+		<ThemeDir name="base"/>
+		<ResourceRef type="font" name="linumes_72" pointsize="72" red="1.0" green="1.0" blue="1.0">RadisSans-medium.ttf</ResourceRef>
+		<ResourceRef type="font" name="base_font_72" pointsize="72" red="1.0" green="1.0" blue="1.0">aerial.ttf</ResourceRef>
+		<ResourceRef type="font" name="base_font_48" pointsize="48" red="1.0" green="1.0" blue="1.0">aerial.ttf</ResourceRef>
+		<ResourceRef type="font" name="base_font_24" pointsize="24" red="1.0" green="1.0" blue="1.0">aerial.ttf</ResourceRef>
+		<ResourceRef type="font" name="base_font_12" pointsize="12" red="1.0" green="1.0" blue="1.0">aerial.ttf</ResourceRef>
+		<ResourceRef type="font" name="base_font_mono_24" pointsize="36" red="1.0" green="1.0" blue="1.0">monof55.ttf</ResourceRef>
+		<ResourceRef type="string" name="base_hud">base_hud.xml</ResourceRef>
+		<ResourceRef type="string" name="base_hi">highscores.xml</ResourceRef>		
+		<ResourceRef type="texture" name="hi_score_table">hiscoretable.png</ResourceRef>
+		<ResourceRef type="texture" name="selection_table">selection.png</ResourceRef>
+		<ResourceRef type="texture" name="base_selection_bg">Drops.png</ResourceRef>
+		<ResourceRef type="texture" name="texture_sidebar">sidebar.png</ResourceRef>
+		<ResourceRef type="texture" name="texture_sidebar_mask">sidebar-mask.png</ResourceRef>
+		<ResourceRef type="texture" name="texture_header">boardheader.png</ResourceRef>
+		<ResourceRef type="texture" name="texture_header_mask">boardheader-mask.png</ResourceRef>
+		<ResourceRef type="texture" name="texture_audio_level">grid-audio-level.png</ResourceRef>
+		<ResourceRef type="texture" name="texture_audio_level_mask">grid-audio-level-mask.png</ResourceRef>
+		<ResourceRef type="string" name="base_selections">modeselections.xml</ResourceRef>
+		<ResourceRef type="string" name="configuration_selections">configurationselections.xml</ResourceRef>
+	</Theme>
+	<ThemeInfo dir="Themes" name="CitrusBlend" file="citrusblend_theme.xml"/>
+	<ThemeInfo dir="Themes" name="Desktop" file="desktop_theme.xml"/>
+	<ThemeInfo dir="Themes" name="Racer" file="racer_theme.xml"/>
+	<ThemeInfo dir="Themes" name="OneLaptop" file="onelaptop_theme.xml"/>
+	<ThemeInfo dir="Themes" name="BubbleGum" file="bubblegum_theme.xml"/>
+	<ThemeInfo dir="Themes" name="Nature" file="nature_theme.xml"/> 
+</ThemeList>
