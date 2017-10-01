@@ -24,10 +24,7 @@
 #include <string.h>
 #include "TextureResource.h"
 #include "AudioResource.h"
-
-#ifdef MING_UNISTD
 #include "unistd.h"
-#endif
 
 using namespace std;
 

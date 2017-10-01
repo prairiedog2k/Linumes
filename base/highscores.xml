@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HighScores>
+	<GameMode name="TimeLimited060" maxListing="10">
+		<ScoreListing name=" " score="191"/>
+		<ScoreListing name=" " score="188"/>
+		<ScoreListing name=" " score="173"/>
+		<ScoreListing name=" " score="88"/>
+		<ScoreListing name=" " score="65"/>
+		<ScoreListing name=" " score="31"/>
+		<ScoreListing name=" " score="18"/>
+		<ScoreListing name=" " score="2"/>
+		<ScoreListing name=" " score="0"/>
+	</GameMode>
+	<GameMode name="jublo" maxListing="10"/>
+</HighScores>

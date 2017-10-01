@@ -96,7 +96,8 @@ GameBoard::GameBoard( float dim, int rx, int ry):
 			_high(0),
 			_score(0),			
 			_canBonus(false),
-			_scoreChecked(false) {
+			_scoreChecked(false),
+			_midasMode(false) {
 	downpressed = false;
 	leftpressed = false;
 	rightpressed = false;
@@ -797,10 +798,18 @@ void GameBoard::resetScan() {
 
 void GameBoard::updateTokens() {
 	if (leftpressed) {
-		_tokenSet[3].advanceLeft(_currentTick);
+		if (!_midasMode) {
+			_tokenSet[3].advanceLeft(_currentTick);
+		} else {
+			midasLeft();
+		}
 	}
 	if (rightpressed) {
-		_tokenSet[3].advanceRight(_currentTick);
+		if (!_midasMode) {
+			_tokenSet[3].advanceRight(_currentTick);
+		} else {
+			midasRight();
+		}
 	}
 
 	for (int i = 0; i < 4; i++) {
@@ -811,6 +820,44 @@ void GameBoard::updateTokens() {
 		advanceToken();
 	}
 }
+
+void GameBoard::midasLeft() {
+	GamePiece * leftPieces = new GamePiece[_ry];
+
+	for (int j = 0; j <_ry; j++) {
+		leftPieces[j] = GamePiece(*getPieceAt(0, j));
+	}
+
+	for (int i = 0; i < _rx; i++) {
+		for (int j = 0; j < _ry; j++) {
+			if (i == _rx-1) {
+				getPieceAt(i,j)->copyPieceState(&leftPieces[j]);
+			} else {
+				getPieceAt(i,j)->copyPieceState(getPieceAt(i+1,j));
+			}
+		}
+	}
+}
+
+void GameBoard::midasRight() {
+	GamePiece * rightPieces = new GamePiece[_ry];
+
+	for (int j = 0; j <_ry; j++) {
+		rightPieces[j] = GamePiece(*getPieceAt(_rx - 1, j));
+	}
+
+
+	for (int i = _rx-1; i >= 0; i--) {
+		for (int j = 0; j < _ry; j++) {
+			if (i == 0) {
+				getPieceAt(i,j)->copyPieceState(&rightPieces[j]);
+			} else {
+				getPieceAt(i,j)->copyPieceState(getPieceAt(i-1,j));
+			}
+		}
+	}
+}
+
 unsigned int GameBoard::getCurrentGameTime() {
 	return (unsigned int)( _advanceScanner ? ((_currentTick - _gameTime) / 1000) : (unsigned int)(_pauseTime/1000) );
 }

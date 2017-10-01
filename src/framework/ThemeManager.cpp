@@ -23,10 +23,7 @@
 #include "xmlParser.h"
 #include "Theme.h"
 #include "XMLTheme.h"
-
-#ifdef MING_UNISTD
 #include "unistd.h"
-#endif
 
 ThemeManager::ThemeManager(): themesFile(DEFAULT_FILE) {
 	_baseTheme = NULL;

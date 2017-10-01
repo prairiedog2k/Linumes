@@ -96,6 +96,7 @@ protected:
 	int _score;
 	bool _canBonus;
 	bool _scoreChecked;
+	bool _midasMode;
 	
 	unsigned int _currentTick;
 	unsigned int _announceTime;
@@ -138,6 +139,9 @@ protected:
 	//input events		
 	void rotateToken( Rotation dir);
 	void updateToken();
+
+	void midasLeft();
+	void midasRight();
 
 	float getLevelFallRate();
 	void setPieceInMotion(int i, int j);
