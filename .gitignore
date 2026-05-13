@@ -1,4 +1,6 @@
-/Debug/
-/Release/
+build/
+cmake-build-*/
 Linumes
 Linumes-Debug
+PieceDump.csv
+*.bmp
