@@ -16,7 +16,7 @@ Font::Font(const char *fontName,
 			fontName(fontName),
 			pointSize(pointSize),
 			fgRed(fgRed), fgGreen(fgGreen), fgBlue(fgBlue),
-			ttfFont(NULL)
+			ttfFont(nullptr)
 			{
 	initCounter++;
 	initFont();
@@ -25,7 +25,7 @@ Font::Font(const char *fontName,
 Font::~Font()
 {
 	for (int i = minGlyph; i < maxGlyph + 1; i++) {
-		if (glyphs[i].pic != NULL) {
+		if (glyphs[i].pic != nullptr) {
 			SDL_FreeSurface(glyphs[i].pic);
 			glDeleteTextures( 1, & (glyphs[i].tex) );
 		}
@@ -38,7 +38,7 @@ void Font::initFont()
 {
 	ttfFont = TTF_OpenFont(fontName, pointSize);
 	
-	if (NULL == ttfFont)
+	if (nullptr == ttfFont)
 	{
 		printf("Can't open font file\n");
 		//TODO :: errorExit("Can't open font file");
@@ -55,7 +55,7 @@ void Font::initFont()
 
 	for (int i = minGlyph; i <= maxGlyph; i++)
 	{
-		glyphs[i].pic = NULL;
+		glyphs[i].pic = nullptr;
 		glyphs[i].tex = 0;
 	}
 
@@ -64,8 +64,8 @@ void Font::initFont()
     	GLfloat texcoord[4];
     	char letter[2] = {0, 0};
 
-		SDL_Surface *g0 = NULL;
-		SDL_Surface *g1 = NULL;
+		SDL_Surface *g0 = nullptr;
+		SDL_Surface *g1 = nullptr;
 
 		letter[0] = c;
 
@@ -81,13 +81,13 @@ void Font::initFont()
 				letter,
 				foreground);
 
-		if (NULL != g0)
+		if (nullptr != g0)
 		{
 			g1 = SDL_DisplayFormatAlpha(g0);
 			SDL_FreeSurface(g0);
 		}
 
-		if (NULL != g1)
+		if (nullptr != g1)
 		{
 			glyphs[((int)c)].pic = g1;
 			glyphs[((int)c)].tex = SDL_GL_LoadTexture(g1, texcoord);

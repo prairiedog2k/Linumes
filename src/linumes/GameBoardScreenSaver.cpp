@@ -11,7 +11,7 @@ GameBoardScreenSaver::~GameBoardScreenSaver()
 }
 
 void GameBoardScreenSaver::init() {
-	if (currTheme == NULL)
+	if (currTheme == nullptr)
 	{
 		currTheme = themeManager->getCurrentTheme();
 	}

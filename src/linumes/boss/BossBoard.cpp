@@ -165,9 +165,8 @@ void BossBoard::evaluateBonus() {
 	if (_bossAttacks > 0 ) {
 		_audioManager->playAudioResource(_boss.getDamageAudio());
 		_announceTime = _currentTick;
-		char temp[20];
-		sprintf(temp,"Boss Attack %d X 10K",_bossAttacks);
-		_hud->setValue("announce",temp);			
+		_hud->setValue("announce", "Boss Attack " + std::to_string(_bossAttacks) + " X 10K");
+
 		addToScore(10000 * _bossAttacks);
 		_bossAttacks = 0;
 	} 
@@ -180,52 +179,17 @@ void BossBoard::addToBlockCount (int count) {
 }
 
 void BossBoard::updateHud() {
-	std::string name = "";
-	std::string val = "";
-	char temp[10];
+	_hud->overrideText("hiscore_txt", "Score");
+	_hud->setValue("hiscore_val",    std::to_string(_score));
+	_hud->overrideText("time_txt", "Attack In");
 
-	name = "hiscore_txt";
-	val = "Score";
-	_hud->overrideText(name,val);
+	int turns = _boss.getNextAttackTurn();
+	_hud->setValue("time_val", std::to_string(turns) + (turns > 1 ? " Passes" : " Pass"));
 
-	name = "hiscore_val";
-	::sprintf(temp,"%d",_score);
-	val = temp;
-	_hud->setValue(name,val);
-
-	name = "time_txt";
-	val = "Attack In";
-	_hud->overrideText(name,val);
-
-	
-	name = "time_val";
-	if (_boss.getNextAttackTurn() > 1) {
-		::sprintf(temp,"%d Passes", _boss.getNextAttackTurn() );
-	} else {
-		::sprintf(temp,"%d Pass", _boss.getNextAttackTurn() );
-	}
-	val = temp;
-	_hud->setValue(name,val);
-
-	name = "score_txt";
-	val = "Attack";
-	_hud->overrideText(name,val);
-
-	name = "score_val";
-	::sprintf(temp,"%d",_boss.getCurrentAttack());
-	val = temp;
-	_hud->setValue(name,val);
-
-
-	name = "count_txt";
-	val = "Boss HP";
-    _hud->overrideText(name, val);
-    
-    
-	name = "count_val";
-	::sprintf(temp,"%d",_boss.getHitPoints());
-	val = temp;
-	_hud->setValue(name, val);
+	_hud->overrideText("score_txt", "Attack");
+	_hud->setValue("score_val",     std::to_string(_boss.getCurrentAttack()));
+	_hud->overrideText("count_txt", "Boss HP");
+	_hud->setValue("count_val",     std::to_string(_boss.getHitPoints()));
 
 	//only leave announcement up for a second
 	if (!_advanceScanner) {
@@ -233,7 +197,6 @@ void BossBoard::updateHud() {
 	} else if (_currentTick - _announceTime > 1000) {
 		_hud->setValue("announce"," ");
 	}
-
 }
 
 void BossBoard::resetContents() {
@@ -291,15 +254,13 @@ void BossBoard::drawGameOver() {
 			f1->drawText(win.c_str(), xformX(512), xformY(630), true);
 			
 			
-			char highs[300];
-			::sprintf( highs,"%s",_hiScoreTable->getTableString().c_str() );
+			std::string highs = _hiScoreTable->getTableString();
 			Font *f3=ResourceHelper::getFontResource(getTheme(),  BASE_FONT_24 )->getResource();
-			f3->drawText(highs,xformX(400), xformY(600), true, true);
-			 
-			char score[64];
-			::sprintf(score,"[Score %d]", _score );
+			f3->drawText(highs.c_str(),xformX(400), xformY(600), true, true);
+
+			std::string score = "[Score " + std::to_string(_score) + "]";
 			Font *f2 = ResourceHelper::getFontResource(getTheme(),  BASE_FONT_48 )->getResource();
-			f2->drawText(score, xformX(512), xformY(20), true);
+			f2->drawText(score.c_str(), xformX(512), xformY(20), true);
 		} else {
 			Font *f1 = ResourceHelper::getFontResource(getTheme(),  BASE_FONT_72 )->getResource();
 			f1->setRGB(1.0,0.0,0.0);

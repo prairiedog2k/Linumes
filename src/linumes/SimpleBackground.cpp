@@ -32,7 +32,7 @@ SimpleBackground::~SimpleBackground()
 }
 void  SimpleBackground::bindTexture() {
 	TextureResource * tr = ResourceHelper::getTextureResource(getTheme(), _texname);
-	if (NULL == tr) {
+	if (nullptr == tr) {
 		return;
 	}
 	glBindTexture( GL_TEXTURE_2D, tr->getResource() );

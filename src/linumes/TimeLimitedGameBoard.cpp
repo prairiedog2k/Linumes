@@ -11,14 +11,14 @@
 
 TimeLimitedGameBoard::TimeLimitedGameBoard() : GameBoard(0.2f,16,10), _gameDuration(60), _timeOver(false),_quad() {
 	char buff[20];
-	sprintf(buff,"TimeLimited%03d",_gameDuration);
+	std::snprintf(buff, sizeof(buff), "TimeLimited%03d", _gameDuration);
 	_gameName = buff;
 }
 
 TimeLimitedGameBoard::TimeLimitedGameBoard(unsigned int gameDuration) : GameBoard(0.2f,16,10), _gameDuration(gameDuration), _timeOver(false), _quad()
 {
 	char buff[20];
-	sprintf(buff,"TimeLimited%03d",_gameDuration);
+	std::snprintf(buff, sizeof(buff), "TimeLimited%03d", _gameDuration);
 	_gameName = buff;
 }
 
@@ -27,40 +27,12 @@ TimeLimitedGameBoard::~TimeLimitedGameBoard()
 }
 
 void TimeLimitedGameBoard::updateHud() {
-	std::string name = "";
-	std::string val = "";
-	char temp[10];
-
-	name = "hiscore_val";
-	::sprintf(temp,"%d",getHigh());
-	val = temp;
-	_hud->setValue(name,val);
-
-
-	name = "time_val";
-	::sprintf(temp,"%d",(_gameDuration - getCurrentGameTime()));
-	val = temp;
-	_hud->setValue(name,val);
-
-	name = "score_txt";
-	val = "Block";
-	_hud->overrideText(name,val);
-
-	name = "score_val";
-	::sprintf(temp,"%d",_blockCount);
-	val = temp;
-	_hud->setValue(name,val);
-
-
-	name = "count_txt";
-	val = "Total";
-	_hud->overrideText(name, val);
-    
-    
-	name = "count_val";
-	::sprintf(temp,"%d",_totalBlockCount + _blockCount);
-	val = temp;
-	_hud->setValue(name, val);
+	_hud->setValue("hiscore_val", std::to_string(getHigh()));
+	_hud->setValue("time_val",    std::to_string(_gameDuration - getCurrentGameTime()));
+	_hud->overrideText("score_txt", "Block");
+	_hud->setValue("score_val",   std::to_string(_blockCount));
+	_hud->overrideText("count_txt", "Total");
+	_hud->setValue("count_val",   std::to_string(_totalBlockCount + _blockCount));
 
 	//only leave announcement up for a second
 	if (!_advanceScanner) {
@@ -94,15 +66,13 @@ void TimeLimitedGameBoard::drawContents() {
 			Font *f1 = ResourceHelper::getFontResource(getTheme(),  HUD_FONT )->getResource();
 			f1->drawText(std::string("Game Over").c_str(), xformX(512), xformY(690), true);
 			
-			char highs[300];
-			::sprintf( highs,"%s",_hiScoreTable->getTableString().c_str() );
+			std::string highs = _hiScoreTable->getTableString();
 			Font *f3=ResourceHelper::getFontResource(getTheme(),  BASE_FONT_24 )->getResource();
-			f3->drawText(highs,xformX(400), xformY(600), true, true);
-			 
-			char score[64];
-			::sprintf(score,"[Block Count x %d]", _totalBlockCount );
+			f3->drawText(highs.c_str(),xformX(400), xformY(600), true, true);
+
+			std::string score = "[Block Count x " + std::to_string(_totalBlockCount) + "]";
 			Font *f2 = ResourceHelper::getFontResource(getTheme(),  HUD_FONT )->getResource();
-			f2->drawText(score, xformX(512), xformY(20), true);
+			f2->drawText(score.c_str(), xformX(512), xformY(20), true);
 		} else {
 			Font *f1 = ResourceHelper::getFontResource(getTheme(),  BASE_FONT_72 )->getResource();
 			f1->setRGB(1.0,0.0,0.0);

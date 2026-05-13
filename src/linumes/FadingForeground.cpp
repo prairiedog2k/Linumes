@@ -22,9 +22,9 @@ void FadingForeground::drawDisplayInfo() {
 	bool canShow = (currTime - _displayTimeBegin)  < _displayDuration; 
 	if ( ( canShow ) && ( ! (_displayInfo == ""))) {
 		Theme * theme = getTheme();
-		if (NULL != theme) {
+		if (nullptr != theme) {
 			Font *f1 = ResourceHelper::getFontResource(getTheme(),  BASE_FONT_12 )->getResource();
-			if (NULL != f1) {
+			if (nullptr != f1) {
 				f1->drawText(_displayInfo.c_str(), 5, 5, false);
 			}
 		}

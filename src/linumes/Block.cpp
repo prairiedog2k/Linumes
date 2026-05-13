@@ -202,7 +202,7 @@ bool Block::hasSpecial(int &x, int &y) {
 GLuint Block::getTexture(const char *name)
 {
 	TextureResource * tr = ResourceHelper::getTextureResource(getTheme(), std::string (name));
-	if (NULL == tr) {
+	if (nullptr == tr) {
 		return 0;
 	}
 	return tr->getResource();

@@ -38,12 +38,12 @@ Scanner::~Scanner()
 
 void Scanner::setTheme(Theme *theTheme) {
 	Themed::setTheme(theTheme);
-	hasMask = (NULL != ResourceHelper::getTextureResource(getTheme(), std::string (BOARD_FLAG_MASK)));
+	hasMask = (nullptr != ResourceHelper::getTextureResource(getTheme(), std::string (BOARD_FLAG_MASK)));
 }
 
 GLuint Scanner::getMask() {
 	TextureResource * tr = ResourceHelper::getTextureResource(getTheme(), std::string (BOARD_FLAG_MASK));
-	if (NULL == tr) {
+	if (nullptr == tr) {
 		return 0;
 	}
 	return tr->getResource();
@@ -51,7 +51,7 @@ GLuint Scanner::getMask() {
 
 GLuint Scanner::getTexture() {
 	TextureResource * tr = ResourceHelper::getTextureResource(getTheme(), std::string (BOARD_FLAG));
-	if (NULL == tr) {
+	if (nullptr == tr) {
 		return 0;
 	}
 	return tr->getResource();

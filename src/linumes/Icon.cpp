@@ -16,7 +16,7 @@ GLuint Icon::getTexture(int which)
 {
 	TextureResource * tr = ResourceHelper::getTextureResource(getTheme(), 
 			std::string ( (which == 0 ? BOARD_ICON_MASK : BOARD_ICON) ) );
-	if (NULL == tr) {
+	if (nullptr == tr) {
 		return 0;
 	}
 	return tr->getResource();

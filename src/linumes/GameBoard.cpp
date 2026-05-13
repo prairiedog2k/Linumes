@@ -244,7 +244,7 @@ void GameBoard::init()
 
 	HighScoreManager *hsm = themeManager->getHighScoreManager();
 	_hiScoreTable = hsm->getHighScoreTable(_gameName);
-	if (NULL == _hiScoreTable) {
+	if (nullptr == _hiScoreTable) {
 		_hiScoreTable = hsm->createHighScoreTable(_gameName);
 	}
 	_high = _hiScoreTable->getHighestScore();
@@ -837,30 +837,10 @@ unsigned int GameBoard::getCurrentGameTime() {
 }
 
 void GameBoard::updateHud() {
-	std::string name = "";
-	std::string val = "";
-	char temp[10];
-
-	name = "hiscore_val";
-	::sprintf(temp,"%d",getHigh());
-	val = temp;
-	_hud->setValue(name,val);
-
-
-	name = "time_val";
-	::sprintf(temp,"%d",getCurrentGameTime());
-	val = temp;
-	_hud->setValue(name,val);
-
-	name = "score_val";
-	::sprintf(temp,"%d",_score);
-	val = temp;
-	_hud->setValue(name, val);
-
-	name = "count_val";
-	::sprintf(temp,"%d",_totalBlockCount + _blockCount);
-	val = temp;
-	_hud->setValue(name, val);
+	_hud->setValue("hiscore_val", std::to_string(getHigh()));
+	_hud->setValue("time_val",    std::to_string(getCurrentGameTime()));
+	_hud->setValue("score_val",   std::to_string(_score));
+	_hud->setValue("count_val",   std::to_string(_totalBlockCount + _blockCount));
 
 	//only leave announcement up for a second
 	if (!_advanceScanner) {

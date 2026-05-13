@@ -31,7 +31,7 @@ void MagicBlock::setTheme(Theme *theTheme) {
 
 GLuint MagicBlock::getNamedTexture(const char * arg) {
 	TextureResource * tr = ResourceHelper::getTextureResource(getTheme(), std::string(arg));
-	if (NULL == tr) {
+	if (nullptr == tr) {
 		return 0;
 	} else {
 		return tr->getResource();

@@ -47,7 +47,7 @@ std::string SelectionBoard::getSelectionResource() {
 }
 
 void SelectionBoard::init() {
-	if (NULL != getTheme()) {
+	if (nullptr != getTheme()) {
 		_bg->setTheme(getTheme());
 		std::string SettingsConfigFile = ResourceHelper::getStringResource( getTheme(), getSelectionResource())->getResource();
 		buildSelectionListFromYaml(SettingsConfigFile, _selectionList, _optionMap);

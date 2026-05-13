@@ -55,9 +55,9 @@ void HUD::setValue(std::string argName, std::string argValue) {
 }
 
 void HUD::setTheme(Theme *theme) {
-    if (NULL != theme) {
+    if (nullptr != theme) {
         StringResource *sr = ResourceHelper::getStringResource(theme, HUD_FILE);
-        if (NULL != sr) {
+        if (nullptr != sr) {
             std::string hudConfigFile = sr->getResource();
             if (!hudConfigFile.empty()) {
                 loadHudConfig(hudConfigFile);

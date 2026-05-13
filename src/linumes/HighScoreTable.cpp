@@ -70,7 +70,7 @@ std::string HighScoreTable::getTableString() {
     int count = 1;
     retVal = "\nRank      Score \n";
     for (const auto& entry : _scoreTable) {
-        sprintf(buff, "%2d     %7d\n", count, entry.first);
+        std::snprintf(buff, sizeof(buff), "%2d     %7d\n", count, entry.first);
         retVal += buff;
         count++;
     }

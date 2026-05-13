@@ -43,7 +43,7 @@ void LinumesModeManager::configureSelectedMode(std::pair<std::string, std::map<s
         currMode = std::make_unique<ScreenSaverMode>();
     } else if ( TIMELIMITED_MODE == nextMode ) {
         std::string duration = params[std::string(PK_DURATION)];
-        int nduration = atoi ( duration.c_str() );
+        int nduration = std::stoi(duration);
         currMode = std::make_unique<TimeLimitedGameMode>(nduration);
     } else if ( BOSS_MODE == nextMode) {
         currMode = std::make_unique<BossMode>();
