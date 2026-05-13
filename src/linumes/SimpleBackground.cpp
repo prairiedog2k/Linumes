@@ -6,7 +6,7 @@
 
 
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 
@@ -65,4 +65,4 @@ void SimpleBackground::Draw() {
 }
 
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes

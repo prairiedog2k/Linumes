@@ -34,7 +34,7 @@
 #include "HighScoreManager.h"
 
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 
@@ -1137,4 +1137,4 @@ void GameBoard::updateSpecialAt(int x, int y) {
 
 
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes

@@ -3,7 +3,7 @@
 
 #include "GameMode.h"
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 
 class ScreenSaverMode : public GameMode
 {
@@ -21,6 +21,6 @@ public:
 
 };
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif /*SCREENSAVERMODE_H_*/

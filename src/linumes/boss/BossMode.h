@@ -3,7 +3,7 @@
 
 #include "linumes/GameMode.h"
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 
 class BossMode : public GameMode
 {
@@ -14,6 +14,6 @@ public:
 	virtual ~BossMode();
 };
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif /*BOSSMODE_H_*/

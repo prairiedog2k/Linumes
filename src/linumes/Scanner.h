@@ -6,7 +6,7 @@
 #include "framework/TimePositioned.h"
 #include "framework/Themed.h"
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 class Scanner : public HF::Rendered, public HF::TimePositioned, public HF::Themed
@@ -41,6 +41,6 @@ public:
 	void Draw();
 };
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif /*SCANNER_H_*/

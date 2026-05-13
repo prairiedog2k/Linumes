@@ -5,7 +5,7 @@
 #include <set>
 #include <yaml-cpp/yaml.h>
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 
 struct hscomp{
     bool operator()(const std::pair<int, std::string> &lhs, const std::pair<int, std::string> &rhs) const{
@@ -33,6 +33,6 @@ public:
     std::string getTableString();
 };
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif /*HIGHSCORETABLE_H_*/

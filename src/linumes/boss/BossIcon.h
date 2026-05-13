@@ -3,7 +3,7 @@
 
 #include "linumes/Icon.h"
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 
 class BossIcon : public Icon
 {
@@ -19,6 +19,6 @@ protected:
 	virtual  GLuint getTexture(int which) {return ( which == 0 ? _bossMask : _bossTexture );};
 };
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif /*BOSSICON_H_*/

@@ -17,7 +17,7 @@
 #include <list>
 #include <map>
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 class ConfigurationBoard: public SelectionBoard {
@@ -53,6 +53,6 @@ protected:
 	Option getOption();
 };
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif /* LINUMESCONFIGURATIONBOARD_H_ */

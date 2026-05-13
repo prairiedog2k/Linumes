@@ -4,7 +4,7 @@
 #include <math.h>
 
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 
@@ -213,4 +213,4 @@ void MagicBlock::Draw() {
 }
 
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes

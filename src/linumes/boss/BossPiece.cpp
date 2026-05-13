@@ -2,7 +2,7 @@
 #include "BossModeTypes.h"
 
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 
@@ -31,4 +31,4 @@ void BossPiece::bindStateTexture() {
 }
 
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes

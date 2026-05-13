@@ -31,7 +31,7 @@
 
 #define GAME_NAME "default"
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 class GameBoard : public HF::Rendered {
@@ -201,6 +201,6 @@ protected:
 	friend class Token;
 };
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif

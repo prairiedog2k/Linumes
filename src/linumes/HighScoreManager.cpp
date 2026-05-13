@@ -10,7 +10,7 @@
 #include <yaml-cpp/yaml.h>
 
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 
@@ -76,4 +76,4 @@ void HighScoreManager::release() {
 }
 
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes

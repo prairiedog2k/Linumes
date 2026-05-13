@@ -3,7 +3,7 @@
 #include "Block.h"
 
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 
@@ -220,4 +220,4 @@ void GameBoardScreenSaver::toggleScanner(unsigned int currTime) {
 
 
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes

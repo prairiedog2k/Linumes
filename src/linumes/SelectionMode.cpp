@@ -3,7 +3,7 @@
 #include "ModeTypes.h"
 
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 
@@ -71,4 +71,4 @@ void SelectionMode::update(unsigned int currTick) {
 }
 
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes

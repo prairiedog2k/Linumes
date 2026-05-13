@@ -10,7 +10,7 @@
 #include "HighScoreManager.h"
 
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 
@@ -117,4 +117,4 @@ void TimeLimitedGameBoard::update(unsigned int currTick) {
 }
 
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes

@@ -3,7 +3,7 @@
 
 #include "linumes/GamePiece.h"
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 
 class BossPiece : public GamePiece {
 private:
@@ -20,6 +20,6 @@ public:
     virtual bool isStopped();
 };
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif

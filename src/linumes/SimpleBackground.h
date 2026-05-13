@@ -6,7 +6,7 @@
 #include "framework/Themed.h"
 #include "framework/TextureQuad.h"
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 class SimpleBackground : public HF::Rendered, public HF::Positioned, public HF::Themed
@@ -28,6 +28,6 @@ public:
 	float getDepth() { return _depth; };
 };
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif /*BACKGROUND_H_*/

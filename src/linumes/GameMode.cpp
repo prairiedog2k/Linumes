@@ -3,7 +3,7 @@
 #include "ModeTypes.h"
 
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 
@@ -128,4 +128,4 @@ void GameMode::handleKeyDown( SDL_Keysym *keysym )
 
 
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes

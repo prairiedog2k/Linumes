@@ -1,7 +1,7 @@
 #include "LinumesThemeManager.h"
 
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 
@@ -26,4 +26,4 @@ bool LinumesThemeManager::init() {
 }
 
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes

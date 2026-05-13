@@ -6,7 +6,7 @@
 #include "GameBoard.h"
 #include "LinumesThemeManager.h"
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 class GameMode : public HF::Mode
@@ -25,6 +25,6 @@ public:
 	virtual void update(unsigned int currTick);
 };
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif /*GAMEMODE_H_*/

@@ -13,7 +13,7 @@
 #include "framework/TextureQuad.h"
 #include "GamePiece.h"
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 class Block : public HF::Rendered, public HF::Themed {
@@ -61,6 +61,6 @@ protected:
     GLuint getTexture(const char *name);
 };
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif

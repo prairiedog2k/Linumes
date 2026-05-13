@@ -9,7 +9,7 @@
 #include <map>
 #include <list>
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 
 typedef struct {
     std::string display;
@@ -28,6 +28,6 @@ void buildSelectionListFromYaml(std::string selectionFile,
         std::list< std::pair<std::string, Selection> > &selectionList,
         std::map< std::string, std::list<Option> > &optionMap);
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif /* SELECTION_H_ */

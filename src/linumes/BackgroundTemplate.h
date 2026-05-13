@@ -3,7 +3,7 @@
 
 #include "framework/Theme.h"
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 class BackgroundTemplate;
@@ -28,6 +28,6 @@ public:
   virtual void update() = 0;
 };
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif /*BACKGROUND_*/

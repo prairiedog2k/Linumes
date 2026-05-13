@@ -11,7 +11,7 @@
 #include "LinumesThemeManager.h"
 #include "ConfigurationBoard.h"
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 class ConfigurationMode: public HF::Mode {
@@ -34,6 +34,6 @@ public:
 
 };
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif /* LINUMESCONFIGURATIONMODE_H_ */

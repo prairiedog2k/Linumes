@@ -4,7 +4,7 @@
 #include "GameBoard.h"
 #include "framework/TextureQuad.h"
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 class TimeLimitedGameBoard : public GameBoard
@@ -26,6 +26,6 @@ protected:
 	virtual void evaluateBonus() { }; //do not evaluate bonus
 };
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif /*TIMELIMITEDGAMEBOARD_H_*/

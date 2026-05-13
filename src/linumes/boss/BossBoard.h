@@ -8,7 +8,7 @@
 #include "BossPiece.h"
 #include "BossIcon.h"
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 
 class BossBoard : public GameBoard {
 private:
@@ -41,6 +41,6 @@ public:
    	virtual void addToBlockCount (int count);
 };
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif

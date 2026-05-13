@@ -4,7 +4,7 @@
 #include "framework/ResourceHelper.h"
 
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 
@@ -281,4 +281,4 @@ void Grid::Draw() {
 }
 
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes

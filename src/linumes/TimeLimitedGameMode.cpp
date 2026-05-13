@@ -3,7 +3,7 @@
 
 #include "ModeTypes.h"
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 
@@ -25,4 +25,4 @@ void TimeLimitedGameMode::createGameBoard() {
 }
 
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes

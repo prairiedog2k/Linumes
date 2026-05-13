@@ -12,7 +12,7 @@
 #include <map>
 #include <vector>
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 class SelectionBoard : public HF::Rendered, public HF::Themed
@@ -47,6 +47,6 @@ protected:
 	Selection getSelection();
 };
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif /*SELECTIONBOARD_H_*/

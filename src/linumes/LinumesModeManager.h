@@ -6,7 +6,7 @@
 #include <map>
 #include <string>
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 class LinumesModeManager : public HF::ModeManager
@@ -27,6 +27,6 @@ public:
 	virtual ~LinumesModeManager();
 };
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif /*LINUMESMODEMANAGER_H_*/

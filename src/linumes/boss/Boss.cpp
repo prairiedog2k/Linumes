@@ -12,7 +12,7 @@
 #include "framework/AudioResource.h"
 
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 
@@ -195,4 +195,4 @@ void Boss::dump() {
 }
 
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes

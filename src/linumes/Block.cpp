@@ -13,7 +13,7 @@
  */
 
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 
@@ -267,4 +267,4 @@ Block& Block::operator= (const Block& param)
 }
 
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes

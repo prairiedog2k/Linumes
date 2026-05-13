@@ -7,7 +7,7 @@
 #include "LinumesThemeManager.h"
 #include "SelectionBoard.h"
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 class SelectionMode : public HF::Mode
@@ -32,6 +32,6 @@ public:
 	std::pair<std::string, std::map<std::string,std::string> > getSelection();
 };
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif /*SELECTIONMODE_H_*/

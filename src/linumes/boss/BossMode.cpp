@@ -3,7 +3,7 @@
 #include "BossBoard.h"
 
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 
@@ -23,4 +23,4 @@ void BossMode::createGameBoard() {
 }
 
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes

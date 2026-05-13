@@ -10,7 +10,7 @@
 
 
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 
@@ -357,4 +357,4 @@ void BossBoard::updateContents() {
 }
 
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes

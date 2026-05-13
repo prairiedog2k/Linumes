@@ -7,7 +7,7 @@
 #include <string>
 #include <map>
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 class HUD : public HF::Themed, public HF::Rendered
@@ -25,6 +25,6 @@ private:
     std::map<std::string, HF::BaseTextDisplay> textDisplays;
 };
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif /*HUD_H_*/

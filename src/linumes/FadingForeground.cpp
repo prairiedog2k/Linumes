@@ -8,7 +8,7 @@
 
 
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 
@@ -71,4 +71,4 @@ void FadingForeground::Draw() {
 
 
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes

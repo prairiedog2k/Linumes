@@ -6,7 +6,7 @@
 #include "HighScoreTable.h"
 #include "framework/Theme.h"
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 class HighScoreManager
@@ -35,6 +35,6 @@ public:
 
 };
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif /*HIGHSCOREMANAGER_H_*/

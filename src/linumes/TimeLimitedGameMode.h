@@ -3,7 +3,7 @@
 
 #include "GameMode.h"
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 
 class TimeLimitedGameMode : public GameMode
 {
@@ -18,6 +18,6 @@ public:
 	virtual ~TimeLimitedGameMode();
 };
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif /*TIMELIMITEDGAMEMODE_H_*/

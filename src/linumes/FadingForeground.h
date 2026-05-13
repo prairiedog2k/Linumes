@@ -6,7 +6,7 @@
 #include "framework/TimeLimited.h"
 #include "framework/Themed.h"
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 typedef enum { FADE_IN, FADE_OUT} Fade;
@@ -34,6 +34,6 @@ public:
 
 };
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif /*FADINGFOREGROUND_H_*/

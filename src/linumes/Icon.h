@@ -7,7 +7,7 @@
 #include "framework/Positioned.h"
 #include "framework/TextureQuad.h"
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 class Icon : public HF::Themed, public HF::Timed, public HF::Rendered, public HF::Positioned
@@ -28,6 +28,6 @@ protected:
 	virtual GLuint getTexture(int which);
 };
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif /*ICON_H_*/

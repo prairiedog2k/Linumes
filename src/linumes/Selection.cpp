@@ -5,7 +5,7 @@
 #include <yaml-cpp/yaml.h>
 
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 
 
 void buildSelectionListFromYaml(std::string selectionFile,
@@ -48,4 +48,4 @@ void buildSelectionListFromYaml(std::string selectionFile,
 }
 
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes

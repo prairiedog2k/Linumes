@@ -11,7 +11,7 @@
 
 
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 
@@ -186,4 +186,4 @@ void Scanner::togglePause() {
 }
 
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes

@@ -10,7 +10,7 @@
 #include <iostream>
 
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 
@@ -89,4 +89,4 @@ void HUD::Draw() {
 }
 
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes

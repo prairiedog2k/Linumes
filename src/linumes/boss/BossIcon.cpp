@@ -1,7 +1,7 @@
 #include "BossIcon.h"
 
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 
@@ -14,4 +14,4 @@ BossIcon::~BossIcon()
 }
 
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes

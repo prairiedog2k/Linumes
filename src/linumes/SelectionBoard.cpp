@@ -5,7 +5,7 @@
 #include "framework/Utils.h"
 
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 
@@ -133,4 +133,4 @@ void SelectionBoard::Draw() {
 }
 
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes

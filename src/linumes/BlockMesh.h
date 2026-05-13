@@ -2,7 +2,7 @@
 #ifndef BLOCKMESH_H_
 #define BLOCKMESH_H_
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 
 class BlockMesh {
 private:
@@ -13,6 +13,6 @@ public:
  	static GLint getListId();
 };
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif /*BLOCKMESH_H_*/

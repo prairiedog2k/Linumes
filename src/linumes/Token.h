@@ -8,7 +8,7 @@
 #include "MagicBlock.h"
 #include <cassert>
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 class GameBoard;
@@ -86,6 +86,6 @@ private:
 	void drop();
 };
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif /*TOKEN_H_*/

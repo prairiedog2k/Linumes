@@ -5,7 +5,7 @@
 #include <cstdio>
 
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 
 
 HighScoreTable::HighScoreTable() : _maxSize(10), _tableName("default")
@@ -82,4 +82,4 @@ std::string HighScoreTable::getTableString() {
 }
 
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes

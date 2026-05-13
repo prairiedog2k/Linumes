@@ -29,7 +29,7 @@
 #include "framework/ResourceHelper.h"
 
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 
@@ -263,4 +263,4 @@ bool GamePiece::isStopped() {
 
 
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes

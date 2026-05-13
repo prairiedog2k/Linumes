@@ -9,7 +9,7 @@
 #include "framework/TextureQuad.h"
 #include "framework/AudioManager.h"
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 class Grid : public HF::Timed, public HF::Rendered, public HF::Positioned, public HF::Themed
@@ -49,6 +49,6 @@ public:
 	void update(unsigned int tick) { currTick = tick;};
 };
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif /*GRID_H_*/

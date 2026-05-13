@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
     std::cout << "(DEBUG MODE ENABLED)" << std::endl;
 #endif
 
-    auto lmm = std::make_unique<Linumes::LinumesModeManager>("LinumesConfiguration.yaml");
+    auto lmm = std::make_unique<Hunchback::Linumes::LinumesModeManager>("LinumesConfiguration.yaml");
     if (lmm->init()) {
         lmm->run();
     }

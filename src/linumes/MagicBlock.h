@@ -7,7 +7,7 @@
 #include "framework/TextureQuad.h"
 #include <set>
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 /**
@@ -86,6 +86,6 @@ struct mbcomp{
 
 typedef std::set<MagicBlock ,mbcomp> MagicBlockSet;
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif /*MAGICBLOCK_H_*/

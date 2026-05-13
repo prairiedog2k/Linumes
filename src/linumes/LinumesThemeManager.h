@@ -5,7 +5,7 @@
 #include "framework/ThemeManager.h"
 #include "HighScoreManager.h"
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 class LinumesThemeManager : public HF::ThemeManager
@@ -19,6 +19,6 @@ public:
 	virtual bool init();
 };
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif /*LINUMESTHEMEMANAGER_H_*/

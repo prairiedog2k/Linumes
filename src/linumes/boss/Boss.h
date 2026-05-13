@@ -10,7 +10,7 @@
 
 #include "BossPiece.h"
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 class Boss
@@ -110,6 +110,6 @@ public:
 
 };
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif /*BOSS_H_*/

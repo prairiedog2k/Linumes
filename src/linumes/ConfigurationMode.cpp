@@ -9,7 +9,7 @@
 #include "ConfigurationMode.h"
 
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 
@@ -79,4 +79,4 @@ void ConfigurationMode::update(unsigned int currTick) {
 }
 
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes

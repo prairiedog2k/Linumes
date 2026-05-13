@@ -10,7 +10,7 @@
 #include "framework/Themed.h"
 #include "framework/TextureQuad.h"
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 class GamePiece : public HF::Rendered, public HF::TimePositioned, public HF::Themed
@@ -78,6 +78,6 @@ public:
   void Dump();
 };
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif

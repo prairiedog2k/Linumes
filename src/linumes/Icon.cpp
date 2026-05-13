@@ -4,7 +4,7 @@
 #include "framework/ResourceHelper.h"
 
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 
@@ -71,4 +71,4 @@ void Icon::Pulse() {
 }
 
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes

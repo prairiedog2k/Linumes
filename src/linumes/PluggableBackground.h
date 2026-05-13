@@ -4,7 +4,7 @@
 #include "BackgroundTemplate.h"
 #include "framework/Theme.h"
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 class PluggableBackground : public BackgroundTemplate
@@ -26,6 +26,6 @@ public:
   virtual void update();
 };
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif /*PLUGGABLEBACKGROUND_H_*/

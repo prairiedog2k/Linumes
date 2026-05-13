@@ -11,7 +11,7 @@
 #include "framework/Utils.h"
 
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 
@@ -150,4 +150,4 @@ void ConfigurationBoard::drawAdditional() {
 }
 
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes

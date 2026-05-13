@@ -9,7 +9,7 @@
 #include "ModeTypes.h"
 
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 namespace HF = Hunchback::Framework;
 
 
@@ -90,4 +90,4 @@ void LinumesModeManager::update() {
 }
 
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes

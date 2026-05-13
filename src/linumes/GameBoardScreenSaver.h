@@ -3,7 +3,7 @@
 
 #include "GameBoard.h"
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 
 class GameBoardScreenSaver: public GameBoard
 {
@@ -24,6 +24,6 @@ public:
 
 };
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
 
 #endif /*GAMEBOARDSCREENSAVER_H_*/

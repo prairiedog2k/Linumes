@@ -5,7 +5,7 @@
 
 
 
-namespace Linumes {
+namespace Hunchback::Linumes {
 
 
 bool BlockMesh::isLoaded = false;
@@ -123,4 +123,4 @@ GLint BlockMesh::getListId() {
 
 
 
-} // namespace Linumes
+} // namespace Hunchback::Linumes
