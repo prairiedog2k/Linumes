@@ -9,12 +9,17 @@
 #include <yaml-cpp/yaml.h>
 #include <iostream>
 
-HUD::HUD() : Rendered(true)
+
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
+
+HUD::HUD() : HF::Rendered(true)
 {
     textDisplays.clear();
 }
 
-HUD::HUD(bool rendered) : Rendered(rendered)
+HUD::HUD(bool rendered) : HF::Rendered(rendered)
 {
     textDisplays.clear();
 }
@@ -30,33 +35,33 @@ void HUD::loadHudConfig(std::string hudConfigFile) {
     for (const auto& node : root["text_displays"]) {
         std::string name = node[TEXT_DISPLAY_ATTR_NAME] ? node[TEXT_DISPLAY_ATTR_NAME].as<std::string>() : "";
         if (!name.empty()) {
-            BaseTextDisplay btd = XMLTextDisplayBuilder::createTextDisplay(node);
+            HF::BaseTextDisplay btd = HF::XMLTextDisplayBuilder::createTextDisplay(node);
             textDisplays[name] = btd;
         }
     }
 }
 
 void HUD::overrideText(std::string argName, std::string argValue) {
-    std::map<std::string, BaseTextDisplay>::iterator iter = textDisplays.find(argName);
+    std::map<std::string, HF::BaseTextDisplay>::iterator iter = textDisplays.find(argName);
     if (iter != textDisplays.end()) {
-        BaseTextDisplay btd = iter->second;
+        HF::BaseTextDisplay btd = iter->second;
         btd.setBaseText(argValue);
         textDisplays[argName] = btd;
     }
 }
 
 void HUD::setValue(std::string argName, std::string argValue) {
-    std::map<std::string, BaseTextDisplay>::iterator iter = textDisplays.find(argName);
+    std::map<std::string, HF::BaseTextDisplay>::iterator iter = textDisplays.find(argName);
     if (iter != textDisplays.end()) {
-        BaseTextDisplay btd = iter->second;
+        HF::BaseTextDisplay btd = iter->second;
         btd.setValue(argValue);
         textDisplays[argName] = btd;
     }
 }
 
-void HUD::setTheme(Theme *theme) {
+void HUD::setTheme(HF::Theme *theme) {
     if (nullptr != theme) {
-        StringResource *sr = ResourceHelper::getStringResource(theme, HUD_FILE);
+        HF::StringResource *sr = HF::ResourceHelper::getStringResource(theme, HUD_FILE);
         if (nullptr != sr) {
             std::string hudConfigFile = sr->getResource();
             if (!hudConfigFile.empty()) {
@@ -64,17 +69,17 @@ void HUD::setTheme(Theme *theme) {
             }
         }
     }
-    Themed::setTheme(theme);
+    HF::Themed::setTheme(theme);
 }
 
 void HUD::Draw() {
     if (isRenderable()) {
-        FontResource *fr = ResourceHelper::getFontResource(getTheme(), HUD_FONT);
-        Font *font = fr->getResource();
+        HF::FontResource *fr = HF::ResourceHelper::getFontResource(getTheme(), HUD_FONT);
+        HF::Font *font = fr->getResource();
 
-        for (std::map<std::string, BaseTextDisplay>::iterator iter = textDisplays.begin();
+        for (std::map<std::string, HF::BaseTextDisplay>::iterator iter = textDisplays.begin();
              iter != textDisplays.end(); iter++) {
-            BaseTextDisplay btd = iter->second;
+            HF::BaseTextDisplay btd = iter->second;
             if (btd.hasDrop()) {
                 font->drawText(btd.getFormattedText().c_str(), btd.getX()+1, btd.getY()+1, 1.0f, 1.0f, 1.0f);
             }
@@ -82,3 +87,6 @@ void HUD::Draw() {
         }
     }
 }
+
+
+} // namespace Linumes

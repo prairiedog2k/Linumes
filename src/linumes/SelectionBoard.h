@@ -12,11 +12,14 @@
 #include <map>
 #include <vector>
 
-class SelectionBoard : public Rendered, public Themed
-{	
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
+class SelectionBoard : public HF::Rendered, public HF::Themed
+{
 protected:
 	std::string _name;
-	TextureQuad _quad;
+	HF::TextureQuad _quad;
 	std::unique_ptr<SimpleBackground> _bg;
 	std::list< std::pair<std::string, Selection > > _selectionList;
 	std::list< std::pair<std::string, Selection > >::iterator _currentSelection;
@@ -28,7 +31,7 @@ public:
 	SelectionBoard(std::string name);
 	virtual ~SelectionBoard();
 
-	virtual void init(); 
+	virtual void init();
 	virtual void Up();
 	virtual void Down();
 	virtual void update(unsigned int currentTime);
@@ -43,5 +46,7 @@ protected:
 	virtual bool isActiveSelection(std::string strName);
 	Selection getSelection();
 };
+
+} // namespace Linumes
 
 #endif /*SELECTIONBOARD_H_*/

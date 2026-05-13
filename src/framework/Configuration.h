@@ -11,6 +11,7 @@
 #include <string>
 #include <map>
 
+namespace Hunchback::Framework {
 
 class Configuration {
 private:
@@ -27,5 +28,7 @@ public:
 	void set(std::string name, std::string value);
 	void release();
 };
+
+} // namespace Hunchback::Framework
 
 #endif /* CONFIGURATION_H_ */

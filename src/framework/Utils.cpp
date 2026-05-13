@@ -21,6 +21,8 @@
 #include "MediaManager.h"
 #include "ScreenDimensions.h"
 
+namespace Hunchback::Framework {
+
 int roundi(double x)
 {
 	return (int)(x + 0.5);
@@ -50,5 +52,7 @@ int xformX(int x) {
 int xformY(int y) {
 	return (int)( (float((float)(y) / (float)(SCREEN_DIM_H)) * MediaManager::getScreenHeight()) );
 }
+
+} // namespace Hunchback::Framework
 
 

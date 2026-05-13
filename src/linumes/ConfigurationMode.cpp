@@ -8,7 +8,12 @@
 #include <memory>
 #include "ConfigurationMode.h"
 
-ConfigurationMode::ConfigurationMode(Configuration *configuration) : _configuration(configuration)
+
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
+
+ConfigurationMode::ConfigurationMode(HF::Configuration *configuration) : _configuration(configuration)
 {
 }
 
@@ -72,3 +77,6 @@ bool ConfigurationMode::init() {
 void ConfigurationMode::update(unsigned int currTick) {
 	_configurationBoard->Draw();
 }
+
+
+} // namespace Linumes

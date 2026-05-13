@@ -6,7 +6,8 @@
 #include "MusicResource.h"
 #include "AudioResource.h"
 #include "fft.h"
-using namespace std;
+
+namespace Hunchback::Framework {
 
 class AudioManager: public Themed
 {
@@ -16,11 +17,11 @@ private:
 	int _nextBeat;
 	int _lastBeat;
 	int _trackLength;
-	
+
 	int levels[256];
 	int levelsMax[256];
 	MusicResource *_musicResource;
-	
+
 public:
 	AudioManager();
 	virtual ~AudioManager();
@@ -38,11 +39,13 @@ public:
   float getSoundLevel(int band);
 private:
   void checkTheme();
-  void calc_freq(Sint16 *_stream);  
+  void calc_freq(Sint16 *_stream);
   fft_state *state;
-  //begin static 
+  //begin static
 public:
   static void mixer_monitor(void *udata, Uint8 *_stream, int _len);
 };
+
+} // namespace Hunchback::Framework
 
 #endif /*AUDIOMANAGER_H_*/

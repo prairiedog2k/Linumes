@@ -4,7 +4,7 @@
 #include <string>
 #include "SDL.h"
 
-using namespace std;
+namespace Hunchback::Framework {
 
 class Mode
 {
@@ -20,11 +20,13 @@ public:
     virtual void handleKeyDown( SDL_Keysym *keysym ) = 0;
     virtual bool init() = 0;
     virtual void update(unsigned int currtick) = 0;
-    
-    std::string getModeName() { return name;}; 
+
+    std::string getModeName() { return name;};
     bool isDone() { return done; };
     bool isModeComplete() { return modeComplete; };
-  
+
 };
+
+} // namespace Hunchback::Framework
 
 #endif /*MODE_H_*/

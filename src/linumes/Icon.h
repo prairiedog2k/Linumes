@@ -7,13 +7,16 @@
 #include "framework/Positioned.h"
 #include "framework/TextureQuad.h"
 
-class Icon : public Themed, public Timed, public Rendered, public Positioned
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
+class Icon : public HF::Themed, public HF::Timed, public HF::Rendered, public HF::Positioned
 {
 private:
  float _dimension;
  float _decay;
  float _currDimension;
- TextureQuad _quad;
+ HF::TextureQuad _quad;
 public:
 	Icon();
 	virtual ~Icon();
@@ -24,5 +27,7 @@ public:
 protected:
 	virtual GLuint getTexture(int which);
 };
+
+} // namespace Linumes
 
 #endif /*ICON_H_*/

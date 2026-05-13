@@ -22,7 +22,8 @@
 
 #include <iostream>
 
-using namespace std;
+namespace Hunchback::Framework {
+
 class Timed
 {
 protected:
@@ -40,5 +41,7 @@ public:
   void setInitialTime( int time ) { _initialTime = time; };
   void setWait(int timewait) { _wait = timewait; };
 };
+
+} // namespace Hunchback::Framework
 
 #endif

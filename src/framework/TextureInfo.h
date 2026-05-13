@@ -21,8 +21,7 @@
 #ifndef TEXTUREINFO_H
 #define TEXTUREINFO_H
 
-
-using namespace std;
+namespace Hunchback::Framework {
 
 class TextureInfo {
 private:
@@ -36,5 +35,7 @@ public:
 	bool isMasked() { return _mask; };
 	void setMasked(bool mask) { _mask = mask; };
 };
+
+} // namespace Hunchback::Framework
 
 #endif

@@ -2,6 +2,11 @@
 #include "GameBoardScreenSaver.h"
 #include "Block.h"
 
+
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
+
 GameBoardScreenSaver::GameBoardScreenSaver( float dim, int rx, int ry) : GameBoard(dim,rx,ry) {
 }
 
@@ -198,7 +203,7 @@ void GameBoardScreenSaver::Draw() {
 	drawScanner();
 	
 	/* Draw it to the screen */
-	SDL_GL_SwapWindow(MediaManager::getWindow());
+	SDL_GL_SwapWindow(HF::MediaManager::getWindow());
 }
 
 void GameBoardScreenSaver::toggleScanner(unsigned int currTime) {
@@ -213,3 +218,6 @@ void GameBoardScreenSaver::toggleScanner(unsigned int currTime) {
 	_scanner->togglePause();
 };
 
+
+
+} // namespace Linumes

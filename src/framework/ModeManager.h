@@ -29,7 +29,7 @@
 #include "Mode.h"
 #include "Configuration.h"
 
-using namespace std;
+namespace Hunchback::Framework {
 
 class ModeManager {
 
@@ -53,10 +53,12 @@ public:
 
 	virtual bool init();
 	virtual bool release();
-	void run(); 
- 
-private: 
+	void run();
+
+private:
 	void assertValidMode();
 };
+
+} // namespace Hunchback::Framework
 
 #endif

@@ -3,6 +3,8 @@
 
 #include "Theme.h"
 
+namespace Hunchback::Framework {
+
 class Themed
 {
 protected:
@@ -11,9 +13,11 @@ public:
 	Themed() : _theme(0){};
 	Themed(const Themed &themed): _theme(themed._theme) {};
 	virtual ~Themed();
-	
+
 	Theme *getTheme() { return _theme; };
 	virtual void setTheme(Theme *theTheme) { _theme = theTheme; };
 };
+
+} // namespace Hunchback::Framework
 
 #endif /*THEMED_H_*/

@@ -33,6 +33,11 @@
 
 #include "HighScoreManager.h"
 
+
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
+
 #ifdef DEBUG
 #define glError() { \
         GLenum err = glGetError(); \
@@ -75,7 +80,7 @@
  */
 
 GameBoard::GameBoard( float dim, int rx, int ry):
-	Rendered(true),
+	HF::Rendered(true),
 	_hiScoreTable(nullptr),
 	_pieces(rx * ry),
 	_scanner(std::make_unique<Scanner>(
@@ -118,7 +123,7 @@ GameBoard::GameBoard( float dim, int rx, int ry):
 	_scanner->setStopped(false);
 	_scanner->setXRate(calculateRate(5.0f));
 	lastscanned = 0;
-	_audioManager = std::make_unique<AudioManager>();
+	_audioManager = std::make_unique<HF::AudioManager>();
 	_currentTick = SDL_GetTicks();
 	_gameTime = _currentTick;
 	_gameName = GAME_NAME;
@@ -340,7 +345,7 @@ void GameBoard::toggleScanner(unsigned int currTime) {
 
 void GameBoard::applyNextTheme()
 {
-	Theme *nextTheme = nullptr;
+	HF::Theme *nextTheme = nullptr;
 	if (themeManager != nullptr)
 	{
 		nextTheme = themeManager->getNextTheme();
@@ -569,7 +574,7 @@ void GameBoard::Draw()
 	/* Draw it to the screen */
 	glError();
 	
-	SDL_GL_SwapWindow(MediaManager::getWindow());
+	SDL_GL_SwapWindow(HF::MediaManager::getWindow());
 }
 
 int GameBoard::scanTo(int column) {
@@ -874,7 +879,7 @@ void GameBoard::update(unsigned int currTick) {
 
 	if ( isGameOver() ){
 		if (! _scoreChecked) {
-			_fg->setDisplayInfo("Press 'BackSpace' to Return to Mode Selection.  Press 'Return' to Start");
+			_fg->setDisplayInfo("Press 'BackSpace' to Return to HF::Mode Selection.  Press 'Return' to Start");
 		}
 		checkHighScore();
 		return;
@@ -1130,3 +1135,6 @@ void GameBoard::updateSpecialAt(int x, int y) {
 	}
 }
 
+
+
+} // namespace Linumes

@@ -12,14 +12,19 @@
  *   ---------
  */
 
-Block::Block(): Rendered(false), Themed(), _x(0.0f), _y(0.0f), _dim(1.0f), _whole(false), _quad() {
+
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
+
+Block::Block(): HF::Rendered(false), HF::Themed(), _x(0.0f), _y(0.0f), _dim(1.0f), _whole(false), _quad() {
 	for (int i = 0; i < 4; i++) {
 		_pieces[i] = std::make_unique<GamePiece>();
 		_pieces[i]->setNewColor(false);
 	}
 }
 
-Block::Block(Block &block):Rendered(block._renderable), 
+Block::Block(Block &block):HF::Rendered(block._renderable), 
 _x(block._x), 
 _y(block._y),
 _dim(block._dim),
@@ -44,7 +49,7 @@ _quad()
 Block::Block( const GamePiece *p1, 
 		const GamePiece *p2,
 		const GamePiece *p3,
-		const  GamePiece *p4) :Rendered(true), Themed(), _quad() {
+		const  GamePiece *p4) :HF::Rendered(true), HF::Themed(), _quad() {
 	_pieces[0] = std::make_unique<GamePiece>(*p1);
 	_pieces[1] = std::make_unique<GamePiece>(*p2);
 	_pieces[2] = std::make_unique<GamePiece>(*p3);
@@ -201,7 +206,7 @@ bool Block::hasSpecial(int &x, int &y) {
 
 GLuint Block::getTexture(const char *name)
 {
-	TextureResource * tr = ResourceHelper::getTextureResource(getTheme(), std::string (name));
+	HF::TextureResource * tr = HF::ResourceHelper::getTextureResource(getTheme(), std::string (name));
 	if (nullptr == tr) {
 		return 0;
 	}
@@ -260,3 +265,6 @@ Block& Block::operator= (const Block& param)
 	_dim = param._dim;
 	return *this;
 }
+
+
+} // namespace Linumes

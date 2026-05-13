@@ -20,8 +20,7 @@
 #ifndef POSITIONED_H
 #define POSITIONED_H
 
-
-using namespace std;
+namespace Hunchback::Framework {
 
 class Positioned {
 protected:
@@ -37,4 +36,7 @@ public:
   void setY(const float y) { _y = y; };
   void setPiecePos (const float x, const float y) { _x = x; _y = y; };
 };
+
+} // namespace Hunchback::Framework
+
 #endif

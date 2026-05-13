@@ -1,21 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU General Public License     *
- *   along with this program; if not, write to the                         *
- *   Free Software Foundation, Inc.,                                       *
- *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 #ifndef GAMEBOARD_H
 #define GAMEBOARD_H
@@ -46,7 +31,10 @@
 
 #define GAME_NAME "default"
 
-class GameBoard : public Rendered {
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
+class GameBoard : public HF::Rendered {
 protected:
 	//this is the name that will be registered in the highscores, descendants should define differently
 	std::string _gameName;
@@ -70,8 +58,8 @@ protected:
 	bool rightpressed;
 
 	LinumesThemeManager *themeManager;
-	std::unique_ptr<AudioManager> _audioManager;
-	Theme *currTheme;
+	std::unique_ptr<HF::AudioManager> _audioManager;
+	HF::Theme *currTheme;
 
 	float _dim;
 	int _rx;
@@ -208,8 +196,11 @@ protected:
 	//scanner
 	float calculateRate(float ScanTime);
 
-	Theme *getTheme() { return currTheme; };
+	HF::Theme *getTheme() { return currTheme; };
 
 	friend class Token;
 };
+
+} // namespace Linumes
+
 #endif

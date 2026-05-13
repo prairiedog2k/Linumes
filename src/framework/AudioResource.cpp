@@ -19,8 +19,9 @@
  ***************************************************************************/
 #include "AudioResource.h"
 
+namespace Hunchback::Framework {
 
-AudioResource::AudioResource(void *info, string argResourceFile) : GenericResource<Mix_Chunk *>(argResourceFile), audioInfo((AudioInfo *)info) {
+AudioResource::AudioResource(void *info, std::string argResourceFile) : GenericResource<Mix_Chunk *>(argResourceFile), audioInfo((AudioInfo *)info) {
 };
 
 AudioResource::~AudioResource() {
@@ -33,15 +34,15 @@ AudioResource::~AudioResource() {
 bool AudioResource::load() {
 	value_ = Mix_LoadWAV(resourceFile.c_str());
 #ifdef DEBUG
-  cout << "load audio sample from ";
+  std::cout << "load audio sample from ";
   reportResourceFile();
-#endif	
+#endif
 	return value_ != 0;
 }
 
 bool AudioResource::release() {
 #ifdef DEBUG
-   cout << "release audio sample from ";
+   std::cout << "release audio sample from ";
    reportResourceFile();
 #endif
   if (value_) {
@@ -51,3 +52,4 @@ bool AudioResource::release() {
   return true;
 }
 
+} // namespace Hunchback::Framework

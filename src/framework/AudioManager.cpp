@@ -13,6 +13,8 @@ extern "C" {
 }
 #endif
 
+namespace Hunchback::Framework {
+
 void AudioManager::mixer_monitor(void *udata, Uint8 *_stream, int _len) {
 
 	//mix the music first.
@@ -179,3 +181,5 @@ void AudioManager::playSoundEffect(std::string sound) {
 	AudioResource *resource = ResourceHelper::getAudioResource(_theme,sound);
 	playAudioResource(resource);
 }
+
+} // namespace Hunchback::Framework

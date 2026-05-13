@@ -19,6 +19,9 @@
  ***************************************************************************/
 #include "TimePositioned.h"
 #include <iostream>
+
+namespace Hunchback::Framework {
+
 float TimePositioned::getDistance(int direction, int current)
 {
   float dist = 0.0f;
@@ -50,3 +53,6 @@ float TimePositioned::forecastX(int current)
   }
   return _x + getDistance(TimePositioned::DIR_X, current);
 }
+
+
+} // namespace Hunchback::Framework

@@ -3,6 +3,8 @@
 
 #include "GameMode.h"
 
+namespace Linumes {
+
 class ScreenSaverMode : public GameMode
 {
 private:
@@ -16,7 +18,9 @@ public:
 	virtual bool init();
 	virtual void handleKeyUp( SDL_Keysym *keysym );
 	virtual void handleKeyDown( SDL_Keysym *keysym );
-	
+
 };
+
+} // namespace Linumes
 
 #endif /*SCREENSAVERMODE_H_*/

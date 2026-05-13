@@ -31,7 +31,7 @@
 #include <unistd.h>
 #endif
 
-using namespace std;
+namespace Hunchback::Framework {
 
 Theme::Theme(std::string filename): themefile(filename), _baseTheme(nullptr) {
 };
@@ -115,8 +115,8 @@ bool Theme::init()
 		fclose(file);
 	}
 	else
-	{  	
-		cout << "Could not find file " << themefile << endl;
+	{
+		std::cout << "Could not find file " << themefile << std::endl;
 	}
 	return resourceCount > 0;
 }
@@ -131,7 +131,9 @@ void Theme::release()
 	resources.clear();
 	resourceCount = 0;
 #ifdef DEBUG
-	std::cout << "Theme Release Complete. " << endl;
+	std::cout << "Theme Release Complete. " << std::endl;
 #endif
 }
+
+} // namespace Hunchback::Framework
 

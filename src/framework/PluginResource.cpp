@@ -2,8 +2,11 @@
 #ifndef MING_NO_PLUGIN
 #include <dlfcn.h>
 #endif
+#include <iostream>
 
-PluginResource::PluginResource(void *info, string argResourceFile): GenericResource<void *>(argResourceFile)
+namespace Hunchback::Framework {
+
+PluginResource::PluginResource(void *info, std::string argResourceFile): GenericResource<void *>(argResourceFile)
 {
 }
 
@@ -17,12 +20,12 @@ bool PluginResource::load() {
 
     value_ = dlopen(resourceFile.c_str(), RTLD_LAZY);
     if (!value_) {
-        cerr << "Cannot load library: " << dlerror() << '\n';
+        std::cerr << "Cannot load library: " << dlerror() << '\n';
         return false;
     }
   // reset errors
   dlerror();
-#endif  
+#endif
 	return value_ != nullptr;
 }
 
@@ -35,3 +38,5 @@ bool PluginResource::release() {
 #endif
 	return true;
 }
+
+} // namespace Hunchback::Framework

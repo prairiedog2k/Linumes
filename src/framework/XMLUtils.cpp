@@ -10,6 +10,8 @@
 #include "FontInfo.h"
 #include "FontInfoBuilder.h"
 
+namespace Hunchback::Framework {
+
 std::string nodeAttributeAsString(const YAML::Node& node, const char *key) {
     if (node[key]) return node[key].as<std::string>();
     return "";
@@ -55,3 +57,5 @@ BaseResource *createResourceFromNode(const YAML::Node& node, const std::string& 
     }
     return nullptr;
 }
+
+} // namespace Hunchback::Framework

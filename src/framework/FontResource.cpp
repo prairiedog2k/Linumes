@@ -1,9 +1,11 @@
 #include "FontResource.h"
 #include <iostream>
 
-FontResource::FontResource(void *info, string argResourceFile) : GenericResource<Font *>(argResourceFile){
+namespace Hunchback::Framework {
+
+FontResource::FontResource(void *info, std::string argResourceFile) : GenericResource<Font *>(argResourceFile){
 	FontInfo *fi = (FontInfo *)info;
-	fontInfo = new FontInfo(*fi);	
+	fontInfo = new FontInfo(*fi);
 }
 
 FontResource::~FontResource()
@@ -20,8 +22,8 @@ bool FontResource::load() {
 		if ( nullptr != value_) {
 			value_->initFont();
 #ifdef DEBUG
-		std::cout << "Loaded Resource " << resourceFile << endl;
-#endif			
+		std::cout << "Loaded Resource " << resourceFile << std::endl;
+#endif
 		}
 		bRetVal = true;
 	}
@@ -35,3 +37,5 @@ bool FontResource::release() {
 	}
 	return true;
 }
+
+} // namespace Hunchback::Framework

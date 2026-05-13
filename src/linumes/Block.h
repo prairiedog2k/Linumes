@@ -4,21 +4,6 @@
 /***************************************************************************
  *   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU General Public License     *
- *   along with this program; if not, write to the                         *
- *   Free Software Foundation, Inc.,                                       *
- *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 #ifndef BLOCK_H
 #define BLOCK_H
@@ -28,18 +13,20 @@
 #include "framework/TextureQuad.h"
 #include "GamePiece.h"
 
-using namespace std;
-class Block : public Rendered, public Themed {
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
+class Block : public HF::Rendered, public HF::Themed {
 public:
     Block();
     Block(Block &block);
-    Block(const GamePiece *p1, 
+    Block(const GamePiece *p1,
           const GamePiece *p2,
           const GamePiece *p3,
           const GamePiece *p4);
     ~Block();
-    
-    void Draw();    
+
+    void Draw();
     bool isScoreTarget();
     bool countableMagic();
     bool AllVisible();
@@ -56,7 +43,7 @@ public:
     void setX(const float x);
     float getY()       { return _y; };
     void setY(const float y);
-    float getDimension()     { return _dim; };    
+    float getDimension()     { return _dim; };
     int   getBoardPos()  { return _boardpos; };
     GamePiece *pieceAt(int i);
 
@@ -67,10 +54,13 @@ protected:
     int   _boardpos;
     float _x;
     float _y;
-    float _dim;    
+    float _dim;
     bool  _whole;
     bool  _inmotion;
-    TextureQuad _quad;
+    HF::TextureQuad _quad;
     GLuint getTexture(const char *name);
 };
+
+} // namespace Linumes
+
 #endif

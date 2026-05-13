@@ -3,7 +3,12 @@
 #include "framework/TextureResource.h"
 #include "framework/ResourceHelper.h"
 
-Icon::Icon() : Rendered(true), _quad()
+
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
+
+Icon::Icon() : HF::Rendered(true), _quad()
 {
 
 }
@@ -14,7 +19,7 @@ Icon::~Icon()
 
 GLuint Icon::getTexture(int which)
 {
-	TextureResource * tr = ResourceHelper::getTextureResource(getTheme(), 
+	HF::TextureResource * tr = HF::ResourceHelper::getTextureResource(getTheme(), 
 			std::string ( (which == 0 ? BOARD_ICON_MASK : BOARD_ICON) ) );
 	if (nullptr == tr) {
 		return 0;
@@ -64,3 +69,6 @@ void Icon::Pulse() {
 	_initialTime = SDL_GetTicks();	
 	_wait = 75;
 }
+
+
+} // namespace Linumes

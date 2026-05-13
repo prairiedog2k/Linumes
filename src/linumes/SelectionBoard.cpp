@@ -4,7 +4,12 @@
 #include "framework/ResourceHelper.h"
 #include "framework/Utils.h"
 
-SelectionBoard::SelectionBoard(std::string name) : Rendered(true), Themed(), _name(name), _quad(), _bg( std::make_unique<SimpleBackground>(0.0,0.0, BASE_SEL_BG) )
+
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
+
+SelectionBoard::SelectionBoard(std::string name) : HF::Rendered(true), HF::Themed(), _name(name), _quad(), _bg( std::make_unique<SimpleBackground>(0.0,0.0, BASE_SEL_BG) )
 {
 
 }
@@ -49,7 +54,7 @@ std::string SelectionBoard::getSelectionResource() {
 void SelectionBoard::init() {
 	if (nullptr != getTheme()) {
 		_bg->setTheme(getTheme());
-		std::string SettingsConfigFile = ResourceHelper::getStringResource( getTheme(), getSelectionResource())->getResource();
+		std::string SettingsConfigFile = HF::ResourceHelper::getStringResource( getTheme(), getSelectionResource())->getResource();
 		buildSelectionListFromYaml(SettingsConfigFile, _selectionList, _optionMap);
 		_currentSelection = _selectionList.begin();
 		_currentOptions = _optionMap[(*_currentSelection).first];
@@ -61,26 +66,26 @@ void SelectionBoard::update(unsigned int currentTime) {
 }
 
 void SelectionBoard::drawAdditional() {
-	Font *f0 = ResourceHelper::getFontResource(getTheme(), LINUMES_FONT_72)->getResource();
+	HF::Font *f0 = HF::ResourceHelper::getFontResource(getTheme(), LINUMES_FONT_72)->getResource();
 	f0->setRGB(0.0f,0.0f,0.0f);
-	f0->drawText(getSelectionsTitle().c_str(), xformX(513), xformY(619), true);
+	f0->drawText(getSelectionsTitle().c_str(), HF::xformX(513), HF::xformY(619), true);
 	f0->setRGB(1.0f,1.0f,1.0f);
-	f0->drawText(getSelectionsTitle().c_str(), xformX(512), xformY(620), true);
+	f0->drawText(getSelectionsTitle().c_str(), HF::xformX(512), HF::xformY(620), true);
 
 
-	Font *f1 = ResourceHelper::getFontResource(getTheme(),  BASE_FONT_24 )->getResource();
+	HF::Font *f1 = HF::ResourceHelper::getFontResource(getTheme(),  BASE_FONT_24 )->getResource();
 	int ypos = 500;
 	for (std::list< std::pair < std::string, Selection > >::iterator iter = _selectionList.begin();
 	iter != _selectionList.end(); iter++) {
 		f1->setRGB(0.0f,0.0f,0.0f);
-		f1->drawText((*iter).second.display.c_str(), xformX(513), xformY(ypos-1), true);
+		f1->drawText((*iter).second.display.c_str(), HF::xformX(513), HF::xformY(ypos-1), true);
 
 		if  ( isActiveSelection( (*iter).first ) ) {
 			f1->setRGB(1.0f,0.0f,0.0f);
 		} else {
 			f1->setRGB(1.0f,1.0f,1.0f);
 		}
-		f1->drawText((*iter).second.display.c_str(), xformX(512), xformY(ypos), true);
+		f1->drawText((*iter).second.display.c_str(), HF::xformX(512), HF::xformY(ypos), true);
 		ypos -= 50;
 	}
 }
@@ -109,7 +114,7 @@ void SelectionBoard::Draw() {
 	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 	glDisable(GL_DEPTH_TEST);
 
-	glBindTexture( GL_TEXTURE_2D, ResourceHelper::getTextureResource(getTheme(),  SELECTION_TBL_TEXTURE)->getResource());
+	glBindTexture( GL_TEXTURE_2D, HF::ResourceHelper::getTextureResource(getTheme(),  SELECTION_TBL_TEXTURE)->getResource());
 
 	glTranslatef( 0.0,0.0, -5.0f );
 
@@ -124,5 +129,8 @@ void SelectionBoard::Draw() {
 	drawAdditional();
 
 	/* Draw it to the screen */
-	SDL_GL_SwapWindow(MediaManager::getWindow());
+	SDL_GL_SwapWindow(HF::MediaManager::getWindow());
 }
+
+
+} // namespace Linumes

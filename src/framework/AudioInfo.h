@@ -23,7 +23,7 @@
 #include <list>
 #include "SDL_mixer.h"
 
-using namespace std;
+namespace Hunchback::Framework {
 
 class AudioInfo {
 private:
@@ -37,16 +37,16 @@ private:
 	int  _songLength;
 	//whether or not prepare has been called
 	bool _wasInit;
-	
+
 	std::string _artist;
 	std::string _track;
-	
+
 public:
   AudioInfo();
-  ~AudioInfo(); 
+  ~AudioInfo();
 	void setMixer(std::string mixer) { _mixer = mixer; };
 	void setType(Mix_MusicType type) { _type = type; };
-	Mix_MusicType getType() { return _type; }; 
+	Mix_MusicType getType() { return _type; };
 	std::string getMixer() { return _mixer; };
 	void addTiming(int beatTime);
 	bool prepare();
@@ -60,6 +60,7 @@ public:
 	void setArtist( std::string artist) { _artist = artist; };
 	void setTrack (std::string track) { _track = track; };
 };
+
+} // namespace Hunchback::Framework
+
 #endif
-
-

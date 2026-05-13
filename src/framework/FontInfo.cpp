@@ -1,5 +1,7 @@
 #include "FontInfo.h"
 
+namespace Hunchback::Framework {
+
 FontInfo::FontInfo() : pointSize(36), fgRed(1.0f), fgGreen(1.0f), fgBlue(1.0f)
 {
 }
@@ -14,3 +16,5 @@ FontInfo::FontInfo(const FontInfo &fi) {
 FontInfo::~FontInfo()
 {
 }
+
+} // namespace Hunchback::Framework

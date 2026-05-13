@@ -1,7 +1,9 @@
 #include "MusicResource.h"
 
-MusicResource::MusicResource(void *info, string argResourceFile) : 
-	GenericResource<void *>(argResourceFile), 
+namespace Hunchback::Framework {
+
+MusicResource::MusicResource(void *info, std::string argResourceFile) :
+	GenericResource<void *>(argResourceFile),
 	audioInfo((AudioInfo *)info) {
 };
 
@@ -21,15 +23,15 @@ bool MusicResource::load() {
 		value_ = Mix_LoadMUS(resourceFile.c_str());
 	}
 #ifdef DEBUG
-  cout << "load music sample from ";
+  std::cout << "load music sample from ";
   reportResourceFile();
-#endif	
+#endif
 	return value_ != 0;
 }
 
 bool MusicResource::release() {
 #ifdef DEBUG
-   cout << "release music sample from ";
+   std::cout << "release music sample from ";
    reportResourceFile();
 #endif
   if (value_ && audioInfo) {
@@ -43,4 +45,4 @@ bool MusicResource::release() {
   return true;
 }
 
-
+} // namespace Hunchback::Framework

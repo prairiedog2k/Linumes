@@ -1,6 +1,11 @@
 #include "PluggableBackground.h"
 
 #include "framework/ResourceHelper.h"
+
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
+
 #ifdef MING_NO_PLUGIN
     //do nothing
 #else
@@ -17,10 +22,10 @@ PluggableBackground::~PluggableBackground()
 {
 }
 
-void PluggableBackground::setTheme(Theme *theme) {
+void PluggableBackground::setTheme(HF::Theme *theme) {
 	if (nullptr != theme) {
 		_theme = theme;
-		PluginResource *pr = ResourceHelper::getPluginResource(theme, std::string(BOARD_BG_PLUGIN));
+		HF::PluginResource *pr = HF::ResourceHelper::getPluginResource(theme, std::string(BOARD_BG_PLUGIN));
 		if (pr != nullptr) {
 			hasTemplate = true;
 		}
@@ -31,7 +36,7 @@ void PluggableBackground::init() {
 #ifdef MING_NO_PLUGIN
 #else
 	if ((nullptr != _theme) && (hasTemplate)) {
-		PluginResource *pr = ResourceHelper::getPluginResource(_theme, std::string(BOARD_BG_PLUGIN));
+		HF::PluginResource *pr = HF::ResourceHelper::getPluginResource(_theme, std::string(BOARD_BG_PLUGIN));
 		void *resource = pr->getResource();
 		if (nullptr != resource) {
 			
@@ -61,7 +66,7 @@ void PluggableBackground::release() {
 		
 		_background->release();
 		
-		PluginResource *pr = ResourceHelper::getPluginResource(_theme, std::string(BOARD_BG_PLUGIN));
+		HF::PluginResource *pr = HF::ResourceHelper::getPluginResource(_theme, std::string(BOARD_BG_PLUGIN));
 		void *resource = pr->getResource();
 		
 		if (nullptr != resource) {
@@ -115,3 +120,6 @@ void PluggableBackground::update() {
 		_background->update();
 	}	
 }
+
+
+} // namespace Linumes

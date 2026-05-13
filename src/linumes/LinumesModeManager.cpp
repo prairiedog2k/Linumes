@@ -8,12 +8,17 @@
 
 #include "ModeTypes.h"
 
-LinumesModeManager::LinumesModeManager() : ModeManager()
+
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
+
+LinumesModeManager::LinumesModeManager() : HF::ModeManager()
 {
 	//do nothing
 }
 
-LinumesModeManager::LinumesModeManager(std::string configurationFile) : ModeManager(configurationFile) {
+LinumesModeManager::LinumesModeManager(std::string configurationFile) : HF::ModeManager(configurationFile) {
 	//do nothing
 }
 
@@ -67,8 +72,8 @@ void LinumesModeManager::handleKeyDown( SDL_Keysym *keysym ) {
 }
 
 void LinumesModeManager::updateCurrentMode() {
-		ModeManager::release();
-		ModeManager::init();
+		HF::ModeManager::release();
+		HF::ModeManager::init();
 }
 
 void LinumesModeManager::update() {
@@ -83,3 +88,6 @@ void LinumesModeManager::update() {
         updateCurrentMode();
 	}
 }
+
+
+} // namespace Linumes

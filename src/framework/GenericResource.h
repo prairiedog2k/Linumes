@@ -6,9 +6,9 @@
 
 #include "BaseResource.h"
 
-using namespace std;
+namespace Hunchback::Framework {
 
-template<class T> 
+template<class T>
 class GenericResource : public BaseResource {
 protected:
 	T value_;
@@ -17,7 +17,9 @@ public:
 	GenericResource( std::string argResourceFile) : BaseResource(), resourceFile(argResourceFile) {};
 	virtual ~GenericResource() {};
 	const T getResource() { return value_;};
-	virtual void reportResourceFile() { cout << "resource file : " << resourceFile << endl; }
+	virtual void reportResourceFile() { std::cout << "resource file : " << resourceFile << std::endl; }
 };
+
+} // namespace Hunchback::Framework
 
 #endif /*GENERICRESOURCE_H_*/

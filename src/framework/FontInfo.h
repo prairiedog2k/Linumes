@@ -1,10 +1,12 @@
 #ifndef FONTINFO_H_
 #define FONTINFO_H_
 
+namespace Hunchback::Framework {
+
 class FontInfo
 {
 private:
-	int pointSize; 
+	int pointSize;
   float fgRed;
   float fgGreen;
   float fgBlue;
@@ -19,7 +21,9 @@ public:
 	void setPointSize(int arg) { pointSize = arg; };
 	void setRed(float arg) { fgRed = arg; };
 	void setGreen(float arg) { fgGreen = arg; };
-	void setBlue(float arg) { fgBlue = arg; }; 
+	void setBlue(float arg) { fgBlue = arg; };
 };
+
+} // namespace Hunchback::Framework
 
 #endif /*FONTINFO_H_*/

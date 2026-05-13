@@ -8,7 +8,7 @@
 /** BTW, it is covered by the LGPL  ** Bob Pendleton **/
 /** http://www.devolution.com/pipermail/sdl/2004-December/066119.html **/
 
-/** 
+/**
 
   +--------------------------------------+
   + Bob Pendleton: writer and programmer +
@@ -24,6 +24,8 @@
 		now takes into account newline character
 
 **/
+
+namespace Hunchback::Framework {
 
 class Font
 {
@@ -61,7 +63,7 @@ private:
 public:
 
   Font(const char *fontName,
-       int pointSize, 
+       int pointSize,
        float fgRed, float fgGreen, float fgBlue);
 
   ~Font();
@@ -79,5 +81,7 @@ public:
   void setRGB(float r, float g, float b) { fgRed = r; fgGreen=g, fgBlue=b; };
 
 };
+
+} // namespace Hunchback::Framework
 
 #endif /*FONT_H_*/

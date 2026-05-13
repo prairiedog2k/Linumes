@@ -15,14 +15,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     return main(0, nullptr);
 }
 #endif
-using namespace std;
+
 int main(int argc, char *argv[]) {
-    std::cout << "LINUMES developer@mountain 2007" << endl;
+    std::cout << "LINUMES developer@mountain 2007" << std::endl;
 #ifdef DEBUG
-    std::cout << "(DEBUG MODE ENABLED)" << endl;
+    std::cout << "(DEBUG MODE ENABLED)" << std::endl;
 #endif
 
-    auto lmm = std::make_unique<LinumesModeManager>("LinumesConfiguration.yaml");
+    auto lmm = std::make_unique<Linumes::LinumesModeManager>("LinumesConfiguration.yaml");
     if (lmm->init()) {
         lmm->run();
     }

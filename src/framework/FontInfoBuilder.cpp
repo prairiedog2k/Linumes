@@ -3,6 +3,8 @@
 #include <string>
 #include <cstdlib>
 
+namespace Hunchback::Framework {
+
 FontInfo FontInfoBuilder::createFontInfo(const YAML::Node& fontNode) {
     FontInfo fontInfo;
     if (fontNode) {
@@ -23,3 +25,5 @@ FontInfo FontInfoBuilder::createFontInfo(const YAML::Node& fontNode) {
     }
     return fontInfo;
 }
+
+} // namespace Hunchback::Framework

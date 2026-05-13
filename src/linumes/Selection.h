@@ -9,6 +9,8 @@
 #include <map>
 #include <list>
 
+namespace Linumes {
+
 typedef struct {
     std::string display;
     std::string value;
@@ -25,5 +27,7 @@ typedef struct {
 void buildSelectionListFromYaml(std::string selectionFile,
         std::list< std::pair<std::string, Selection> > &selectionList,
         std::map< std::string, std::list<Option> > &optionMap);
+
+} // namespace Linumes
 
 #endif /* SELECTION_H_ */

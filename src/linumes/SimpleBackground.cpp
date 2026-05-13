@@ -5,23 +5,28 @@
 #include "framework/ResourceHelper.h"
 
 
-SimpleBackground::SimpleBackground() : Rendered(true),  Positioned(), Themed(), _depth(-20.0f), _quad(), _texname(BOARD_BG)
+
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
+
+SimpleBackground::SimpleBackground() : HF::Rendered(true),  HF::Positioned(), HF::Themed(), _depth(-20.0f), _quad(), _texname(BOARD_BG)
 {
 
 }
 
-SimpleBackground::SimpleBackground(std::string texname) : Rendered(true),  Positioned(), Themed(), _depth(-20.0f), _quad(), _texname(texname)
+SimpleBackground::SimpleBackground(std::string texname) : HF::Rendered(true),  HF::Positioned(), HF::Themed(), _depth(-20.0f), _quad(), _texname(texname)
 {
 
 }
 
 
-SimpleBackground::SimpleBackground(float x, float y) : Rendered(true),  Positioned(x,y), _depth(-20.0f), _quad(), _texname(BOARD_BG)
+SimpleBackground::SimpleBackground(float x, float y) : HF::Rendered(true),  HF::Positioned(x,y), _depth(-20.0f), _quad(), _texname(BOARD_BG)
 {
 
 }
 
-SimpleBackground::SimpleBackground(float x, float y, std::string texname) : Rendered(true),  Positioned(x,y), _depth(-20.0f), _quad(), _texname(texname)
+SimpleBackground::SimpleBackground(float x, float y, std::string texname) : HF::Rendered(true),  HF::Positioned(x,y), _depth(-20.0f), _quad(), _texname(texname)
 {
 
 }
@@ -31,7 +36,7 @@ SimpleBackground::~SimpleBackground()
 
 }
 void  SimpleBackground::bindTexture() {
-	TextureResource * tr = ResourceHelper::getTextureResource(getTheme(), _texname);
+	HF::TextureResource * tr = HF::ResourceHelper::getTextureResource(getTheme(), _texname);
 	if (nullptr == tr) {
 		return;
 	}
@@ -58,3 +63,6 @@ void SimpleBackground::Draw() {
 		glDisable(GL_TEXTURE_2D);
 	}
 }
+
+
+} // namespace Linumes

@@ -2,7 +2,12 @@
 #include "GameMode.h"
 #include "ModeTypes.h"
 
-GameMode::GameMode() : Mode() {
+
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
+
+GameMode::GameMode() : HF::Mode() {
 	name = GAME_MODE;
 	_currentTick = SDL_GetTicks();
 }
@@ -121,3 +126,6 @@ void GameMode::handleKeyDown( SDL_Keysym *keysym )
 
 
 
+
+
+} // namespace Linumes

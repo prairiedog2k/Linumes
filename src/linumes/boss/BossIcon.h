@@ -3,6 +3,8 @@
 
 #include "linumes/Icon.h"
 
+namespace Linumes {
+
 class BossIcon : public Icon
 {
 private:
@@ -16,5 +18,7 @@ public:
 protected:
 	virtual  GLuint getTexture(int which) {return ( which == 0 ? _bossMask : _bossTexture );};
 };
+
+} // namespace Linumes
 
 #endif /*BOSSICON_H_*/

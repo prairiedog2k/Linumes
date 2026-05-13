@@ -11,6 +11,8 @@
 #include "MediaConfigurationTypes.h"
 #include "ScreenDimensions.h"
 
+namespace Hunchback::Framework {
+
 int          MediaManager::screenheight = 0;
 int          MediaManager::screenwidth  = 0;
 SDL_Window*  MediaManager::_window      = nullptr;
@@ -220,3 +222,5 @@ void MediaManager::takeScreenShot()
     SDL_FreeSurface(image);
     SDL_FreeSurface(temp);
 }
+
+} // namespace Hunchback::Framework

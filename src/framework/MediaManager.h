@@ -23,6 +23,8 @@
 #include "SDL.h"
 #include "Configuration.h"
 
+namespace Hunchback::Framework {
+
 class MediaManager
 {
 private:
@@ -58,5 +60,7 @@ public:
 	static SDL_Window* getWindow() { return _window; };
 	void resetGlContext() { initGL(); resizeWindow(getScreenWidth(), getScreenHeight()); };
 };
+
+} // namespace Hunchback::Framework
 
 #endif

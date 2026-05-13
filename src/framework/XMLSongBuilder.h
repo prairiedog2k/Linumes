@@ -6,11 +6,14 @@
 #include "MusicResource.h"
 #include <string>
 
-using namespace std;
+namespace Hunchback::Framework {
 
 class XMLSongBuilder {
 public:
    static AudioInfo *createAudioInfo(const YAML::Node& themeNode);
    static MusicResource *createMusicResource(const YAML::Node& themeNode, std::string strThemeDir);
 };
+
+} // namespace Hunchback::Framework
+
 #endif  //XMLSONGBUILDER_H

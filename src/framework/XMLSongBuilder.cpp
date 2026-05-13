@@ -4,6 +4,8 @@
 #include <cmath>
 #include <cstdlib>
 
+namespace Hunchback::Framework {
+
 // themeNode is the root theme YAML node; song data is under the "song" key.
 AudioInfo *XMLSongBuilder::createAudioInfo(const YAML::Node& themeNode) {
     if (!themeNode["song"]) return nullptr;
@@ -59,3 +61,5 @@ MusicResource *XMLSongBuilder::createMusicResource(const YAML::Node& themeNode, 
     mr->load();
     return mr;
 }
+
+} // namespace Hunchback::Framework

@@ -19,7 +19,13 @@
  ***************************************************************************/
 #include "Timed.h"
 
+
+namespace Hunchback::Framework {
+
 bool Timed::canMove( int current ){ 
 	return (current > (_initialTime + _wait )); 
 }
 
+
+
+} // namespace Hunchback::Framework

@@ -26,8 +26,7 @@
 #include "GenericResource.h"
 #include "AudioInfo.h"
 
-
-using namespace std;
+namespace Hunchback::Framework {
 
 class AudioResource : public GenericResource<Mix_Chunk *> {
 public:
@@ -39,4 +38,7 @@ public:
 private:
 	AudioInfo *audioInfo;
 };
+
+} // namespace Hunchback::Framework
+
 #endif

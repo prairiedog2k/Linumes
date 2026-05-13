@@ -1,16 +1,18 @@
 #include "OpenGLUtils.h"
 #include "Utils.h"
 
+namespace Hunchback::Framework {
+
 void glEnable2D()
 {
 	int vPort[4];
-  
+
 	glGetIntegerv(GL_VIEWPORT, vPort);
-  
+
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glLoadIdentity();
-  
+
 	glOrtho(0, vPort[2], 0, vPort[3], -1, 1);
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
@@ -20,9 +22,9 @@ void glEnable2D()
 void glDisable2D()
 {
 	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();   
+	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
-	glPopMatrix();	
+	glPopMatrix();
 }
 
 GLuint SDL_GL_LoadTexture(SDL_Surface *surface, GLfloat *texcoord)
@@ -45,14 +47,14 @@ GLuint SDL_GL_LoadTexture(SDL_Surface *surface, GLfloat *texcoord)
                         w, h,
                         32,
 #if SDL_BYTEORDER == SDL_LIL_ENDIAN /* OpenGL RGBA masks */
-                        0x000000FF, 
-                        0x0000FF00, 
-                        0x00FF0000, 
+                        0x000000FF,
+                        0x0000FF00,
+                        0x00FF0000,
                         0xFF000000
 #else
                         0xFF000000,
-                        0x00FF0000, 
-                        0x0000FF00, 
+                        0x00FF0000,
+                        0x0000FF00,
                         0x000000FF
 #endif
                        );
@@ -88,3 +90,4 @@ GLuint SDL_GL_LoadTexture(SDL_Surface *surface, GLfloat *texcoord)
         return texture;
 }
 
+} // namespace Hunchback::Framework

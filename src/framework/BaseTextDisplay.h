@@ -4,11 +4,13 @@
 #include <string>
 #include <sstream>
 
+namespace Hunchback::Framework {
+
 class BaseTextDisplay
 {
 protected:
-	int x; 
-	int y;	
+	int x;
+	int y;
 	std::string baseText;
 	std::string value;
 	std::string type;
@@ -32,5 +34,7 @@ public:
 	std::string getFormattedText();
 	void setBaseText(std::string argBaseText) { baseText = argBaseText; };
 };
+
+} // namespace Hunchback::Framework
 
 #endif /*BASETEXTDISPLAY_H_*/

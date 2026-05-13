@@ -3,7 +3,12 @@
 #include "framework/ResourceHelper.h"
 #include <math.h>
 
-MagicBlock::MagicBlock(float x, float y, float dim, int boardpos) : Rendered(true), Themed(), TimeLimited(500), _state(NONE), _quad()
+
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
+
+MagicBlock::MagicBlock(float x, float y, float dim, int boardpos) : HF::Rendered(true), HF::Themed(), HF::TimeLimited(500), _state(NONE), _quad()
 {
 	_renderable = true;
 	_x = x;
@@ -12,7 +17,7 @@ MagicBlock::MagicBlock(float x, float y, float dim, int boardpos) : Rendered(tru
 	_boardpos = boardpos;
 }
 
-MagicBlock::MagicBlock() : Rendered(true), Themed(), TimeLimited(500), _state(NONE), _quad()
+MagicBlock::MagicBlock() : HF::Rendered(true), HF::Themed(), HF::TimeLimited(500), _state(NONE), _quad()
 {
 	_renderable = false;
 	_x = 0.0f;
@@ -25,12 +30,12 @@ MagicBlock::~MagicBlock()
 {
 }
 
-void MagicBlock::setTheme(Theme *theTheme) {
-	Themed::setTheme(theTheme);
+void MagicBlock::setTheme(HF::Theme *theTheme) {
+	HF::Themed::setTheme(theTheme);
 }
 
 GLuint MagicBlock::getNamedTexture(const char * arg) {
-	TextureResource * tr = ResourceHelper::getTextureResource(getTheme(), std::string(arg));
+	HF::TextureResource * tr = HF::ResourceHelper::getTextureResource(getTheme(), std::string(arg));
 	if (nullptr == tr) {
 		return 0;
 	} else {
@@ -206,3 +211,6 @@ void MagicBlock::Draw() {
 		glDisable(GL_TEXTURE_2D);
 	}
 }
+
+
+} // namespace Linumes

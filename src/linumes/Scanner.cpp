@@ -7,6 +7,12 @@
 #include "BoardTypes.h"
 #include "framework/ResourceHelper.h"
 #include <math.h>
+#include <algorithm>
+
+
+
+namespace Linumes {
+namespace HF = Hunchback::Framework;
 
 
 Scanner::Scanner( float minx,
@@ -15,8 +21,8 @@ Scanner::Scanner( float minx,
 		float ratex, 
 		float dimx, 
 		float dimy,
-		int colcount) : Rendered(true), 
-		TimePositioned(minx, posy, ratex, 0.0f, 0,0,false),
+		int colcount) : HF::Rendered(true), 
+		HF::TimePositioned(minx, posy, ratex, 0.0f, 0,0,false),
 		minimumx(minx),
 		maximumx(maxx),
 		dimensionx(dimx),
@@ -32,17 +38,17 @@ Scanner::Scanner( float minx,
 Scanner::~Scanner()
 {
 #ifdef DEBUG
-	std::cout << "Scanner Deleted" << endl;
+	std::cout << "Scanner Deleted" << std::endl;
 #endif
 }
 
-void Scanner::setTheme(Theme *theTheme) {
-	Themed::setTheme(theTheme);
-	hasMask = (nullptr != ResourceHelper::getTextureResource(getTheme(), std::string (BOARD_FLAG_MASK)));
+void Scanner::setTheme(HF::Theme *theTheme) {
+	HF::Themed::setTheme(theTheme);
+	hasMask = (nullptr != HF::ResourceHelper::getTextureResource(getTheme(), std::string (BOARD_FLAG_MASK)));
 }
 
 GLuint Scanner::getMask() {
-	TextureResource * tr = ResourceHelper::getTextureResource(getTheme(), std::string (BOARD_FLAG_MASK));
+	HF::TextureResource * tr = HF::ResourceHelper::getTextureResource(getTheme(), std::string (BOARD_FLAG_MASK));
 	if (nullptr == tr) {
 		return 0;
 	}
@@ -50,7 +56,7 @@ GLuint Scanner::getMask() {
 }
 
 GLuint Scanner::getTexture() {
-	TextureResource * tr = ResourceHelper::getTextureResource(getTheme(), std::string (BOARD_FLAG));
+	HF::TextureResource * tr = HF::ResourceHelper::getTextureResource(getTheme(), std::string (BOARD_FLAG));
 	if (nullptr == tr) {
 		return 0;
 	}
@@ -78,7 +84,7 @@ void Scanner::Draw() {
 		// tracer behind
 		// Bottom Left Of The Texture and Quad
 		glColor3f(0.0f,0.0f,0.0f);
-		glVertex3f( max(minimumx, getX() - dimensionx), getY() - dimensiony, 1.0f );
+		glVertex3f( std::max(minimumx, getX() - dimensionx), getY() - dimensiony, 1.0f );
 		// Bottom Right Of The Texture and Quad
 		glColor3f(0.5f,0.5f,0.5f);
 		glVertex3f(  getX(), getY() - dimensiony, 1.0f );
@@ -87,7 +93,7 @@ void Scanner::Draw() {
 		glVertex3f(  getX(), getY() , 1.0f );
 		// Top Left Of The Texture and Quad
 		glColor3f(0.0f,0.0f,0.0f);
-		glVertex3f( max(minimumx, getX() - dimensionx),  getY(), 1.0f );
+		glVertex3f( std::max(minimumx, getX() - dimensionx),  getY(), 1.0f );
 
 		//solid bar in front	    
 		// Bottom Left Of The Texture and Quad
@@ -178,3 +184,6 @@ void Scanner::togglePause() {
 		this->setStopped( false );
 	}
 }
+
+
+} // namespace Linumes

@@ -1,5 +1,8 @@
 #include "TimeLimited.h"
 #include "SDL.h"
+
+namespace Hunchback::Framework {
+
 TimeLimited::TimeLimited(unsigned int duration) : _startTime(0), _duration(duration)
 {
 }
@@ -28,3 +31,6 @@ bool TimeLimited::isComplete() {
 	}
 	return false;
 }
+
+
+} // namespace Hunchback::Framework

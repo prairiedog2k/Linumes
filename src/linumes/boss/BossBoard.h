@@ -8,17 +8,19 @@
 #include "BossPiece.h"
 #include "BossIcon.h"
 
+namespace Linumes {
+
 class BossBoard : public GameBoard {
 private:
     Boss _boss;
     std::vector<BossPiece> _bossPieces;
     std::unique_ptr<BossIcon> _bossIcon;
     int _bossAttacks;
-    
+
     unsigned int _attackStart;
     unsigned int _attackDuration;
     bool _bossWinPlayed;
-    bool isAttacking() { return _currentTick - _attackStart < _attackDuration; }    
+    bool isAttacking() { return _currentTick - _attackStart < _attackDuration; }
     void drawAttack();
     void drawGameOver();
 protected:
@@ -33,10 +35,12 @@ protected:
 	virtual void evaluateBonus();
 public:
     BossBoard();
-    virtual ~BossBoard();    
+    virtual ~BossBoard();
    	virtual void init();
    	virtual void reset();
    	virtual void addToBlockCount (int count);
 };
+
+} // namespace Linumes
 
 #endif

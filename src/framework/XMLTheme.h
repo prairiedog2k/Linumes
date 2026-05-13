@@ -6,7 +6,7 @@
 #include <yaml-cpp/yaml.h>
 #include "BaseResource.h"
 
-using namespace std;
+namespace Hunchback::Framework {
 
 class XMLTheme : public Theme
 {
@@ -26,5 +26,7 @@ private:
     std::string _resourcedir;
     bool loadResources();
 };
+
+} // namespace Hunchback::Framework
 
 #endif /*XMLTHEME_H_*/

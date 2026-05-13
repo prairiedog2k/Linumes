@@ -6,7 +6,10 @@
 #include "framework/TimePositioned.h"
 #include "framework/Themed.h"
 
-class Scanner : public Rendered, public TimePositioned, public Themed
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
+class Scanner : public HF::Rendered, public HF::TimePositioned, public HF::Themed
 {
 private:
   float minimumx;
@@ -16,26 +19,28 @@ private:
   int columns;
   int colpos;
   bool reset;
-  
+
   bool hasMask;
 
   float getBoardWidth() { return dimensionx * columns; };
   GLuint getTexture();
-  GLuint getMask();  
+  GLuint getMask();
   bool paused;
-  
+
 public:
 	Scanner(float minx, float maxx, float posy, float ratex, float dimx, float dimy, int colcount);
 	virtual ~Scanner();
 	void update(unsigned int currTime);
-	
+
 	void togglePause();
-	
+
 	int getCurrentColumn() { return colpos; };
 	bool isReset() { return reset; };
-	virtual void setTheme(Theme *theme);	
+	virtual void setTheme(HF::Theme *theme);
 	//override
 	void Draw();
 };
+
+} // namespace Linumes
 
 #endif /*SCANNER_H_*/

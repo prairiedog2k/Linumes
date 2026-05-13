@@ -6,11 +6,14 @@
 #include "GameBoard.h"
 #include "LinumesThemeManager.h"
 
-class GameMode : public Mode
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
+class GameMode : public HF::Mode
 {
 protected:
 	std::unique_ptr<GameBoard> gameboard;
-	std::unique_ptr<ThemeManager> _themeManager;
+	std::unique_ptr<HF::ThemeManager> _themeManager;
 	unsigned int _currentTick;
 	virtual void createGameBoard();
 public:
@@ -21,5 +24,7 @@ public:
 	virtual bool init();
 	virtual void update(unsigned int currTick);
 };
+
+} // namespace Linumes
 
 #endif /*GAMEMODE_H_*/

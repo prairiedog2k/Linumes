@@ -28,8 +28,13 @@
 #include "framework/TextureResource.h"
 #include "framework/ResourceHelper.h"
 
-GamePiece::GamePiece() : Rendered(true),
-TimePositioned(0.0f, 0.0f, 0.0f, 0.0f, 0,0,false), 
+
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
+
+GamePiece::GamePiece() : HF::Rendered(true),
+HF::TimePositioned(0.0f, 0.0f, 0.0f, 0.0f, 0,0,false), 
 _dim(1.0),
 _edge(0.0f),
 _scoreTarget(false),
@@ -43,8 +48,8 @@ _quad()
 {
 }
 
-GamePiece::GamePiece(float x, float y, float dim, float edge) : Rendered(true),
-TimePositioned( x, y, 0.0f, 0.0f, 0,0,false),
+GamePiece::GamePiece(float x, float y, float dim, float edge) : HF::Rendered(true),
+HF::TimePositioned( x, y, 0.0f, 0.0f, 0,0,false),
 _dim(dim),
 _edge(edge),
 _scoreTarget(false),
@@ -64,8 +69,8 @@ _quad()
 #endif  
 }
 
-GamePiece::GamePiece(const GamePiece &piece): Rendered(piece._renderable),
-TimePositioned( piece._x, piece._y, 0.0f, 0.0f, 0,0,piece._stopped), Themed(piece),	 
+GamePiece::GamePiece(const GamePiece &piece): HF::Rendered(piece._renderable),
+HF::TimePositioned( piece._x, piece._y, 0.0f, 0.0f, 0,0,piece._stopped), HF::Themed(piece),	 
 _dim(piece._dim),
 _edge(piece._edge),
 _color(piece._color),
@@ -100,7 +105,7 @@ GamePiece::~GamePiece()
 
 GLuint GamePiece::getTexture(const char *name)
 {
-	TextureResource * tr = ResourceHelper::getTextureResource(getTheme(), std::string (name));
+	HF::TextureResource * tr = HF::ResourceHelper::getTextureResource(getTheme(), std::string (name));
 	if (nullptr == tr) {
 #ifdef DEBUG
 		std::cout << " texture miss : " << name << std::endl;
@@ -111,7 +116,7 @@ GLuint GamePiece::getTexture(const char *name)
 }
 
 bool GamePiece::hasMask() {
-	return (nullptr != ResourceHelper::getTextureResource(getTheme(), std::string (  _color == 0 ? PIECE_MASK0 : PIECE_MASK1 ) ) );
+	return (nullptr != HF::ResourceHelper::getTextureResource(getTheme(), std::string (  _color == 0 ? PIECE_MASK0 : PIECE_MASK1 ) ) );
 }
 
 void GamePiece::bindMask() {
@@ -256,3 +261,6 @@ bool GamePiece::isStopped() {
 	return (nexty == y);
 }
 
+
+
+} // namespace Linumes

@@ -3,6 +3,8 @@
 #include <string>
 #include <cstdlib>
 
+namespace Hunchback::Framework {
+
 BaseTextDisplay XMLTextDisplayBuilder::createTextDisplay(const YAML::Node& node) {
     BaseTextDisplay baseTextDisplay;
     if (node) {
@@ -25,3 +27,5 @@ BaseTextDisplay XMLTextDisplayBuilder::createTextDisplay(const YAML::Node& node)
     }
     return baseTextDisplay;
 }
+
+} // namespace Hunchback::Framework

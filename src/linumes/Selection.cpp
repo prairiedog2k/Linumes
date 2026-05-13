@@ -4,6 +4,10 @@
 #include "Selection.h"
 #include <yaml-cpp/yaml.h>
 
+
+namespace Linumes {
+
+
 void buildSelectionListFromYaml(std::string selectionFile,
         std::list< std::pair<std::string, Selection> > &selectionList,
         std::map< std::string, std::list<Option> > &optionMap) {
@@ -42,3 +46,6 @@ void buildSelectionListFromYaml(std::string selectionFile,
         selectionList.push_back(std::make_pair(id, sel));
     }
 }
+
+
+} // namespace Linumes

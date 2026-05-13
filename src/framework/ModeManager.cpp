@@ -25,6 +25,8 @@
 
 #include "ScreenDimensions.h"
 
+namespace Hunchback::Framework {
+
 ModeManager::ModeManager(): isActive(true), isDone(false)
 {
 	mediamanager = std::make_unique<MediaManager>(SCREEN_DIM_W, SCREEN_DIM_H, SCREEN_DIM_BPP);
@@ -215,5 +217,7 @@ void ModeManager::run()
 }
 
 void ModeManager::assertValidMode() {
-	assert(currMode);	
+	assert(currMode);
 }
+
+} // namespace Hunchback::Framework

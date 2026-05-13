@@ -16,6 +16,8 @@
 #include "SDL.h"
 #include "XMLUtils.h"
 
+namespace Hunchback::Framework {
+
 XMLTheme::XMLTheme() : Theme(std::string("")), _resourcedir(std::string("")) {
 }
 
@@ -104,3 +106,5 @@ bool XMLTheme::init() {
 void XMLTheme::release() {
     Theme::release();
 }
+
+} // namespace Hunchback::Framework

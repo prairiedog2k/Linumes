@@ -2,6 +2,11 @@
 #include "BossModeTypes.h"
 #include "BossBoard.h"
 
+
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
+
 BossMode::BossMode() : GameMode()
 {
 	_themeManager = nullptr;
@@ -16,3 +21,6 @@ BossMode::~BossMode()
 void BossMode::createGameBoard() {
 	gameboard = std::make_unique<BossBoard>();
 }
+
+
+} // namespace Linumes

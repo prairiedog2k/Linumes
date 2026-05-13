@@ -3,6 +3,8 @@
 
 #include "linumes/GamePiece.h"
 
+namespace Linumes {
+
 class BossPiece : public GamePiece {
 private:
     bool _boss;
@@ -17,5 +19,7 @@ public:
     void setBossTexture(GLuint texture) { _bossTexture = texture; };
     virtual bool isStopped();
 };
+
+} // namespace Linumes
 
 #endif

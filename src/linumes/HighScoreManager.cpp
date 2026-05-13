@@ -9,10 +9,15 @@
 #include "framework/FileUtils.h"
 #include <yaml-cpp/yaml.h>
 
+
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
+
 HighScoreManager::HighScoreManager() : _baseTheme(nullptr), _highScoreFile("") {
 }
 
-HighScoreManager::HighScoreManager(Theme *baseTheme) : _baseTheme(baseTheme), _highScoreFile("") {
+HighScoreManager::HighScoreManager(HF::Theme *baseTheme) : _baseTheme(baseTheme), _highScoreFile("") {
 }
 
 HighScoreManager::~HighScoreManager()
@@ -20,7 +25,7 @@ HighScoreManager::~HighScoreManager()
 }
 
 void HighScoreManager::loadHighScores() {
-    if (!fileExists(_highScoreFile)) return;
+    if (!HF::fileExists(_highScoreFile)) return;
     YAML::Node root = YAML::LoadFile(_highScoreFile);
     if (!root[HI_GAME_MODE]) return;
     for (const auto& gm : root[HI_GAME_MODE]) {
@@ -46,7 +51,7 @@ HighScoreTable *HighScoreManager::createHighScoreTable(std::string tableName, un
 
 void HighScoreManager::init() {
     if (_baseTheme) {
-        StringResource *sr = ResourceHelper::getStringResource(_baseTheme, BASE_HI_REF);
+        HF::StringResource *sr = HF::ResourceHelper::getStringResource(_baseTheme, BASE_HI_REF);
         if (sr) {
             _highScoreFile = sr->getResource();
             if (!_highScoreFile.empty()) {
@@ -69,3 +74,6 @@ void HighScoreManager::release() {
     fout << root;
     _tableMap.clear();
 }
+
+
+} // namespace Linumes

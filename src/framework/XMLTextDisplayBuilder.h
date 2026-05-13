@@ -4,6 +4,8 @@
 #include "BaseTextDisplay.h"
 #include <yaml-cpp/yaml.h>
 
+namespace Hunchback::Framework {
+
 class XMLTextDisplayBuilder
 {
 private:
@@ -12,5 +14,7 @@ private:
 public:
   static BaseTextDisplay createTextDisplay(const YAML::Node& node);
 };
+
+} // namespace Hunchback::Framework
 
 #endif /*XMLTEXTDISPLAYBUILDER_H_*/

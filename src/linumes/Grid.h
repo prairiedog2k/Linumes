@@ -9,7 +9,10 @@
 #include "framework/TextureQuad.h"
 #include "framework/AudioManager.h"
 
-class Grid : public Timed, public Rendered, public Positioned, public Themed
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
+class Grid : public HF::Timed, public HF::Rendered, public HF::Positioned, public HF::Themed
 {
 private:
 	float dimension;
@@ -17,19 +20,19 @@ private:
 	int boardrows;
 	bool hasMask;
 
-	TextureQuad _quad;
-	AudioManager *audioManager;
+	HF::TextureQuad _quad;
+	HF::AudioManager *audioManager;
 
 	unsigned int currTick;
 	std::vector<float> lastLevel;
 	std::vector<unsigned int> lastLevelTick;
 	float decay;
-	
+
 	GLuint getTexture();
 	GLuint getMask();
 	GLuint getSideBarTexture(bool mask);
 	GLuint getHeaderTexture(bool mask);
-	GLuint getAudioLevelTexture(bool mask); 
+	GLuint getAudioLevelTexture(bool mask);
 
 	void drawDecorations();
 	void drawAudioLevels();
@@ -40,10 +43,12 @@ public:
 	virtual ~Grid();
 	void setDimension( float dim) { dimension = dim; };
 	float getDimension() { return dimension; };
-	virtual void setTheme(Theme *theme);
-	void setAudioManager(AudioManager *am) { audioManager = am; };
+	virtual void setTheme(HF::Theme *theme);
+	void setAudioManager(HF::AudioManager *am) { audioManager = am; };
 	void Draw();
 	void update(unsigned int tick) { currTick = tick;};
 };
+
+} // namespace Linumes
 
 #endif /*GRID_H_*/

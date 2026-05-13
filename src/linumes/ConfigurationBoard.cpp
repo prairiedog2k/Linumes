@@ -10,7 +10,12 @@
 #include "framework/ResourceHelper.h"
 #include "framework/Utils.h"
 
-ConfigurationBoard::ConfigurationBoard(std::string name, Configuration *configuration) :
+
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
+
+ConfigurationBoard::ConfigurationBoard(std::string name, HF::Configuration *configuration) :
 	SelectionBoard(name),
 	_optionMode(false),
 	_configuration(configuration)
@@ -113,25 +118,25 @@ bool ConfigurationBoard::isCurrentOptionValue(std::string value) {
 }
 
 void ConfigurationBoard::drawOptions() {
-	Font *f0 = ResourceHelper::getFontResource(getTheme(), LINUMES_FONT_72)->getResource();
+	HF::Font *f0 = HF::ResourceHelper::getFontResource(getTheme(), LINUMES_FONT_72)->getResource();
 	f0->setRGB(0.0f,0.0f,0.0f);
-	f0->drawText(getSelection().display.c_str(), xformX(513), xformY(619), true);
+	f0->drawText(getSelection().display.c_str(), HF::xformX(513), HF::xformY(619), true);
 	f0->setRGB(1.0f,1.0f,1.0f);
-	f0->drawText(getSelection().display.c_str(), xformX(512), xformY(620), true);
+	f0->drawText(getSelection().display.c_str(), HF::xformX(512), HF::xformY(620), true);
 
-	Font *f1 = ResourceHelper::getFontResource(getTheme(),  BASE_FONT_24 )->getResource();
+	HF::Font *f1 = HF::ResourceHelper::getFontResource(getTheme(),  BASE_FONT_24 )->getResource();
 	int ypos = 500;
 	for (std::list< Option >::iterator iter = _currentOptions.begin();
 			iter != _currentOptions.end(); iter++)
 	{
 		f1->setRGB(0.0f,0.0f,0.0f);
-		f1->drawText((*iter).display.c_str(), xformX(513), xformY(ypos-1), true);
+		f1->drawText((*iter).display.c_str(), HF::xformX(513), HF::xformY(ypos-1), true);
 		if  ( isCurrentOptionValue( (*iter).value ) ) {
 			f1->setRGB(1.0f,0.0f,0.0f);
 		} else {
 			f1->setRGB(1.0f,1.0f,1.0f);
 		}
-		f1->drawText((*iter).display.c_str(), xformX(512), xformY(ypos), true);
+		f1->drawText((*iter).display.c_str(), HF::xformX(512), HF::xformY(ypos), true);
 		ypos -= 75;
 	}
 }
@@ -143,3 +148,6 @@ void ConfigurationBoard::drawAdditional() {
 		drawOptions();
 	}
 }
+
+
+} // namespace Linumes

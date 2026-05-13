@@ -3,6 +3,9 @@
 
 #include "framework/Theme.h"
 
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
 class BackgroundTemplate;
 
 // the types of the class factories
@@ -14,7 +17,7 @@ class BackgroundTemplate {
 public:
   BackgroundTemplate() {};
   virtual ~BackgroundTemplate() {};
-  virtual void setTheme(Theme *theme) = 0;
+  virtual void setTheme(HF::Theme *theme) = 0;
   virtual void init() = 0;
   virtual void release() = 0;
 	virtual void Draw() = 0;
@@ -24,5 +27,7 @@ public:
 	virtual void stopAnimation() = 0;
   virtual void update() = 0;
 };
+
+} // namespace Linumes
 
 #endif /*BACKGROUND_*/

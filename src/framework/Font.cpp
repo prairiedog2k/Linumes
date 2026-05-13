@@ -8,6 +8,9 @@
 #include "GL/glu.h"
 #include "GL/glext.h"
 #endif
+
+namespace Hunchback::Framework {
+
 int Font::initCounter = 0;
 
 Font::Font(const char *fontName,
@@ -37,7 +40,7 @@ Font::~Font()
 void Font::initFont()
 {
 	ttfFont = TTF_OpenFont(fontName, pointSize);
-	
+
 	if (nullptr == ttfFont)
 	{
 		printf("Can't open font file\n");
@@ -97,7 +100,7 @@ void Font::initFont()
 			glyphs[((int)c)].texMaxY = texcoord[3];
 		}
 	}
-	
+
 	TTF_CloseFont(ttfFont);
 }
 
@@ -111,7 +114,7 @@ int Font::getHeight()
 	return height;
 }
 
-void Font::textSize(char *text, 
+void Font::textSize(char *text,
 		SDL_Rect *r)
 {
 	int maxx = 0;
@@ -165,11 +168,11 @@ void Font::drawText(const char *text, int x, int y, bool centered, bool upsidedo
 	GLfloat baseleft = x;
 
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
-	
+
 	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_TEXTURE_2D);
-	
+
 	if (centered) {
 		GLfloat widthX = 0;
 		std::string strText(text);
@@ -177,14 +180,14 @@ void Font::drawText(const char *text, int x, int y, bool centered, bool upsidedo
 			int ch = strText.at(i);
 			if ((minGlyph <= ch) && (ch <= maxGlyph) ){
 				widthX += glyphs[ch].pic->w;
-			}				
+			}
 		}
 		x = (int)(baseleft - (widthX / 2));
 	}
 
 	//alpha channel needs help
-	GLfloat arr0[4] = { fgRed, fgGreen, fgBlue,1.0f }; 
-	
+	GLfloat arr0[4] = { fgRed, fgGreen, fgBlue,1.0f };
+
 	while (0 != *text) {
 		if (*text == '\n') {
 			x = (int)baseleft;
@@ -216,14 +219,14 @@ void Font::drawText(const char *text, int x, int y, bool centered, bool upsidedo
 			glTexEnvi(GL_TEXTURE_ENV, GL_OPERAND1_RGB, GL_SRC_COLOR);
 			glTexEnvfv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_COLOR, arr0);
 			glTexEnvi(GL_TEXTURE_ENV, GL_RGB_SCALE, 1);
-			
+
 			glBegin(GL_TRIANGLE_STRIP);
 
 			glTexCoord2f(texMinX, texMinY); glVertex2f( left,    bottom);
 			glTexCoord2f(texMaxX, texMinY); glVertex2f(right,    bottom);
 			glTexCoord2f(texMinX, texMaxY); glVertex2f( left, top);
 			glTexCoord2f(texMaxX, texMaxY); glVertex2f(right, top);
-			
+
 			glEnd();
 
 			x += glyphs[((int)*text)].advance;
@@ -249,3 +252,5 @@ void Font::drawText(const char *text, int x, int y,float r, float g, float b) {
 	fgGreen = tmpG;
 	fgBlue = tmpB;
 }
+
+} // namespace Hunchback::Framework

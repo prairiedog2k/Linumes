@@ -3,6 +3,11 @@
 #include <memory>
 #include <string>
 #include "ModeTypes.h"
+
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
+
 ScreenSaverMode::ScreenSaverMode() : GameMode(), _expire(100), _start( SDL_GetTicks())
 {
     name=SCREENSAVER_MODE;
@@ -36,3 +41,6 @@ void ScreenSaverMode::handleKeyDown( SDL_Keysym *keysym ) {
 	// do nothing
 }
 
+
+
+} // namespace Linumes

@@ -27,6 +27,8 @@
 #ifdef MING_GL 
 #endif
 
+namespace Hunchback::Framework {
+
 TextureResource::~TextureResource() {
 	release();
 	delete textureInfo;
@@ -86,7 +88,7 @@ GLuint TextureResource::loadPNG()
   }
   else
   {
-    cout << "Could not load " << resourceFile << " - should exit" << endl;
+    std::cout << "Could not load " << resourceFile << " - should exit" << std::endl;
   }
 
 		  
@@ -121,7 +123,7 @@ GLuint TextureResource::loadBMP()
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
                      GL_LINEAR );
   } else {
-	cout << "Could not load " << resourceFile << " - should exit" << endl;
+	std::cout << "Could not load " << resourceFile << " - should exit" << std::endl;
   }
   if ( TextureImage[0] )
     SDL_FreeSurface( TextureImage[0] );
@@ -129,16 +131,16 @@ GLuint TextureResource::loadBMP()
 }
 
  int TextureResource::getTextureType() {
-  if (resourceFile.find (".bmp",0) != string::npos) {
+  if (resourceFile.find (".bmp",0) != std::string::npos) {
     return TEX_TYPE_BMP;
   }
-  if (resourceFile.find (".png",0) != string::npos) {
+  if (resourceFile.find (".png",0) != std::string::npos) {
     return TEX_TYPE_PNG;
   }
-  if (resourceFile.find (".BMP",0) != string::npos) {
+  if (resourceFile.find (".BMP",0) != std::string::npos) {
     return TEX_TYPE_BMP;
   }
-  if (resourceFile.find (".PNG",0) != string::npos) {
+  if (resourceFile.find (".PNG",0) != std::string::npos) {
     return TEX_TYPE_PNG;
   }
   return TEX_TYPE_INVALID;
@@ -151,19 +153,19 @@ bool TextureResource::load() {
 	case TEX_TYPE_BMP: {
 		value_ = loadBMP();
 #ifdef DEBUG
-    cout << "Loaded " << resourceFile << endl;
+    std::cout << "Loaded " << resourceFile << std::endl;
 #endif		
 		break;
 	}
 	case TEX_TYPE_PNG: {
 		value_ = loadPNG();
 #ifdef DEBUG
-    cout << "Loaded " << resourceFile << endl;
+    std::cout << "Loaded " << resourceFile << std::endl;
 #endif		
 		break;
 	}
 	default: {
-		cout << resourceFile << " was not of a recognizable texture type" << endl;
+		std::cout << resourceFile << " was not of a recognizable texture type" << std::endl;
 		break;
 	}	
   }
@@ -173,9 +175,9 @@ bool TextureResource::load() {
 
 bool TextureResource::release() {
 #ifdef DEBUG
-   cout << "release texture sample from ";
+   std::cout << "release texture sample from ";
    reportResourceFile();
-   cout << "Texture Number : " << value_ << endl;
+   std::cout << "Texture Number : " << value_ << std::endl;
 #endif
 	if (value_) {
 		glDeleteTextures(1, &value_);
@@ -183,3 +185,5 @@ bool TextureResource::release() {
 	}
 	return true;
 }
+
+} // namespace Hunchback::Framework

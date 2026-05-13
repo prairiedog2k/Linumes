@@ -7,7 +7,12 @@
 #define BASE_FONT_12 "base_font_12" 
 
 
-FadingForeground::FadingForeground(float x, float y, unsigned int duration) : SimpleBackground(x,y), TimeLimited(duration), _fade(FADE_IN), _displayDuration(60000), _displayTimeBegin(0)
+
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
+
+FadingForeground::FadingForeground(float x, float y, unsigned int duration) : SimpleBackground(x,y), HF::TimeLimited(duration), _fade(FADE_IN), _displayDuration(60000), _displayTimeBegin(0)
 {
 	setDepth(2.0f);
 }
@@ -21,9 +26,9 @@ void FadingForeground::drawDisplayInfo() {
 	
 	bool canShow = (currTime - _displayTimeBegin)  < _displayDuration; 
 	if ( ( canShow ) && ( ! (_displayInfo == ""))) {
-		Theme * theme = getTheme();
+		HF::Theme * theme = getTheme();
 		if (nullptr != theme) {
-			Font *f1 = ResourceHelper::getFontResource(getTheme(),  BASE_FONT_12 )->getResource();
+			HF::Font *f1 = HF::ResourceHelper::getFontResource(getTheme(),  BASE_FONT_12 )->getResource();
 			if (nullptr != f1) {
 				f1->drawText(_displayInfo.c_str(), 5, 5, false);
 			}
@@ -64,3 +69,6 @@ void FadingForeground::Draw() {
 	}
 }
 
+
+
+} // namespace Linumes

@@ -1,6 +1,8 @@
 #ifndef TIMELIMITED_H_
 #define TIMELIMITED_H_
 
+namespace Hunchback::Framework {
+
 //A timer oriented class
 // all units are in milliseconds
 class TimeLimited
@@ -17,5 +19,7 @@ public:
 
 	void setMaxTime(unsigned int duration) { _duration = duration; };
 };
+
+} // namespace Hunchback::Framework
 
 #endif /*TIMELIMITED_H_*/

@@ -1,8 +1,5 @@
 /*
  * LinumesConfigurationMode.h
- *
- *  Created on: Apr 7, 2011
- *      Author: rigriff
  */
 
 #ifndef LINUMESCONFIGURATIONMODE_H_
@@ -14,17 +11,20 @@
 #include "LinumesThemeManager.h"
 #include "ConfigurationBoard.h"
 
-class ConfigurationMode: public Mode {
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
+class ConfigurationMode: public HF::Mode {
 private:
-	Configuration *_configuration;
+	HF::Configuration *_configuration;
 	std::unique_ptr<ConfigurationBoard> _configurationBoard;
 	unsigned int _currentTick;
 
 protected:
-	std::unique_ptr<ThemeManager> _themeManager;
+	std::unique_ptr<HF::ThemeManager> _themeManager;
 
 public:
-	ConfigurationMode(Configuration *configuration);
+	ConfigurationMode(HF::Configuration *configuration);
 	virtual ~ConfigurationMode();
 
 	void handleKeyUp( SDL_Keysym *keysym );
@@ -33,5 +33,7 @@ public:
 	void update(unsigned int currTick);
 
 };
+
+} // namespace Linumes
 
 #endif /* LINUMESCONFIGURATIONMODE_H_ */

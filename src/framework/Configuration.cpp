@@ -7,6 +7,8 @@
 #include <yaml-cpp/yaml.h>
 #include <fstream>
 
+namespace Hunchback::Framework {
+
 Configuration::Configuration() {
 }
 
@@ -52,3 +54,5 @@ void Configuration::release() {
     fout << root;
     _configurations.clear();
 }
+
+} // namespace Hunchback::Framework

@@ -9,6 +9,11 @@
 #include "linumes/BaseTextTypes.h"
 
 
+
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
+
 BossBoard::BossBoard() :
     GameBoard(0.2f, 16, 10),
     _boss("jublo.yaml"),
@@ -234,10 +239,10 @@ void BossBoard::drawGameOver() {
 		glEnable(GL_TEXTURE_2D);
 		glDisable(GL_DEPTH_TEST);
 
-		glBindTexture( GL_TEXTURE_2D, ResourceHelper::getTextureResource(getTheme(),  "hi_score_table" )->getResource());
+		glBindTexture( GL_TEXTURE_2D, HF::ResourceHelper::getTextureResource(getTheme(),  "hi_score_table" )->getResource());
 
 		glTranslatef( 0.0,0.0, -5.0f );
-		TextureQuad _quad;		
+		HF::TextureQuad _quad;		
 		_quad.setDimensionAndPosition2D(0.0,0.0,2.0f);
 		_quad.setZ(1.0f);
 		_quad.Draw();
@@ -246,30 +251,30 @@ void BossBoard::drawGameOver() {
 		glEnable(GL_DEPTH_TEST);
 
 		if (_boss.isDead()) {
-			Font *f1 = ResourceHelper::getFontResource(getTheme(),  BASE_FONT_48 )->getResource();
+			HF::Font *f1 = HF::ResourceHelper::getFontResource(getTheme(),  BASE_FONT_48 )->getResource();
 			f1->setRGB(0.0,1.0,0.0);
 			std::string win = "You Beat ";
-			f1->drawText(win.c_str(), xformX(512), xformY(690), true);
+			f1->drawText(win.c_str(), HF::xformX(512), HF::xformY(690), true);
 			win = _boss.getName();
-			f1->drawText(win.c_str(), xformX(512), xformY(630), true);
+			f1->drawText(win.c_str(), HF::xformX(512), HF::xformY(630), true);
 			
 			
 			std::string highs = _hiScoreTable->getTableString();
-			Font *f3=ResourceHelper::getFontResource(getTheme(),  BASE_FONT_24 )->getResource();
-			f3->drawText(highs.c_str(),xformX(400), xformY(600), true, true);
+			HF::Font *f3=HF::ResourceHelper::getFontResource(getTheme(),  BASE_FONT_24 )->getResource();
+			f3->drawText(highs.c_str(),HF::xformX(400), HF::xformY(600), true, true);
 
 			std::string score = "[Score " + std::to_string(_score) + "]";
-			Font *f2 = ResourceHelper::getFontResource(getTheme(),  BASE_FONT_48 )->getResource();
-			f2->drawText(score.c_str(), xformX(512), xformY(20), true);
+			HF::Font *f2 = HF::ResourceHelper::getFontResource(getTheme(),  BASE_FONT_48 )->getResource();
+			f2->drawText(score.c_str(), HF::xformX(512), HF::xformY(20), true);
 		} else {
-			Font *f1 = ResourceHelper::getFontResource(getTheme(),  BASE_FONT_72 )->getResource();
+			HF::Font *f1 = HF::ResourceHelper::getFontResource(getTheme(),  BASE_FONT_72 )->getResource();
 			f1->setRGB(1.0,0.0,0.0);
 			std::string fail = "Failed...";
-			f1->drawText(fail.c_str(), xformX(512), xformY(425),true);
+			f1->drawText(fail.c_str(), HF::xformX(512), HF::xformY(425),true);
 			fail =_boss.getName();
-			f1->drawText(fail.c_str(), xformX(512), xformY(350),true);
+			f1->drawText(fail.c_str(), HF::xformX(512), HF::xformY(350),true);
 			fail = " Wins!!!";
-			f1->drawText(fail.c_str(), xformX(512), xformY(275),true);
+			f1->drawText(fail.c_str(), HF::xformX(512), HF::xformY(275),true);
 									
 		}
 	}	
@@ -283,7 +288,7 @@ void BossBoard::drawAttack() {
 		critDim = ::sqrt(critDim);			
 		critDim = _dim + (critDim * _dim);
 		float dd = 1.25f * critDim;
-		TextureQuad _quad;
+		HF::TextureQuad _quad;
 		
 		glLoadIdentity();
 
@@ -350,3 +355,6 @@ void BossBoard::updateContents() {
 		}
 	}
 }
+
+
+} // namespace Linumes

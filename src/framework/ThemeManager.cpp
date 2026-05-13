@@ -20,6 +20,8 @@
 #include <unistd.h>
 #endif
 
+namespace Hunchback::Framework {
+
 ThemeManager::ThemeManager() : themesFile(DEFAULT_FILE) {
 }
 
@@ -107,3 +109,5 @@ Theme *ThemeManager::getNextTheme() {
     _currentTheme->init();
     return _currentTheme.get();
 }
+
+} // namespace Hunchback::Framework

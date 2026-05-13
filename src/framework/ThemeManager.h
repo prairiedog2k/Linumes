@@ -27,7 +27,7 @@
 
 #define DEFAULT_FILE "theme.list"
 
-using namespace std;
+namespace Hunchback::Framework {
 
 class ThemeManager{
 protected:
@@ -45,10 +45,13 @@ public:
 private:
   bool initXML();
   bool initData();
-  
+
   std::string themesFile;
-  std::list< std::pair< std::string, std::string> > nameList;    
-  std::list< std::pair< std::string, std::string> > themeList;  
-  std::list< std::pair< std::string, std::string> >::iterator themeIterator; 
+  std::list< std::pair< std::string, std::string> > nameList;
+  std::list< std::pair< std::string, std::string> > themeList;
+  std::list< std::pair< std::string, std::string> >::iterator themeIterator;
 };
+
+} // namespace Hunchback::Framework
+
 #endif

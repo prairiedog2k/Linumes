@@ -4,14 +4,16 @@
 #include "GenericResource.h"
 #include <string>
 
-using namespace std;
+namespace Hunchback::Framework {
 
 class PluginResource: public GenericResource<void *> {
 public:
-	PluginResource(void *info, string argResourceFile);
+	PluginResource(void *info, std::string argResourceFile);
 	virtual ~PluginResource();
 	bool load();
 	bool release();
 };
+
+} // namespace Hunchback::Framework
 
 #endif /*PLUGINRESOURCE_H_*/

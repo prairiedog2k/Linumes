@@ -1,5 +1,7 @@
 #include "AudioInfo.h"
 
+namespace Hunchback::Framework {
+
 AudioInfo::AudioInfo() :  _type(MUS_NONE), _wasInit(false) {
 }
 
@@ -10,7 +12,7 @@ bool AudioInfo::prepare() {
   if (_wasInit) {
     return _wasInit;
   }
-  
+
   if (beatSequence.size() > 0) {
     beat = beatSequence.begin();
     _wasInit = true;
@@ -19,10 +21,10 @@ bool AudioInfo::prepare() {
 }
 
 void AudioInfo::addTiming(int beatTime) {
-  //only accept new timing while  
+  //only accept new timing while
   //`prepare` has not been called
   if (!_wasInit ) {
-    beatSequence.push_back(beatTime); 
+    beatSequence.push_back(beatTime);
   }
 }
 
@@ -38,3 +40,5 @@ int AudioInfo::getNextBeat() {
 int AudioInfo::getBeatCount() {
   return beatSequence.size();
 }
+
+} // namespace Hunchback::Framework

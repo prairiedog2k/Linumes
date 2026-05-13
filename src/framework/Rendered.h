@@ -19,6 +19,9 @@
  ***************************************************************************/
 #ifndef RENDERED_H
 #define RENDERED_H
+
+namespace Hunchback::Framework {
+
 class Rendered {
 protected:
 	bool _renderable;
@@ -27,6 +30,9 @@ public:
   virtual ~Rendered() {};
 	bool isRenderable() { return _renderable; };
 	void setRenderable( bool render ) { _renderable = render;};
-	virtual void Draw() = 0;	
+	virtual void Draw() = 0;
 };
+
+} // namespace Hunchback::Framework
+
 #endif

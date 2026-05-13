@@ -11,6 +11,11 @@
 #include "framework/TextureResource.h"
 #include "framework/AudioResource.h"
 
+
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
+
 Boss::Boss(std::string bossFile) : _bossFile(bossFile),
     _name(),
     _dir(),
@@ -67,12 +72,12 @@ int Boss::getPatternColor(int x, int y) {
 }
 
 void Boss::load() {
-    if (!fileExists(_bossFile)) return;
+    if (!HF::fileExists(_bossFile)) return;
     YAML::Node root = YAML::LoadFile(_bossFile);
     if (!root) return;
 
-    _name = nodeAttributeAsString(root, BOSS_ATTR_NAME);
-    _dir  = nodeAttributeAsString(root, BOSS_ATTR_DIR);
+    _name = HF::nodeAttributeAsString(root, BOSS_ATTR_NAME);
+    _dir  = HF::nodeAttributeAsString(root, BOSS_ATTR_DIR);
     _turnsToAttack = root[BOSS_ATTACK_TURN]   ? root[BOSS_ATTACK_TURN].as<int>()   : 0;
     _turnAttack    = root[BOSS_ATTACK_DAMAGE]  ? root[BOSS_ATTACK_DAMAGE].as<int>() : 0;
     _attackReduce  = root[BOSS_ATTACK_REDUCE]  ? root[BOSS_ATTACK_REDUCE].as<int>() : 0;
@@ -84,19 +89,19 @@ void Boss::load() {
     // media
     if (root["media"]) {
         for (const auto& res : root["media"]) {
-            std::string target = nodeAttributeAsString(res, THEME_ATTR_NAME);
-            if (target == BOSS_COLOR0)            _color0.reset(dynamic_cast<TextureResource*>(createResourceFromNode(res, _dir)));
-            else if (target == BOSS_COLOR1)       _color1.reset(dynamic_cast<TextureResource*>(createResourceFromNode(res, _dir)));
-            else if (target == BOSS_ATT_BG)       _bg.reset(dynamic_cast<TextureResource*>(createResourceFromNode(res, _dir)));
-            else if (target == BOSS_ATT_FG)       _fg.reset(dynamic_cast<TextureResource*>(createResourceFromNode(res, _dir)));
-            else if (target == BOSS_ICON)         _icon.reset(dynamic_cast<TextureResource*>(createResourceFromNode(res, _dir)));
-            else if (target == BOSS_ATT_BG_MASK)  _bgMask.reset(dynamic_cast<TextureResource*>(createResourceFromNode(res, _dir)));
-            else if (target == BOSS_ATT_FG_MASK)  _fgMask.reset(dynamic_cast<TextureResource*>(createResourceFromNode(res, _dir)));
-            else if (target == BOSS_ICON_MASK)    _iconMask.reset(dynamic_cast<TextureResource*>(createResourceFromNode(res, _dir)));
-            else if (target == BOSS_AUDIO_ATTACK) _attack.reset(dynamic_cast<AudioResource*>(createResourceFromNode(res, _dir)));
-            else if (target == BOSS_AUDIO_DAMAGE) _damage.reset(dynamic_cast<AudioResource*>(createResourceFromNode(res, _dir)));
-            else if (target == BOSS_AUDIO_DIE)    _die.reset(dynamic_cast<AudioResource*>(createResourceFromNode(res, _dir)));
-            else if (target == BOSS_AUDIO_WIN)    _win.reset(dynamic_cast<AudioResource*>(createResourceFromNode(res, _dir)));
+            std::string target = HF::nodeAttributeAsString(res, THEME_ATTR_NAME);
+            if (target == BOSS_COLOR0)            _color0.reset(dynamic_cast<HF::TextureResource*>(HF::createResourceFromNode(res, _dir)));
+            else if (target == BOSS_COLOR1)       _color1.reset(dynamic_cast<HF::TextureResource*>(HF::createResourceFromNode(res, _dir)));
+            else if (target == BOSS_ATT_BG)       _bg.reset(dynamic_cast<HF::TextureResource*>(HF::createResourceFromNode(res, _dir)));
+            else if (target == BOSS_ATT_FG)       _fg.reset(dynamic_cast<HF::TextureResource*>(HF::createResourceFromNode(res, _dir)));
+            else if (target == BOSS_ICON)         _icon.reset(dynamic_cast<HF::TextureResource*>(HF::createResourceFromNode(res, _dir)));
+            else if (target == BOSS_ATT_BG_MASK)  _bgMask.reset(dynamic_cast<HF::TextureResource*>(HF::createResourceFromNode(res, _dir)));
+            else if (target == BOSS_ATT_FG_MASK)  _fgMask.reset(dynamic_cast<HF::TextureResource*>(HF::createResourceFromNode(res, _dir)));
+            else if (target == BOSS_ICON_MASK)    _iconMask.reset(dynamic_cast<HF::TextureResource*>(HF::createResourceFromNode(res, _dir)));
+            else if (target == BOSS_AUDIO_ATTACK) _attack.reset(dynamic_cast<HF::AudioResource*>(HF::createResourceFromNode(res, _dir)));
+            else if (target == BOSS_AUDIO_DAMAGE) _damage.reset(dynamic_cast<HF::AudioResource*>(HF::createResourceFromNode(res, _dir)));
+            else if (target == BOSS_AUDIO_DIE)    _die.reset(dynamic_cast<HF::AudioResource*>(HF::createResourceFromNode(res, _dir)));
+            else if (target == BOSS_AUDIO_WIN)    _win.reset(dynamic_cast<HF::AudioResource*>(HF::createResourceFromNode(res, _dir)));
         }
     }
 
@@ -188,3 +193,6 @@ void Boss::dump() {
         std::cout << "|" << std::endl;
     }
 }
+
+
+} // namespace Linumes

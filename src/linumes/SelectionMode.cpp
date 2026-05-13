@@ -2,7 +2,12 @@
 #include "SelectionMode.h"
 #include "ModeTypes.h"
 
-SelectionMode::SelectionMode(): Mode(SELECTION_MODE)
+
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
+
+SelectionMode::SelectionMode(): HF::Mode(SELECTION_MODE)
 {
 	_currentTick = SDL_GetTicks();
 }
@@ -64,3 +69,6 @@ bool SelectionMode::init() {
 void SelectionMode::update(unsigned int currTick) {
 	_selectionBoard->Draw();
 }
+
+
+} // namespace Linumes

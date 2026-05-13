@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-using namespace std;
+namespace Hunchback::Framework {
 
 class BaseResource {
 public:
@@ -13,5 +13,7 @@ public:
 	virtual bool release() = 0;
 	virtual void reportResourceFile() = 0;
 };
+
+} // namespace Hunchback::Framework
 
 #endif /*BASERESOURCE_*/

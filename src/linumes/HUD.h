@@ -7,19 +7,24 @@
 #include <string>
 #include <map>
 
-class HUD : public Themed, public Rendered
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
+class HUD : public HF::Themed, public HF::Rendered
 {
 public:
     HUD();
     HUD(bool render);
     virtual ~HUD();
-    void setTheme(Theme *theme);
+    void setTheme(HF::Theme *theme);
     void setValue(std::string argName, std::string argValue);
     void overrideText(std::string argName, std::string argValue);
     void Draw();
 private:
     void loadHudConfig(std::string hudConfigFile);
-    std::map<std::string, BaseTextDisplay> textDisplays;
+    std::map<std::string, HF::BaseTextDisplay> textDisplays;
 };
+
+} // namespace Linumes
 
 #endif /*HUD_H_*/

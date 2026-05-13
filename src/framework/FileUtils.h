@@ -3,6 +3,10 @@
 
 #include <string>
 
-bool fileExists(std::string myFileName); 
+namespace Hunchback::Framework {
+
+bool fileExists(std::string myFileName);
+
+} // namespace Hunchback::Framework
 
 #endif /*FILEUTILS_H_*/

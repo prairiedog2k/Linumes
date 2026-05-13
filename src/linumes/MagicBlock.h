@@ -7,24 +7,27 @@
 #include "framework/TextureQuad.h"
 #include <set>
 
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
 /**
- * Magic Block is used to provide animations for the newly created blocks on the screen 
- * It is ephemeral (i.e Time Limited) and when it is complete it should be removed 
+ * Magic Block is used to provide animations for the newly created blocks on the screen
+ * It is ephemeral (i.e Time Limited) and when it is complete it should be removed
  * The x and y Position are the lower left of Magic Block to be rendered.
- * 
- * Thus, if the Magic Block is to cover the area for a newly created Block (not a single game piece, 
+ *
+ * Thus, if the Magic Block is to cover the area for a newly created Block (not a single game piece,
  * but the scoring aggregate) then the x and y parameters should be from piece 0 (the lower left block)
  * The dimension is then 2 * the dimension of a single game piece.
- * 
- * Percent Complete will be used to render the alpha channel of the rendering where 
+ *
+ * Percent Complete will be used to render the alpha channel of the rendering where
  * 100% complete (1.0f) is equivalent to total transparency
  */
 
-class MagicBlock : public Rendered, public Themed, public TimeLimited
+class MagicBlock : public HF::Rendered, public HF::Themed, public HF::TimeLimited
 {
 public:
 	enum  BlockState { NONE=0, SHRINKER, SPARK, STAR, LOOPER };
-private:	
+private:
 	float _x;
 	float _y;
 	float _dim;
@@ -33,10 +36,10 @@ private:
 
 	BlockState _state;
 
-	TextureQuad _quad;
-	
-	GLuint getNamedTexture(const char * arg); 
-	
+	HF::TextureQuad _quad;
+
+	GLuint getNamedTexture(const char * arg);
+
 	GLuint getTexture();
 	GLuint getMask();
 	GLuint getSparkTexture();
@@ -49,14 +52,14 @@ private:
 	void drawStar();
 	void drawLooper();
 
-	
+
 public:
 
 	MagicBlock(float x, float y, float dim, int boardpos);
 	MagicBlock();
 	virtual ~MagicBlock();
 
-	virtual void setTheme(Theme *theme);
+	virtual void setTheme(HF::Theme *theme);
 	void setState(BlockState state) { _state = state; };
 	BlockState getState() { return _state; };
 	void Draw();
@@ -66,11 +69,11 @@ public:
 	void setX(float x) { _x = x; };
 	void setY(float y) { _y = y; };
 	void setDim(float dim) { _dim = dim; };
-	
+
 	float getDim() { return _dim;}
 	int getBoardPos() const { return _boardpos; } ;
 
-	bool operator == (const MagicBlock &rhs) const { return getBoardPos() == rhs.getBoardPos();}; 
+	bool operator == (const MagicBlock &rhs) const { return getBoardPos() == rhs.getBoardPos();};
 
 
 };
@@ -83,5 +86,6 @@ struct mbcomp{
 
 typedef std::set<MagicBlock ,mbcomp> MagicBlockSet;
 
+} // namespace Linumes
 
 #endif /*MAGICBLOCK_H_*/

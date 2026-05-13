@@ -5,6 +5,8 @@
 #include <set>
 #include <yaml-cpp/yaml.h>
 
+namespace Linumes {
+
 struct hscomp{
     bool operator()(const std::pair<int, std::string> &lhs, const std::pair<int, std::string> &rhs) const{
         return lhs.first > rhs.first;
@@ -30,5 +32,7 @@ public:
     int getHighestScore();
     std::string getTableString();
 };
+
+} // namespace Linumes
 
 #endif /*HIGHSCORETABLE_H_*/

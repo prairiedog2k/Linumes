@@ -3,15 +3,20 @@
 #include "framework/TextureResource.h"
 #include "framework/ResourceHelper.h"
 
-Grid::Grid() : Timed(), Rendered(true), Positioned(), Themed(), _quad(), audioManager(nullptr)
+
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
+
+Grid::Grid() : HF::Timed(), HF::Rendered(true), HF::Positioned(), HF::Themed(), _quad(), audioManager(nullptr)
 {
 }
 
 Grid::Grid(float posx, float posy, float dim, int columns, int rows) :
-	Timed(),
-	Rendered(true),
-	Positioned(posx, posy),
-	Themed(),
+	HF::Timed(),
+	HF::Rendered(true),
+	HF::Positioned(posx, posy),
+	HF::Themed(),
 	dimension(dim),
 	boardcolumns(columns),
 	boardrows(rows),
@@ -27,13 +32,13 @@ Grid::Grid(float posx, float posy, float dim, int columns, int rows) :
 
 Grid::~Grid() = default;
 
-void Grid::setTheme(Theme *theTheme) {
-	Themed::setTheme(theTheme);
-	hasMask = (nullptr != ResourceHelper::getTextureResource(getTheme(), std::string (BOARD_GRID_MASK)));
+void Grid::setTheme(HF::Theme *theTheme) {
+	HF::Themed::setTheme(theTheme);
+	hasMask = (nullptr != HF::ResourceHelper::getTextureResource(getTheme(), std::string (BOARD_GRID_MASK)));
 }
 
 GLuint Grid::getMask() {
-	TextureResource * tr = ResourceHelper::getTextureResource(getTheme(), std::string (BOARD_GRID_MASK));
+	HF::TextureResource * tr = HF::ResourceHelper::getTextureResource(getTheme(), std::string (BOARD_GRID_MASK));
 	if (nullptr == tr) {
 		return 0;
 	}
@@ -41,7 +46,7 @@ GLuint Grid::getMask() {
 }
 
 GLuint Grid::getTexture() {
-	TextureResource * tr = ResourceHelper::getTextureResource(getTheme(), std::string (BOARD_GRID));
+	HF::TextureResource * tr = HF::ResourceHelper::getTextureResource(getTheme(), std::string (BOARD_GRID));
 	if (nullptr == tr) {
 		return 0;
 	}
@@ -49,7 +54,7 @@ GLuint Grid::getTexture() {
 }
 
 GLuint Grid::getSideBarTexture(bool mask) {
-	TextureResource *tr = ResourceHelper::getTextureResource(getTheme(), std::string ( mask ? BOARD_SIDEBAR_MASK : BOARD_SIDEBAR));
+	HF::TextureResource *tr = HF::ResourceHelper::getTextureResource(getTheme(), std::string ( mask ? BOARD_SIDEBAR_MASK : BOARD_SIDEBAR));
 	if (nullptr == tr) {
 		return 0;
 	}
@@ -57,7 +62,7 @@ GLuint Grid::getSideBarTexture(bool mask) {
 }
 
 GLuint Grid::getHeaderTexture(bool mask) {
-	TextureResource *tr = ResourceHelper::getTextureResource(getTheme(), std::string ( mask ? BOARD_HEADER_MASK : BOARD_HEADER));
+	HF::TextureResource *tr = HF::ResourceHelper::getTextureResource(getTheme(), std::string ( mask ? BOARD_HEADER_MASK : BOARD_HEADER));
 	if (nullptr == tr) {
 		return 0;
 	}
@@ -65,7 +70,7 @@ GLuint Grid::getHeaderTexture(bool mask) {
 }
 
 GLuint Grid::getAudioLevelTexture(bool mask) {
-	TextureResource *tr = ResourceHelper::getTextureResource(getTheme(), std::string ( mask ? BOARD_AUDIO_LEVEL_MASK : BOARD_AUDIO_LEVEL));
+	HF::TextureResource *tr = HF::ResourceHelper::getTextureResource(getTheme(), std::string ( mask ? BOARD_AUDIO_LEVEL_MASK : BOARD_AUDIO_LEVEL));
 	if (nullptr == tr) {
 		return 0;
 	}
@@ -274,3 +279,6 @@ void Grid::Draw() {
 		glEnable(GL_DEPTH_TEST);
 	}	
 }
+
+
+} // namespace Linumes

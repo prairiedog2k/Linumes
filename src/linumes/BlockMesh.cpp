@@ -4,6 +4,10 @@
 #include "BlockMesh.h"
 
 
+
+namespace Linumes {
+
+
 bool BlockMesh::isLoaded = false;
 
 GLint BlockMesh::listID=-1;
@@ -117,3 +121,6 @@ GLint BlockMesh::getListId() {
 
 
 
+
+
+} // namespace Linumes

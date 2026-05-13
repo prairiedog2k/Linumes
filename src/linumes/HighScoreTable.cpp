@@ -4,6 +4,10 @@
 #include <cstdlib>
 #include <cstdio>
 
+
+namespace Linumes {
+
+
 HighScoreTable::HighScoreTable() : _maxSize(10), _tableName("default")
 {
 }
@@ -76,3 +80,6 @@ std::string HighScoreTable::getTableString() {
     }
     return retVal;
 }
+
+
+} // namespace Linumes

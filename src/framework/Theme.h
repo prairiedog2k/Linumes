@@ -25,7 +25,8 @@
 #include <string>
 #include <map>
 #include "BaseResource.h"
-using namespace std;
+
+namespace Hunchback::Framework {
 
 class Theme
 {
@@ -39,21 +40,23 @@ public:
   virtual bool init();
   virtual void release();
   BaseResource *getResource(std::string target);
-  
-  
+
+
   Theme *getBaseTheme() { return _baseTheme; };
-  
+
   void setBaseTheme(Theme *baseTheme) { _baseTheme = baseTheme; };
-  
+
 protected:
-  //Theme Manager will be responsible for memory mgmt on the base theme  
+  //Theme Manager will be responsible for memory mgmt on the base theme
   Theme *_baseTheme;
-    
-  std::string themedir;  
-  map<std::string, BaseResource *> resources;
+
+  std::string themedir;
+  std::map<std::string, BaseResource *> resources;
   std::string fontfile;
   int resourceCount;
   void handleTag(const char *currDir, const char* tag, const char *target);
 };
+
+} // namespace Hunchback::Framework
 
 #endif

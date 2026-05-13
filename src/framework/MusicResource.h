@@ -7,8 +7,7 @@
 #include "GenericResource.h"
 #include "AudioInfo.h"
 
-
-using namespace std;
+namespace Hunchback::Framework {
 
 class MusicResource : public GenericResource<void *> {
 public:
@@ -20,5 +19,7 @@ public:
 private:
 	AudioInfo *audioInfo;
 };
+
+} // namespace Hunchback::Framework
 
 #endif /*MUSICRESOURCE_H_*/

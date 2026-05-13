@@ -6,20 +6,23 @@
 #include "HighScoreTable.h"
 #include "framework/Theme.h"
 
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
 class HighScoreManager
 {
 private:
 	std::map<std::string, std::unique_ptr<HighScoreTable>> _tableMap;
-	Theme *_baseTheme;
+	HF::Theme *_baseTheme;
 	std::string _highScoreFile;
 
 	void loadHighScores();
 public:
 	HighScoreManager();
-	HighScoreManager(Theme *baseTheme);
+	HighScoreManager(HF::Theme *baseTheme);
 	virtual ~HighScoreManager();
 
-	void setBaseTheme(Theme *baseTheme) { _baseTheme = baseTheme; };
+	void setBaseTheme(HF::Theme *baseTheme) { _baseTheme = baseTheme; };
 
 	void init();
 
@@ -31,5 +34,7 @@ public:
 	HighScoreTable *getHighScoreTable(std::string tableName) { return _tableMap[tableName].get(); };
 
 };
+
+} // namespace Linumes
 
 #endif /*HIGHSCOREMANAGER_H_*/

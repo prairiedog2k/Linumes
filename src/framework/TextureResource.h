@@ -25,8 +25,7 @@
 #include "GenericResource.h"
 #include "TextureInfo.h"
 
-
-using namespace std;
+namespace Hunchback::Framework {
 
 class TextureResource : public GenericResource<GLuint> {
 public:
@@ -39,10 +38,13 @@ public:
   virtual ~TextureResource();
 	bool load();
 	bool release();
-private:	
+private:
 	TextureInfo *textureInfo;
 	GLuint loadPNG();
 	GLuint loadBMP();
 	int getTextureType();
 };
+
+} // namespace Hunchback::Framework
+
 #endif

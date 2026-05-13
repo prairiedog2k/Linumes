@@ -1,5 +1,8 @@
 #include "TextureQuad.h"
 
+
+namespace Hunchback::Framework {
+
 TextureQuad::TextureQuad() : _x0(0.0), _x1(1.0), _y0(0.0), _y1(1.0), _z(1.0) {
 }
 
@@ -47,3 +50,6 @@ void TextureQuad::setDimensionAndPosition2D ( GLfloat x, GLfloat y, GLfloat dim)
     _y0 = y - halfdim;
     _y1 = y + halfdim;
 }
+
+
+} // namespace Hunchback::Framework

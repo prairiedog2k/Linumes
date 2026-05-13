@@ -19,5 +19,9 @@
  ***************************************************************************/
 #include "Resource.h"
 
+namespace Hunchback::Framework {
+
 IResource::IResource(std::string argResourceFile): resourceFile(argResourceFile) {
 }
+
+} // namespace Hunchback::Framework

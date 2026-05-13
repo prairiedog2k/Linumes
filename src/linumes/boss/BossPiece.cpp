@@ -1,6 +1,11 @@
 #include "BossPiece.h"
 #include "BossModeTypes.h"
 
+
+namespace Linumes {
+namespace HF = Hunchback::Framework;
+
+
 BossPiece::BossPiece() : GamePiece(), _boss(false), _bossTexture(0) {
     
 }
@@ -24,3 +29,6 @@ void BossPiece::bindStateTexture() {
         GamePiece::bindStateTexture();
     }
 }
+
+
+} // namespace Linumes
