@@ -14,5 +14,5 @@ BossMode::~BossMode()
 }
 
 void BossMode::createGameBoard() {
-	gameboard = new BossBoard();
+	gameboard = std::make_unique<BossBoard>();
 }

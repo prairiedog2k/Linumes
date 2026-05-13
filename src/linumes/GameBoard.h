@@ -36,6 +36,7 @@
 #include "Icon.h"
 #include "MagicBlock.h"
 #include <memory>
+#include <vector>
 
 #define FROM_ORIGIN -1
 #define FROM_LEFT 0
@@ -50,44 +51,44 @@ protected:
 	//this is the name that will be registered in the highscores, descendants should define differently
 	std::string _gameName;
 	HighScoreTable *_hiScoreTable;
-	
+
 	Token _tokenSet[4];
 
-	GamePiece *_pieces;
-	Grid *_grid;
-	Scanner  *_scanner;
-	auto_ptr<SimpleBackground> _bg;
-	auto_ptr<FadingForeground> _fg;
-	auto_ptr<Icon>  _icon;  
-	auto_ptr<HUD> _hud;
+	std::vector<GamePiece> _pieces;
+	std::unique_ptr<Grid> _grid;
+	std::unique_ptr<Scanner> _scanner;
+	std::unique_ptr<SimpleBackground> _bg;
+	std::unique_ptr<FadingForeground> _fg;
+	std::unique_ptr<Icon> _icon;
+	std::unique_ptr<HUD> _hud;
 
 	MagicBlockSet _mbSet;
-	
+
 	//Input
 	bool downpressed;
 	bool leftpressed;
-	bool rightpressed;	  
+	bool rightpressed;
 
 	LinumesThemeManager *themeManager;
-	AudioManager *_audioManager;
+	std::unique_ptr<AudioManager> _audioManager;
 	Theme *currTheme;
 
 	float _dim;
 	int _rx;
 	int _ry ;
 	int _targetCount;
-	int lastscanned;	
+	int lastscanned;
 
 	bool _advanceScanner;
-	
+
 	//game time to be reported in seconds
 	unsigned int _gameTime;
 	unsigned int _pauseTime;
-	
-	bool _isThemeChanging;		
+
+	bool _isThemeChanging;
 	//score to report in units of 10
 	bool _gameOver;
-	
+
 	int _tokenCount;
 	int _pieceCount;
 	int _blockCount;
@@ -97,15 +98,15 @@ protected:
 	bool _canBonus;
 	bool _scoreChecked;
 	bool _midasMode;
-	
+
 	unsigned int _currentTick;
 	unsigned int _announceTime;
-	
+
 	virtual GamePiece *getPieceAt( int x, int y);
 
 	void drawPieces();
 	void drawGrid();
-	void drawScanner();	
+	void drawScanner();
 	void drawBackground();
 	void drawScoreTargets();
 	void drawTokens();
@@ -121,22 +122,22 @@ protected:
 	virtual void cleanScanned(int column);
 	virtual void dropPieces();
 	virtual void assignInitialTheme();
-	
+
 	virtual void updateContents();
 	//called to reset individual members in a subclass after a scanner pass
 	virtual void resetContents();
-	
-	virtual void updateHud();	
+
+	virtual void updateHud();
 	virtual void drawContents();
-	
-	
+
+
 	void resetScan();
 
 	virtual void markScoreTargets();
 
 	void createTokenSet(int tokenPos);
-	
-	//input events		
+
+	//input events
 	void rotateToken( Rotation dir);
 	void updateToken();
 
@@ -149,8 +150,8 @@ protected:
 public:
 	GameBoard( float dim, int rx, int ry);
 	virtual ~GameBoard();
-	virtual void init(); 
-	virtual void reset(); 
+	virtual void init();
+	virtual void reset();
 	void dump();
 
 	virtual void update(unsigned int currTick);
@@ -168,34 +169,34 @@ public:
 	void RightKeyUp(){rightpressed = false;};
 	void DownKeyUp(){downpressed = false;};
 	void RotateLeft() { if (!_gameOver) { rotateToken(CLOCKWISE); } };
-	void RotateRight(){ if (!_gameOver) { rotateToken(COUNTERCLOCKWISE); } };  
+	void RotateRight(){ if (!_gameOver) { rotateToken(COUNTERCLOCKWISE); } };
 
 	int getRowMax() { return _ry; };
 	int getColMax() { return _rx; };
-	
+
 	void updateSpecialAt (int x, int y);
 
 	virtual void toggleScanner(unsigned int currTime);
-	void advanceToken();  
+	void advanceToken();
 	void updateTokens();
 	void markSpecial(int x, int y);
 	bool isGameOver() { return _gameOver; };
 	void setGameOver( bool gameOver) { _gameOver = gameOver; if (_gameOver) { _audioManager->stopSong(); } };
-	
+
 	//score
 	int getHigh() { return _high; };
-	
+
 	int getScore() { return _score; };
-	int getBlockCount() { return _blockCount; };	
+	int getBlockCount() { return _blockCount; };
 
 	void setScore(int score) { _score = score; };
 	void setBlockCount (int count) { _blockCount = count; };
-	
+
 	void addToScore(int score) { _score += score; };
-	virtual void addToBlockCount (int count) { _blockCount += count; };	
-	
+	virtual void addToBlockCount (int count) { _blockCount += count; };
+
 	unsigned int getCurrentGameTime();
-	
+
 protected:
 	float getMinX();
 	float getMaxX();
@@ -206,9 +207,9 @@ protected:
 
 	//scanner
 	float calculateRate(float ScanTime);
-	
+
 	Theme *getTheme() { return currTheme; };
-	
+
 	friend class Token;
 };
 #endif

@@ -1,4 +1,6 @@
 #include "framework/OpenGLHeaders.h"
+#include <array>
+#include <memory>
 /***************************************************************************
  *   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
@@ -57,10 +59,10 @@ public:
     float getDimension()     { return _dim; };    
     int   getBoardPos()  { return _boardpos; };
     GamePiece *pieceAt(int i);
-    
+
     Block& operator= (const Block& param);
 protected:
-    GamePiece *_pieces[4];
+    std::array<std::unique_ptr<GamePiece>, 4> _pieces;
 
     int   _boardpos;
     float _x;

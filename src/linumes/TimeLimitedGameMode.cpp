@@ -16,5 +16,5 @@ TimeLimitedGameMode::~TimeLimitedGameMode()
 }
 
 void TimeLimitedGameMode::createGameBoard() {
-	gameboard = new TimeLimitedGameBoard(_duration); 
+	gameboard = std::make_unique<TimeLimitedGameBoard>(_duration);
 }

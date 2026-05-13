@@ -203,7 +203,7 @@ void GameBoard::init()
 	assignInitialTheme();
 
 	_audioManager->init();
-	_grid->setAudioManager(_audioManager);
+	_grid->setAudioManager(_audioManager.get());
 	
 	_icon->setDimension(3 * _dim);
 	_icon->setX(getMinX() - 2.90 * _dim);

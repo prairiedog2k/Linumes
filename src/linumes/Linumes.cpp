@@ -1,5 +1,6 @@
 #include <cstdlib>
 #include <iostream>
+#include <memory>
 
 #include "LinumesModeManager.h"
 
@@ -21,11 +22,10 @@ int main(int argc, char *argv[]) {
     std::cout << "(DEBUG MODE ENABLED)" << endl;
 #endif
 
-    ModeManager *lmm = new LinumesModeManager("LinumesConfiguration.yaml");
+    auto lmm = std::make_unique<LinumesModeManager>("LinumesConfiguration.yaml");
     if (lmm->init()) {
         lmm->run();
     }
-    delete lmm;
 
     return 0;
 }

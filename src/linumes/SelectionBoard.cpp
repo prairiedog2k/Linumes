@@ -4,7 +4,7 @@
 #include "framework/ResourceHelper.h"
 #include "framework/Utils.h"
 
-SelectionBoard::SelectionBoard(std::string name) : Rendered(true), Themed(), _name(name), _quad(), _bg( new SimpleBackground(0.0,0.0, BASE_SEL_BG) )
+SelectionBoard::SelectionBoard(std::string name) : Rendered(true), Themed(), _name(name), _quad(), _bg( std::make_unique<SimpleBackground>(0.0,0.0, BASE_SEL_BG) )
 {
 
 }
