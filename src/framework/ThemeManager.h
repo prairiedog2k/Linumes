@@ -22,6 +22,7 @@
 
 #include <string>
 #include <list>
+#include <memory>
 #include "Theme.h"
 
 #define DEFAULT_FILE "theme.list"
@@ -30,8 +31,8 @@ using namespace std;
 
 class ThemeManager{
 protected:
-  Theme *_baseTheme;
-  Theme *_currentTheme;
+  std::unique_ptr<Theme> _baseTheme;
+  std::unique_ptr<Theme> _currentTheme;
 public:
   ThemeManager();
   ThemeManager(std::string filename);
@@ -39,8 +40,8 @@ public:
   virtual bool init();
   Theme *getNamedTheme(std::string themeName);
   Theme *getNextTheme();
-  Theme *getBaseTheme() { return _baseTheme; };
-  Theme *getCurrentTheme() { return _currentTheme; };
+  Theme *getBaseTheme() { return _baseTheme.get(); };
+  Theme *getCurrentTheme() { return _currentTheme.get(); };
 private:
   bool initXML();
   bool initData();

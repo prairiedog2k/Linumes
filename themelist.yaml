@@ -1,0 +1,104 @@
+base_theme:
+  dir: base
+  resources:
+    - type: font
+      name: linumes_72
+      pointsize: 72
+      red: 1.0
+      green: 1.0
+      blue: 1.0
+      file: RadisSans-medium.ttf
+    - type: font
+      name: base_font_72
+      pointsize: 72
+      red: 1.0
+      green: 1.0
+      blue: 1.0
+      file: aerial.ttf
+    - type: font
+      name: base_font_48
+      pointsize: 48
+      red: 1.0
+      green: 1.0
+      blue: 1.0
+      file: aerial.ttf
+    - type: font
+      name: base_font_24
+      pointsize: 24
+      red: 1.0
+      green: 1.0
+      blue: 1.0
+      file: aerial.ttf
+    - type: font
+      name: base_font_12
+      pointsize: 12
+      red: 1.0
+      green: 1.0
+      blue: 1.0
+      file: aerial.ttf
+    - type: font
+      name: base_font_mono_24
+      pointsize: 36
+      red: 1.0
+      green: 1.0
+      blue: 1.0
+      file: monof55.ttf
+    - type: string
+      name: base_hud
+      file: base_hud.yaml
+    - type: string
+      name: base_hi
+      file: highscores.yaml
+    - type: texture
+      name: hi_score_table
+      file: hiscoretable.png
+    - type: texture
+      name: selection_table
+      file: selection.png
+    - type: texture
+      name: base_selection_bg
+      file: Drops.png
+    - type: texture
+      name: texture_sidebar
+      file: sidebar.png
+    - type: texture
+      name: texture_sidebar_mask
+      file: sidebar-mask.png
+    - type: texture
+      name: texture_header
+      file: boardheader.png
+    - type: texture
+      name: texture_header_mask
+      file: boardheader-mask.png
+    - type: texture
+      name: texture_audio_level
+      file: grid-audio-level.png
+    - type: texture
+      name: texture_audio_level_mask
+      file: grid-audio-level-mask.png
+    - type: string
+      name: base_selections
+      file: modeselections.yaml
+    - type: string
+      name: configuration_selections
+      file: configurationselections.yaml
+
+themes:
+  - name: CitrusBlend
+    file: citrusblend_theme.yaml
+    dir: Themes
+  - name: Desktop
+    file: desktop_theme.yaml
+    dir: Themes
+  - name: Racer
+    file: racer_theme.yaml
+    dir: Themes
+  - name: OneLaptop
+    file: onelaptop_theme.yaml
+    dir: Themes
+  - name: BubbleGum
+    file: bubblegum_theme.yaml
+    dir: Themes
+  - name: Nature
+    file: nature_theme.yaml
+    dir: Themes

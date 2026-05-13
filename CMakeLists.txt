@@ -1,34 +1,25 @@
 cmake_minimum_required(VERSION 3.16)
 project(Linumes LANGUAGES C CXX)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # ---------------------------------------------------------------------------
-# Dependencies
+# Dependencies  (SDL2 via vcpkg or system install)
 # ---------------------------------------------------------------------------
 
-# SDL 1.x
-find_package(SDL REQUIRED)
-find_package(SDL_mixer REQUIRED)
-find_package(SDL_ttf REQUIRED)
-find_package(SDL_image REQUIRED)
-
-# OpenGL + GLU
-find_package(OpenGL REQUIRED)
-
-# dl (plugin loading via dlopen/dlsym — Linux/macOS only)
-# CMAKE_DL_LIBS is empty on Windows where this path is unused.
+find_package(SDL2         CONFIG REQUIRED)
+find_package(SDL2_mixer   CONFIG REQUIRED)
+find_package(SDL2_ttf     CONFIG REQUIRED)
+find_package(SDL2_image   CONFIG REQUIRED)
+find_package(OpenGL       REQUIRED)
+find_package(yaml-cpp     CONFIG REQUIRED)
 
 # ---------------------------------------------------------------------------
 # Bundled third-party sources
 # ---------------------------------------------------------------------------
 
-# Frank Vanden Berghen's XML parser (vendored in xmlparser/)
-set(XMLPARSER_SOURCES xmlparser/xmlParser.cpp)
-
-# XMMS FFT (vendored in xmms/, GPL v2+)
-set(XMMS_SOURCES xmms/fft.c)
+set(XMMS_SOURCES      xmms/fft.c)
 
 # ---------------------------------------------------------------------------
 # Game sources
@@ -114,48 +105,84 @@ set(GAME_SOURCES
 add_executable(Linumes
     ${FRAMEWORK_SOURCES}
     ${GAME_SOURCES}
-    ${XMLPARSER_SOURCES}
     ${XMMS_SOURCES}
 )
 
 target_include_directories(Linumes PRIVATE
     ${CMAKE_SOURCE_DIR}/src
-    ${CMAKE_SOURCE_DIR}/xmlparser
     ${CMAKE_SOURCE_DIR}/xmms
-    ${SDL_INCLUDE_DIR}
-    ${SDLMIXER_INCLUDE_DIR}
-    ${SDLTTF_INCLUDE_DIR}
-    ${SDLIMAGE_INCLUDE_DIR}
     ${OPENGL_INCLUDE_DIR}
 )
 
 target_link_libraries(Linumes PRIVATE
-    ${SDL_LIBRARY}
-    ${SDLMIXER_LIBRARY}
-    ${SDLTTF_LIBRARY}
-    ${SDLIMAGE_LIBRARY}
+    SDL2::SDL2
+    SDL2::SDL2main
+    $<IF:$<TARGET_EXISTS:SDL2_mixer::SDL2_mixer>,SDL2_mixer::SDL2_mixer,SDL2_mixer::SDL2_mixer-static>
+    $<IF:$<TARGET_EXISTS:SDL2_ttf::SDL2_ttf>,SDL2_ttf::SDL2_ttf,SDL2_ttf::SDL2_ttf-static>
+    $<IF:$<TARGET_EXISTS:SDL2_image::SDL2_image>,SDL2_image::SDL2_image,SDL2_image::SDL2_image-static>
     ${OPENGL_LIBRARIES}
     ${CMAKE_DL_LIBS}
+    yaml-cpp::yaml-cpp
 )
 
 # ---------------------------------------------------------------------------
 # Build configuration
 # ---------------------------------------------------------------------------
 
-# Mirror the old Eclipse Debug flag
 target_compile_definitions(Linumes PRIVATE
     $<$<CONFIG:Debug>:DEBUG>
 )
 
-# Windows GUI entry point (matches the MING_ENTRY guard in Linumes.cpp)
+# On Windows: use srand() instead of POSIX srandom(), disable dlfcn plugin loader
 if(WIN32)
-    target_compile_definitions(Linumes PRIVATE MING_ENTRY)
+    target_compile_definitions(Linumes PRIVATE MING_RANDOM MING_NO_PLUGIN MING_ENTRY)
     set_target_properties(Linumes PROPERTIES WIN32_EXECUTABLE TRUE)
 endif()
 
-# Compiler warnings
 if(MSVC)
-    target_compile_options(Linumes PRIVATE /W3)
+    # /Z7 embeds debug info in .obj files (no shared PDB per TU) — avoids C1041
+    # contention when MSBuild compiles files in parallel.
+    string(REPLACE "/Zi" "/Z7" CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}")
+    string(REPLACE "/Zi" "/Z7" CMAKE_C_FLAGS_DEBUG   "${CMAKE_C_FLAGS_DEBUG}")
+    string(REPLACE "/Zi" "/Z7" CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO}")
+    string(REPLACE "/Zi" "/Z7" CMAKE_C_FLAGS_RELWITHDEBINFO   "${CMAKE_C_FLAGS_RELWITHDEBINFO}")
+
+    # Force-include OpenGLHeaders.h first in every TU so windows.h always
+    # precedes GL/gl.h regardless of individual file include order.
+    target_compile_options(Linumes PRIVATE
+        /W3 /wd4996
+        "/FI${CMAKE_SOURCE_DIR}/src/framework/OpenGLHeaders.h"
+        "/FI${CMAKE_SOURCE_DIR}/src/framework/SDL2Compat.h"
+    )
 else()
     target_compile_options(Linumes PRIVATE -Wall -Wextra)
 endif()
+
+# ---------------------------------------------------------------------------
+# Copy runtime data assets next to the executable after each build
+# ---------------------------------------------------------------------------
+
+set(ASSET_DIRS  Themes base jublo)
+set(ASSET_FILES LinumesConfiguration.yaml themelist.yaml jublo.yaml)
+
+foreach(DIR ${ASSET_DIRS})
+    if(EXISTS "${CMAKE_SOURCE_DIR}/${DIR}")
+        add_custom_command(TARGET Linumes POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_directory
+                "${CMAKE_SOURCE_DIR}/${DIR}"
+                "$<TARGET_FILE_DIR:Linumes>/${DIR}"
+            COMMENT "Copying ${DIR}/ to output"
+        )
+    endif()
+endforeach()
+
+foreach(FILE ${ASSET_FILES})
+    if(EXISTS "${CMAKE_SOURCE_DIR}/${FILE}")
+        add_custom_command(TARGET Linumes POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                "${CMAKE_SOURCE_DIR}/${FILE}"
+                "$<TARGET_FILE_DIR:Linumes>/${FILE}"
+            COMMENT "Copying ${FILE} to output"
+        )
+    endif()
+endforeach()

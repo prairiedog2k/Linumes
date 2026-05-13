@@ -1,17 +1,18 @@
 #ifndef SELECTIONMODE_H_
 #define SELECTIONMODE_H_
 
+#include <map>
+#include <memory>
 #include "framework/Mode.h"
 #include "LinumesThemeManager.h"
 #include "SelectionBoard.h"
-#include <map>
 
 class SelectionMode : public Mode
 {
 protected:
-	ThemeManager *_themeManager;
+	std::unique_ptr<ThemeManager> _themeManager;
 private:
-	SelectionBoard *_selectionBoard;
+	std::unique_ptr<SelectionBoard> _selectionBoard;
 	unsigned int _currentTick;
 	
 
@@ -20,8 +21,8 @@ public:
 	SelectionMode();
 	virtual ~SelectionMode();
 	
-	void handleKeyUp( SDL_keysym *keysym );
-	void handleKeyDown( SDL_keysym *keysym );
+	void handleKeyUp( SDL_Keysym *keysym );
+	void handleKeyDown( SDL_Keysym *keysym );
 	bool init();
 	void update(unsigned int currTick);		
 	

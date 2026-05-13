@@ -1,5 +1,4 @@
-#include <GL/gl.h>
-#include <GL/glu.h>
+#include "framework/OpenGLHeaders.h"
 #include <iostream>
 
 #include "BlockMesh.h"

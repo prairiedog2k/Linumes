@@ -1,6 +1,8 @@
 #ifndef BOSSBOARD_H
 #define BOSSBOARD_H
 
+#include <memory>
+#include <vector>
 #include "linumes/GameBoard.h"
 #include "Boss.h"
 #include "BossPiece.h"
@@ -8,9 +10,9 @@
 
 class BossBoard : public GameBoard {
 private:
-    Boss _boss;   
-    BossPiece *_bossPieces;
-    auto_ptr<BossIcon>  _bossIcon;
+    Boss _boss;
+    std::vector<BossPiece> _bossPieces;
+    std::unique_ptr<BossIcon> _bossIcon;
     int _bossAttacks;
     
     unsigned int _attackStart;

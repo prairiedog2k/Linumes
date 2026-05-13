@@ -1,6 +1,7 @@
 #ifndef GRID_H_
 #define GRID_H_
 
+#include <vector>
 #include "framework/Timed.h"
 #include "framework/Rendered.h"
 #include "framework/Positioned.h"
@@ -13,15 +14,15 @@ class Grid : public Timed, public Rendered, public Positioned, public Themed
 private:
 	float dimension;
 	int boardcolumns;
-	int boardrows;	
+	int boardrows;
 	bool hasMask;
-	
+
 	TextureQuad _quad;
 	AudioManager *audioManager;
 
 	unsigned int currTick;
-	float *lastLevel;
-	unsigned int *lastLevelTick;
+	std::vector<float> lastLevel;
+	std::vector<unsigned int> lastLevelTick;
 	float decay;
 	
 	GLuint getTexture();

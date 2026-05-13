@@ -20,7 +20,7 @@
 #ifndef MODE_MANAGER_H
 #define MODE_MANAGER_H
 
-
+#include <memory>
 #include "SDL.h"
 #include <string>
 
@@ -34,16 +34,16 @@ using namespace std;
 class ModeManager {
 
 protected:
-	Mode *currMode;
+	std::unique_ptr<Mode> currMode;
 	virtual bool initContext() = 0;
 	virtual void update() = 0;
-	virtual void handleKeyUp( SDL_keysym *keysym ) = 0;
-	virtual void handleKeyDown( SDL_keysym *keysym ) = 0;   
+	virtual void handleKeyUp( SDL_Keysym *keysym ) = 0;
+	virtual void handleKeyDown( SDL_Keysym *keysym ) = 0;
 
 	bool isActive;
 	bool isDone;
 
-	MediaManager *mediamanager;
+	std::unique_ptr<MediaManager> mediamanager;
 	Configuration configuration;
 public:
 	ModeManager();

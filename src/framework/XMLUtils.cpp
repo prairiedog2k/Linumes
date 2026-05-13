@@ -10,69 +10,48 @@
 #include "FontInfo.h"
 #include "FontInfoBuilder.h"
 
-bool nodeHasAttribute(XMLNode resourceRef, const char * attr) {
-	return (NULL == resourceRef.getAttribute(attr));
+std::string nodeAttributeAsString(const YAML::Node& node, const char *key) {
+    if (node[key]) return node[key].as<std::string>();
+    return "";
 }
 
-std::string nodeAttributeAsString(XMLNode resourceRef, const char *attr) {
-	std::string retVal( ( nodeHasAttribute(resourceRef, attr) ? "" :  resourceRef.getAttribute(attr) ) );
-	return retVal;
+bool nodeAttributeAsBool(const YAML::Node& node, const char *key) {
+    if (!node[key]) return false;
+    return node[key].as<std::string>() == "true";
 }
 
-bool nodeAttributeAsBool(XMLNode node, const char *attributeName) {
-	std::string strBoolean = node.getAttribute(attributeName) == NULL ? "false" : node.getAttribute(attributeName);
-	return (strBoolean == "true");
-}
+BaseResource *createResourceFromNode(const YAML::Node& node, const std::string& themedir) {
+    if (!node) return nullptr;
+    std::string strType = nodeAttributeAsString(node, THEME_ATTR_TYPE);
+    std::string strAltDir = nodeAttributeAsString(node, THEME_ATTR_ALTDIR);
+    std::string file = nodeAttributeAsString(node, "file");
+    std::string path = strAltDir.empty() ? (themedir + "/" + file) : (strAltDir + "/" + file);
 
-
-//callers should be aware that they need to delete the resources returned by this function
-BaseResource *createResourceFromNode(XMLNode resourceRef, std::string themedir) {
-    if ( resourceRef.isEmpty() ) {
-        return NULL;
+    if (strType == RESOURCE_AUDIO) {
+        AudioResource *ar = new AudioResource(nullptr, path);
+        ar->load();
+        return ar;
     }
-    BaseResource *br = NULL;
-	std::string strType( resourceRef.getAttribute(THEME_ATTR_TYPE));
-	std::string strName( resourceRef.getAttribute(THEME_ATTR_NAME));
-
-	//allow overrides to load resources outside of the the specified resource directory
-	std::string strAltDir = nodeAttributeAsString(resourceRef, THEME_ATTR_ALTDIR);
-
-	std::string strText = resourceRef.getText();
-
-	if (strAltDir.size() > 0) {
-		strText = strAltDir + "/" + strText;
-	} else {
-		strText = themedir + "/" + strText;
-	}
-
-	if (strType.compare(RESOURCE_AUDIO) == 0) {
-		AudioResource *ar = new AudioResource(NULL, strText);
-		ar->load();
-        br = ar;
-	}
-	if (strType.compare(RESOURCE_TEXTURE) == 0) {
-		TextureResource *tr = new TextureResource(NULL,strText);
-		tr->load();
-        br = tr;
-	}
-	if (strType.compare(RESOURCE_FONT) == 0) {
-		FontInfo fi = FontInfoBuilder::createFontInfo(resourceRef);
-		FontResource *fr = new FontResource(&fi, strText);
-		fr->load();
-		br = fr;
-	}
-	if (strType.compare(RESOURCE_PLUGIN) == 0) {
-		PluginResource *pr = new PluginResource(NULL, strText);
-		pr->load();
-		br = pr;
-	}
-	if (strType.compare(RESOURCE_STRING) == 0) {
-		StringResource *sr = new StringResource(strText);
-		sr->load();
-		br = sr;
-	}
-	if (strType.compare(RESOURCE_MESH) == 0) {
-		br = NULL;
-	}
-	return br;
+    if (strType == RESOURCE_TEXTURE) {
+        TextureResource *tr = new TextureResource(nullptr, path);
+        tr->load();
+        return tr;
+    }
+    if (strType == RESOURCE_FONT) {
+        FontInfo fi = FontInfoBuilder::createFontInfo(node);
+        FontResource *fr = new FontResource(&fi, path);
+        fr->load();
+        return fr;
+    }
+    if (strType == RESOURCE_PLUGIN) {
+        PluginResource *pr = new PluginResource(nullptr, path);
+        pr->load();
+        return pr;
+    }
+    if (strType == RESOURCE_STRING) {
+        StringResource *sr = new StringResource(path);
+        sr->load();
+        return sr;
+    }
+    return nullptr;
 }

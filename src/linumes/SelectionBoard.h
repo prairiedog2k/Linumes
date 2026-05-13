@@ -10,13 +10,14 @@
 #include <string>
 #include <list>
 #include <map>
+#include <vector>
 
 class SelectionBoard : public Rendered, public Themed
 {	
 protected:
 	std::string _name;
 	TextureQuad _quad;
-	auto_ptr<SimpleBackground> _bg;
+	std::unique_ptr<SimpleBackground> _bg;
 	std::list< std::pair<std::string, Selection > > _selectionList;
 	std::list< std::pair<std::string, Selection > >::iterator _currentSelection;
 	//selection name to available options

@@ -23,7 +23,7 @@ bool ScreenSaverMode::init() {
 	return bRetVal;
 }
 
-void ScreenSaverMode::handleKeyUp( SDL_keysym *keysym ) {
+void ScreenSaverMode::handleKeyUp( SDL_Keysym *keysym ) {
 	if ( ( SDL_GetTicks() - _start) >  _expire) {
 		modeComplete = true;
 	} else {
@@ -31,7 +31,7 @@ void ScreenSaverMode::handleKeyUp( SDL_keysym *keysym ) {
 	}
 }
 
-void ScreenSaverMode::handleKeyDown( SDL_keysym *keysym ) {
+void ScreenSaverMode::handleKeyDown( SDL_Keysym *keysym ) {
 	// do nothing
 }
 

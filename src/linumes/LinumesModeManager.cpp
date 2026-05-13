@@ -57,11 +57,11 @@ void LinumesModeManager::configureSelectedMode(std::pair<std::string, std::map<s
     }       
 }
 
-void LinumesModeManager::handleKeyUp( SDL_keysym *keysym ) {
+void LinumesModeManager::handleKeyUp( SDL_Keysym *keysym ) {
 	currMode->handleKeyUp(keysym);
 }
 
-void LinumesModeManager::handleKeyDown( SDL_keysym *keysym ) {
+void LinumesModeManager::handleKeyDown( SDL_Keysym *keysym ) {
 	switch ( keysym->sym )
 	{
 	default:		  

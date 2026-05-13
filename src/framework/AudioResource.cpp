@@ -24,9 +24,9 @@ AudioResource::AudioResource(void *info, string argResourceFile) : GenericResour
 };
 
 AudioResource::~AudioResource() {
-  if (audioInfo != NULL) {
-    delete audioInfo;
-  }
+  release();
+  delete audioInfo;
+  audioInfo = nullptr;
 }
 
 
@@ -44,9 +44,10 @@ bool AudioResource::release() {
    cout << "release audio sample from ";
    reportResourceFile();
 #endif
-  if (value_ != 0) { 	
-		Mix_FreeChunk(value_);
+  if (value_) {
+    Mix_FreeChunk(value_);
+    value_ = nullptr;
   }
-	return value_ == 0;
+  return true;
 }
 

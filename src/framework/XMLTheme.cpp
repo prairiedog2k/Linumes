@@ -1,6 +1,5 @@
 #include "XMLTheme.h"
 #include "XMLThemeTypes.h"
-#include "xmlParser.h"
 #include "AudioResource.h"
 #include "MusicResource.h"
 #include "TextureResource.h"
@@ -13,114 +12,95 @@
 #include "XMLSongTypes.h"
 #include <string>
 #include <cstdlib>
+#include <fstream>
 #include "SDL.h"
-
 #include "XMLUtils.h"
 
-XMLTheme::XMLTheme() : Theme(std::string("")), _resourcedir(std::string("")){
+XMLTheme::XMLTheme() : Theme(std::string("")), _resourcedir(std::string("")) {
 }
 
-XMLTheme::XMLTheme(std::string resourcefile): Theme(resourcefile) {
-
+XMLTheme::XMLTheme(std::string resourcefile) : Theme(resourcefile) {
 }
 
-XMLTheme::XMLTheme(std::string resourcefile, std::string resourcedir) : Theme(resourcefile), _resourcedir(resourcedir) {
-	
+XMLTheme::XMLTheme(std::string resourcefile, std::string resourcedir)
+    : Theme(resourcefile), _resourcedir(resourcedir) {
 }
 
-bool XMLTheme::loadResourcesFromNode (XMLNode xMainNode) {
-    bool bRetVal = false;
-	if (! xMainNode.isEmpty()) {
-		XMLNode xNode=xMainNode.getChildNode(THEME_DIR);
+bool XMLTheme::loadResourcesFromNode(const YAML::Node& xMainNode) {
+    if (!xMainNode) return false;
 
-		themedir = xNode.getAttribute(THEME_ATTR_NAME);
+    if (xMainNode["dir"]) {
+        themedir = xMainNode["dir"].as<std::string>();
+    }
+    if (_resourcedir != "") {
+        themedir = _resourcedir + "/" + themedir;
+    }
 
-		if (_resourcedir != "") {
-			themedir = _resourcedir + "/" + themedir;
-		}
+    // music resource
+    MusicResource *mr = XMLSongBuilder::createMusicResource(xMainNode, themedir);
+    if (mr != nullptr) {
+        std::string songName = "audio_song";
+        if (xMainNode["song"] && xMainNode["song"]["name"]) {
+            songName = xMainNode["song"]["name"].as<std::string>();
+        }
+        resources[songName] = mr;
+        resourceCount++;
+    }
 
-		XMLNode resourceRef;
-		int i = 0;
-		resourceRef = xMainNode.getChildNode(THEME_SONG_RESOURCE);
-		if (!resourceRef.isEmpty()) {
-			resourceCount++;
-			std::string strName(resourceRef.getAttribute(THEME_ATTR_NAME));
-			MusicResource *musicResource = XMLSongBuilder::createMusicResource(xMainNode,themedir);
-			if ((musicResource != NULL) && (strName.size() > 0)) {
-				resources[strName]= musicResource;
-			}
-		}
-		do {
-			resourceRef = xMainNode.getChildNode(THEME_RESOURCE, &i);
-			if (! resourceRef.isEmpty() ) {
-				std::string strType( resourceRef.getAttribute(THEME_ATTR_TYPE));
-				std::string strName(resourceRef.getAttribute(THEME_ATTR_NAME));
+    // other resources
+    if (xMainNode["resources"]) {
+        for (const auto& res : xMainNode["resources"]) {
+            std::string strType = nodeAttributeAsString(res, THEME_ATTR_TYPE);
+            std::string strName = nodeAttributeAsString(res, THEME_ATTR_NAME);
+            std::string strAltDir = nodeAttributeAsString(res, THEME_ATTR_ALTDIR);
+            std::string file = nodeAttributeAsString(res, "file");
+            std::string path = strAltDir.empty() ? (themedir + "/" + file) : (strAltDir + "/" + file);
 
-				//allow overrides to load resources outside of the the specified resource directory
-				std::string strAltDir = nodeAttributeAsString(resourceRef, THEME_ATTR_ALTDIR);
-
-				std::string strText = resourceRef.getText();
-
-				if (strAltDir.size() > 0) {
-					strText = strAltDir + "/" + strText;
-				} else {
-					strText = themedir + "/" + strText;
-				}
-
-				if (strType.compare(RESOURCE_AUDIO) == 0) {
-					resourceCount++;
-					AudioResource *ar = new AudioResource(NULL, strText);
-					ar->load();
-					resources[strName]= ar;
-				}
-				if (strType.compare(RESOURCE_TEXTURE) == 0) {
-					resourceCount++;
-					TextureResource *tr = new TextureResource(NULL,strText);
-					tr->load();
-					resources[strName] = tr;
-				}
-				if (strType.compare(RESOURCE_FONT) == 0) {
-					resourceCount++;
-					FontInfo fi = FontInfoBuilder::createFontInfo(resourceRef);
-					FontResource *fr = new FontResource(&fi, strText);
-					fr->load();
-					resources[strName] = fr;
-				}
-				if (strType.compare(RESOURCE_PLUGIN) == 0) {
-					resourceCount++;
-					PluginResource *pr = new PluginResource(NULL, strText);
-					pr->load();
-					resources[strName] = pr;
-				}
-				if (strType.compare(RESOURCE_STRING) == 0) {
-					resourceCount++;
-					StringResource *sr = new StringResource(strText);
-					sr->load();
-					resources[strName] = sr;
-				}
-
-				if (strType.compare(RESOURCE_MESH) == 0) {
-				}
-			}
-		} while ( ! resourceRef.isEmpty() );
-		bRetVal = true;
-	}
-	return bRetVal;
+            if (strType == RESOURCE_AUDIO) {
+                resourceCount++;
+                AudioResource *ar = new AudioResource(nullptr, path);
+                ar->load();
+                resources[strName] = ar;
+            } else if (strType == RESOURCE_TEXTURE) {
+                resourceCount++;
+                TextureResource *tr = new TextureResource(nullptr, path);
+                tr->load();
+                resources[strName] = tr;
+            } else if (strType == RESOURCE_FONT) {
+                resourceCount++;
+                FontInfo fi = FontInfoBuilder::createFontInfo(res);
+                FontResource *fr = new FontResource(&fi, path);
+                fr->load();
+                resources[strName] = fr;
+            } else if (strType == RESOURCE_PLUGIN) {
+                resourceCount++;
+                PluginResource *pr = new PluginResource(nullptr, path);
+                pr->load();
+                resources[strName] = pr;
+            } else if (strType == RESOURCE_STRING) {
+                resourceCount++;
+                StringResource *sr = new StringResource(path);
+                sr->load();
+                resources[strName] = sr;
+            }
+        }
+    }
+    return true;
 }
 
-bool XMLTheme::loadResources() {		
-	if (_resourcedir != "") {
-		themefile = _resourcedir + "/" + themefile;
-	}
-	
-	XMLNode xMainNode=XMLNode::openFileHelper(themefile.c_str(),THEME_MAIN);
-	return loadResourcesFromNode( xMainNode );
+bool XMLTheme::loadResources() {
+    std::string path = themefile;
+    if (_resourcedir != "") {
+        path = _resourcedir + "/" + themefile;
+    }
+    YAML::Node root = YAML::LoadFile(path);
+    return loadResourcesFromNode(root);
 }
 
 bool XMLTheme::init() {
-	return loadResources();
+    return loadResources();
 }
 
 void XMLTheme::release() {
-	Theme::release();
+    Theme::release();
 }

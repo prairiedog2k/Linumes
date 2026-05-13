@@ -1,3 +1,4 @@
+#include "framework/OpenGLHeaders.h"
 /***************************************************************************
  *   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
@@ -24,7 +25,6 @@
 #include "framework/Themed.h"
 #include "framework/TextureQuad.h"
 #include "GamePiece.h"
-#include "GL/gl.h"
 
 using namespace std;
 class Block : public Rendered, public Themed {

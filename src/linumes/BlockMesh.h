@@ -1,7 +1,7 @@
+#include "framework/OpenGLHeaders.h"
 #ifndef BLOCKMESH_H_
 #define BLOCKMESH_H_
 
-#include <GL/gl.h>
 
 using namespace std;
 

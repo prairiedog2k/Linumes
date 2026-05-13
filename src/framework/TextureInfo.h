@@ -1,3 +1,4 @@
+#include "framework/OpenGLHeaders.h"
 /***************************************************************************
  *   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
@@ -20,8 +21,6 @@
 #ifndef TEXTUREINFO_H
 #define TEXTUREINFO_H
 
-#include <GL/gl.h>
-#include <GL/glu.h>
 
 using namespace std;
 

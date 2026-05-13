@@ -101,7 +101,7 @@ GamePiece::~GamePiece()
 GLuint GamePiece::getTexture(const char *name)
 {
 	TextureResource * tr = ResourceHelper::getTextureResource(getTheme(), std::string (name));
-	if (NULL == tr) {
+	if (nullptr == tr) {
 #ifdef DEBUG
 		std::cout << " texture miss : " << name << std::endl;
 #endif 		
@@ -111,11 +111,11 @@ GLuint GamePiece::getTexture(const char *name)
 }
 
 bool GamePiece::hasMask() {
-	return (NULL != ResourceHelper::getTextureResource(getTheme(), std::string (  _color == 0 ? PIECE_MASK0 : PIECE_MASK1 ) ) );
+	return (nullptr != ResourceHelper::getTextureResource(getTheme(), std::string (  _color == 0 ? PIECE_MASK0 : PIECE_MASK1 ) ) );
 }
 
 void GamePiece::bindMask() {
-	const char *strState = NULL;
+	const char *strState = nullptr;
 	if ( _color == 0)
 	{
 		strState = PIECE_MASK0;
@@ -129,7 +129,7 @@ void GamePiece::bindMask() {
 
 void GamePiece::bindStateTexture()
 {
-	const char *strState = NULL;
+	const char *strState = nullptr;
 	if ( _color == 0)
 	{
 		if (_scanned || _special || _connected) {
@@ -229,7 +229,7 @@ GamePiece& GamePiece::operator= (const GamePiece& param)
 }
 
 void GamePiece::copyPieceState( GamePiece *param) {
-	if ((this != param) && (param != NULL)) {
+	if ((this != param) && (param != nullptr)) {
 		_color = param->_color;
 		_stopped = param->_stopped; 
 		_scoreTarget=param->_scoreTarget;

@@ -14,8 +14,8 @@ public:
 	ScreenSaverMode();
 	virtual ~ScreenSaverMode();
 	virtual bool init();
-	virtual void handleKeyUp( SDL_keysym *keysym );
-	virtual void handleKeyDown( SDL_keysym *keysym );
+	virtual void handleKeyUp( SDL_Keysym *keysym );
+	virtual void handleKeyDown( SDL_Keysym *keysym );
 	
 };
 

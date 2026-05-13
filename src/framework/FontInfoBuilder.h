@@ -2,13 +2,12 @@
 #define FONTINFOBUILDER_H_
 
 #include "FontInfo.h"
-#include "xmlParser.h"
+#include <yaml-cpp/yaml.h>
 
 class FontInfoBuilder
 {
 public:
-  static FontInfo createFontInfo(XMLNode fontNode);
+  static FontInfo createFontInfo(const YAML::Node& fontNode);
 };
 
 #endif /*FONTINFOBUILDER_H_*/
-

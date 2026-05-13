@@ -19,7 +19,7 @@ void AudioManager::mixer_monitor(void *udata, Uint8 *_stream, int _len) {
 #ifndef MING_NO_PLUGIN
 	music_mixer(udata, _stream, _len);
 #endif
-	if ( NULL != udata) {
+	if ( nullptr != udata) {
 		AudioManager *am = (AudioManager *)udata;
 		am->calc_freq((Sint16 *)_stream);
 	}
@@ -73,9 +73,9 @@ AudioManager::AudioManager() : Themed(), _lastChannel(2)
 AudioManager::~AudioManager()
 {
 #ifndef MING_NO_PLUGIN
-	Mix_HookMusic( NULL,NULL );
+	Mix_HookMusic( nullptr,nullptr );
 #else
-	Mix_SetPostMix (NULL, NULL );
+	Mix_SetPostMix (nullptr, nullptr );
 #endif
 }
 
@@ -132,9 +132,9 @@ void AudioManager::playSong(std::string song) {
 	Mix_HaltChannel(1);
 	_musicResource = ResourceHelper::getMusicResource(_theme,song);
 
-	if ( NULL != _musicResource) {
+	if ( nullptr != _musicResource) {
 		Mix_MusicType type = MUS_NONE;
-		if (_musicResource->getAudioInfo() != NULL) {
+		if (_musicResource->getAudioInfo() != nullptr) {
 			_trackLength = _musicResource->getAudioInfo()->getSongLength();
 			_musicResource->getAudioInfo()->resetBeats();
 			_nextBeat = _musicResource->getAudioInfo()->getNextBeat();
@@ -160,7 +160,7 @@ void AudioManager::playSong(std::string song) {
 }
 
 void AudioManager::playAudioResource( AudioResource *resource) {
-	if ( NULL != resource) {
+	if ( nullptr != resource) {
 		Mix_HaltChannel(_lastChannel);
 		if(Mix_PlayChannel(_lastChannel, resource->getResource(), 0)==-1) {
 #ifdef DEBUG

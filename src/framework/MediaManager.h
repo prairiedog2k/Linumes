@@ -23,22 +23,18 @@
 #include "SDL.h"
 #include "Configuration.h"
 
-using namespace std;
-
 class MediaManager
 {
 private:
 	static int screenheight;
 	static int screenwidth;
+	static SDL_Window *_window;
 
-	//fields		
 	int screenbpp;
-	SDL_Surface *surface;
+	bool _fullscreen;
+	SDL_GLContext glContext;
 	SDL_Joystick *joystick;
-	int videoFlags;
-	const SDL_VideoInfo *videoInfo;
 
-	//methods
 	void initSDL();
 	void initCursor();
 	void initJoyStick();
@@ -57,9 +53,10 @@ public:
 	bool resizeScreenTo(int width, int height);
 	void takeScreenShot();
 	SDL_Joystick *getJoyStick() { return joystick; };
-	static int getScreenHeight() { return screenheight;};
-	static int getScreenWidth() { return screenwidth;};
-	void resetGlContext() { initGL(); resizeWindow(getScreenWidth(), getScreenHeight() );};
+	static int getScreenHeight() { return screenheight; };
+	static int getScreenWidth()  { return screenwidth;  };
+	static SDL_Window* getWindow() { return _window; };
+	void resetGlContext() { initGL(); resizeWindow(getScreenWidth(), getScreenHeight()); };
 };
 
 #endif

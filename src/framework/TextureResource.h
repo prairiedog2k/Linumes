@@ -1,3 +1,4 @@
+#include "framework/OpenGLHeaders.h"
 /***************************************************************************
  *   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
@@ -21,8 +22,6 @@
 #define TEXTURE_RESOURCE_H
 
 #include <string>
-#include <GL/gl.h>
-#include <GL/glu.h>
 #include "GenericResource.h"
 #include "TextureInfo.h"
 

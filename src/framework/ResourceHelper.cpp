@@ -3,16 +3,16 @@
 
 TextureResource *ResourceHelper::getTextureResource( Theme * theme, const string resourceName ) {
 	BaseResource *br = getBaseResource( theme, resourceName );
-	if (NULL == br) {
-		return NULL;
+	if (nullptr == br) {
+		return nullptr;
 	}
 	return dynamic_cast<TextureResource *>(br);
 }
 
 MusicResource *ResourceHelper::getMusicResource( Theme * theme, const string resourceName ) {
 	BaseResource *br = getBaseResource( theme, resourceName );
-	if (NULL == br) {
-		return NULL;
+	if (nullptr == br) {
+		return nullptr;
 	}
 	return dynamic_cast<MusicResource *>(br);
 }
@@ -20,24 +20,24 @@ MusicResource *ResourceHelper::getMusicResource( Theme * theme, const string res
 
 AudioResource *ResourceHelper::getAudioResource( Theme * theme, const string resourceName ) {
 	BaseResource *br = getBaseResource( theme, resourceName );
-	if (NULL == br) {
-		return NULL;
+	if (nullptr == br) {
+		return nullptr;
 	}
 	return dynamic_cast<AudioResource *>(br);
 }
 
 FontResource *ResourceHelper::getFontResource( Theme *theme, const string resourceName) {
 	BaseResource *br = getBaseResource( theme, resourceName );
-	if (NULL == br) {
-		return NULL;
+	if (nullptr == br) {
+		return nullptr;
 	}
 	return dynamic_cast<FontResource *>(br);
 }
 
 PluginResource *ResourceHelper::getPluginResource( Theme *theme, const string resourceName) {
 	BaseResource *br = getBaseResource( theme, resourceName );
-	if (NULL == br) {
-		return NULL;
+	if (nullptr == br) {
+		return nullptr;
 	}
 	return dynamic_cast<PluginResource *>(br);
 }
@@ -45,28 +45,28 @@ PluginResource *ResourceHelper::getPluginResource( Theme *theme, const string re
 
 StringResource *ResourceHelper::getStringResource( Theme *theme, const string resourceName) {
 	BaseResource *br = getBaseResource( theme, resourceName );
-	if (NULL == br) {
-		return NULL;
+	if (nullptr == br) {
+		return nullptr;
 	}
 	return dynamic_cast<StringResource *>(br);
 }
 
 bool ResourceHelper::isValid( Theme * theme, const string resourceName ) {
-	return ((NULL != theme) && (resourceName.size() > 0));
+	return ((nullptr != theme) && (resourceName.size() > 0));
 }
 
 BaseResource *ResourceHelper::getBaseResource( Theme *theme, const string resourceName) {
 	if (!isValid(theme, resourceName)) {
-		return NULL;
+		return nullptr;
 	}
-	BaseResource * retVal = NULL;
+	BaseResource * retVal = nullptr;
 	try {
 		retVal = theme->getResource( resourceName ); 
-		if ( ( NULL == retVal ) && ( NULL != theme->getBaseTheme() ) ) {
+		if ( ( nullptr == retVal ) && ( nullptr != theme->getBaseTheme() ) ) {
             retVal = theme->getBaseTheme()->getResource(resourceName);
         }
 	} catch(...) {
-		return NULL;
+		return nullptr;
 	}
 	return retVal;
 }

@@ -3,42 +3,38 @@
 #include "framework/TextureResource.h"
 #include "framework/ResourceHelper.h"
 
-Grid::Grid() : Timed(), Rendered(true), Positioned(), Themed(), _quad(), audioManager(NULL)
+Grid::Grid() : Timed(), Rendered(true), Positioned(), Themed(), _quad(), audioManager(nullptr)
 {
 }
 
-Grid::Grid(float posx, float posy, float dim, int columns, int rows) : 
-	Timed(), 
-	Rendered(true), 
-	Positioned(posx, posy), 
-	Themed(), 
+Grid::Grid(float posx, float posy, float dim, int columns, int rows) :
+	Timed(),
+	Rendered(true),
+	Positioned(posx, posy),
+	Themed(),
 	dimension(dim),
 	boardcolumns(columns),
 	boardrows(rows),
 	hasMask(false),
 	_quad(),
-	audioManager(NULL),
+	audioManager(nullptr),
 	currTick(0),
+	lastLevel(columns, 0.0f),
+	lastLevelTick(columns, 0u),
 	decay(0.00002f)
 	{
-	lastLevel = new float[columns];
-	lastLevelTick = new unsigned int[columns];
 	}
 
-Grid::~Grid()
-{
-	delete[] lastLevel;
-	delete[] lastLevelTick;
-}
+Grid::~Grid() = default;
 
 void Grid::setTheme(Theme *theTheme) {
 	Themed::setTheme(theTheme);
-	hasMask = (NULL != ResourceHelper::getTextureResource(getTheme(), std::string (BOARD_GRID_MASK)));
+	hasMask = (nullptr != ResourceHelper::getTextureResource(getTheme(), std::string (BOARD_GRID_MASK)));
 }
 
 GLuint Grid::getMask() {
 	TextureResource * tr = ResourceHelper::getTextureResource(getTheme(), std::string (BOARD_GRID_MASK));
-	if (NULL == tr) {
+	if (nullptr == tr) {
 		return 0;
 	}
 	return tr->getResource();
@@ -46,7 +42,7 @@ GLuint Grid::getMask() {
 
 GLuint Grid::getTexture() {
 	TextureResource * tr = ResourceHelper::getTextureResource(getTheme(), std::string (BOARD_GRID));
-	if (NULL == tr) {
+	if (nullptr == tr) {
 		return 0;
 	}
 	return tr->getResource();
@@ -54,7 +50,7 @@ GLuint Grid::getTexture() {
 
 GLuint Grid::getSideBarTexture(bool mask) {
 	TextureResource *tr = ResourceHelper::getTextureResource(getTheme(), std::string ( mask ? BOARD_SIDEBAR_MASK : BOARD_SIDEBAR));
-	if (NULL == tr) {
+	if (nullptr == tr) {
 		return 0;
 	}
 	return tr->getResource();
@@ -62,7 +58,7 @@ GLuint Grid::getSideBarTexture(bool mask) {
 
 GLuint Grid::getHeaderTexture(bool mask) {
 	TextureResource *tr = ResourceHelper::getTextureResource(getTheme(), std::string ( mask ? BOARD_HEADER_MASK : BOARD_HEADER));
-	if (NULL == tr) {
+	if (nullptr == tr) {
 		return 0;
 	}
 	return tr->getResource();
@@ -70,7 +66,7 @@ GLuint Grid::getHeaderTexture(bool mask) {
 
 GLuint Grid::getAudioLevelTexture(bool mask) {
 	TextureResource *tr = ResourceHelper::getTextureResource(getTheme(), std::string ( mask ? BOARD_AUDIO_LEVEL_MASK : BOARD_AUDIO_LEVEL));
-	if (NULL == tr) {
+	if (nullptr == tr) {
 		return 0;
 	}
 	return tr->getResource();
@@ -172,7 +168,7 @@ void Grid::drawDecorations() {
 }
 
 void Grid::drawAudioLevels() {
-	if (NULL == audioManager) {
+	if (nullptr == audioManager) {
 		return;
 	}
 

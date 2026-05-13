@@ -1,3 +1,4 @@
+#include "framework/OpenGLHeaders.h"
 /***************************************************************************
  *   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
@@ -24,15 +25,15 @@
 #include "TextureResource.h"
 
 #ifdef MING_GL 
-#include "GL/glext.h"
 #endif
 
 TextureResource::~TextureResource() {
-	if (textureInfo != NULL){
-		delete textureInfo;
-		textureInfo = NULL;
-	}
+	release();
+	delete textureInfo;
+	textureInfo = nullptr;
 }
+
+
 
 GLuint TextureResource::loadPNG()
 {
@@ -176,6 +177,9 @@ bool TextureResource::release() {
    reportResourceFile();
    cout << "Texture Number : " << value_ << endl;
 #endif
-	glDeleteTextures( 1, &value_ );
+	if (value_) {
+		glDeleteTextures(1, &value_);
+		value_ = 0;
+	}
 	return true;
 }

@@ -31,8 +31,6 @@ GLuint SDL_GL_LoadTexture(SDL_Surface *surface, GLfloat *texcoord)
         int w, h;
         SDL_Surface *image;
         SDL_Rect area;
-        Uint32 saved_flags;
-        Uint8  saved_alpha;
 
         /* Use the surface width and height expanded to powers of 2 */
         w = power_of_two(surface->w);
@@ -43,7 +41,7 @@ GLuint SDL_GL_LoadTexture(SDL_Surface *surface, GLfloat *texcoord)
         texcoord[3] = (GLfloat)surface->h / h; /* Max Y */
 
         image = SDL_CreateRGBSurface(
-                        SDL_SWSURFACE,
+                        0,
                         w, h,
                         32,
 #if SDL_BYTEORDER == SDL_LIL_ENDIAN /* OpenGL RGBA masks */
@@ -58,16 +56,12 @@ GLuint SDL_GL_LoadTexture(SDL_Surface *surface, GLfloat *texcoord)
                         0x000000FF
 #endif
                        );
-        if ( image == NULL ) {
+        if ( image == nullptr ) {
                 return 0;
         }
 
-        /* Save the alpha blending attributes */
-        saved_flags = surface->flags&(SDL_SRCALPHA|SDL_RLEACCELOK);
-        saved_alpha = surface->format->alpha;
-        if ( (saved_flags & SDL_SRCALPHA) == SDL_SRCALPHA ) {
-                SDL_SetAlpha(surface, 0, 0);
-        }
+        /* Disable blending so pixels copy as-is into the GL texture */
+        SDL_SetSurfaceBlendMode(surface, SDL_BLENDMODE_NONE);
 
         /* Copy the surface into the GL texture image */
         area.x = 0;
@@ -75,11 +69,6 @@ GLuint SDL_GL_LoadTexture(SDL_Surface *surface, GLfloat *texcoord)
         area.w = surface->w;
         area.h = surface->h;
         SDL_BlitSurface(surface, &area, image, &area);
-
-        /* Restore the alpha blending attributes */
-        if ( (saved_flags & SDL_SRCALPHA) == SDL_SRCALPHA ) {
-                SDL_SetAlpha(surface, saved_flags, saved_alpha);
-        }
 
         /* Create an OpenGL texture for the image */
         glGenTextures(1, &texture);

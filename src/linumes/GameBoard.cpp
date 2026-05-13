@@ -1,3 +1,4 @@
+#include "framework/OpenGLHeaders.h"
 /*   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
  *                                                                         *
@@ -18,9 +19,10 @@
  ***************************************************************************/
 #include <iostream>
 #include <cassert>
+#include <memory>
+#include <vector>
 #include "SDL.h"
-#include "GL/gl.h"
-#include "GL/glu.h"
+#include "framework/MediaManager.h"
 
 #include "GameBoard.h"
 #include "Block.h"
@@ -74,41 +76,41 @@
 
 GameBoard::GameBoard( float dim, int rx, int ry):
 	Rendered(true),
-	_hiScoreTable(NULL),
-	_scanner(new Scanner( (float) - ( (rx * dim)  / 2.0f ),
+	_hiScoreTable(nullptr),
+	_pieces(rx * ry),
+	_scanner(std::make_unique<Scanner>(
+			(float) - ( (rx * dim)  / 2.0f ),
 			(float)rx*dim - ( (rx * dim)  / 2.0f ),
 			(float)ry*dim - ( (ry * dim)  / 2.0f ),
-			1.0 ,
+			1.0,
 			dim,
 			(float)ry * dim,
 			rx)),
-			_bg( new SimpleBackground(0.0,0.0) ),
-			_fg( new FadingForeground(0.0,0.0,1000)),
-			_icon( new Icon() ),
-			_hud( new HUD() ),
-			currTheme(NULL),
-			_isThemeChanging(false),
-			_gameOver(false),
-			_tokenCount(0),
-			_pieceCount(0),
-			_blockCount(0),
-			_totalBlockCount(0),
-			_high(0),
-			_score(0),			
-			_canBonus(false),
-			_scoreChecked(false),
-			_midasMode(false) {
+	_bg(std::make_unique<SimpleBackground>(0.0, 0.0)),
+	_fg(std::make_unique<FadingForeground>(0.0, 0.0, 1000)),
+	_icon(std::make_unique<Icon>()),
+	_hud(std::make_unique<HUD>()),
+	currTheme(nullptr),
+	_isThemeChanging(false),
+	_gameOver(false),
+	_tokenCount(0),
+	_pieceCount(0),
+	_blockCount(0),
+	_totalBlockCount(0),
+	_high(0),
+	_score(0),
+	_canBonus(false),
+	_scoreChecked(false),
+	_midasMode(false) {
 	downpressed = false;
 	leftpressed = false;
 	rightpressed = false;
 	_advanceScanner = true;
 	_dim = dim;
 	_rx = rx;
-	_ry = ry; 
+	_ry = ry;
 
-	_pieces = new GamePiece[ _rx * _ry];
-
-	_grid = new Grid(0.0,0.0,dim,rx,ry);
+	_grid = std::make_unique<Grid>(0.0, 0.0, dim, rx, ry);
 	_grid->setRenderable(true);
 
 	_icon->setRenderable(true);
@@ -116,7 +118,7 @@ GameBoard::GameBoard( float dim, int rx, int ry):
 	_scanner->setStopped(false);
 	_scanner->setXRate(calculateRate(5.0f));
 	lastscanned = 0;
-	_audioManager = new AudioManager();
+	_audioManager = std::make_unique<AudioManager>();
 	_currentTick = SDL_GetTicks();
 	_gameTime = _currentTick;
 	_gameName = GAME_NAME;
@@ -155,29 +157,6 @@ float GameBoard::getMaxY() {
 
 GameBoard::~GameBoard()
 {
-	if (_pieces != NULL)
-	{
-		delete[] _pieces;
-	}
-
-	if (_grid != NULL) {
-		delete _grid;
-	}
-
-	if (_audioManager != NULL) {
-		delete _audioManager;
-	}
-	
-	if (_scanner != NULL) {
-		delete _scanner;
-	}
-
-	/*  The following members are std::auto_ptr and do not need to be deleted
-	// _hud
-	// _bg
-	// _icon
-	
-	 */
 
 	_mbSet.clear();
 }
@@ -213,7 +192,7 @@ void GameBoard::createTokenSet(int tokenPos) {
 }
 
 void GameBoard::assignInitialTheme() {
-	if (currTheme == NULL)
+	if (currTheme == nullptr)
 	{
 		currTheme = themeManager->getCurrentTheme();
 	}
@@ -244,7 +223,7 @@ void GameBoard::init()
 		}
 	}
 
-	if (currTheme != NULL) {
+	if (currTheme != nullptr) {
 		_audioManager->setTheme(currTheme);
 		_audioManager->playSong(AUDIO_SONG);
 		_grid->setTheme(currTheme);
@@ -286,12 +265,12 @@ float GameBoard::getPieceY(int j) {
 void GameBoard::reset() {
 	if (isGameOver()) {
 		_gameOver = false;
-	
-		delete _scanner;
-		_scanner = new Scanner( (float) - ( (_rx * _dim)  / 2.0f ),
+
+		_scanner = std::make_unique<Scanner>(
+								(float) - ( (_rx * _dim)  / 2.0f ),
 								(float)_rx*_dim - ( (_rx * _dim)  / 2.0f ),
 								(float)_ry*_dim - ( (_ry * _dim)  / 2.0f ),
-								1.0 ,
+								1.0,
 								_dim,
 								(float)_ry * _dim,
 								_rx);
@@ -361,8 +340,8 @@ void GameBoard::toggleScanner(unsigned int currTime) {
 
 void GameBoard::applyNextTheme()
 {
-	Theme *nextTheme = NULL;
-	if (themeManager != NULL)
+	Theme *nextTheme = nullptr;
+	if (themeManager != nullptr)
 	{
 		nextTheme = themeManager->getNextTheme();
 	}
@@ -590,7 +569,7 @@ void GameBoard::Draw()
 	/* Draw it to the screen */
 	glError();
 	
-	SDL_GL_SwapBuffers( );
+	SDL_GL_SwapWindow(MediaManager::getWindow());
 }
 
 int GameBoard::scanTo(int column) {
@@ -822,12 +801,10 @@ void GameBoard::updateTokens() {
 }
 
 void GameBoard::midasLeft() {
-	GamePiece * leftPieces = new GamePiece[_ry];
-
-	for (int j = 0; j <_ry; j++) {
+	std::vector<GamePiece> leftPieces(_ry);
+	for (int j = 0; j < _ry; j++) {
 		leftPieces[j] = GamePiece(*getPieceAt(0, j));
 	}
-
 	for (int i = 0; i < _rx; i++) {
 		for (int j = 0; j < _ry; j++) {
 			if (i == _rx-1) {
@@ -840,13 +817,10 @@ void GameBoard::midasLeft() {
 }
 
 void GameBoard::midasRight() {
-	GamePiece * rightPieces = new GamePiece[_ry];
-
-	for (int j = 0; j <_ry; j++) {
+	std::vector<GamePiece> rightPieces(_ry);
+	for (int j = 0; j < _ry; j++) {
 		rightPieces[j] = GamePiece(*getPieceAt(_rx - 1, j));
 	}
-
-
 	for (int i = _rx-1; i >= 0; i--) {
 		for (int j = 0; j < _ry; j++) {
 			if (i == 0) {

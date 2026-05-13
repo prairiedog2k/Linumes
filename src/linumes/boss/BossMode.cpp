@@ -4,7 +4,7 @@
 
 BossMode::BossMode() : GameMode()
 {
-	_themeManager = NULL;
+	_themeManager = nullptr;
 	name = BOSS_MODE;
 	_currentTick = SDL_GetTicks();
 }

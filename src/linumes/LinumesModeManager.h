@@ -15,8 +15,8 @@ private:
 protected:
   virtual void update();
   virtual bool initContext(); 
-  virtual void handleKeyUp( SDL_keysym *keysym );
-  virtual void handleKeyDown( SDL_keysym *keysym );  	
+  virtual void handleKeyUp( SDL_Keysym *keysym );
+  virtual void handleKeyDown( SDL_Keysym *keysym );  	
   
 public:
 	LinumesModeManager();

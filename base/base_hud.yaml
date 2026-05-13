@@ -1,0 +1,16 @@
+text_displays:
+  - name: center_info_txt
+    type: string
+    x: 512
+    y: 384
+    text: " "
+  - name: top_info_txt
+    type: string
+    x: 512
+    y: 690
+    text: " "
+  - name: bottom_info_txt
+    type: string
+    x: 512
+    y: 20
+    text: " "

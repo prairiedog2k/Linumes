@@ -1,11 +1,12 @@
+#include "framework/OpenGLHeaders.h"
 #ifndef BOSS_H_
 #define BOSS_H_
 
 #include <string>
 #include <vector>
+#include <memory>
 #include "framework/TextureResource.h"
 #include "framework/AudioResource.h"
-#include "GL/gl.h"
 
 #include "BossPiece.h"
 
@@ -23,20 +24,20 @@ private:
 	int _attackReduce;
 	int _hitPoints;
 	int _currentHitPoints;
-	
-	TextureResource *_color0;
-	TextureResource *_color1;
-	TextureResource *_bg;
-	TextureResource *_fg;
-	TextureResource *_bgMask;
-	TextureResource *_fgMask;
-	TextureResource *_icon;
-	TextureResource *_iconMask;
-	
-	AudioResource *_attack;
-	AudioResource *_damage;
-	AudioResource *_die;
-	AudioResource *_win;
+
+	std::unique_ptr<TextureResource> _color0;
+	std::unique_ptr<TextureResource> _color1;
+	std::unique_ptr<TextureResource> _bg;
+	std::unique_ptr<TextureResource> _fg;
+	std::unique_ptr<TextureResource> _bgMask;
+	std::unique_ptr<TextureResource> _fgMask;
+	std::unique_ptr<TextureResource> _icon;
+	std::unique_ptr<TextureResource> _iconMask;
+
+	std::unique_ptr<AudioResource> _attack;
+	std::unique_ptr<AudioResource> _damage;
+	std::unique_ptr<AudioResource> _die;
+	std::unique_ptr<AudioResource> _win;
 	
     bool _shape[ 16 * 10 ];
     bool _currentShape[ 16 * 10];
@@ -72,10 +73,10 @@ public:
 	//return the Icon mask
 	GLuint getIconMask();
 
-	AudioResource *getAttackAudio() { return _attack;};
-	AudioResource *getDamageAudio() { return _damage;};
-	AudioResource *getDieAudio() { return _die;}; 
-	AudioResource *getWinAudio() { return _win;};	
+	AudioResource *getAttackAudio() { return _attack.get(); };
+	AudioResource *getDamageAudio() { return _damage.get(); };
+	AudioResource *getDieAudio()    { return _die.get(); };
+	AudioResource *getWinAudio()    { return _win.get(); };	
 	
 	//dump
 	void dump();

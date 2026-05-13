@@ -3,27 +3,23 @@
 #include <string>
 #include <cstdlib>
 
-FontInfo FontInfoBuilder::createFontInfo(XMLNode fontNode) {
-	FontInfo fontInfo;
-	if (! fontNode.isEmpty()) {
-		std::string strPoint( fontNode.getAttribute(FONT_POINT_SIZE));
-		std::string strRed( fontNode.getAttribute(FONT_RED));
-		std::string strGreen(fontNode.getAttribute(FONT_GREEN));
-		std::string strBlue(fontNode.getAttribute(FONT_BLUE));
-		if ( (strPoint.size() > 0) &&
-				(strRed.size() > 0) &&
-				(strGreen.size() > 0) &&
-				(strBlue.size() > 0) ) {
-			int pointSize = atoi(strPoint.c_str());
-			float red = atof(strRed.c_str());
-			float green = atof(strGreen.c_str());
-			float blue = atof(strBlue.c_str());
-			fontInfo.setPointSize(pointSize);
-			fontInfo.setRed(red);
-			fontInfo.setGreen(green);
-			fontInfo.setBlue(blue);
-		}
-	}
-	return fontInfo;
+FontInfo FontInfoBuilder::createFontInfo(const YAML::Node& fontNode) {
+    FontInfo fontInfo;
+    if (fontNode) {
+        if (!fontNode[FONT_POINT_SIZE] || !fontNode[FONT_RED] ||
+            !fontNode[FONT_GREEN]      || !fontNode[FONT_BLUE]) {
+            return fontInfo;
+        }
+        int pointSize = fontNode[FONT_POINT_SIZE].as<int>(0);
+        float red   = fontNode[FONT_RED].as<float>(0.0f);
+        float green = fontNode[FONT_GREEN].as<float>(0.0f);
+        float blue  = fontNode[FONT_BLUE].as<float>(0.0f);
+        if (pointSize > 0) {
+            fontInfo.setPointSize(pointSize);
+            fontInfo.setRed(red);
+            fontInfo.setGreen(green);
+            fontInfo.setBlue(blue);
+        }
+    }
+    return fontInfo;
 }
-

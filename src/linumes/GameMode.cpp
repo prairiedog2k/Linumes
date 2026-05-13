@@ -1,38 +1,29 @@
+#include <memory>
 #include "GameMode.h"
 #include "ModeTypes.h"
 
-GameMode::GameMode() : Mode(), gameboard(NULL) {
-	_themeManager = NULL;
+GameMode::GameMode() : Mode() {
 	name = GAME_MODE;
 	_currentTick = SDL_GetTicks();
 }
 
-GameMode::~GameMode()
-{
-	if (gameboard != NULL) {
-		delete gameboard;
-	}
-
-	if (_themeManager != NULL) {
-		delete _themeManager;
-	}
-}
+GameMode::~GameMode() = default;
 
 void GameMode::createGameBoard() {
-	gameboard = new GameBoard(0.2f,16,10);	
+	gameboard = std::make_unique<GameBoard>(0.2f, 16, 10);
 }
 
 bool GameMode::init() {
 	createGameBoard();
 
-	if (NULL == _themeManager) {
-		_themeManager = new LinumesThemeManager("themelist.xml");
-		if (!_themeManager->init() ) {
+	if (!_themeManager) {
+		_themeManager = std::make_unique<LinumesThemeManager>("themelist.yaml");
+		if (!_themeManager->init()) {
 			return false;
 		}
 	}
 
-	gameboard->setThemeManager( dynamic_cast<LinumesThemeManager *>(_themeManager));
+	gameboard->setThemeManager(dynamic_cast<LinumesThemeManager *>(_themeManager.get()));
 
 	gameboard->init();
 	//stop until ready to start
@@ -47,7 +38,7 @@ void GameMode::update(unsigned int currTick) {
 }
 
 /* function to handle key press events */
-void GameMode::handleKeyUp( SDL_keysym *keysym )
+void GameMode::handleKeyUp( SDL_Keysym *keysym )
 {
 	switch ( keysym->sym )
 	{
@@ -73,7 +64,7 @@ void GameMode::handleKeyUp( SDL_keysym *keysym )
 }
 
 /* function to handle key press events */
-void GameMode::handleKeyDown( SDL_keysym *keysym )
+void GameMode::handleKeyDown( SDL_Keysym *keysym )
 {
 	switch ( keysym->sym )
 	{

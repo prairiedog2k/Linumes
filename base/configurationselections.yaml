@@ -1,0 +1,31 @@
+selections:
+  - name: ScreenWidth
+    display: "Screen Width"
+    options:
+      - display: "Low Resolution (800)"
+        value: "800"
+      - display: "Medium Resolution (1024)"
+        value: "1024"
+      - display: "High Resolution (1600)"
+        value: "1600"
+  - name: ScreenHeight
+    display: "Screen Height"
+    options:
+      - display: "Low Resolution (600)"
+        value: "600"
+      - display: "Medium Resolution (768)"
+        value: "768"
+      - display: "High Resolution (900)"
+        value: "900"
+  - name: GameDifficulty
+    display: "Game Difficulty"
+    options:
+      - display: "Easy Mode"
+        value: "1"
+      - display: "Medium Mode"
+        value: "2"
+      - display: "Hard Mode"
+        value: "3"
+  - name: exit
+    display: "Exit Configuration"
+    type: EXIT

@@ -1,27 +1,19 @@
+#include <memory>
 #include "SelectionMode.h"
 #include "ModeTypes.h"
 
-SelectionMode::SelectionMode(): Mode(SELECTION_MODE), _themeManager(NULL),  _selectionBoard(NULL) 
+SelectionMode::SelectionMode(): Mode(SELECTION_MODE)
 {
-    
 	_currentTick = SDL_GetTicks();
 }
 
-SelectionMode::~SelectionMode()
-{
-	if (NULL != _selectionBoard) {
-		delete _selectionBoard;
-	}
-	if (NULL != _themeManager) {
-		delete _themeManager;
-	}
-}
+SelectionMode::~SelectionMode() = default;
 
 std::pair<std::string, std::map<std::string,std::string> > SelectionMode::getSelection() {
     return _selectionBoard->getSelectionDisplayAndParameters();
 }
 
-void SelectionMode::handleKeyUp( SDL_keysym *keysym ) {
+void SelectionMode::handleKeyUp( SDL_Keysym *keysym ) {
 	switch ( keysym->sym )
 	{
 	case SDLK_PAGEDOWN:
@@ -38,7 +30,7 @@ void SelectionMode::handleKeyUp( SDL_keysym *keysym ) {
 	}
 	return;
 }
-void SelectionMode::handleKeyDown( SDL_keysym *keysym ) {
+void SelectionMode::handleKeyDown( SDL_Keysym *keysym ) {
 	switch ( keysym->sym )
 	{
 	case SDLK_KP_ENTER:
@@ -56,16 +48,15 @@ void SelectionMode::handleKeyDown( SDL_keysym *keysym ) {
 
 }
 bool SelectionMode::init() {
-	
-	_selectionBoard  = new SelectionBoard("defaultSelection");
-	
-	if (NULL == _themeManager) {
-		_themeManager = new LinumesThemeManager("themelist.xml");
-		if (!_themeManager->init() ) {
+	_selectionBoard = std::make_unique<SelectionBoard>("defaultSelection");
+
+	if (!_themeManager) {
+		_themeManager = std::make_unique<LinumesThemeManager>("themelist.yaml");
+		if (!_themeManager->init()) {
 			return false;
 		}
 	}
-	_selectionBoard->setTheme( _themeManager->getCurrentTheme());
+	_selectionBoard->setTheme(_themeManager->getCurrentTheme());
 	_selectionBoard->init();
 	return true;
 }

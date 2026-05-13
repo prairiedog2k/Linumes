@@ -1,3 +1,4 @@
+#include "framework/MediaManager.h"
 #include "GameBoardScreenSaver.h"
 #include "Block.h"
 
@@ -197,7 +198,7 @@ void GameBoardScreenSaver::Draw() {
 	drawScanner();
 	
 	/* Draw it to the screen */
-	SDL_GL_SwapBuffers( );
+	SDL_GL_SwapWindow(MediaManager::getWindow());
 }
 
 void GameBoardScreenSaver::toggleScanner(unsigned int currTime) {

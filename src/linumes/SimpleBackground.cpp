@@ -1,6 +1,6 @@
+#include "framework/OpenGLHeaders.h"
 #include "SimpleBackground.h"
 #include "BoardTypes.h"
-#include "GL/gl.h"
 #include "framework/TextureResource.h"
 #include "framework/ResourceHelper.h"
 

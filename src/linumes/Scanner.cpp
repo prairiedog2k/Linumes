@@ -1,3 +1,4 @@
+#include "framework/OpenGLHeaders.h"
 
 #include "Scanner.h"
 
@@ -6,8 +7,6 @@
 #include "BoardTypes.h"
 #include "framework/ResourceHelper.h"
 #include <math.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
 
 
 Scanner::Scanner( float minx,

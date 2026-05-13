@@ -1,3 +1,4 @@
+#include "framework/OpenGLHeaders.h"
 /***************************************************************************
  *   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
@@ -21,7 +22,6 @@
 #ifndef THEME_H
 #define THEME_H
 
-#include <GL/gl.h>
 #include <string>
 #include <map>
 #include "BaseResource.h"

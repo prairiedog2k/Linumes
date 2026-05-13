@@ -9,6 +9,7 @@ PluginResource::PluginResource(void *info, string argResourceFile): GenericResou
 
 PluginResource::~PluginResource()
 {
+  release();
 }
 
 bool PluginResource::load() {
@@ -22,15 +23,15 @@ bool PluginResource::load() {
   // reset errors
   dlerror();
 #endif  
-	return value_ != NULL;
+	return value_ != nullptr;
 }
 
 bool PluginResource::release() {
 #ifndef MING_NO_PLUGIN
-	if (NULL != value_) {
-	  dlclose(value_);
-	  value_ = NULL;	
+	if (value_) {
+		dlclose(value_);
+		value_ = nullptr;
 	}
-	return value_ == NULL;
 #endif
+	return true;
 }

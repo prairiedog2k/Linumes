@@ -5,24 +5,16 @@
  *      Author: rigriff
  */
 
+#include <memory>
 #include "ConfigurationMode.h"
 
-ConfigurationMode::ConfigurationMode(Configuration *configuration) : _configuration(configuration), _configurationBoard(NULL),
-_themeManager(NULL)
+ConfigurationMode::ConfigurationMode(Configuration *configuration) : _configuration(configuration)
 {
 }
 
-ConfigurationMode::~ConfigurationMode() {
-	if (NULL != _configurationBoard) {
-		delete _configurationBoard;
-	}
+ConfigurationMode::~ConfigurationMode() = default;
 
-	if (NULL != _themeManager) {
-		delete _themeManager;
-	}
-}
-
-void ConfigurationMode::handleKeyUp( SDL_keysym *keysym ) {
+void ConfigurationMode::handleKeyUp( SDL_Keysym *keysym ) {
 	switch ( keysym->sym )
 	{
 	case SDLK_PAGEDOWN:
@@ -45,7 +37,7 @@ void ConfigurationMode::handleKeyUp( SDL_keysym *keysym ) {
 	return;
 }
 
-void ConfigurationMode::handleKeyDown( SDL_keysym *keysym ) {
+void ConfigurationMode::handleKeyDown( SDL_Keysym *keysym ) {
 	switch ( keysym->sym )
 	{
 	case SDLK_KP_ENTER:
@@ -63,18 +55,16 @@ void ConfigurationMode::handleKeyDown( SDL_keysym *keysym ) {
 
 
 bool ConfigurationMode::init() {
-	if (NULL == _configurationBoard) {
-		_configurationBoard = new ConfigurationBoard("default_configuration", _configuration);
+	if (!_configurationBoard) {
+		_configurationBoard = std::make_unique<ConfigurationBoard>("default_configuration", _configuration);
 	}
-	if (NULL == _themeManager) {
-		_themeManager = new LinumesThemeManager("themelist.xml");
-		if (!_themeManager->init() ) {
+	if (!_themeManager) {
+		_themeManager = std::make_unique<LinumesThemeManager>("themelist.yaml");
+		if (!_themeManager->init()) {
 			return false;
 		}
-	} else {
-
 	}
-	_configurationBoard->setTheme( _themeManager->getCurrentTheme());
+	_configurationBoard->setTheme(_themeManager->getCurrentTheme());
 	_configurationBoard->init();
 	return true;
 }

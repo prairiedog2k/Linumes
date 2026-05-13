@@ -6,13 +6,13 @@ MusicResource::MusicResource(void *info, string argResourceFile) :
 };
 
 MusicResource::~MusicResource() {
-  if (audioInfo != NULL) {
-    delete audioInfo;
-  }
+  release();
+  delete audioInfo;
+  audioInfo = nullptr;
 }
 
 bool MusicResource::load() {
-	if (NULL == audioInfo) {
+	if (nullptr == audioInfo) {
 		return false;
 	}
 	if (audioInfo->getType() == MUS_WAV ) {
@@ -32,14 +32,15 @@ bool MusicResource::release() {
    cout << "release music sample from ";
    reportResourceFile();
 #endif
-  if (value_ != 0) {
-  	if (audioInfo->getType() == MUS_WAV ) {
-			Mix_FreeChunk((Mix_Chunk *)value_);
-		} else if (audioInfo->getType() == MUS_MP3) {
-			Mix_FreeMusic((Mix_Music *)value_);
-		}
+  if (value_ && audioInfo) {
+    if (audioInfo->getType() == MUS_WAV) {
+      Mix_FreeChunk((Mix_Chunk *)value_);
+    } else if (audioInfo->getType() == MUS_MP3) {
+      Mix_FreeMusic((Mix_Music *)value_);
+    }
+    value_ = nullptr;
   }
-	return value_ == 0;
+  return true;
 }
 
 

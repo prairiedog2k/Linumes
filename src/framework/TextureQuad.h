@@ -1,7 +1,7 @@
+#include "framework/OpenGLHeaders.h"
 #ifndef TEXTUREQUAD_H_
 #define TEXTUREQUAD_H_
 
-#include <GL/gl.h>
 
 class TextureQuad {
 private:

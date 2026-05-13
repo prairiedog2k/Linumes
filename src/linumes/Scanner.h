@@ -1,10 +1,10 @@
+#include "framework/OpenGLHeaders.h"
 #ifndef SCANNER_H_
 #define SCANNER_H_
 
 #include "framework/Rendered.h"
 #include "framework/TimePositioned.h"
 #include "framework/Themed.h"
-#include "GL/gl.h"
 
 class Scanner : public Rendered, public TimePositioned, public Themed
 {

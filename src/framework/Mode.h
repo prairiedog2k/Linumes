@@ -16,8 +16,8 @@ public:
 	Mode();
 	Mode( std::string modename): name(modename), done(false), modeComplete(false) {};
 	virtual ~Mode();
-    virtual void handleKeyUp( SDL_keysym *keysym ) = 0;
-    virtual void handleKeyDown( SDL_keysym *keysym ) = 0;
+    virtual void handleKeyUp( SDL_Keysym *keysym ) = 0;
+    virtual void handleKeyDown( SDL_Keysym *keysym ) = 0;
     virtual bool init() = 0;
     virtual void update(unsigned int currtick) = 0;
     

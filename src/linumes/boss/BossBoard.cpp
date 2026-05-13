@@ -9,30 +9,24 @@
 #include "linumes/BaseTextTypes.h"
 
 
-BossBoard::BossBoard() : 
-    GameBoard(0.2f,16,10), 
-    _boss("jublo.xml"),
-    _bossIcon( new BossIcon() ),
+BossBoard::BossBoard() :
+    GameBoard(0.2f, 16, 10),
+    _boss("jublo.yaml"),
+    _bossPieces(16 * 10),
+    _bossIcon(std::make_unique<BossIcon>()),
     _bossAttacks(0),
     _attackStart(0),
     _attackDuration(250),
     _bossWinPlayed(false)
 {
-	
-	_bossPieces = new BossPiece[16 * 10];
 	_bossIcon->setRenderable(true);
-	_gameName = "jublo";	
+	_gameName = "jublo";
 }
 
-BossBoard::~BossBoard() {
-	if (_bossPieces != NULL)
-	{
-		delete[] _bossPieces;
-	}
-}
+BossBoard::~BossBoard() = default;
 
 void BossBoard::assignInitialTheme() {
-	if (currTheme == NULL)
+	if (currTheme == nullptr)
 	{
 		if ( _boss.getPreferredTheme().length() > 0) {
 			currTheme = themeManager->getNamedTheme( _boss.getPreferredTheme() );

@@ -1,3 +1,4 @@
+#include "framework/MediaManager.h"
 #include "SelectionBoard.h"
 #include "SelectionTypes.h"
 #include "framework/ResourceHelper.h"
@@ -49,7 +50,7 @@ void SelectionBoard::init() {
 	if (NULL != getTheme()) {
 		_bg->setTheme(getTheme());
 		std::string SettingsConfigFile = ResourceHelper::getStringResource( getTheme(), getSelectionResource())->getResource();
-		buildSelectionListFromXml(SettingsConfigFile, _selectionList, _optionMap);
+		buildSelectionListFromYaml(SettingsConfigFile, _selectionList, _optionMap);
 		_currentSelection = _selectionList.begin();
 		_currentOptions = _optionMap[(*_currentSelection).first];
 	}
@@ -123,5 +124,5 @@ void SelectionBoard::Draw() {
 	drawAdditional();
 
 	/* Draw it to the screen */
-	SDL_GL_SwapBuffers( );
+	SDL_GL_SwapWindow(MediaManager::getWindow());
 }
