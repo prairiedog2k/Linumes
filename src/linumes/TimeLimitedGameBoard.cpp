@@ -16,14 +16,14 @@ namespace HF = Hunchback::Framework;
 
 TimeLimitedGameBoard::TimeLimitedGameBoard() : GameBoard(0.2f,16,10), _gameDuration(60), _timeOver(false),_quad() {
 	char buff[20];
-	std::snprintf(buff, sizeof(buff), "HF::TimeLimited%03d", _gameDuration);
+	std::snprintf(buff, sizeof(buff), "TimeLimited%03d", _gameDuration);
 	_gameName = buff;
 }
 
 TimeLimitedGameBoard::TimeLimitedGameBoard(unsigned int gameDuration) : GameBoard(0.2f,16,10), _gameDuration(gameDuration), _timeOver(false), _quad()
 {
 	char buff[20];
-	std::snprintf(buff, sizeof(buff), "HF::TimeLimited%03d", _gameDuration);
+	std::snprintf(buff, sizeof(buff), "TimeLimited%03d", _gameDuration);
 	_gameName = buff;
 }
 
