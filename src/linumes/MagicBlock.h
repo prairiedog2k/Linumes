@@ -61,16 +61,16 @@ public:
 
 	virtual void setTheme(HF::Theme *theme);
 	void setState(BlockState state) { _state = state; };
-	BlockState getState() { return _state; };
+	BlockState getState() const { return _state; };
 	void Draw();
 
-	float getX() { return _x; };
-	float getY() { return _y; };
+	float getX() const { return _x; };
+	float getY() const { return _y; };
 	void setX(float x) { _x = x; };
 	void setY(float y) { _y = y; };
 	void setDim(float dim) { _dim = dim; };
 
-	float getDim() { return _dim;}
+	float getDim() const { return _dim;}
 	int getBoardPos() const { return _boardpos; } ;
 
 	bool operator == (const MagicBlock &rhs) const { return getBoardPos() == rhs.getBoardPos();};

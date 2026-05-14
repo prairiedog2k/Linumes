@@ -39,12 +39,12 @@ public:
     void setBoardPosition( int boardpos) { _boardpos = boardpos; };
     void setDimension( float dim );
     void setStopped(bool inmotion);
-    float getX()       { return _x; };
+    float getX()         const { return _x; };
     void setX(const float x);
-    float getY()       { return _y; };
+    float getY()         const { return _y; };
     void setY(const float y);
-    float getDimension()     { return _dim; };
-    int   getBoardPos()  { return _boardpos; };
+    float getDimension() const { return _dim; };
+    int   getBoardPos()  const { return _boardpos; };
     GamePiece *pieceAt(int i);
 
     Block& operator= (const Block& param);

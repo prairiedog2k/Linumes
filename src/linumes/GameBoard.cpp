@@ -132,7 +132,7 @@ GameBoard::GameBoard( float dim, int rx, int ry):
 //given a time in seconds that you want to scan the board in
 //this will provide the scanner with the appropriate rate for
 // the size of the board
-float GameBoard::calculateRate(float ScanTime) {
+float GameBoard::calculateRate(float ScanTime) const {
 	if ( ScanTime == 0.0f ) {
 		return 0.0f;
 	}
@@ -143,19 +143,19 @@ float GameBoard::calculateRate(float ScanTime) {
 }
 
 
-float GameBoard::getMinX() {
+float GameBoard::getMinX() const {
 	return  - ( (_rx * _dim)  / 2.0f );
 }
 
-float GameBoard::getMaxX() {
+float GameBoard::getMaxX() const {
 	return static_cast<float>(_rx)*_dim - ( (_rx * _dim)  / 2.0f );
 }
 
-float GameBoard::getMinY() {
+float GameBoard::getMinY() const {
 	return  - ( (_ry * _dim)  / 2.0f );
 }
 
-float GameBoard::getMaxY() {
+float GameBoard::getMaxY() const {
 	return static_cast<float>(_ry)*_dim - ( (_ry * _dim)  / 2.0f );
 }
 
@@ -259,11 +259,11 @@ void GameBoard::init()
 	}
 }
 
-float GameBoard::getPieceX(int i) {
+float GameBoard::getPieceX(int i) const {
 	return static_cast<float>(i)*_dim - ( (_rx * _dim)  / 2.0f );
 }
 
-float GameBoard::getPieceY(int j) {
+float GameBoard::getPieceY(int j) const {
 	return static_cast<float>(j)*_dim - ( (_ry * _dim)  / 2.0f );
 }
 

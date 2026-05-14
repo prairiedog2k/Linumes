@@ -30,9 +30,9 @@ private:
 public:
   TextureInfo();
   virtual ~TextureInfo();
-	GLuint getNumberOfTextures() { return _numTextures; };
+	GLuint getNumberOfTextures() const { return _numTextures; };
 	void setNumberOfTextures(GLuint numTextures) { _numTextures = numTextures; };
-	bool isMasked() { return _mask; };
+	bool isMasked() const { return _mask; };
 	void setMasked(bool mask) { _mask = mask; };
 };
 

@@ -159,8 +159,8 @@ public:
 	void RotateLeft() { if (!_gameOver) { rotateToken(CLOCKWISE); } };
 	void RotateRight(){ if (!_gameOver) { rotateToken(COUNTERCLOCKWISE); } };
 
-	int getRowMax() { return _ry; };
-	int getColMax() { return _rx; };
+	int getRowMax() const { return _ry; };
+	int getColMax() const { return _rx; };
 
 	void updateSpecialAt (int x, int y);
 
@@ -168,14 +168,14 @@ public:
 	void advanceToken();
 	void updateTokens();
 	void markSpecial(int x, int y);
-	bool isGameOver() { return _gameOver; };
+	bool isGameOver() const { return _gameOver; };
 	void setGameOver( bool gameOver) { _gameOver = gameOver; if (_gameOver) { _audioManager->stopSong(); } };
 
 	//score
-	int getHigh() { return _high; };
+	int getHigh()       const { return _high; };
 
-	int getScore() { return _score; };
-	int getBlockCount() { return _blockCount; };
+	int getScore()      const { return _score; };
+	int getBlockCount() const { return _blockCount; };
 
 	void setScore(int score) { _score = score; };
 	void setBlockCount (int count) { _blockCount = count; };
@@ -186,17 +186,17 @@ public:
 	unsigned int getCurrentGameTime();
 
 protected:
-	float getMinX();
-	float getMaxX();
-	float getMinY();
-	float getMaxY();
-	float getPieceX(int i);
-	float getPieceY(int j);
+	float getMinX() const;
+	float getMaxX() const;
+	float getMinY() const;
+	float getMaxY() const;
+	float getPieceX(int i) const;
+	float getPieceY(int j) const;
 
 	//scanner
-	float calculateRate(float ScanTime);
+	float calculateRate(float ScanTime) const;
 
-	HF::Theme *getTheme() { return currTheme; };
+	HF::Theme *getTheme() const { return currTheme; };
 
 	friend class Token;
 };

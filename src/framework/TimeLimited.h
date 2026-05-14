@@ -14,8 +14,8 @@ public:
 	TimeLimited(unsigned int duration);
 	virtual ~TimeLimited();
 	void start();
-	float getPercentComplete();
-	bool isComplete();
+	float getPercentComplete() const;
+	bool isComplete() const;
 
 	void setMaxTime(unsigned int duration) { _duration = duration; };
 };

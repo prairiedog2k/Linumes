@@ -22,7 +22,7 @@ private:
 
   bool hasMask;
 
-  float getBoardWidth() { return dimensionx * columns; };
+  float getBoardWidth() const { return dimensionx * columns; };
   GLuint getTexture();
   GLuint getMask();
   bool paused;
@@ -34,8 +34,8 @@ public:
 
 	void togglePause();
 
-	int getCurrentColumn() { return colpos; };
-	bool isReset() { return reset; };
+	int getCurrentColumn() const { return colpos; };
+	bool isReset()         const { return reset; };
 	virtual void setTheme(HF::Theme *theme);
 	//override
 	void Draw();

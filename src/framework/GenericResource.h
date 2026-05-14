@@ -16,7 +16,7 @@ protected:
 public:
 	GenericResource( std::string argResourceFile) : BaseResource(), resourceFile(argResourceFile) {};
 	virtual ~GenericResource() {};
-	const T getResource() { return value_;};
+	const T getResource() const { return value_;};
 	virtual void reportResourceFile() { std::cout << "resource file : " << resourceFile << std::endl; }
 };
 

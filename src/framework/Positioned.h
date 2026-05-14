@@ -30,8 +30,8 @@ public:
   Positioned();
   Positioned(float x, float y);
   virtual ~Positioned() {};
-  const float getY() { return _y;};
-  const float getX() { return _x;};
+  float getY() const { return _y;};
+  float getX() const { return _x;};
   void setX(const float x) { _x = x; };
   void setY(const float y) { _y = y; };
   void setPiecePos (const float x, const float y) { _x = x; _y = y; };

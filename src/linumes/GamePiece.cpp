@@ -255,7 +255,7 @@ void GamePiece::update(unsigned int currTime) {
 	}	
 }
 
-bool GamePiece::isStopped() {
+bool GamePiece::isStopped() const {
 	int nexty = static_cast<int>(1000 * _nexty);
 	int y = static_cast<int>(1000 * _y);	
 	return (nexty == y);

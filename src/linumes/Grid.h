@@ -42,7 +42,7 @@ public:
 	Grid(float posx, float posy, float dim, int columns, int rows);
 	virtual ~Grid();
 	void setDimension( float dim) { dimension = dim; };
-	float getDimension() { return dimension; };
+	float getDimension() const { return dimension; };
 	virtual void setTheme(HF::Theme *theme);
 	void setAudioManager(HF::AudioManager *am) { audioManager = am; };
 	void Draw();

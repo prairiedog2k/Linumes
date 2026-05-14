@@ -55,15 +55,15 @@ public:
   void setScreenMinY(const float fallto)  { _fallto  = fallto;  };
   void setVisited(const bool visited) { _visited = visited; };
   void setConnected(const bool connected) { _connected = connected; };
-  int   getColor() { return _color;};
-  float getDimension() { return _dim;};
-  float getScreenMinY()    { return _fallto;    };
-  bool  isScoreTarget()     { return _scoreTarget;     };
-  bool  isOverlap()   { return _overlap;   };
-  bool  isScanned()   { return _scanned;   };
-  bool  isSpecial()   { return _special;   };
-  bool  isVisited()   { return _visited;   };
-  bool  isConnected() { return _connected; };
+  int   getColor()      const { return _color;};
+  float getDimension()  const { return _dim;};
+  float getScreenMinY() const { return _fallto;    };
+  bool  isScoreTarget() const { return _scoreTarget;     };
+  bool  isOverlap()     const { return _overlap;   };
+  bool  isScanned()     const { return _scanned;   };
+  bool  isSpecial()     const { return _special;   };
+  bool  isVisited()     const { return _visited;   };
+  bool  isConnected()   const { return _connected; };
   GamePiece& operator= (const GamePiece& param);
   void copyPieceState( GamePiece *param);
   void Draw();
@@ -71,9 +71,9 @@ public:
   //updates
   void update(unsigned int currTime);
   void setNextY(float nexty) { _nexty = nexty;};
-  float getNextY() { return _nexty; };
+  float getNextY() const { return _nexty; };
   //override
-  bool isStopped();
+  bool isStopped() const;
 
   void Dump();
 };

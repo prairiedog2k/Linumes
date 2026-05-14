@@ -25,7 +25,7 @@ public:
 	void Draw();
 
 	void setDepth (float depth) { _depth = depth; };
-	float getDepth() { return _depth; };
+	float getDepth() const { return _depth; };
 };
 
 } // namespace Hunchback::Linumes

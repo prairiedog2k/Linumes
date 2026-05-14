@@ -21,9 +21,9 @@ public:
     virtual bool init() = 0;
     virtual void update(unsigned int currtick) = 0;
 
-    std::string getModeName() { return name;};
-    bool isDone() { return done; };
-    bool isModeComplete() { return modeComplete; };
+    std::string getModeName() const { return name;};
+    bool isDone()            const { return done; };
+    bool isModeComplete()    const { return modeComplete; };
 
 };
 

@@ -36,7 +36,7 @@ public:
   Timed(int current, int timewait, bool isStopped): _initialTime(current),_wait(timewait),_stopped(isStopped) {};
   virtual ~Timed() {};
   bool canMove(int current);
-  virtual bool isStopped(){ return _stopped;};
+  virtual bool isStopped() const { return _stopped;};
   void setStopped( bool stopped ) { stopped = stopped; };
   void setInitialTime( int time ) { _initialTime = time; };
   void setWait(int timewait) { _wait = timewait; };

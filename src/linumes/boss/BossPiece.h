@@ -14,10 +14,10 @@ protected:
 public:
     BossPiece();
     virtual ~BossPiece();
-    bool isBoss() { return _boss; };
+    bool isBoss() const { return _boss; };
     void setBoss(bool boss) { _boss = boss; };
     void setBossTexture(GLuint texture) { _bossTexture = texture; };
-    virtual bool isStopped();
+    virtual bool isStopped() const;
 };
 
 } // namespace Hunchback::Linumes

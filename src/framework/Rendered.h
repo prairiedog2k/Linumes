@@ -28,7 +28,7 @@ protected:
 public:
   Rendered(bool renderable): _renderable(renderable){};
   virtual ~Rendered() {};
-	bool isRenderable() { return _renderable; };
+	bool isRenderable() const { return _renderable; };
 	void setRenderable( bool render ) { _renderable = render;};
 	virtual void Draw() = 0;
 };

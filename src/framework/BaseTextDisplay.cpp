@@ -12,13 +12,13 @@ BaseTextDisplay::~BaseTextDisplay()
 {
 }
 
-std::string BaseTextDisplay::getFormattedText() {
+std::string BaseTextDisplay::getFormattedText() const {
 				std::ostringstream strout;
 		  	strout << baseText << value << std::endl;
 		  	return strout.str();
 };
 
-int BaseTextDisplay::getX() {
+int BaseTextDisplay::getX() const {
 	if (! _isRelative ) {
 		return xformX(x);
 	} else {
@@ -26,7 +26,7 @@ int BaseTextDisplay::getX() {
 		return static_cast<int>(relativeX);
 	}
 }
-int BaseTextDisplay::getY() {
+int BaseTextDisplay::getY() const {
 	if (!_isRelative ) {
 		return xformY(y);
 	} else {

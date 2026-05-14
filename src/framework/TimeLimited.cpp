@@ -15,7 +15,7 @@ void TimeLimited::start() {
 	_startTime = SDL_GetTicks();
 }
 
-float TimeLimited::getPercentComplete() {
+float TimeLimited::getPercentComplete() const {
 	if (!isComplete() && _duration != 0) {
 		float currTime = static_cast<float>(SDL_GetTicks());
 		float startTime = static_cast<float>(_startTime);
@@ -25,7 +25,7 @@ float TimeLimited::getPercentComplete() {
 	return 1.0f;
 }
 
-bool TimeLimited::isComplete() {
+bool TimeLimited::isComplete() const {
 	if (_startTime > 0) {
 		return (SDL_GetTicks() - _startTime) >= _duration;
 	}

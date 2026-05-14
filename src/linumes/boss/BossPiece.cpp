@@ -14,7 +14,7 @@ BossPiece::~BossPiece() {
 
 }
 
-bool BossPiece::isStopped() {
+bool BossPiece::isStopped() const {
     if (_boss) {
         return true;
     }

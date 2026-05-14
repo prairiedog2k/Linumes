@@ -21,11 +21,11 @@ public:
     void Draw(GLfloat x, GLfloat y, GLfloat dim, GLfloat z);
 
     void setZ( GLfloat z) { _z = z; };
-    GLfloat getZ() { return _z; };
-    GLfloat getX0() { return _x0; };
-    GLfloat getX1() { return _x1; };
-    GLfloat getY0() { return _y0; };
-    GLfloat getY1() { return _y1; };
+    GLfloat getZ()  const { return _z; };
+    GLfloat getX0() const { return _x0; };
+    GLfloat getX1() const { return _x1; };
+    GLfloat getY0() const { return _y0; };
+    GLfloat getY1() const { return _y1; };
 
     void setDimensionAndPosition2D( GLfloat x, GLfloat y, GLfloat dim);
 };

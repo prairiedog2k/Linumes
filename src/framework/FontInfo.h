@@ -14,10 +14,10 @@ public:
 	FontInfo();
 	FontInfo( const FontInfo &fi);
 	virtual ~FontInfo();
-	int getPointSize() { return pointSize;};
-	float getRed() { return fgRed; };
-	float getGreen() { return fgGreen; };
-	float getBlue() { return fgBlue; };
+	int getPointSize() const { return pointSize;};
+	float getRed()     const { return fgRed; };
+	float getGreen()   const { return fgGreen; };
+	float getBlue()    const { return fgBlue; };
 	void setPointSize(int arg) { pointSize = arg; };
 	void setRed(float arg) { fgRed = arg; };
 	void setGreen(float arg) { fgGreen = arg; };

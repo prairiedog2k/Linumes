@@ -14,7 +14,7 @@ public:
 	Themed(const Themed &themed): _theme(themed._theme) {};
 	virtual ~Themed();
 
-	Theme *getTheme() { return _theme; };
+	Theme *getTheme() const { return _theme; };
 	virtual void setTheme(Theme *theTheme) { _theme = theTheme; };
 };
 
