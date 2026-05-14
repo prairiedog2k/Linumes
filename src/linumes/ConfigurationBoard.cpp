@@ -126,17 +126,16 @@ void ConfigurationBoard::drawOptions() {
 
 	HF::Font *f1 = HF::ResourceHelper::getFontResource(getTheme(),  BASE_FONT_24 )->getResource();
 	int ypos = 500;
-	for (std::list< Option >::iterator iter = _currentOptions.begin();
-			iter != _currentOptions.end(); iter++)
+	for (const auto& opt : _currentOptions)
 	{
 		f1->setRGB(0.0f,0.0f,0.0f);
-		f1->drawText((*iter).display.c_str(), HF::xformX(513), HF::xformY(ypos-1), true);
-		if  ( isCurrentOptionValue( (*iter).value ) ) {
+		f1->drawText(opt.display.c_str(), HF::xformX(513), HF::xformY(ypos-1), true);
+		if  ( isCurrentOptionValue( opt.value ) ) {
 			f1->setRGB(1.0f,0.0f,0.0f);
 		} else {
 			f1->setRGB(1.0f,1.0f,1.0f);
 		}
-		f1->drawText((*iter).display.c_str(), HF::xformX(512), HF::xformY(ypos), true);
+		f1->drawText(opt.display.c_str(), HF::xformX(512), HF::xformY(ypos), true);
 		ypos -= 75;
 	}
 }

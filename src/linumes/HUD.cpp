@@ -77,9 +77,8 @@ void HUD::Draw() {
         HF::FontResource *fr = HF::ResourceHelper::getFontResource(getTheme(), HUD_FONT);
         HF::Font *font = fr->getResource();
 
-        for (std::map<std::string, HF::BaseTextDisplay>::iterator iter = textDisplays.begin();
-             iter != textDisplays.end(); iter++) {
-            HF::BaseTextDisplay btd = iter->second;
+        for (auto& kv : textDisplays) {
+            HF::BaseTextDisplay btd = kv.second;
             if (btd.hasDrop()) {
                 font->drawText(btd.getFormattedText().c_str(), btd.getX()+1, btd.getY()+1, 1.0f, 1.0f, 1.0f);
             }

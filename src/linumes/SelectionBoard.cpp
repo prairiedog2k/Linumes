@@ -75,17 +75,16 @@ void SelectionBoard::drawAdditional() {
 
 	HF::Font *f1 = HF::ResourceHelper::getFontResource(getTheme(),  BASE_FONT_24 )->getResource();
 	int ypos = 500;
-	for (std::list< std::pair < std::string, Selection > >::iterator iter = _selectionList.begin();
-	iter != _selectionList.end(); iter++) {
+	for (const auto& kv : _selectionList) {
 		f1->setRGB(0.0f,0.0f,0.0f);
-		f1->drawText((*iter).second.display.c_str(), HF::xformX(513), HF::xformY(ypos-1), true);
+		f1->drawText(kv.second.display.c_str(), HF::xformX(513), HF::xformY(ypos-1), true);
 
-		if  ( isActiveSelection( (*iter).first ) ) {
+		if  ( isActiveSelection( kv.first ) ) {
 			f1->setRGB(1.0f,0.0f,0.0f);
 		} else {
 			f1->setRGB(1.0f,1.0f,1.0f);
 		}
-		f1->drawText((*iter).second.display.c_str(), HF::xformX(512), HF::xformY(ypos), true);
+		f1->drawText(kv.second.display.c_str(), HF::xformX(512), HF::xformY(ypos), true);
 		ypos -= 50;
 	}
 }

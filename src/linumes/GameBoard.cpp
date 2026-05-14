@@ -395,9 +395,13 @@ void GameBoard::applyNextTheme()
 	_fg->setDisplayInfo(displayInfo);
 
 
-	for ( std::set<MagicBlock>::iterator iter = _mbSet.begin(); iter != _mbSet.end(); iter++) {
-		((MagicBlock)*iter).setTheme(nextTheme);
+	MagicBlockSet updated;
+	for (auto it = _mbSet.begin(); it != _mbSet.end(); ) {
+		auto node = _mbSet.extract(it++);
+		node.value().setTheme(nextTheme);
+		updated.insert(std::move(node));
 	}
+	_mbSet = std::move(updated);
 
 	currTheme = nextTheme;
 }
@@ -512,8 +516,7 @@ void GameBoard::drawScoreTargets() {
 
 
 void GameBoard::drawMagicBlocks() {
-	for ( std::set<MagicBlock>::iterator iter = _mbSet.begin(); iter != _mbSet.end(); iter++) {
-		MagicBlock mb = (MagicBlock)*iter;
+	for (auto mb : _mbSet) {
 		if ( ! mb.isComplete() ) {
 			mb.setTheme(currTheme);
 			mb.Draw();

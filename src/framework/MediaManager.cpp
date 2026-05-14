@@ -27,9 +27,9 @@ MediaManager::MediaManager(int width, int height, int bpp)
 MediaManager::MediaManager(Configuration configuration)
     : screenbpp(0), _fullscreen(false), glContext(nullptr), joystick(nullptr)
 {
-    int h = std::atoi(configuration.getValue(MEDIA_SCREEN_HEIGHT).c_str());
-    int w = std::atoi(configuration.getValue(MEDIA_SCREEN_WIDTH).c_str());
-    int b = std::atoi(configuration.getValue(MEDIA_SCREEN_BPP).c_str());
+    int h = std::stoi(configuration.getValue(MEDIA_SCREEN_HEIGHT));
+    int w = std::stoi(configuration.getValue(MEDIA_SCREEN_WIDTH));
+    int b = std::stoi(configuration.getValue(MEDIA_SCREEN_BPP));
     MediaManager::screenheight = (h > 0) ? h : SCREEN_DIM_H;
     MediaManager::screenwidth  = (w > 0) ? w : SCREEN_DIM_W;
     screenbpp = (b > 0) ? b : SCREEN_DIM_BPP;

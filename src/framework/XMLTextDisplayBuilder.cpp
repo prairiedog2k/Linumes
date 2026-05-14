@@ -18,8 +18,8 @@ BaseTextDisplay XMLTextDisplayBuilder::createTextDisplay(const YAML::Node& node)
         if (!strType.empty() && !strX.empty() && !strY.empty()) {
             baseTextDisplay.setBaseText(baseText);
             baseTextDisplay.setType(strType);
-            baseTextDisplay.setX(std::atoi(strX.c_str()));
-            baseTextDisplay.setY(std::atoi(strY.c_str()));
+            baseTextDisplay.setX(std::stoi(strX));
+            baseTextDisplay.setY(std::stoi(strY));
             baseTextDisplay.setDrop(hasDrop);
             baseTextDisplay.setRelative(isRelative);
             baseTextDisplay.setValue("");
