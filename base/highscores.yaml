@@ -22,4 +22,4 @@ game_modes:
         score: 0
   - name: jublo
     max_listing: 10
-    scores: []
+    scores: ~
