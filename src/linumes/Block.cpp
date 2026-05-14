@@ -112,8 +112,8 @@ bool Block::AllInvisible() {
 
 
 bool Block::isWhole() {
-	int y1 = (int)((_pieces[0]->getY() * 1000.0f)+0.4999f)/100;
-	int y2 = (int)((_pieces[1]->getY() * 1000.0f)+0.4999f)/100;
+	int y1 = static_cast<int>((_pieces[0]->getY() * 1000.0f)+0.4999f)/100;
+	int y2 = static_cast<int>((_pieces[1]->getY() * 1000.0f)+0.4999f)/100;
 	if ( y1 != y2) {
 		_whole = false;
 	} else {
@@ -225,7 +225,7 @@ void Block::Draw() {
 	} else {
 		glLoadIdentity();
 		        
-		glTranslatef( (GLfloat)_x,(GLfloat)_y, -4.99999f );
+		glTranslatef( static_cast<GLfloat>(_x), static_cast<GLfloat>(_y), -4.99999f );
 		GLuint texture = 0;         
 		if (_pieces[0]->getColor() == 0) {
 			glColor3f(0.75f,0.375f,0.0f);

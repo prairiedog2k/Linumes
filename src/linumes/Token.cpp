@@ -311,7 +311,7 @@ void Token::slide(Slide dir, unsigned int currTime) {
 	}
 	if ((nextXPos > 0) && (nextXPos < _board->_rx)) {
 		if (_leftBottom >= _board->_ry) {
-			setX( getX() + (float)(mult * _dim) );
+			setX( getX() + static_cast<float>(mult * _dim) );
 			_posX = nextXPos;
 			_timerx.setInitialTime( currTime );
 
@@ -326,7 +326,7 @@ void Token::slide(Slide dir, unsigned int currTime) {
 					return;				
 				}				 
 			}
-			setX( getX() + (float)(mult * _dim) );
+			setX( getX() + static_cast<float>(mult * _dim) );
 			_posX = nextXPos;
 			_timerx.setInitialTime(currTime);
 		}

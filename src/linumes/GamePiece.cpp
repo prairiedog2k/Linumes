@@ -187,7 +187,7 @@ void GamePiece::Draw()
 		glEnable(GL_TEXTURE_2D);
 		glDisable(GL_DEPTH_TEST);
 		
-		glTranslatef( (GLfloat)_x,(GLfloat)_y, -5.0f );
+		glTranslatef( static_cast<GLfloat>(_x), static_cast<GLfloat>(_y), -5.0f );
 
 		_quad.setZ(1.0f);
 		_quad.setDimensionAndPosition2D((_dim - _edge )/2.0f,(_dim - _edge )/2.0f, (_dim - _edge ) );
@@ -256,8 +256,8 @@ void GamePiece::update(unsigned int currTime) {
 }
 
 bool GamePiece::isStopped() {
-	int nexty = (int) ( 1000 * _nexty);
-	int y = (int) ( 1000 * _y);	
+	int nexty = static_cast<int>(1000 * _nexty);
+	int y = static_cast<int>(1000 * _y);	
 	return (nexty == y);
 }
 

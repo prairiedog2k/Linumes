@@ -72,7 +72,7 @@ GLuint MagicBlock::getStarMask() {
 void MagicBlock::drawShrinker() {
 	glLoadIdentity();
 
-	glTranslatef( (GLfloat)_x,(GLfloat) _y , -4.95f );
+	glTranslatef( static_cast<GLfloat>(_x),static_cast<GLfloat>(_y) , -4.95f );
 	glRotatef(90.0f * getPercentComplete(), 0.0f,0.0f,1.0f);		
     
 	glBindTexture( GL_TEXTURE_2D, getMask() );
@@ -96,7 +96,7 @@ void MagicBlock::drawShrinker() {
 void MagicBlock::drawLooper() {
 	glLoadIdentity();
 
-	glTranslatef( (GLfloat)_x,(GLfloat) _y , -4.95f );
+	glTranslatef( static_cast<GLfloat>(_x),static_cast<GLfloat>(_y) , -4.95f );
 	glRotatef(90.0f * getPercentComplete(), 0.0f,0.0f,1.0f);		
     
 	glBindTexture( GL_TEXTURE_2D, getMask() );
@@ -125,10 +125,10 @@ void MagicBlock::drawLooper() {
 void MagicBlock::drawSpark() {
 	glLoadIdentity();
 
-	glTranslatef( (GLfloat)_x ,(GLfloat) _y , -4.94f );
+	glTranslatef( static_cast<GLfloat>(_x) ,static_cast<GLfloat>(_y) , -4.94f );
 
-	int side = (int)(4.0f * getPercentComplete());
-	float sideComplete = (4.0f * getPercentComplete()) - ((float)side);
+	int side = static_cast<int>(4.0f * getPercentComplete());
+	float sideComplete = (4.0f * getPercentComplete()) - static_cast<float>(side);
 	float currx = 0.0f;
 	float curry = 0.0f;
 	if (side == 0) {
@@ -160,7 +160,7 @@ void MagicBlock::drawSpark() {
 void MagicBlock::drawStar() {
 	glLoadIdentity();
 
-	glTranslatef( (GLfloat)_x,(GLfloat) _y , -4.95f );
+	glTranslatef( static_cast<GLfloat>(_x),static_cast<GLfloat>(_y) , -4.95f );
 	glRotatef(-90.0f * getPercentComplete(), 0.0f,0.0f,1.0f);		
 
 	glBindTexture( GL_TEXTURE_2D, getStarMask() );

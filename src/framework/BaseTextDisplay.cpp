@@ -22,16 +22,16 @@ int BaseTextDisplay::getX() {
 	if (! _isRelative ) {
 		return xformX(x);
 	} else {
-		float relativeX = ((float)(x) ) / ( 100.0f) * ((float)( MediaManager::getScreenWidth() ));
-		return (int)(relativeX);
+		float relativeX = static_cast<float>(x) / 100.0f * static_cast<float>(MediaManager::getScreenWidth());
+		return static_cast<int>(relativeX);
 	}
 }
 int BaseTextDisplay::getY() {
 	if (!_isRelative ) {
 		return xformY(y);
 	} else {
-		float relativeY = ((float)(y) ) / ( 100.0f) * ((float)( MediaManager::getScreenHeight() ));
-		return (int)(relativeY);
+		float relativeY = static_cast<float>(y) / 100.0f * static_cast<float>(MediaManager::getScreenHeight());
+		return static_cast<int>(relativeY);
 	}
 }
 

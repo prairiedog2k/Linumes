@@ -95,9 +95,9 @@ void MediaManager::initGraphics()
 void MediaManager::resizeWindow(int width, int height)
 {
     if (height == 0) height = 1;
-    GLfloat ratio = (GLfloat)width / (GLfloat)height;
+    GLfloat ratio = static_cast<GLfloat>(width) / static_cast<GLfloat>(height);
 
-    glViewport(0, 0, (GLint)width, (GLint)height);
+    glViewport(0, 0, static_cast<GLint>(width), static_cast<GLint>(height));
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(45.0f, ratio, 0.1f, 100.0f);
@@ -219,8 +219,8 @@ void MediaManager::takeScreenShot()
     glReadPixels(0, 0, screenWidth, screenHeight, GL_RGB, GL_UNSIGNED_BYTE, image->pixels);
 
     for (int i = 0; i < screenHeight; i++)
-        memcpy((char *)temp->pixels + 3 * screenWidth * i,
-               (char *)image->pixels + 3 * screenWidth * (screenHeight - i - 1),
+        memcpy(static_cast<char *>(temp->pixels) + 3 * screenWidth * i,
+               static_cast<char *>(image->pixels) + 3 * screenWidth * (screenHeight - i - 1),
                3 * screenWidth);
 
     SDL_SaveBMP(temp, screenshotName);

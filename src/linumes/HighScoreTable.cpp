@@ -23,7 +23,7 @@ HighScoreTable::~HighScoreTable()
 void HighScoreTable::fillYaml(YAML::Node& gameModes) {
     YAML::Node gm;
     gm[HI_ATTR_NAME] = _tableName;
-    gm[HI_ATTR_MAX_LISTING] = (int)_maxSize;
+    gm[HI_ATTR_MAX_LISTING] = static_cast<int>(_maxSize);
     YAML::Node scores;
     for (const auto& entry : _scoreTable) {
         YAML::Node score;

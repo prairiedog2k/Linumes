@@ -17,9 +17,9 @@ void TimeLimited::start() {
 
 float TimeLimited::getPercentComplete() {
 	if (!isComplete() && _duration != 0) {
-		float currTime = (float)SDL_GetTicks();
-		float startTime = (float)_startTime;
-		float maxTime = (float)_duration;
+		float currTime = static_cast<float>(SDL_GetTicks());
+		float startTime = static_cast<float>(_startTime);
+		float maxTime = static_cast<float>(_duration);
 		return ( (currTime - startTime) / maxTime) > 1.0f ? 1.0f : ((currTime - startTime) / maxTime);   
 	}
 	return 1.0f;

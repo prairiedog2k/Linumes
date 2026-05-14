@@ -84,12 +84,12 @@ GameBoard::GameBoard( float dim, int rx, int ry):
 	_hiScoreTable(nullptr),
 	_pieces(rx * ry),
 	_scanner(std::make_unique<Scanner>(
-			(float) - ( (rx * dim)  / 2.0f ),
-			(float)rx*dim - ( (rx * dim)  / 2.0f ),
-			(float)ry*dim - ( (ry * dim)  / 2.0f ),
+			- ( (rx * dim)  / 2.0f ),
+			static_cast<float>(rx)*dim - ( (rx * dim)  / 2.0f ),
+			static_cast<float>(ry)*dim - ( (ry * dim)  / 2.0f ),
 			1.0,
 			dim,
-			(float)ry * dim,
+			static_cast<float>(ry) * dim,
 			rx)),
 	_bg(std::make_unique<SimpleBackground>(0.0, 0.0)),
 	_fg(std::make_unique<FadingForeground>(0.0, 0.0, 1000)),
@@ -138,25 +138,25 @@ float GameBoard::calculateRate(float ScanTime) {
 	}
 	float distance = _rx * _dim;
 	float scanRate = ( distance / 1000.0f);
-	float frequency = 1.0f / (float)ScanTime;
+	float frequency = 1.0f / ScanTime;
 	return frequency * scanRate;
 }
 
 
 float GameBoard::getMinX() {
-	return  (float) - ( (_rx * _dim)  / 2.0f );
+	return  - ( (_rx * _dim)  / 2.0f );
 }
 
 float GameBoard::getMaxX() {
-	return (float)_rx*_dim - ( (_rx * _dim)  / 2.0f );
+	return static_cast<float>(_rx)*_dim - ( (_rx * _dim)  / 2.0f );
 }
 
 float GameBoard::getMinY() {
-	return  (float) - ( (_ry * _dim)  / 2.0f );
+	return  - ( (_ry * _dim)  / 2.0f );
 }
 
 float GameBoard::getMaxY() {
-	return (float)_ry*_dim - ( (_ry * _dim)  / 2.0f );
+	return static_cast<float>(_ry)*_dim - ( (_ry * _dim)  / 2.0f );
 }
 
 
@@ -178,7 +178,7 @@ void GameBoard::createTokenSet(int tokenPos) {
 
 	if (tokenPos == 3) {
 		float halfway =  _rx / 2.0f;
-		float distance = (float) halfway * _dim;
+		float distance = halfway * _dim;
 		distance += getMinX();
 		distance -= _dim;
 		leftMostX = distance;
@@ -260,11 +260,11 @@ void GameBoard::init()
 }
 
 float GameBoard::getPieceX(int i) {
-	return (float)i*_dim - ( (_rx * _dim)  / 2.0f );
+	return static_cast<float>(i)*_dim - ( (_rx * _dim)  / 2.0f );
 }
 
 float GameBoard::getPieceY(int j) {
-	return (float)j*_dim - ( (_ry * _dim)  / 2.0f );
+	return static_cast<float>(j)*_dim - ( (_ry * _dim)  / 2.0f );
 }
 
 void GameBoard::reset() {
@@ -272,12 +272,12 @@ void GameBoard::reset() {
 		_gameOver = false;
 
 		_scanner = std::make_unique<Scanner>(
-								(float) - ( (_rx * _dim)  / 2.0f ),
-								(float)_rx*_dim - ( (_rx * _dim)  / 2.0f ),
-								(float)_ry*_dim - ( (_ry * _dim)  / 2.0f ),
+								- ( (_rx * _dim)  / 2.0f ),
+								static_cast<float>(_rx)*_dim - ( (_rx * _dim)  / 2.0f ),
+								static_cast<float>(_ry)*_dim - ( (_ry * _dim)  / 2.0f ),
 								1.0,
 								_dim,
-								(float)_ry * _dim,
+								static_cast<float>(_ry) * _dim,
 								_rx);
 		_scanner->setStopped(false);
 		_scanner->setXRate(calculateRate(5.0f));
@@ -668,14 +668,14 @@ void GameBoard::setPieceInMotion(int i, int j) {
 	//the height attributable to the number of pieces that don't exist beneath this piece
 
 	//the initial y for the given block
-	float yInitial = ( (float)(j) *_dim);
+	float yInitial = ( static_cast<float>(j) *_dim);
 	//centering
-	yInitial -= ( ( (float) (_ry * _dim) ) / 2.0f );
+	yInitial -= ( (_ry * _dim) / 2.0f );
 
 	//the final y position for this block
-	float yFinal = ( (float)(j - 1) *_dim);
+	float yFinal = ( static_cast<float>(j - 1) *_dim);
 	//centering
-	yFinal -= ( (float)(_ry * _dim) / 2.0f );
+	yFinal -= ( (_ry * _dim) / 2.0f );
 
 	getPieceAt(i,j-1)->setNextY( yFinal );
 	getPieceAt(i,j-1)->setY( yInitial  );

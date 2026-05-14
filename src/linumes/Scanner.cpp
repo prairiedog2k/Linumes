@@ -170,7 +170,7 @@ void Scanner::update(unsigned int currTime) {
 		this->setX(currX);
 		reset = false;
 	}
-	colpos = (int) ((( (currX - minimumx) / (maximumx - minimumx) ) * columns));
+	colpos = static_cast<int>((currX - minimumx) / (maximumx - minimumx) * columns);
 }
 
 

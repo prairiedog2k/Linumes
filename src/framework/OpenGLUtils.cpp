@@ -39,8 +39,8 @@ GLuint SDL_GL_LoadTexture(SDL_Surface *surface, GLfloat *texcoord)
         h = power_of_two(surface->h);
         texcoord[0] = 0.0f;                    /* Min X */
         texcoord[1] = 0.0f;                    /* Min Y */
-        texcoord[2] = (GLfloat)surface->w / w; /* Max X */
-        texcoord[3] = (GLfloat)surface->h / h; /* Max Y */
+        texcoord[2] = static_cast<GLfloat>(surface->w) / w; /* Max X */
+        texcoord[3] = static_cast<GLfloat>(surface->h) / h; /* Max Y */
 
         image = SDL_CreateRGBSurface(
                         0,

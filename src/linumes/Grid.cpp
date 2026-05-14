@@ -85,8 +85,8 @@ void Grid::drawDecorations() {
 	glBindTexture( GL_TEXTURE_2D, getSideBarTexture(true) );		
 	glBlendFunc(GL_DST_COLOR,GL_ZERO);
 
-	GLfloat glx = ((GLfloat)getX()) - ( (boardcolumns * dimension) / 2.0f );
-	GLfloat gly = ((GLfloat)getY());
+	GLfloat glx = static_cast<GLfloat>(getX()) - ( (boardcolumns * dimension) / 2.0f );
+	GLfloat gly = static_cast<GLfloat>(getY());
 	glPushMatrix();
 	glTranslatef(glx,gly,-5.0f);
 
@@ -131,8 +131,8 @@ void Grid::drawDecorations() {
 	glBindTexture( GL_TEXTURE_2D, getHeaderTexture(true) );		
 	glBlendFunc(GL_DST_COLOR,GL_ZERO);
 
-	glx = ((GLfloat)getX()) - ( (boardcolumns * dimension) / 2 );
-	gly = ((GLfloat)getY());
+	glx = static_cast<GLfloat>(getX()) - ( (boardcolumns * dimension) / 2 );
+	gly = static_cast<GLfloat>(getY());
 	glPushMatrix();
 	glTranslatef(glx,gly,-5.0f);
 
@@ -197,10 +197,10 @@ void Grid::drawAudioLevels() {
 			lastLevel[i] -= decay * (currTick - lastLevelTick[i]);
 			soundLevel = lastLevel[i];
 		}
-		int level = (int) ( ((float) boardrows * 3) * soundLevel);
+		int level = static_cast<int>(static_cast<float>(boardrows) * 3 * soundLevel);
 		for (int j = 0; j < level; j++) {
-			glx = ((GLfloat)getX()) + (const float)i*dimension - ( (boardcolumns * dimension) / 2 );
-			gly = ((GLfloat)getY()) + (const float)j*dimension/3.0f - ( (boardrows * dimension) / 2 );
+			glx = static_cast<GLfloat>(getX()) + static_cast<float>(i)*dimension - ( (boardcolumns * dimension) / 2 );
+			gly = static_cast<GLfloat>(getY()) + static_cast<float>(j)*dimension/3.0f - ( (boardrows * dimension) / 2 );
 
 
 			glPushMatrix();
@@ -236,8 +236,8 @@ void Grid::drawGrid() {
 
 	for (int i = 0; i < boardcolumns; i++) {
 		for (int j = 0; j < boardrows; j++) {
-			glx = ((GLfloat)getX()) + (const float)i*dimension - ( (boardcolumns * dimension) / 2 );
-			gly = ((GLfloat)getY()) + (const float)j*dimension - ( (boardrows * dimension) / 2 );
+			glx = static_cast<GLfloat>(getX()) + static_cast<float>(i)*dimension - ( (boardcolumns * dimension) / 2 );
+			gly = static_cast<GLfloat>(getY()) + static_cast<float>(j)*dimension - ( (boardrows * dimension) / 2 );
 			glPushMatrix();
 			glTranslatef(glx,gly,-5.0f);
 			/* Start Drawing Quads */

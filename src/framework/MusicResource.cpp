@@ -36,9 +36,9 @@ bool MusicResource::release() {
 #endif
   if (value_ && audioInfo) {
     if (audioInfo->getType() == MUS_WAV) {
-      Mix_FreeChunk((Mix_Chunk *)value_);
+      Mix_FreeChunk(static_cast<Mix_Chunk *>(value_));
     } else if (audioInfo->getType() == MUS_MP3) {
-      Mix_FreeMusic((Mix_Music *)value_);
+      Mix_FreeMusic(static_cast<Mix_Music *>(value_));
     }
     value_ = nullptr;
   }

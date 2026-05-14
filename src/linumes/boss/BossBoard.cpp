@@ -282,7 +282,7 @@ void BossBoard::drawGameOver() {
 
 void BossBoard::drawAttack() {
 	if ( isAttacking() ) {
-		float percentAttack = (float)( _currentTick -_attackStart) / (float)(_attackDuration);
+		float percentAttack = static_cast<float>(_currentTick - _attackStart) / static_cast<float>(_attackDuration);
 		float critDim = ( percentAttack - 0.5f ) * 2.0f;
 		critDim *= critDim;
 		critDim = ::sqrt(critDim);			
@@ -301,7 +301,7 @@ void BossBoard::drawAttack() {
 		glRotatef(45.0f * percentAttack, 0.0f, 0.0f, 1.0f);
 
 		glPushMatrix();
-			glTranslatef( (GLfloat)- 2.0f * dd, (GLfloat) -2.0f * dd, -3.0f );
+			glTranslatef( -2.0f * dd, -2.0f * dd, -3.0f );
 			_quad.setZ(1.0f);
 			_quad.setDimensionAndPosition2D(2.0f * dd, 2.0f * dd, 4.0f * dd );
 			
@@ -316,7 +316,7 @@ void BossBoard::drawAttack() {
 		
 		glLoadIdentity();
 		glPushMatrix();
-			glTranslatef( (GLfloat)- 2.0f * critDim, (GLfloat) -2.0f * critDim, -3.0f );
+			glTranslatef( -2.0f * critDim, -2.0f * critDim, -3.0f );
 			_quad.setZ(1.0f);
 			_quad.setDimensionAndPosition2D(2.0f * critDim, 2.0f * critDim, 4.0f * critDim );
 			

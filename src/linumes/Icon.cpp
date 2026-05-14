@@ -32,7 +32,7 @@ void Icon::Draw() {
 	{ 
 		int currTime = SDL_GetTicks();
 		if (! canMove(currTime) ) {
-			_currDimension = _dimension + ((float)( (float)currTime / (float)( _initialTime + _wait )) * 0.10f);
+			_currDimension = _dimension + (static_cast<float>(currTime) / static_cast<float>(_initialTime + _wait) * 0.10f);
 		} else {
 			_currDimension = _dimension;
 		}
@@ -45,7 +45,7 @@ void Icon::Draw() {
 
 		glBindTexture( GL_TEXTURE_2D, getTexture(0));
 
-		glTranslatef( (GLfloat)_x,(GLfloat)_y, -5.0f );
+		glTranslatef( static_cast<GLfloat>(_x), static_cast<GLfloat>(_y), -5.0f );
 
 		glBlendFunc(GL_DST_COLOR,GL_ZERO);		
 		_quad.setDimensionAndPosition2D(_currDimension/2.0f,_currDimension/2.0f,_currDimension);

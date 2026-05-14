@@ -74,11 +74,11 @@ void Font::initFont()
 
 		TTF_GlyphMetrics(ttfFont,
 				(Uint16)c,
-				&glyphs[((int)c)].minx,
-				&glyphs[((int)c)].maxx,
-				&glyphs[((int)c)].miny,
-				&glyphs[((int)c)].maxy,
-				&glyphs[((int)c)].advance);
+				&glyphs[static_cast<int>(c)].minx,
+				&glyphs[static_cast<int>(c)].maxx,
+				&glyphs[static_cast<int>(c)].miny,
+				&glyphs[static_cast<int>(c)].maxy,
+				&glyphs[static_cast<int>(c)].advance);
 
 		g0 = TTF_RenderText_Blended(ttfFont,
 				letter,
@@ -92,12 +92,12 @@ void Font::initFont()
 
 		if (nullptr != g1)
 		{
-			glyphs[((int)c)].pic = g1;
-			glyphs[((int)c)].tex = SDL_GL_LoadTexture(g1, texcoord);
-			glyphs[((int)c)].texMinX = texcoord[0];
-			glyphs[((int)c)].texMinY = texcoord[1];
-			glyphs[((int)c)].texMaxX = texcoord[2];
-			glyphs[((int)c)].texMaxY = texcoord[3];
+			glyphs[static_cast<int>(c)].pic = g1;
+			glyphs[static_cast<int>(c)].tex = SDL_GL_LoadTexture(g1, texcoord);
+			glyphs[static_cast<int>(c)].texMinX = texcoord[0];
+			glyphs[static_cast<int>(c)].texMinY = texcoord[1];
+			glyphs[static_cast<int>(c)].texMaxX = texcoord[2];
+			glyphs[static_cast<int>(c)].texMaxY = texcoord[3];
 		}
 	}
 
@@ -137,8 +137,8 @@ void Font::textSize(char *text,
 				if (r->w > w_largest) w_largest = r->w;
 				r->w = 0;
 			} else {
-                maxx = glyphs[((int)*text)].maxx;
-				advance = glyphs[((int)*text)].advance;
+                maxx = glyphs[static_cast<unsigned char>(*text)].maxx;
+				advance = glyphs[static_cast<unsigned char>(*text)].advance;
 				r->w += advance;
 			}
 		}
@@ -182,7 +182,7 @@ void Font::drawText(const char *text, int x, int y, bool centered, bool upsidedo
 				widthX += glyphs[ch].pic->w;
 			}
 		}
-		x = (int)(baseleft - (widthX / 2));
+		x = static_cast<int>(baseleft - (widthX / 2));
 	}
 
 	//alpha channel needs help
@@ -190,26 +190,26 @@ void Font::drawText(const char *text, int x, int y, bool centered, bool upsidedo
 
 	while (0 != *text) {
 		if (*text == '\n') {
-			x = (int)baseleft;
+			x = static_cast<int>(baseleft);
 			if (upsidedown) {
 				y -= lineSkip;
 			} else {
 				y += lineSkip;
 			}
 		} else if ((minGlyph <= *text) && (*text < maxGlyph)) {
-			texMinX = glyphs[((int)*text)].texMinX;
-			texMinY = glyphs[((int)*text)].texMinY;
-			texMaxX = glyphs[((int)*text)].texMaxX;
-			texMaxY = glyphs[((int)*text)].texMaxY;
+			texMinX = glyphs[static_cast<unsigned char>(*text)].texMinX;
+			texMinY = glyphs[static_cast<unsigned char>(*text)].texMinY;
+			texMaxX = glyphs[static_cast<unsigned char>(*text)].texMaxX;
+			texMaxY = glyphs[static_cast<unsigned char>(*text)].texMaxY;
 
-			minx = glyphs[((int)*text)].minx;
+			minx = glyphs[static_cast<unsigned char>(*text)].minx;
 
 			left   = x + minx;
-			right  = x + glyphs[((int)*text)].pic->w + minx;
+			right  = x + glyphs[static_cast<unsigned char>(*text)].pic->w + minx;
 			top    = y;
-			bottom = y + glyphs[((int)*text)].pic->h;
+			bottom = y + glyphs[static_cast<unsigned char>(*text)].pic->h;
 
-			glBindTexture(GL_TEXTURE_2D, glyphs[((int)*text)].tex);
+			glBindTexture(GL_TEXTURE_2D, glyphs[static_cast<unsigned char>(*text)].tex);
 
 			glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE);
 			glTexEnvi(GL_TEXTURE_ENV, GL_COMBINE_RGB, GL_MODULATE);
@@ -229,7 +229,7 @@ void Font::drawText(const char *text, int x, int y, bool centered, bool upsidedo
 
 			glEnd();
 
-			x += glyphs[((int)*text)].advance;
+			x += glyphs[static_cast<unsigned char>(*text)].advance;
 		}
 
 		text++;

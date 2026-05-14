@@ -37,7 +37,7 @@ float AudioManager::getSoundLevel(int band) {
 		levelsMax[band] = level;
 		return 1.0f;
 	}
-	return ((float)(float(level)/float(maxLevel)));
+	return float(level)/float(maxLevel);
 }
 
 void AudioManager::calc_freq(Sint16 *src)
@@ -58,10 +58,10 @@ void AudioManager::calc_freq(Sint16 *src)
 	int currLevel = 0;
 	float scale =  256  / log(256);
 	for(i = 0; i < 256; i++) {
-		currLevel = ((int)(sqrt(tmp_out[i + 1]))) >> 8;
+		currLevel = static_cast<int>(sqrt(tmp_out[i + 1])) >> 8;
 		currLevel >>= 7;
 		if(currLevel != 0) {
-			currLevel = (int)(log(currLevel) * scale);
+			currLevel = static_cast<int>(log(currLevel) * scale);
 		}
 		levels[i] = currLevel;
 	}
@@ -145,13 +145,13 @@ void AudioManager::playSong(std::string song) {
 		}
 
 		if (type == MUS_WAV) {
-			if(Mix_PlayChannel(1, (Mix_Chunk *)_musicResource->getResource(), -1)==-1) {
+			if(Mix_PlayChannel(1, static_cast<Mix_Chunk *>(_musicResource->getResource()), -1)==-1) {
 #ifdef DEBUG
 				std::cout << "Mix_PlayChannel: " << Mix_GetError() << std::endl;
 #endif
 			}
 		} else if (type == MUS_MP3) {
-			if(Mix_PlayMusic((Mix_Music *)_musicResource->getResource(), -1)==-1) {
+			if(Mix_PlayMusic(static_cast<Mix_Music *>(_musicResource->getResource()), -1)==-1) {
 #ifdef DEBUG
 				std::cout << "Mix_PlayMusic: " << Mix_GetError() << std::endl;
 #endif
