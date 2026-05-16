@@ -56,7 +56,7 @@ bool SelectionMode::init() {
 	_selectionBoard = std::make_unique<SelectionBoard>("defaultSelection");
 
 	if (!_themeManager) {
-		_themeManager = std::make_unique<LinumesThemeManager>("themelist.yaml");
+		_themeManager = std::make_unique<LinumesThemeManager>("resources/themelist.yaml");
 		if (!_themeManager->init()) {
 			return false;
 		}

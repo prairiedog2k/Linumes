@@ -16,7 +16,7 @@ namespace HF = Hunchback::Framework;
 
 BossBoard::BossBoard() :
     GameBoard(0.2f, 16, 10),
-    _boss("jublo.yaml"),
+    _boss("resources/jublo.yaml"),
     _bossPieces(16 * 10),
     _bossIcon(std::make_unique<BossIcon>()),
     _bossAttacks(0),

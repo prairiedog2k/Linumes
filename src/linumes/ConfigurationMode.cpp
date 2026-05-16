@@ -64,7 +64,7 @@ bool ConfigurationMode::init() {
 		_configurationBoard = std::make_unique<ConfigurationBoard>("default_configuration", _configuration);
 	}
 	if (!_themeManager) {
-		_themeManager = std::make_unique<LinumesThemeManager>("themelist.yaml");
+		_themeManager = std::make_unique<LinumesThemeManager>("resources/themelist.yaml");
 		if (!_themeManager->init()) {
 			return false;
 		}

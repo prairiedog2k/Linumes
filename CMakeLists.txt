@@ -159,8 +159,8 @@ endif()
 # Copy runtime data assets next to the executable after each build
 # ---------------------------------------------------------------------------
 
-set(ASSET_DIRS  Themes base jublo)
-set(ASSET_FILES LinumesConfiguration.yaml themelist.yaml jublo.yaml)
+set(ASSET_DIRS  resources)
+set(ASSET_FILES )
 
 foreach(DIR ${ASSET_DIRS})
     if(EXISTS "${CMAKE_SOURCE_DIR}/${DIR}")
