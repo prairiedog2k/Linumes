@@ -1,5 +1,4 @@
-#ifndef BOSSPIECE_H
-#define BOSSPIECE_H
+﻿#pragma once
 
 #include "linumes/GamePiece.h"
 
@@ -21,5 +20,3 @@ public:
 };
 
 } // namespace Hunchback::Linumes
-
-#endif

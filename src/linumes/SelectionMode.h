@@ -1,5 +1,4 @@
-#ifndef SELECTIONMODE_H_
-#define SELECTIONMODE_H_
+﻿#pragma once
 
 #include <map>
 #include <memory>
@@ -33,5 +32,3 @@ public:
 };
 
 } // namespace Hunchback::Linumes
-
-#endif /*SELECTIONMODE_H_*/

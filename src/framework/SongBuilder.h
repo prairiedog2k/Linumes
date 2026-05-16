@@ -1,5 +1,4 @@
-#ifndef XMLSONGBUILDER_H
-#define XMLSONGBUILDER_H
+﻿#pragma once
 
 #include <yaml-cpp/yaml.h>
 #include "AudioInfo.h"
@@ -8,12 +7,10 @@
 
 namespace Hunchback::Framework {
 
-class XMLSongBuilder {
+class SongBuilder {
 public:
    static AudioInfo *createAudioInfo(const YAML::Node& themeNode);
    static MusicResource *createMusicResource(const YAML::Node& themeNode, std::string strThemeDir);
 };
 
 } // namespace Hunchback::Framework
-
-#endif  //XMLSONGBUILDER_H

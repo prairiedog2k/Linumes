@@ -1,5 +1,4 @@
-#ifndef PLUGGABLEBACKGROUND_H_
-#define PLUGGABLEBACKGROUND_H_
+﻿#pragma once
 
 #include "BackgroundTemplate.h"
 #include "framework/Theme.h"
@@ -27,5 +26,3 @@ public:
 };
 
 } // namespace Hunchback::Linumes
-
-#endif /*PLUGGABLEBACKGROUND_H_*/

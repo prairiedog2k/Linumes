@@ -1,5 +1,4 @@
-#ifndef SELECTIONBOARD_H_
-#define SELECTIONBOARD_H_
+﻿#pragma once
 
 #include "framework/Rendered.h"
 #include "SimpleBackground.h"
@@ -48,5 +47,3 @@ protected:
 };
 
 } // namespace Hunchback::Linumes
-
-#endif /*SELECTIONBOARD_H_*/

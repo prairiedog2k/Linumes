@@ -1,5 +1,4 @@
-#ifndef RESOURCEHELPER_H_
-#define RESOURCEHELPER_H_
+﻿#pragma once
 
 #include <iostream>
 
@@ -29,5 +28,3 @@ private:
 };
 
 } // namespace Hunchback::Framework
-
-#endif /*RESOURCEHELPER_H_*/

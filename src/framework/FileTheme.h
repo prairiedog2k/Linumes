@@ -1,5 +1,4 @@
-#ifndef XMLTHEME_H_
-#define XMLTHEME_H_
+﻿#pragma once
 
 #include "Theme.h"
 #include "AudioInfo.h"
@@ -8,13 +7,13 @@
 
 namespace Hunchback::Framework {
 
-class XMLTheme : public Theme
+class FileTheme : public Theme
 {
 public:
-    XMLTheme();
-    XMLTheme(std::string resourcefile);
-    XMLTheme(std::string resourcefile, std::string resourcedir);
-    virtual ~XMLTheme() {};
+    FileTheme();
+    FileTheme(std::string resourcefile);
+    FileTheme(std::string resourcefile, std::string resourcedir);
+    virtual ~FileTheme() {};
 
     bool loadResourcesFromNode(const YAML::Node& node);
 
@@ -28,5 +27,3 @@ private:
 };
 
 } // namespace Hunchback::Framework
-
-#endif /*XMLTHEME_H_*/

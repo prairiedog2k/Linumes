@@ -1,5 +1,4 @@
-#ifndef BASERESOURCE_
-#define BASERESOURCE_
+﻿#pragma once
 
 #include <iostream>
 
@@ -15,5 +14,3 @@ public:
 };
 
 } // namespace Hunchback::Framework
-
-#endif /*BASERESOURCE_*/

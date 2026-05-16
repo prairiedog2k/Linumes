@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
  *   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
  *                                                                         *
@@ -17,8 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef POSITIONED_H
-#define POSITIONED_H
+#pragma once
 
 namespace Hunchback::Framework {
 
@@ -38,5 +37,3 @@ public:
 };
 
 } // namespace Hunchback::Framework
-
-#endif

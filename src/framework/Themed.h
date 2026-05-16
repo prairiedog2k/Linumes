@@ -1,5 +1,4 @@
-#ifndef THEMED_H_
-#define THEMED_H_
+﻿#pragma once
 
 #include "Theme.h"
 
@@ -19,5 +18,3 @@ public:
 };
 
 } // namespace Hunchback::Framework
-
-#endif /*THEMED_H_*/

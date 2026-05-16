@@ -54,7 +54,7 @@ void AudioManager::calc_freq(Sint16 *src)
 		*(d++) = (*(sl++) + *(sr++)) >> 1;
 	}
 
-	fft_perform(tmp,tmp_out,state);
+	_fft.perform(tmp, tmp_out);
 	int currLevel = 0;
 	float scale =  256  / log(256);
 	for(i = 0; i < 256; i++) {
@@ -86,7 +86,7 @@ void AudioManager::init() {
 		levels[i] = 0;
 		levelsMax[i] = 0;
 	}
-	state = fft_init();
+
 #ifndef MING_NO_PLUGIN
 	Mix_HookMusic( AudioManager::mixer_monitor,this );
 #else

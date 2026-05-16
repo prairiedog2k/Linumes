@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
  *   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
  *                                                                         *
@@ -17,8 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef THEME_MANAGER_H
-#define THEME_MANAGER_H
+#pragma once
 
 #include <string>
 #include <list>
@@ -43,7 +42,7 @@ public:
   Theme *getBaseTheme() { return _baseTheme.get(); };
   Theme *getCurrentTheme() { return _currentTheme.get(); };
 private:
-  bool initXML();
+  bool initThemes();
   bool initData();
 
   std::string themesFile;
@@ -53,5 +52,3 @@ private:
 };
 
 } // namespace Hunchback::Framework
-
-#endif

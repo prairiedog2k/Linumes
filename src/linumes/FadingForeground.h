@@ -1,5 +1,4 @@
-#ifndef FADINGFOREGROUND_H_
-#define FADINGFOREGROUND_H_
+﻿#pragma once
 
 #include "SimpleBackground.h"
 #include "SDL.h"
@@ -35,5 +34,3 @@ public:
 };
 
 } // namespace Hunchback::Linumes
-
-#endif /*FADINGFOREGROUND_H_*/

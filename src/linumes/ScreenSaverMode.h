@@ -1,5 +1,4 @@
-#ifndef SCREENSAVERMODE_H_
-#define SCREENSAVERMODE_H_
+﻿#pragma once
 
 #include "GameMode.h"
 
@@ -22,5 +21,3 @@ public:
 };
 
 } // namespace Hunchback::Linumes
-
-#endif /*SCREENSAVERMODE_H_*/

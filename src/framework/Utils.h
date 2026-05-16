@@ -1,5 +1,4 @@
-#ifndef UTILS_H
-#define UTILS_H
+﻿#pragma once
 
 #define FALSE 0
 #define TRUE 1
@@ -18,5 +17,3 @@ int xformX(int x);
 int xformY(int y);
 
 } // namespace Hunchback::Framework
-
-#endif

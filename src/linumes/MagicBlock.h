@@ -1,5 +1,4 @@
-#ifndef MAGICBLOCK_H_
-#define MAGICBLOCK_H_
+﻿#pragma once
 
 #include "framework/Rendered.h"
 #include "framework/Themed.h"
@@ -87,5 +86,3 @@ struct mbcomp{
 typedef std::set<MagicBlock ,mbcomp> MagicBlockSet;
 
 } // namespace Hunchback::Linumes
-
-#endif /*MAGICBLOCK_H_*/

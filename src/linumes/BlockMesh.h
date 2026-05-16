@@ -1,6 +1,5 @@
-#include "framework/OpenGLHeaders.h"
-#ifndef BLOCKMESH_H_
-#define BLOCKMESH_H_
+﻿#include "framework/OpenGLHeaders.h"
+#pragma once
 
 namespace Hunchback::Linumes {
 
@@ -14,5 +13,3 @@ public:
 };
 
 } // namespace Hunchback::Linumes
-
-#endif /*BLOCKMESH_H_*/

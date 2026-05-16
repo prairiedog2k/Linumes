@@ -1,5 +1,4 @@
-#ifndef HIGHSCOREMANAGER_H_
-#define HIGHSCOREMANAGER_H_
+﻿#pragma once
 
 #include <map>
 #include <memory>
@@ -36,5 +35,3 @@ public:
 };
 
 } // namespace Hunchback::Linumes
-
-#endif /*HIGHSCOREMANAGER_H_*/

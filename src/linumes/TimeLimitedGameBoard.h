@@ -1,5 +1,4 @@
-#ifndef TIMELIMITEDGAMEBOARD_H_
-#define TIMELIMITEDGAMEBOARD_H_
+﻿#pragma once
 
 #include "GameBoard.h"
 #include "framework/TextureQuad.h"
@@ -27,5 +26,3 @@ protected:
 };
 
 } // namespace Hunchback::Linumes
-
-#endif /*TIMELIMITEDGAMEBOARD_H_*/

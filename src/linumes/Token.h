@@ -1,5 +1,4 @@
-#ifndef TOKEN_H_
-#define TOKEN_H_
+﻿#pragma once
 
 #include "Block.h"
 #include "framework/Timed.h"
@@ -87,5 +86,3 @@ private:
 };
 
 } // namespace Hunchback::Linumes
-
-#endif /*TOKEN_H_*/

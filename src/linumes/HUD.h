@@ -1,5 +1,4 @@
-#ifndef HUD_H_
-#define HUD_H_
+﻿#pragma once
 
 #include "framework/Themed.h"
 #include "framework/Rendered.h"
@@ -26,5 +25,3 @@ private:
 };
 
 } // namespace Hunchback::Linumes
-
-#endif /*HUD_H_*/

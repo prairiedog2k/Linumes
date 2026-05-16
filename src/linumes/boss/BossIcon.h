@@ -1,5 +1,4 @@
-#ifndef BOSSICON_H_
-#define BOSSICON_H_
+﻿#pragma once
 
 #include "linumes/Icon.h"
 
@@ -20,5 +19,3 @@ protected:
 };
 
 } // namespace Hunchback::Linumes
-
-#endif /*BOSSICON_H_*/

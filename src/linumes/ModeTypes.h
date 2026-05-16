@@ -1,5 +1,4 @@
-#ifndef MODE_TYPES_H
-#define MODE_TYPES_H
+﻿#pragma once
 
 //Mode Names
 #define SCREENSAVER_MODE "SCREENSAVER"
@@ -12,5 +11,3 @@
 //Parameter Keys
 #define PK_MODE "mode"
 #define PK_DURATION "duration"
-
-#endif

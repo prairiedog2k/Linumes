@@ -8,10 +8,10 @@
  *   (at your option) any later version.                                   *
  ***************************************************************************/
 #include "ThemeManager.h"
-#include "XMLThemeManagerTypes.h"
-#include "XMLThemeTypes.h"
+#include "ThemeManagerTypes.h"
+#include "ThemeTypes.h"
 #include "Theme.h"
-#include "XMLTheme.h"
+#include "FileTheme.h"
 #include <yaml-cpp/yaml.h>
 #ifdef _WIN32
 #include <direct.h>
@@ -30,7 +30,7 @@ ThemeManager::ThemeManager(std::string filename) : themesFile(filename) {
 
 ThemeManager::~ThemeManager() = default;
 
-bool ThemeManager::initXML() {
+bool ThemeManager::initThemes() {
     bool bRetVal = false;
     if (!_currentTheme) {
         YAML::Node root = YAML::LoadFile(themesFile);
@@ -38,7 +38,7 @@ bool ThemeManager::initXML() {
 
         if (root["base_theme"]) {
             const YAML::Node& bt = root["base_theme"];
-            auto bt_theme = std::make_unique<XMLTheme>();
+            auto bt_theme = std::make_unique<FileTheme>();
             bt_theme->loadResourcesFromNode(bt);
             _baseTheme = std::move(bt_theme);
         }
@@ -64,7 +64,7 @@ bool ThemeManager::initData() {
 }
 
 bool ThemeManager::init() {
-    return initXML();
+    return initThemes();
 }
 
 Theme *ThemeManager::getNamedTheme(std::string themeName) {
@@ -82,9 +82,9 @@ Theme *ThemeManager::getNamedTheme(std::string themeName) {
     for (auto& kv : themeList) {
         if (kv.first == fileName) {
             if (kv.second.empty()) {
-                _currentTheme = std::make_unique<XMLTheme>(kv.first);
+                _currentTheme = std::make_unique<FileTheme>(kv.first);
             } else {
-                _currentTheme = std::make_unique<XMLTheme>(kv.first, kv.second);
+                _currentTheme = std::make_unique<FileTheme>(kv.first, kv.second);
             }
             _currentTheme->setBaseTheme(_baseTheme.get());
             _currentTheme->init();
@@ -98,9 +98,9 @@ Theme *ThemeManager::getNextTheme() {
     std::pair<std::string, std::string> filedirpair = *themeIterator;
 
     if (filedirpair.second.empty()) {
-        _currentTheme = std::make_unique<XMLTheme>(filedirpair.first);
+        _currentTheme = std::make_unique<FileTheme>(filedirpair.first);
     } else {
-        _currentTheme = std::make_unique<XMLTheme>(filedirpair.first, filedirpair.second);
+        _currentTheme = std::make_unique<FileTheme>(filedirpair.first, filedirpair.second);
     }
     if (++themeIterator == themeList.end()) {
         themeIterator = themeList.begin();

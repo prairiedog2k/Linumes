@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
  *   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
  *                                                                         *
@@ -17,8 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef MODE_MANAGER_H
-#define MODE_MANAGER_H
+#pragma once
 
 #include <memory>
 #include "SDL.h"
@@ -60,5 +59,3 @@ private:
 };
 
 } // namespace Hunchback::Framework
-
-#endif

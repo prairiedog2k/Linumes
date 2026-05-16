@@ -1,5 +1,4 @@
-#ifndef FONTINFO_H_
-#define FONTINFO_H_
+﻿#pragma once
 
 namespace Hunchback::Framework {
 
@@ -25,5 +24,3 @@ public:
 };
 
 } // namespace Hunchback::Framework
-
-#endif /*FONTINFO_H_*/

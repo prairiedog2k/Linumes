@@ -1,5 +1,4 @@
-#ifndef FONT_H_
-#define FONT_H_
+﻿#pragma once
 
 #include "SDL.h"
 #include "SDL_ttf.h"
@@ -83,5 +82,3 @@ public:
 };
 
 } // namespace Hunchback::Framework
-
-#endif /*FONT_H_*/

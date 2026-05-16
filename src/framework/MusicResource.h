@@ -1,5 +1,4 @@
-#ifndef MUSICRESOURCE_H_
-#define MUSICRESOURCE_H_
+﻿#pragma once
 
 #include <string>
 #include "SDL.h"
@@ -21,5 +20,3 @@ private:
 };
 
 } // namespace Hunchback::Framework
-
-#endif /*MUSICRESOURCE_H_*/

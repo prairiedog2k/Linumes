@@ -1,5 +1,4 @@
-#ifndef BOSSMODE_H_
-#define BOSSMODE_H_
+﻿#pragma once
 
 #include "linumes/GameMode.h"
 
@@ -15,5 +14,3 @@ public:
 };
 
 } // namespace Hunchback::Linumes
-
-#endif /*BOSSMODE_H_*/

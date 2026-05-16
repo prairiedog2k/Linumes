@@ -1,5 +1,4 @@
-#ifndef STRINGRESOURCE_H_
-#define STRINGRESOURCE_H_
+﻿#pragma once
 
 #include "GenericResource.h"
 #include <string>
@@ -16,5 +15,3 @@ public:
 };
 
 } // namespace Hunchback::Framework
-
-#endif /*STRINGRESOURCE_H_*/

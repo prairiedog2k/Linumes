@@ -1,5 +1,4 @@
-#ifndef BOSSBOARD_H
-#define BOSSBOARD_H
+﻿#pragma once
 
 #include <memory>
 #include <vector>
@@ -42,5 +41,3 @@ public:
 };
 
 } // namespace Hunchback::Linumes
-
-#endif

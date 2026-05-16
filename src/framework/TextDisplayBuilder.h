@@ -1,20 +1,17 @@
-#ifndef XMLTEXTDISPLAYBUILDER_H_
-#define XMLTEXTDISPLAYBUILDER_H_
+﻿#pragma once
 
 #include "BaseTextDisplay.h"
 #include <yaml-cpp/yaml.h>
 
 namespace Hunchback::Framework {
 
-class XMLTextDisplayBuilder
+class TextDisplayBuilder
 {
 private:
-    XMLTextDisplayBuilder() {};
-    virtual ~XMLTextDisplayBuilder() {};
+    TextDisplayBuilder() {};
+    virtual ~TextDisplayBuilder() {};
 public:
   static BaseTextDisplay createTextDisplay(const YAML::Node& node);
 };
 
 } // namespace Hunchback::Framework
-
-#endif /*XMLTEXTDISPLAYBUILDER_H_*/

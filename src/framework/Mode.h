@@ -1,5 +1,4 @@
-#ifndef MODE_H_
-#define MODE_H_
+﻿#pragma once
 
 #include <string>
 #include "SDL.h"
@@ -28,5 +27,3 @@ public:
 };
 
 } // namespace Hunchback::Framework
-
-#endif /*MODE_H_*/

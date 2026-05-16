@@ -1,12 +1,11 @@
-#include "framework/OpenGLHeaders.h"
+﻿#include "framework/OpenGLHeaders.h"
 #include <array>
 #include <memory>
 /***************************************************************************
  *   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
  ***************************************************************************/
-#ifndef BLOCK_H
-#define BLOCK_H
+#pragma once
 
 #include "framework/Rendered.h"
 #include "framework/Themed.h"
@@ -62,5 +61,3 @@ protected:
 };
 
 } // namespace Hunchback::Linumes
-
-#endif

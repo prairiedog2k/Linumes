@@ -1,13 +1,13 @@
-#include "XMLSongBuilder.h"
-#include "XMLSongTypes.h"
-#include "XMLThemeTypes.h"
+#include "SongBuilder.h"
+#include "SongTypes.h"
+#include "ThemeTypes.h"
 #include <cmath>
 #include <cstdlib>
 
 namespace Hunchback::Framework {
 
 // themeNode is the root theme YAML node; song data is under the "song" key.
-AudioInfo *XMLSongBuilder::createAudioInfo(const YAML::Node& themeNode) {
+AudioInfo *SongBuilder::createAudioInfo(const YAML::Node& themeNode) {
     if (!themeNode["song"]) return nullptr;
     const YAML::Node& s = themeNode["song"];
 
@@ -51,7 +51,7 @@ AudioInfo *XMLSongBuilder::createAudioInfo(const YAML::Node& themeNode) {
     return ai;
 }
 
-MusicResource *XMLSongBuilder::createMusicResource(const YAML::Node& themeNode, std::string strThemeDir) {
+MusicResource *SongBuilder::createMusicResource(const YAML::Node& themeNode, std::string strThemeDir) {
     if (!themeNode["song"]) return nullptr;
     const YAML::Node& s = themeNode["song"];
     std::string track = s["track"] ? s["track"].as<std::string>() : "";

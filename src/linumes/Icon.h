@@ -1,5 +1,4 @@
-#ifndef ICON_H_
-#define ICON_H_
+﻿#pragma once
 
 #include "framework/Themed.h"
 #include "framework/Timed.h"
@@ -29,5 +28,3 @@ protected:
 };
 
 } // namespace Hunchback::Linumes
-
-#endif /*ICON_H_*/

@@ -1,6 +1,5 @@
-#include "framework/OpenGLHeaders.h"
-#ifndef TEXTUREQUAD_H_
-#define TEXTUREQUAD_H_
+﻿#include "framework/OpenGLHeaders.h"
+#pragma once
 
 namespace Hunchback::Framework {
 
@@ -31,5 +30,3 @@ public:
 };
 
 } // namespace Hunchback::Framework
-
-#endif

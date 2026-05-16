@@ -1,5 +1,4 @@
-#ifndef GENERICRESOURCE_H_
-#define GENERICRESOURCE_H_
+﻿#pragma once
 
 #include <iostream>
 #include <string>
@@ -21,5 +20,3 @@ public:
 };
 
 } // namespace Hunchback::Framework
-
-#endif /*GENERICRESOURCE_H_*/

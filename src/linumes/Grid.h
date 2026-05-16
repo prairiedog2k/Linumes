@@ -1,5 +1,4 @@
-#ifndef GRID_H_
-#define GRID_H_
+﻿#pragma once
 
 #include <vector>
 #include "framework/Timed.h"
@@ -50,5 +49,3 @@ public:
 };
 
 } // namespace Hunchback::Linumes
-
-#endif /*GRID_H_*/

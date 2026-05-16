@@ -1,9 +1,8 @@
-/*
+﻿/*
  * LinumesConfigurationMode.h
  */
 
-#ifndef LINUMESCONFIGURATIONMODE_H_
-#define LINUMESCONFIGURATIONMODE_H_
+#pragma once
 
 #include <memory>
 #include "framework/Mode.h"
@@ -35,5 +34,3 @@ public:
 };
 
 } // namespace Hunchback::Linumes
-
-#endif /* LINUMESCONFIGURATIONMODE_H_ */

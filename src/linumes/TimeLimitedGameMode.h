@@ -1,5 +1,4 @@
-#ifndef TIMELIMITEDGAMEMODE_H_
-#define TIMELIMITEDGAMEMODE_H_
+﻿#pragma once
 
 #include "GameMode.h"
 
@@ -19,5 +18,3 @@ public:
 };
 
 } // namespace Hunchback::Linumes
-
-#endif /*TIMELIMITEDGAMEMODE_H_*/

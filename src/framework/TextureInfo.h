@@ -1,4 +1,4 @@
-#include "framework/OpenGLHeaders.h"
+﻿#include "framework/OpenGLHeaders.h"
 /***************************************************************************
  *   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
@@ -18,8 +18,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef TEXTUREINFO_H
-#define TEXTUREINFO_H
+#pragma once
 
 namespace Hunchback::Framework {
 
@@ -37,5 +36,3 @@ public:
 };
 
 } // namespace Hunchback::Framework
-
-#endif

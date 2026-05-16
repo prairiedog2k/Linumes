@@ -1,5 +1,4 @@
-#ifndef BACKGROUND_H_
-#define BACKGROUND_H_
+﻿#pragma once
 
 #include "framework/Positioned.h"
 #include "framework/Rendered.h"
@@ -29,5 +28,3 @@ public:
 };
 
 } // namespace Hunchback::Linumes
-
-#endif /*BACKGROUND_H_*/

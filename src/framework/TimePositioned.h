@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
  *   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
  *                                                                         *
@@ -17,8 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef TIME_POSITIONED_H
-#define TIME_POSITIONED_H
+#pragma once
 
 #include "Timed.h"
 #include "Positioned.h"
@@ -52,5 +51,3 @@ protected:
 };
 
 } // namespace Hunchback::Framework
-
-#endif

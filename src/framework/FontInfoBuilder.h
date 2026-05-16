@@ -1,5 +1,4 @@
-#ifndef FONTINFOBUILDER_H_
-#define FONTINFOBUILDER_H_
+﻿#pragma once
 
 #include "FontInfo.h"
 #include <yaml-cpp/yaml.h>
@@ -13,5 +12,3 @@ public:
 };
 
 } // namespace Hunchback::Framework
-
-#endif /*FONTINFOBUILDER_H_*/

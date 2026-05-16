@@ -1,9 +1,8 @@
-/*
+﻿/*
  * LinumesConfigurationBoard.h
  */
 
-#ifndef LINUMESCONFIGURATIONBOARD_H_
-#define LINUMESCONFIGURATIONBOARD_H_
+#pragma once
 
 #include "framework/Rendered.h"
 #include "SimpleBackground.h"
@@ -54,5 +53,3 @@ protected:
 };
 
 } // namespace Hunchback::Linumes
-
-#endif /* LINUMESCONFIGURATIONBOARD_H_ */

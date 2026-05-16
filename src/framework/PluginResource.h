@@ -1,5 +1,4 @@
-#ifndef PLUGINRESOURCE_H_
-#define PLUGINRESOURCE_H_
+﻿#pragma once
 
 #include "GenericResource.h"
 #include <string>
@@ -15,5 +14,3 @@ public:
 };
 
 } // namespace Hunchback::Framework
-
-#endif /*PLUGINRESOURCE_H_*/

@@ -1,6 +1,5 @@
-#include "framework/OpenGLHeaders.h"
-#ifndef OPENGLUTILS_H_
-#define OPENGLUTILS_H_
+﻿#include "framework/OpenGLHeaders.h"
+#pragma once
 
 #include "SDL.h"
 
@@ -11,5 +10,3 @@ void glDisable2D();
 GLuint SDL_GL_LoadTexture(SDL_Surface *surface, GLfloat *texcoord);
 
 } // namespace Hunchback::Framework
-
-#endif /*OPENGLUTILS_H_*/

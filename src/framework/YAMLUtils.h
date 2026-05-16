@@ -1,5 +1,4 @@
-#ifndef XML_UTILS_H
-#define XML_UTILS_H
+﻿#pragma once
 
 #include <string>
 #include <yaml-cpp/yaml.h>
@@ -12,5 +11,3 @@ std::string nodeAttributeAsString(const YAML::Node& node, const char *key);
 bool nodeAttributeAsBool(const YAML::Node& node, const char *key);
 
 } // namespace Hunchback::Framework
-
-#endif

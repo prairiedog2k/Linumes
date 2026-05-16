@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
  *   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
  *                                                                         *
@@ -17,8 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef PIECETYPES_H
-#define PIECETYPES_H
+#pragma once
 
 #define PIECE_MASK0 "texture_piecemask0"
 #define PIECE_MASK1 "texture_piecemask1"
@@ -29,5 +28,3 @@
 #define PIECE_SPECIAL1 "texture_special1"
 #define PIECE_SCANNED0 "texture_scanned0"
 #define PIECE_SCANNED1 "texture_scanned1"
-
-#endif

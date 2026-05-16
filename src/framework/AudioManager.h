@@ -1,11 +1,10 @@
-#ifndef AUDIOMANAGER_H_
-#define AUDIOMANAGER_H_
+﻿#pragma once
 
 #include <string>
 #include "Themed.h"
 #include "MusicResource.h"
 #include "AudioResource.h"
-#include "fft.h"
+#include "FFT.h"
 
 namespace Hunchback::Framework {
 
@@ -40,12 +39,10 @@ public:
 private:
   void checkTheme();
   void calc_freq(Sint16 *_stream);
-  fft_state *state;
+  FFT _fft;
   //begin static
 public:
   static void mixer_monitor(void *udata, Uint8 *_stream, int _len);
 };
 
 } // namespace Hunchback::Framework
-
-#endif /*AUDIOMANAGER_H_*/

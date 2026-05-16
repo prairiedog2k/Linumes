@@ -1,5 +1,5 @@
-#include "XMLTheme.h"
-#include "XMLThemeTypes.h"
+#include "FileTheme.h"
+#include "ThemeTypes.h"
 #include "AudioResource.h"
 #include "MusicResource.h"
 #include "TextureResource.h"
@@ -8,27 +8,27 @@
 #include "PluginResource.h"
 #include "FontInfo.h"
 #include "FontInfoBuilder.h"
-#include "XMLSongBuilder.h"
-#include "XMLSongTypes.h"
+#include "SongBuilder.h"
+#include "SongTypes.h"
 #include <string>
 #include <cstdlib>
 #include <fstream>
 #include "SDL.h"
-#include "XMLUtils.h"
+#include "YAMLUtils.h"
 
 namespace Hunchback::Framework {
 
-XMLTheme::XMLTheme() : Theme(std::string("")), _resourcedir(std::string("")) {
+FileTheme::FileTheme() : Theme(std::string("")), _resourcedir(std::string("")) {
 }
 
-XMLTheme::XMLTheme(std::string resourcefile) : Theme(resourcefile) {
+FileTheme::FileTheme(std::string resourcefile) : Theme(resourcefile) {
 }
 
-XMLTheme::XMLTheme(std::string resourcefile, std::string resourcedir)
+FileTheme::FileTheme(std::string resourcefile, std::string resourcedir)
     : Theme(resourcefile), _resourcedir(resourcedir) {
 }
 
-bool XMLTheme::loadResourcesFromNode(const YAML::Node& xMainNode) {
+bool FileTheme::loadResourcesFromNode(const YAML::Node& xMainNode) {
     if (!xMainNode) return false;
 
     if (xMainNode["dir"]) {
@@ -39,7 +39,7 @@ bool XMLTheme::loadResourcesFromNode(const YAML::Node& xMainNode) {
     }
 
     // music resource
-    MusicResource *mr = XMLSongBuilder::createMusicResource(xMainNode, themedir);
+    MusicResource *mr = SongBuilder::createMusicResource(xMainNode, themedir);
     if (mr != nullptr) {
         std::string songName = "audio_song";
         if (xMainNode["song"] && xMainNode["song"]["name"]) {
@@ -90,7 +90,7 @@ bool XMLTheme::loadResourcesFromNode(const YAML::Node& xMainNode) {
     return true;
 }
 
-bool XMLTheme::loadResources() {
+bool FileTheme::loadResources() {
     std::string path = themefile;
     if (_resourcedir != "") {
         path = _resourcedir + "/" + themefile;
@@ -99,11 +99,11 @@ bool XMLTheme::loadResources() {
     return loadResourcesFromNode(root);
 }
 
-bool XMLTheme::init() {
+bool FileTheme::init() {
     return loadResources();
 }
 
-void XMLTheme::release() {
+void FileTheme::release() {
     Theme::release();
 }
 

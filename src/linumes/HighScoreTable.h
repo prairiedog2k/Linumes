@@ -1,5 +1,4 @@
-#ifndef HIGHSCORETABLE_H_
-#define HIGHSCORETABLE_H_
+﻿#pragma once
 
 #include <string>
 #include <set>
@@ -34,5 +33,3 @@ public:
 };
 
 } // namespace Hunchback::Linumes
-
-#endif /*HIGHSCORETABLE_H_*/

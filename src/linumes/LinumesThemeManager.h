@@ -1,5 +1,4 @@
-#ifndef LINUMESTHEMEMANAGER_H_
-#define LINUMESTHEMEMANAGER_H_
+﻿#pragma once
 
 #include <memory>
 #include "framework/ThemeManager.h"
@@ -20,5 +19,3 @@ public:
 };
 
 } // namespace Hunchback::Linumes
-
-#endif /*LINUMESTHEMEMANAGER_H_*/

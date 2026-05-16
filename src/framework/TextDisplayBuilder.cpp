@@ -1,11 +1,11 @@
-#include "XMLTextDisplayBuilder.h"
+#include "TextDisplayBuilder.h"
 #include "TextDisplayTypes.h"
 #include <string>
 #include <cstdlib>
 
 namespace Hunchback::Framework {
 
-BaseTextDisplay XMLTextDisplayBuilder::createTextDisplay(const YAML::Node& node) {
+BaseTextDisplay TextDisplayBuilder::createTextDisplay(const YAML::Node& node) {
     BaseTextDisplay baseTextDisplay;
     if (node) {
         std::string strType = node[TEXT_DISPLAY_ATTR_TYPE] ? node[TEXT_DISPLAY_ATTR_TYPE].as<std::string>() : "";

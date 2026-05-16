@@ -1,9 +1,8 @@
-/***************************************************************************
+﻿/***************************************************************************
  *   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
  ***************************************************************************/
-#ifndef GAMEPIECE_H
-#define GAMEPIECE_H
+#pragma once
 
 #include "framework/Rendered.h"
 #include "framework/TimePositioned.h"
@@ -79,5 +78,3 @@ public:
 };
 
 } // namespace Hunchback::Linumes
-
-#endif

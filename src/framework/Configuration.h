@@ -1,12 +1,11 @@
-/*
+﻿/*
  * Configuration.h
  *
  *  Created on: Apr 7, 2011
  *      Author: rigriff
  */
 
-#ifndef CONFIGURATION_H_
-#define CONFIGURATION_H_
+#pragma once
 
 #include <string>
 #include <map>
@@ -30,5 +29,3 @@ public:
 };
 
 } // namespace Hunchback::Framework
-
-#endif /* CONFIGURATION_H_ */

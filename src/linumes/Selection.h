@@ -1,9 +1,8 @@
-/*
+﻿/*
  * Selection.h
  */
 
-#ifndef SELECTION_H_
-#define SELECTION_H_
+#pragma once
 
 #include <string>
 #include <map>
@@ -29,5 +28,3 @@ void buildSelectionListFromYaml(std::string selectionFile,
         std::map< std::string, std::list<Option> > &optionMap);
 
 } // namespace Hunchback::Linumes
-
-#endif /* SELECTION_H_ */

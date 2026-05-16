@@ -1,9 +1,8 @@
-/***************************************************************************
+﻿/***************************************************************************
  *   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
  ***************************************************************************/
-#ifndef GAMEBOARD_H
-#define GAMEBOARD_H
+#pragma once
 
 #include "GamePiece.h"
 #include "framework/Rendered.h"
@@ -202,5 +201,3 @@ protected:
 };
 
 } // namespace Hunchback::Linumes
-
-#endif

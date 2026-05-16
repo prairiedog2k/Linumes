@@ -1,6 +1,5 @@
-#include "framework/OpenGLHeaders.h"
-#ifndef BOSS_H_
-#define BOSS_H_
+﻿#include "framework/OpenGLHeaders.h"
+#pragma once
 
 #include <string>
 #include <vector>
@@ -111,5 +110,3 @@ public:
 };
 
 } // namespace Hunchback::Linumes
-
-#endif /*BOSS_H_*/

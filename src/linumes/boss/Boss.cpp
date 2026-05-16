@@ -6,8 +6,8 @@
 
 #include "BossModeTypes.h"
 
-#include "framework/XMLUtils.h"
-#include "framework/XMLThemeTypes.h"
+#include "framework/YAMLUtils.h"
+#include "framework/ThemeTypes.h"
 #include "framework/TextureResource.h"
 #include "framework/AudioResource.h"
 

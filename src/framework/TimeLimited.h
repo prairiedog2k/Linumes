@@ -1,5 +1,4 @@
-#ifndef TIMELIMITED_H_
-#define TIMELIMITED_H_
+﻿#pragma once
 
 namespace Hunchback::Framework {
 
@@ -21,5 +20,3 @@ public:
 };
 
 } // namespace Hunchback::Framework
-
-#endif /*TIMELIMITED_H_*/

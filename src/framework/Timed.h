@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
  *   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
  *                                                                         *
@@ -17,8 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef TIMED_H
-#define TIMED_H
+#pragma once
 
 #include <iostream>
 
@@ -43,5 +42,3 @@ public:
 };
 
 } // namespace Hunchback::Framework
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef BACKGROUND_TEMPLATE_H
-#define BACKGROUND_TEMPLATE_H
+﻿#pragma once
 
 #include "framework/Theme.h"
 
@@ -29,5 +28,3 @@ public:
 };
 
 } // namespace Hunchback::Linumes
-
-#endif /*BACKGROUND_*/

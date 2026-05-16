@@ -1,7 +1,7 @@
 #include "HUD.h"
 #include "HUDTextTypes.h"
 #include "framework/TextDisplayTypes.h"
-#include "framework/XMLTextDisplayBuilder.h"
+#include "framework/TextDisplayBuilder.h"
 #include "framework/ResourceHelper.h"
 #include "framework/FontResource.h"
 #include "framework/Font.h"
@@ -35,7 +35,7 @@ void HUD::loadHudConfig(std::string hudConfigFile) {
     for (const auto& node : root["text_displays"]) {
         std::string name = node[TEXT_DISPLAY_ATTR_NAME] ? node[TEXT_DISPLAY_ATTR_NAME].as<std::string>() : "";
         if (!name.empty()) {
-            HF::BaseTextDisplay btd = HF::XMLTextDisplayBuilder::createTextDisplay(node);
+            HF::BaseTextDisplay btd = HF::TextDisplayBuilder::createTextDisplay(node);
             textDisplays[name] = btd;
         }
     }

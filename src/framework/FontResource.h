@@ -1,5 +1,4 @@
-#ifndef FONTRESOURCE_H_
-#define FONTRESOURCE_H_
+﻿#pragma once
 
 #include "GenericResource.h"
 #include "Font.h"
@@ -20,5 +19,3 @@ public:
 };
 
 } // namespace Hunchback::Framework
-
-#endif /*FONTRESOURCE_H_*/

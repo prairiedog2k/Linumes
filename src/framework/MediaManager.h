@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
  *   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
  *                                                                         *
@@ -17,8 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef MEDIA_MANAGER_H
-#define MEDIA_MANAGER_H
+#pragma once
 
 #include "SDL.h"
 #include "Configuration.h"
@@ -62,5 +61,3 @@ public:
 };
 
 } // namespace Hunchback::Framework
-
-#endif

@@ -1,6 +1,5 @@
-#include "framework/OpenGLHeaders.h"
-#ifndef SCANNER_H_
-#define SCANNER_H_
+﻿#include "framework/OpenGLHeaders.h"
+#pragma once
 
 #include "framework/Rendered.h"
 #include "framework/TimePositioned.h"
@@ -42,5 +41,3 @@ public:
 };
 
 } // namespace Hunchback::Linumes
-
-#endif /*SCANNER_H_*/

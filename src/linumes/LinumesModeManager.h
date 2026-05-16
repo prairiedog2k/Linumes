@@ -1,5 +1,4 @@
-#ifndef LINUMESMODEMANAGER_H_
-#define LINUMESMODEMANAGER_H_
+﻿#pragma once
 
 #include "framework/ModeManager.h"
 #include "framework/Mode.h"
@@ -28,5 +27,3 @@ public:
 };
 
 } // namespace Hunchback::Linumes
-
-#endif /*LINUMESMODEMANAGER_H_*/

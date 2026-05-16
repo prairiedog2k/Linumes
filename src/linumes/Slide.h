@@ -1,10 +1,6 @@
-#ifndef SLIDE_H
-#define SLIDE_H
+﻿#pragma once
 
 enum Slide {
 	LEFT = 0,
 	RIGHT = 1
 };
-
-#endif
-

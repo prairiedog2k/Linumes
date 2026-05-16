@@ -1,5 +1,4 @@
-#ifndef GAMEBOARDSCREENSAVER_H_
-#define GAMEBOARDSCREENSAVER_H_
+﻿#pragma once
 
 #include "GameBoard.h"
 
@@ -25,5 +24,3 @@ public:
 };
 
 } // namespace Hunchback::Linumes
-
-#endif /*GAMEBOARDSCREENSAVER_H_*/

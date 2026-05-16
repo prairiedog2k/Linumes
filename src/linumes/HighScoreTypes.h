@@ -1,5 +1,4 @@
-#ifndef HIGHSCORETYPES_H_
-#define HIGHSCORETYPES_H_
+﻿#pragma once
 
 #define BASE_HI_REF "base_hi"
 
@@ -10,5 +9,3 @@
 #define HI_ATTR_MAX_LISTING "max_listing"
 #define HI_ATTR_NAME "name"
 #define HI_ATTR_SCORE "score"
-
-#endif /*HIGHSCORETYPES_H_*/

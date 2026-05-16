@@ -19,8 +19,6 @@ find_package(yaml-cpp     CONFIG REQUIRED)
 # Bundled third-party sources
 # ---------------------------------------------------------------------------
 
-set(XMMS_SOURCES      xmms/fft.c)
-
 # ---------------------------------------------------------------------------
 # Game sources
 # ---------------------------------------------------------------------------
@@ -56,10 +54,11 @@ set(FRAMEWORK_SOURCES
     src/framework/TimePositioned.cpp
     src/framework/Timed.cpp
     src/framework/Utils.cpp
-    src/framework/XMLSongBuilder.cpp
-    src/framework/XMLTextDisplayBuilder.cpp
-    src/framework/XMLTheme.cpp
-    src/framework/XMLUtils.cpp
+    src/framework/FFT.cpp
+    src/framework/FileTheme.cpp
+    src/framework/SongBuilder.cpp
+    src/framework/TextDisplayBuilder.cpp
+    src/framework/YAMLUtils.cpp
 )
 
 set(GAME_SOURCES
@@ -105,12 +104,10 @@ set(GAME_SOURCES
 add_executable(Linumes
     ${FRAMEWORK_SOURCES}
     ${GAME_SOURCES}
-    ${XMMS_SOURCES}
 )
 
 target_include_directories(Linumes PRIVATE
     ${CMAKE_SOURCE_DIR}/src
-    ${CMAKE_SOURCE_DIR}/xmms
     ${OPENGL_INCLUDE_DIR}
 )
 

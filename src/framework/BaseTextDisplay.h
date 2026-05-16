@@ -1,5 +1,4 @@
-#ifndef BASETEXTDISPLAY_H_
-#define BASETEXTDISPLAY_H_
+﻿#pragma once
 
 #include <string>
 #include <sstream>
@@ -36,5 +35,3 @@ public:
 };
 
 } // namespace Hunchback::Framework
-
-#endif /*BASETEXTDISPLAY_H_*/

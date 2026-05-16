@@ -1,5 +1,4 @@
-#ifndef GAMEMODE_H_
-#define GAMEMODE_H_
+﻿#pragma once
 
 #include <memory>
 #include "framework/Mode.h"
@@ -26,5 +25,3 @@ public:
 };
 
 } // namespace Hunchback::Linumes
-
-#endif /*GAMEMODE_H_*/
