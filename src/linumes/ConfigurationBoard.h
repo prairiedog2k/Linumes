@@ -1,12 +1,8 @@
-/*
+﻿/*
  * LinumesConfigurationBoard.h
- *
- *  Created on: Apr 7, 2011
- *      Author: rigriff
  */
 
-#ifndef LINUMESCONFIGURATIONBOARD_H_
-#define LINUMESCONFIGURATIONBOARD_H_
+#pragma once
 
 #include "framework/Rendered.h"
 #include "SimpleBackground.h"
@@ -20,14 +16,17 @@
 #include <list>
 #include <map>
 
+namespace Hunchback::Linumes {
+namespace HF = Hunchback::Framework;
+
 class ConfigurationBoard: public SelectionBoard {
 private:
 	bool _optionMode;
 protected:
-	Configuration *_configuration;
+	HF::Configuration *_configuration;
 	std::list<Option>::iterator _currentOption;
 public:
-	ConfigurationBoard(std::string name, Configuration *configuration);
+	ConfigurationBoard(std::string name, HF::Configuration *configuration);
 	virtual ~ConfigurationBoard();
 
 	virtual void init();
@@ -53,4 +52,4 @@ protected:
 	Option getOption();
 };
 
-#endif /* LINUMESCONFIGURATIONBOARD_H_ */
+} // namespace Hunchback::Linumes

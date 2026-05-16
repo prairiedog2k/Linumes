@@ -1,8 +1,8 @@
 #include <cstdlib>
 #include <iostream>
+#include <memory>
 
 #include "LinumesModeManager.h"
-#include "xmlParser.h"
 
 #include "boss/Boss.h"
 
@@ -12,21 +12,20 @@
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
                    LPSTR lpCmdLine, int iCmdShow)
 {
-    return main(0, NULL);
+    return main(0, nullptr);
 }
 #endif
-using namespace std;
-int main (int argc, char *argv[]) {
-	std::cout << "LINUMES developer@mountain 2007" << endl;
-#ifdef DEBUG
-	std::cout << "(DEBUG MODE ENABLED)" << endl;
-#endif 	
-	
-	ModeManager *lmm = new LinumesModeManager( "LinumesConfiguration.xml");
-	if ( lmm->init() ) {
-		lmm->run();
-	}	
-	delete lmm;
 
-	return 0;
+int main(int argc, char *argv[]) {
+    std::cout << "LINUMES developer@mountain 2007" << std::endl;
+#ifdef DEBUG
+    std::cout << "(DEBUG MODE ENABLED)" << std::endl;
+#endif
+
+    auto lmm = std::make_unique<Hunchback::Linumes::LinumesModeManager>("resources/LinumesConfiguration.yaml");
+    if (lmm->init()) {
+        lmm->run();
+    }
+
+    return 0;
 }

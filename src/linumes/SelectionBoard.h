@@ -1,5 +1,4 @@
-#ifndef SELECTIONBOARD_H_
-#define SELECTIONBOARD_H_
+﻿#pragma once
 
 #include "framework/Rendered.h"
 #include "SimpleBackground.h"
@@ -10,13 +9,17 @@
 #include <string>
 #include <list>
 #include <map>
+#include <vector>
 
-class SelectionBoard : public Rendered, public Themed
-{	
+namespace Hunchback::Linumes {
+namespace HF = Hunchback::Framework;
+
+class SelectionBoard : public HF::Rendered, public HF::Themed
+{
 protected:
 	std::string _name;
-	TextureQuad _quad;
-	auto_ptr<SimpleBackground> _bg;
+	HF::TextureQuad _quad;
+	std::unique_ptr<SimpleBackground> _bg;
 	std::list< std::pair<std::string, Selection > > _selectionList;
 	std::list< std::pair<std::string, Selection > >::iterator _currentSelection;
 	//selection name to available options
@@ -27,7 +30,7 @@ public:
 	SelectionBoard(std::string name);
 	virtual ~SelectionBoard();
 
-	virtual void init(); 
+	virtual void init();
 	virtual void Up();
 	virtual void Down();
 	virtual void update(unsigned int currentTime);
@@ -43,4 +46,4 @@ protected:
 	Selection getSelection();
 };
 
-#endif /*SELECTIONBOARD_H_*/
+} // namespace Hunchback::Linumes

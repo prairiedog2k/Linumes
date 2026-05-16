@@ -1,5 +1,4 @@
-#ifndef MUSICRESOURCE_H_
-#define MUSICRESOURCE_H_
+﻿#pragma once
 
 #include <string>
 #include "SDL.h"
@@ -7,8 +6,7 @@
 #include "GenericResource.h"
 #include "AudioInfo.h"
 
-
-using namespace std;
+namespace Hunchback::Framework {
 
 class MusicResource : public GenericResource<void *> {
 public:
@@ -21,4 +19,4 @@ private:
 	AudioInfo *audioInfo;
 };
 
-#endif /*MUSICRESOURCE_H_*/
+} // namespace Hunchback::Framework

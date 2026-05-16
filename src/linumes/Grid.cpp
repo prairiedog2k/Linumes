@@ -3,74 +3,75 @@
 #include "framework/TextureResource.h"
 #include "framework/ResourceHelper.h"
 
-Grid::Grid() : Timed(), Rendered(true), Positioned(), Themed(), _quad(), audioManager(NULL)
+
+namespace Hunchback::Linumes {
+namespace HF = Hunchback::Framework;
+
+
+Grid::Grid() : HF::Timed(), HF::Rendered(true), HF::Positioned(), HF::Themed(), _quad(), audioManager(nullptr)
 {
 }
 
-Grid::Grid(float posx, float posy, float dim, int columns, int rows) : 
-	Timed(), 
-	Rendered(true), 
-	Positioned(posx, posy), 
-	Themed(), 
+Grid::Grid(float posx, float posy, float dim, int columns, int rows) :
+	HF::Timed(),
+	HF::Rendered(true),
+	HF::Positioned(posx, posy),
+	HF::Themed(),
 	dimension(dim),
 	boardcolumns(columns),
 	boardrows(rows),
 	hasMask(false),
 	_quad(),
-	audioManager(NULL),
+	audioManager(nullptr),
 	currTick(0),
+	lastLevel(columns, 0.0f),
+	lastLevelTick(columns, 0u),
 	decay(0.00002f)
 	{
-	lastLevel = new float[columns];
-	lastLevelTick = new unsigned int[columns];
 	}
 
-Grid::~Grid()
-{
-	delete[] lastLevel;
-	delete[] lastLevelTick;
-}
+Grid::~Grid() = default;
 
-void Grid::setTheme(Theme *theTheme) {
-	Themed::setTheme(theTheme);
-	hasMask = (NULL != ResourceHelper::getTextureResource(getTheme(), std::string (BOARD_GRID_MASK)));
+void Grid::setTheme(HF::Theme *theTheme) {
+	HF::Themed::setTheme(theTheme);
+	hasMask = (nullptr != HF::ResourceHelper::getTextureResource(getTheme(), std::string (BOARD_GRID_MASK)));
 }
 
 GLuint Grid::getMask() {
-	TextureResource * tr = ResourceHelper::getTextureResource(getTheme(), std::string (BOARD_GRID_MASK));
-	if (NULL == tr) {
+	HF::TextureResource * tr = HF::ResourceHelper::getTextureResource(getTheme(), std::string (BOARD_GRID_MASK));
+	if (nullptr == tr) {
 		return 0;
 	}
 	return tr->getResource();
 }
 
 GLuint Grid::getTexture() {
-	TextureResource * tr = ResourceHelper::getTextureResource(getTheme(), std::string (BOARD_GRID));
-	if (NULL == tr) {
+	HF::TextureResource * tr = HF::ResourceHelper::getTextureResource(getTheme(), std::string (BOARD_GRID));
+	if (nullptr == tr) {
 		return 0;
 	}
 	return tr->getResource();
 }
 
 GLuint Grid::getSideBarTexture(bool mask) {
-	TextureResource *tr = ResourceHelper::getTextureResource(getTheme(), std::string ( mask ? BOARD_SIDEBAR_MASK : BOARD_SIDEBAR));
-	if (NULL == tr) {
+	HF::TextureResource *tr = HF::ResourceHelper::getTextureResource(getTheme(), std::string ( mask ? BOARD_SIDEBAR_MASK : BOARD_SIDEBAR));
+	if (nullptr == tr) {
 		return 0;
 	}
 	return tr->getResource();
 }
 
 GLuint Grid::getHeaderTexture(bool mask) {
-	TextureResource *tr = ResourceHelper::getTextureResource(getTheme(), std::string ( mask ? BOARD_HEADER_MASK : BOARD_HEADER));
-	if (NULL == tr) {
+	HF::TextureResource *tr = HF::ResourceHelper::getTextureResource(getTheme(), std::string ( mask ? BOARD_HEADER_MASK : BOARD_HEADER));
+	if (nullptr == tr) {
 		return 0;
 	}
 	return tr->getResource();
 }
 
 GLuint Grid::getAudioLevelTexture(bool mask) {
-	TextureResource *tr = ResourceHelper::getTextureResource(getTheme(), std::string ( mask ? BOARD_AUDIO_LEVEL_MASK : BOARD_AUDIO_LEVEL));
-	if (NULL == tr) {
+	HF::TextureResource *tr = HF::ResourceHelper::getTextureResource(getTheme(), std::string ( mask ? BOARD_AUDIO_LEVEL_MASK : BOARD_AUDIO_LEVEL));
+	if (nullptr == tr) {
 		return 0;
 	}
 	return tr->getResource();
@@ -84,8 +85,8 @@ void Grid::drawDecorations() {
 	glBindTexture( GL_TEXTURE_2D, getSideBarTexture(true) );		
 	glBlendFunc(GL_DST_COLOR,GL_ZERO);
 
-	GLfloat glx = ((GLfloat)getX()) - ( (boardcolumns * dimension) / 2.0f );
-	GLfloat gly = ((GLfloat)getY());
+	GLfloat glx = static_cast<GLfloat>(getX()) - ( (boardcolumns * dimension) / 2.0f );
+	GLfloat gly = static_cast<GLfloat>(getY());
 	glPushMatrix();
 	glTranslatef(glx,gly,-5.0f);
 
@@ -130,8 +131,8 @@ void Grid::drawDecorations() {
 	glBindTexture( GL_TEXTURE_2D, getHeaderTexture(true) );		
 	glBlendFunc(GL_DST_COLOR,GL_ZERO);
 
-	glx = ((GLfloat)getX()) - ( (boardcolumns * dimension) / 2 );
-	gly = ((GLfloat)getY());
+	glx = static_cast<GLfloat>(getX()) - ( (boardcolumns * dimension) / 2 );
+	gly = static_cast<GLfloat>(getY());
 	glPushMatrix();
 	glTranslatef(glx,gly,-5.0f);
 
@@ -172,7 +173,7 @@ void Grid::drawDecorations() {
 }
 
 void Grid::drawAudioLevels() {
-	if (NULL == audioManager) {
+	if (nullptr == audioManager) {
 		return;
 	}
 
@@ -196,10 +197,10 @@ void Grid::drawAudioLevels() {
 			lastLevel[i] -= decay * (currTick - lastLevelTick[i]);
 			soundLevel = lastLevel[i];
 		}
-		int level = (int) ( ((float) boardrows * 3) * soundLevel);
+		int level = static_cast<int>(static_cast<float>(boardrows) * 3 * soundLevel);
 		for (int j = 0; j < level; j++) {
-			glx = ((GLfloat)getX()) + (const float)i*dimension - ( (boardcolumns * dimension) / 2 );
-			gly = ((GLfloat)getY()) + (const float)j*dimension/3.0f - ( (boardrows * dimension) / 2 );
+			glx = static_cast<GLfloat>(getX()) + static_cast<float>(i)*dimension - ( (boardcolumns * dimension) / 2 );
+			gly = static_cast<GLfloat>(getY()) + static_cast<float>(j)*dimension/3.0f - ( (boardrows * dimension) / 2 );
 
 
 			glPushMatrix();
@@ -235,8 +236,8 @@ void Grid::drawGrid() {
 
 	for (int i = 0; i < boardcolumns; i++) {
 		for (int j = 0; j < boardrows; j++) {
-			glx = ((GLfloat)getX()) + (const float)i*dimension - ( (boardcolumns * dimension) / 2 );
-			gly = ((GLfloat)getY()) + (const float)j*dimension - ( (boardrows * dimension) / 2 );
+			glx = static_cast<GLfloat>(getX()) + static_cast<float>(i)*dimension - ( (boardcolumns * dimension) / 2 );
+			gly = static_cast<GLfloat>(getY()) + static_cast<float>(j)*dimension - ( (boardrows * dimension) / 2 );
 			glPushMatrix();
 			glTranslatef(glx,gly,-5.0f);
 			/* Start Drawing Quads */
@@ -278,3 +279,6 @@ void Grid::Draw() {
 		glEnable(GL_DEPTH_TEST);
 	}	
 }
+
+
+} // namespace Hunchback::Linumes

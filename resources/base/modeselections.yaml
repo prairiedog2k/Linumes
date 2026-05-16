@@ -1,0 +1,28 @@
+selections:
+  - display: "Boss Mode"
+    params:
+      mode: BOSS
+  - display: "Time Limited Mode (1 Minute)"
+    params:
+      mode: TIMELIMITED
+      duration: "60"
+  - display: "Time Limited Mode (3 Minutes)"
+    params:
+      mode: TIMELIMITED
+      duration: "180"
+  - display: "Time Limited Mode (5 Minutes)"
+    params:
+      mode: TIMELIMITED
+      duration: "300"
+  - display: "Time Limited Mode (10 Minutes)"
+    params:
+      mode: TIMELIMITED
+      duration: "600"
+  - display: "Free-Style Mode"
+    params:
+      mode: GAME
+  - display: "Configuration"
+    params:
+      mode: CONFIG
+  - display: "Exit linumes"
+    type: EXIT

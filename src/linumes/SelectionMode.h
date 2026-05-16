@@ -1,31 +1,34 @@
-#ifndef SELECTIONMODE_H_
-#define SELECTIONMODE_H_
+﻿#pragma once
 
+#include <map>
+#include <memory>
 #include "framework/Mode.h"
 #include "LinumesThemeManager.h"
 #include "SelectionBoard.h"
-#include <map>
 
-class SelectionMode : public Mode
+namespace Hunchback::Linumes {
+namespace HF = Hunchback::Framework;
+
+class SelectionMode : public HF::Mode
 {
 protected:
-	ThemeManager *_themeManager;
+	std::unique_ptr<HF::ThemeManager> _themeManager;
 private:
-	SelectionBoard *_selectionBoard;
+	std::unique_ptr<SelectionBoard> _selectionBoard;
 	unsigned int _currentTick;
-	
 
-	
+
+
 public:
 	SelectionMode();
 	virtual ~SelectionMode();
-	
-	void handleKeyUp( SDL_keysym *keysym );
-	void handleKeyDown( SDL_keysym *keysym );
+
+	void handleKeyUp( SDL_Keysym *keysym );
+	void handleKeyDown( SDL_Keysym *keysym );
 	bool init();
-	void update(unsigned int currTick);		
-	
+	void update(unsigned int currTick);
+
 	std::pair<std::string, std::map<std::string,std::string> > getSelection();
 };
 
-#endif /*SELECTIONMODE_H_*/
+} // namespace Hunchback::Linumes

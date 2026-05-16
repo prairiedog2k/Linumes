@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
  *   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
  *                                                                         *
@@ -17,10 +17,9 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef MODE_MANAGER_H
-#define MODE_MANAGER_H
+#pragma once
 
-
+#include <memory>
 #include "SDL.h"
 #include <string>
 
@@ -29,21 +28,21 @@
 #include "Mode.h"
 #include "Configuration.h"
 
-using namespace std;
+namespace Hunchback::Framework {
 
 class ModeManager {
 
 protected:
-	Mode *currMode;
+	std::unique_ptr<Mode> currMode;
 	virtual bool initContext() = 0;
 	virtual void update() = 0;
-	virtual void handleKeyUp( SDL_keysym *keysym ) = 0;
-	virtual void handleKeyDown( SDL_keysym *keysym ) = 0;   
+	virtual void handleKeyUp( SDL_Keysym *keysym ) = 0;
+	virtual void handleKeyDown( SDL_Keysym *keysym ) = 0;
 
 	bool isActive;
 	bool isDone;
 
-	MediaManager *mediamanager;
+	std::unique_ptr<MediaManager> mediamanager;
 	Configuration configuration;
 public:
 	ModeManager();
@@ -53,10 +52,10 @@ public:
 
 	virtual bool init();
 	virtual bool release();
-	void run(); 
- 
-private: 
+	void run();
+
+private:
 	void assertValidMode();
 };
 
-#endif
+} // namespace Hunchback::Framework

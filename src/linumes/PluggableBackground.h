@@ -1,18 +1,20 @@
-#ifndef PLUGGABLEBACKGROUND_H_
-#define PLUGGABLEBACKGROUND_H_
+﻿#pragma once
 
 #include "BackgroundTemplate.h"
 #include "framework/Theme.h"
 
+namespace Hunchback::Linumes {
+namespace HF = Hunchback::Framework;
+
 class PluggableBackground : public BackgroundTemplate
 {
 	BackgroundTemplate *_background;
-	Theme *_theme;	
+	HF::Theme *_theme;
 	bool hasTemplate;
 public:
 	PluggableBackground();
 	virtual ~PluggableBackground();
-  virtual void setTheme(Theme *theme);
+  virtual void setTheme(HF::Theme *theme);
   virtual void init();
   virtual void release();
 	virtual void Draw();
@@ -23,4 +25,4 @@ public:
   virtual void update();
 };
 
-#endif /*PLUGGABLEBACKGROUND_H_*/
+} // namespace Hunchback::Linumes

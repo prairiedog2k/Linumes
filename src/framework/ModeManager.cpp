@@ -17,40 +17,32 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#include <iostream> 
+#include <iostream>
+#include <memory>
 #include "ModeManager.h"
 #include <cassert>
 #include <cstdlib>
 
 #include "ScreenDimensions.h"
 
-ModeManager::ModeManager(): currMode(0), isActive(true), isDone(false) 
+namespace Hunchback::Framework {
+
+ModeManager::ModeManager(): isActive(true), isDone(false)
 {
-	mediamanager = new MediaManager(SCREEN_DIM_W,SCREEN_DIM_H,SCREEN_DIM_BPP);
+	mediamanager = std::make_unique<MediaManager>(SCREEN_DIM_W, SCREEN_DIM_H, SCREEN_DIM_BPP);
 	mediamanager->init();
 }
 
-ModeManager::ModeManager(std::string configurationFile) : currMode(0), isActive(true), isDone(false),configuration(configurationFile)
+ModeManager::ModeManager(std::string configurationFile) : isActive(true), isDone(false), configuration(configurationFile)
 {
 	configuration.init();
-	mediamanager = new MediaManager(configuration);
+	mediamanager = std::make_unique<MediaManager>(configuration);
 	mediamanager->init();
-
 }
 
-ModeManager::~ ModeManager()
+ModeManager::~ModeManager()
 {
-
-	if (currMode != NULL) {
-		delete currMode;
-	}
-
 	configuration.release();
-
-	if (mediamanager != NULL) {
-		mediamanager->release();
-		delete mediamanager;
-	}
 }
 
 bool ModeManager::init()
@@ -83,7 +75,7 @@ void ModeManager::run()
 	
 	SDL_Joystick* joy = mediamanager->getJoyStick();
 	
-	SDL_keysym joyKey = { 0, SDLK_UNKNOWN, KMOD_NONE, 0};
+	SDL_Keysym joyKey = { SDL_SCANCODE_UNKNOWN, SDLK_UNKNOWN, KMOD_NONE, 0};
 	
 	while (!isDone)
 	{
@@ -92,28 +84,18 @@ void ModeManager::run()
 		{
 			switch( event.type )
 			{
-			case SDL_ACTIVEEVENT:
-				/* Something's happend with our focus
-				 * If we lost focus or we are iconified, we
-				 * shouldn't draw the screen
-				 */
-				//        if ( event.active.gain == 0 )
-				//        {
-				//          isActive = false;
-				//        }
-				//        else
-				//        {
-				//          isActive = true;
-				//        }
-				isActive = true;
-				break;
-			case SDL_VIDEORESIZE:
-				if ( ! mediamanager->resizeScreenTo(event.resize.w,
-						event.resize.h) )
+			case SDL_WINDOWEVENT:
+				if (event.window.event == SDL_WINDOWEVENT_RESIZED ||
+				    event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
 				{
-					isActive=false;
-					isDone=true;
+					if (!mediamanager->resizeScreenTo(event.window.data1,
+					                                  event.window.data2))
+					{
+						isActive = false;
+						isDone   = true;
+					}
 				}
+				isActive = true;
 				break;
 			case SDL_JOYAXISMOTION:
 				xAxis = SDL_JoystickGetAxis(joy,0);
@@ -207,10 +189,10 @@ void ModeManager::run()
 					proceed = true;
 					break;
 				}
-				handleKeyDown( &event.key.keysym );
+				handleKeyDown(&event.key.keysym);
 				break;
 				case SDL_KEYUP:
-					handleKeyUp  ( &event.key.keysym );
+					handleKeyUp(&event.key.keysym);
 					break;
 				case SDL_QUIT:
 					isDone = true;
@@ -235,5 +217,7 @@ void ModeManager::run()
 }
 
 void ModeManager::assertValidMode() {
-	assert(currMode);	
+	assert(currMode);
 }
+
+} // namespace Hunchback::Framework

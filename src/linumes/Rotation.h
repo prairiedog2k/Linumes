@@ -1,9 +1,6 @@
-#ifndef ROTATION_H_
-#define ROTATION_H_
+﻿#pragma once
 
 enum Rotation {
 	CLOCKWISE = 0,
 	COUNTERCLOCKWISE = 1	
 };
-
-#endif /*ROTATION_H_*/

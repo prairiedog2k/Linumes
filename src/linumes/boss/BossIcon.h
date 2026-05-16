@@ -1,7 +1,8 @@
-#ifndef BOSSICON_H_
-#define BOSSICON_H_
+﻿#pragma once
 
 #include "linumes/Icon.h"
+
+namespace Hunchback::Linumes {
 
 class BossIcon : public Icon
 {
@@ -17,4 +18,4 @@ protected:
 	virtual  GLuint getTexture(int which) {return ( which == 0 ? _bossMask : _bossTexture );};
 };
 
-#endif /*BOSSICON_H_*/
+} // namespace Hunchback::Linumes

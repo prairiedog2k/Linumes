@@ -2,35 +2,37 @@
 #include "MediaManager.h"
 #include "Utils.h"
 
+namespace Hunchback::Framework {
+
 BaseTextDisplay::BaseTextDisplay() : _hasDrop(false), _isRelative(false)
 {
 }
 
 BaseTextDisplay::~BaseTextDisplay()
-{	
+{
 }
 
-std::string BaseTextDisplay::getFormattedText() {
+std::string BaseTextDisplay::getFormattedText() const {
 				std::ostringstream strout;
 		  	strout << baseText << value << std::endl;
 		  	return strout.str();
 };
 
-int BaseTextDisplay::getX() {
+int BaseTextDisplay::getX() const {
 	if (! _isRelative ) {
 		return xformX(x);
 	} else {
-		float relativeX = ((float)(x) ) / ( 100.0f) * ((float)( MediaManager::getScreenWidth() ));
-		return (int)(relativeX);
+		float relativeX = static_cast<float>(x) / 100.0f * static_cast<float>(MediaManager::getScreenWidth());
+		return static_cast<int>(relativeX);
 	}
 }
-int BaseTextDisplay::getY() { 
+int BaseTextDisplay::getY() const {
 	if (!_isRelative ) {
-		return xformY(y); 
+		return xformY(y);
 	} else {
-		float relativeY = ((float)(y) ) / ( 100.0f) * ((float)( MediaManager::getScreenHeight() ));
-		return (int)(relativeY);
+		float relativeY = static_cast<float>(y) / 100.0f * static_cast<float>(MediaManager::getScreenHeight());
+		return static_cast<int>(relativeY);
 	}
 }
 
-
+} // namespace Hunchback::Framework

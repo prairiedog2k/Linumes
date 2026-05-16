@@ -1,6 +1,11 @@
 #include "BossPiece.h"
 #include "BossModeTypes.h"
 
+
+namespace Hunchback::Linumes {
+namespace HF = Hunchback::Framework;
+
+
 BossPiece::BossPiece() : GamePiece(), _boss(false), _bossTexture(0) {
     
 }
@@ -9,7 +14,7 @@ BossPiece::~BossPiece() {
 
 }
 
-bool BossPiece::isStopped() {
+bool BossPiece::isStopped() const {
     if (_boss) {
         return true;
     }
@@ -24,3 +29,6 @@ void BossPiece::bindStateTexture() {
         GamePiece::bindStateTexture();
     }
 }
+
+
+} // namespace Hunchback::Linumes

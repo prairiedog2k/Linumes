@@ -1,5 +1,4 @@
-#ifndef TOKEN_H_
-#define TOKEN_H_
+﻿#pragma once
 
 #include "Block.h"
 #include "framework/Timed.h"
@@ -8,7 +7,8 @@
 #include "MagicBlock.h"
 #include <cassert>
 
-using namespace std;
+namespace Hunchback::Linumes {
+namespace HF = Hunchback::Framework;
 
 class GameBoard;
 
@@ -16,19 +16,19 @@ class Token : public Block
 {
 protected:
 	//how fast we can advance the token left or right
-	Timed _timerx;  
+	HF::Timed _timerx;
 
 	//how fast we can advance the token downward
-	Timed _pushy;  
+	HF::Timed _pushy;
 
 	//how fast a non-broken token drops
-	Timed _fally;
+	HF::Timed _fally;
 
 	//how long can we stay at the top of the screen
-	Timed _holder;
+	HF::Timed _holder;
 
 	//how fast a broken token drops
-	Timed _broken;
+	HF::Timed _broken;
 
 	//tokens horizontal position on the board
 	// _posX - 1 is the left block
@@ -44,16 +44,16 @@ protected:
 	//so we can get board data easily (we are a 'friend' of GameBoard).
 	GameBoard *_board;
 
-	//indicators for which side of the token is stationary 
+	//indicators for which side of the token is stationary
 	bool _leftLanded;
 	bool _rightLanded;
 
-	//configurable values for how long to wait until advancing either in a 
-	// broken state	
+	//configurable values for how long to wait until advancing either in a
+	// broken state
 	int _brokenWait;
 	//or a whole state
-	int _fallWait;	
-	
+	int _fallWait;
+
 	MagicBlock _mblock;
 	bool _isActive;
 public:
@@ -66,7 +66,7 @@ public:
 	void resetTokenTiming(unsigned int currTime);
 	void setFallWait(int fallwait) { _fallWait = fallwait; };
 	void setBrokenWait(int brokenwait) { _brokenWait = brokenwait; };
-	void setTheme (Theme *theTheme);
+	void setTheme (HF::Theme *theTheme);
 	void init( float x, float y, float dim);
 	void update(unsigned int currTime);
 	void setSideInvisible( int side );
@@ -81,8 +81,8 @@ public:
 private:
 	void checkBoard() { assert(_board); };
 	void slide(Slide dir, unsigned int currTime);
-	bool canDrop(int currTime);  	
+	bool canDrop(int currTime);
 	void drop();
 };
 
-#endif /*TOKEN_H_*/
+} // namespace Hunchback::Linumes

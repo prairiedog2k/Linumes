@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
  *   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
  *                                                                         *
@@ -17,12 +17,12 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef TIMED_H
-#define TIMED_H
+#pragma once
 
 #include <iostream>
 
-using namespace std;
+namespace Hunchback::Framework {
+
 class Timed
 {
 protected:
@@ -35,10 +35,10 @@ public:
   Timed(int current, int timewait, bool isStopped): _initialTime(current),_wait(timewait),_stopped(isStopped) {};
   virtual ~Timed() {};
   bool canMove(int current);
-  virtual bool isStopped(){ return _stopped;};
+  virtual bool isStopped() const { return _stopped;};
   void setStopped( bool stopped ) { stopped = stopped; };
   void setInitialTime( int time ) { _initialTime = time; };
   void setWait(int timewait) { _wait = timewait; };
 };
 
-#endif
+} // namespace Hunchback::Framework

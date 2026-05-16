@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
  *   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
  *                                                                         *
@@ -17,11 +17,12 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef TIME_POSITIONED_H
-#define TIME_POSITIONED_H
+#pragma once
 
 #include "Timed.h"
 #include "Positioned.h"
+
+namespace Hunchback::Framework {
 
 class TimePositioned: public Timed, public Positioned
 {
@@ -39,13 +40,14 @@ public:
                   int current, int wait, bool stopped):
                     Timed(current, wait, stopped),
                     Positioned(x,y),
-                    _xrate(xrate), 
+                    _xrate(xrate),
                     _yrate(yrate) {};
-  virtual ~TimePositioned() {};                    
+  virtual ~TimePositioned() {};
 protected:
   float _xrate;
   float _yrate;
 
   float getDistance(int direction, int current);
 };
-#endif
+
+} // namespace Hunchback::Framework

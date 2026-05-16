@@ -1,3 +1,4 @@
+﻿#include "framework/OpenGLHeaders.h"
 /***************************************************************************
  *   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
@@ -17,13 +18,9 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef TEXTUREINFO_H
-#define TEXTUREINFO_H
+#pragma once
 
-#include <GL/gl.h>
-#include <GL/glu.h>
-
-using namespace std;
+namespace Hunchback::Framework {
 
 class TextureInfo {
 private:
@@ -32,10 +29,10 @@ private:
 public:
   TextureInfo();
   virtual ~TextureInfo();
-	GLuint getNumberOfTextures() { return _numTextures; };
+	GLuint getNumberOfTextures() const { return _numTextures; };
 	void setNumberOfTextures(GLuint numTextures) { _numTextures = numTextures; };
-	bool isMasked() { return _mask; };
+	bool isMasked() const { return _mask; };
 	void setMasked(bool mask) { _mask = mask; };
 };
 
-#endif
+} // namespace Hunchback::Framework

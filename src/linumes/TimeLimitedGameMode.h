@@ -1,7 +1,8 @@
-#ifndef TIMELIMITEDGAMEMODE_H_
-#define TIMELIMITEDGAMEMODE_H_
+﻿#pragma once
 
 #include "GameMode.h"
+
+namespace Hunchback::Linumes {
 
 class TimeLimitedGameMode : public GameMode
 {
@@ -9,11 +10,11 @@ private:
     int _duration;
 protected:
 	virtual void createGameBoard();
-	
+
 public:
 	TimeLimitedGameMode();
 	TimeLimitedGameMode(int duration);
 	virtual ~TimeLimitedGameMode();
 };
 
-#endif /*TIMELIMITEDGAMEMODE_H_*/
+} // namespace Hunchback::Linumes

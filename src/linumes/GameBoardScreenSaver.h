@@ -1,16 +1,17 @@
-#ifndef GAMEBOARDSCREENSAVER_H_
-#define GAMEBOARDSCREENSAVER_H_
+﻿#pragma once
 
 #include "GameBoard.h"
 
-class GameBoardScreenSaver: public GameBoard 
+namespace Hunchback::Linumes {
+
+class GameBoardScreenSaver: public GameBoard
 {
 protected:
   void jumbleBlocks();
   int scanTo(int column);
   //void cleanScanned(int column);
-  void resetScan();    
-  void markScoreTargets();  	
+  void resetScan();
+  void markScoreTargets();
   virtual void Draw();
   virtual void toggleVisible();
 public:
@@ -19,7 +20,7 @@ public:
 	virtual void toggleScanner(unsigned int currTime);
 	virtual void update(unsigned int currTime);
 	virtual void init();
-	
+
 };
 
-#endif /*GAMEBOARDSCREENSAVER_H_*/
+} // namespace Hunchback::Linumes

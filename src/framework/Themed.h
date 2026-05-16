@@ -1,7 +1,8 @@
-#ifndef THEMED_H_
-#define THEMED_H_
+﻿#pragma once
 
 #include "Theme.h"
+
+namespace Hunchback::Framework {
 
 class Themed
 {
@@ -11,9 +12,9 @@ public:
 	Themed() : _theme(0){};
 	Themed(const Themed &themed): _theme(themed._theme) {};
 	virtual ~Themed();
-	
-	Theme *getTheme() { return _theme; };
+
+	Theme *getTheme() const { return _theme; };
 	virtual void setTheme(Theme *theTheme) { _theme = theTheme; };
 };
 
-#endif /*THEMED_H_*/
+} // namespace Hunchback::Framework

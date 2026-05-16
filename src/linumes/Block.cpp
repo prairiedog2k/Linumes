@@ -12,14 +12,19 @@
  *   ---------
  */
 
-Block::Block(): Rendered(false), Themed(), _x(0.0f), _y(0.0f), _dim(1.0f), _whole(false), _quad() {
+
+namespace Hunchback::Linumes {
+namespace HF = Hunchback::Framework;
+
+
+Block::Block(): HF::Rendered(false), HF::Themed(), _x(0.0f), _y(0.0f), _dim(1.0f), _whole(false), _quad() {
 	for (int i = 0; i < 4; i++) {
-		_pieces[i] = new GamePiece();
-		_pieces[i]->setNewColor(false);   	  
+		_pieces[i] = std::make_unique<GamePiece>();
+		_pieces[i]->setNewColor(false);
 	}
 }
 
-Block::Block(Block &block):Rendered(block._renderable), 
+Block::Block(Block &block):HF::Rendered(block._renderable), 
 _x(block._x), 
 _y(block._y),
 _dim(block._dim),
@@ -27,17 +32,16 @@ _whole(block._whole),
 _quad()
 {
 	setTheme(block._theme);
-	GamePiece *gp;
 	for (int i = 0; i < 4; i++) {
-		gp  = block.pieceAt(i);
-		if (gp != 0) {
-			_pieces[i] = new GamePiece();
-			_pieces[i]->setPiecePos     ( gp->getX(),gp->getY());
-			_pieces[i]->setNextY(gp->getNextY());
-			_pieces[i]->setDimension     ( gp->getDimension() );
+		GamePiece *gp = block.pieceAt(i);
+		if (gp != nullptr) {
+			_pieces[i] = std::make_unique<GamePiece>();
+			_pieces[i]->setPiecePos  ( gp->getX(), gp->getY() );
+			_pieces[i]->setNextY( gp->getNextY() );
+			_pieces[i]->setDimension ( gp->getDimension() );
 			_pieces[i]->setColor  ( gp->getColor() );
 			_pieces[i]->setSpecial( gp->isSpecial() );
-			_pieces[i]->setStopped( gp->isStopped() );      
+			_pieces[i]->setStopped( gp->isStopped() );
 		}
 	}
 }
@@ -45,11 +49,11 @@ _quad()
 Block::Block( const GamePiece *p1, 
 		const GamePiece *p2,
 		const GamePiece *p3,
-		const  GamePiece *p4) :Rendered(true), Themed(), _quad() {
-	_pieces[0] = new GamePiece(*p1);
-	_pieces[1] = new GamePiece(*p2);
-	_pieces[2] = new GamePiece(*p3);
-	_pieces[3] = new GamePiece(*p4);
+		const  GamePiece *p4) :HF::Rendered(true), HF::Themed(), _quad() {
+	_pieces[0] = std::make_unique<GamePiece>(*p1);
+	_pieces[1] = std::make_unique<GamePiece>(*p2);
+	_pieces[2] = std::make_unique<GamePiece>(*p3);
+	_pieces[3] = std::make_unique<GamePiece>(*p4);
 	_x = _pieces[0]->getX();
 	_y = _pieces[0]->getY();
 	setDimension(_pieces[0]->getDimension());
@@ -57,16 +61,11 @@ Block::Block( const GamePiece *p1,
 	isWhole();                
 }
 
-Block::~Block()
-{
-	for (int i = 0; i < 4; i++) {		
-		delete _pieces[i];		
-	}
-}
+Block::~Block() = default;
 
 //use judiciously
-GamePiece *Block::pieceAt(int i) { 
-	return _pieces[i];
+GamePiece *Block::pieceAt(int i) {
+	return _pieces[i].get();
 }
 
 void Block::setX(const float x) {
@@ -113,8 +112,8 @@ bool Block::AllInvisible() {
 
 
 bool Block::isWhole() {
-	int y1 = (int)((_pieces[0]->getY() * 1000.0f)+0.4999f)/100;
-	int y2 = (int)((_pieces[1]->getY() * 1000.0f)+0.4999f)/100;
+	int y1 = static_cast<int>((_pieces[0]->getY() * 1000.0f)+0.4999f)/100;
+	int y2 = static_cast<int>((_pieces[1]->getY() * 1000.0f)+0.4999f)/100;
 	if ( y1 != y2) {
 		_whole = false;
 	} else {
@@ -207,8 +206,8 @@ bool Block::hasSpecial(int &x, int &y) {
 
 GLuint Block::getTexture(const char *name)
 {
-	TextureResource * tr = ResourceHelper::getTextureResource(getTheme(), std::string (name));
-	if (NULL == tr) {
+	HF::TextureResource * tr = HF::ResourceHelper::getTextureResource(getTheme(), std::string (name));
+	if (nullptr == tr) {
 		return 0;
 	}
 	return tr->getResource();
@@ -226,7 +225,7 @@ void Block::Draw() {
 	} else {
 		glLoadIdentity();
 		        
-		glTranslatef( (GLfloat)_x,(GLfloat)_y, -4.99999f );
+		glTranslatef( static_cast<GLfloat>(_x), static_cast<GLfloat>(_y), -4.99999f );
 		GLuint texture = 0;         
 		if (_pieces[0]->getColor() == 0) {
 			glColor3f(0.75f,0.375f,0.0f);
@@ -251,10 +250,13 @@ void Block::Draw() {
 
 Block& Block::operator= (const Block& param)
 {
-	_pieces[0] = param._pieces[0];
-	_pieces[1] = param._pieces[1];
-	_pieces[2] = param._pieces[2];
-	_pieces[3] = param._pieces[3];
+	if (this == &param) return *this;
+	for (int i = 0; i < 4; i++) {
+		if (param._pieces[i])
+			_pieces[i] = std::make_unique<GamePiece>(*param._pieces[i]);
+		else
+			_pieces[i].reset();
+	}
 	_whole = param._whole;
 	_boardpos = param._boardpos;
 	_inmotion = param._inmotion;
@@ -263,3 +265,6 @@ Block& Block::operator= (const Block& param)
 	_dim = param._dim;
 	return *this;
 }
+
+
+} // namespace Hunchback::Linumes

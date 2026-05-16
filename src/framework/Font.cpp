@@ -8,6 +8,9 @@
 #include "GL/glu.h"
 #include "GL/glext.h"
 #endif
+
+namespace Hunchback::Framework {
+
 int Font::initCounter = 0;
 
 Font::Font(const char *fontName,
@@ -16,7 +19,7 @@ Font::Font(const char *fontName,
 			fontName(fontName),
 			pointSize(pointSize),
 			fgRed(fgRed), fgGreen(fgGreen), fgBlue(fgBlue),
-			ttfFont(NULL)
+			ttfFont(nullptr)
 			{
 	initCounter++;
 	initFont();
@@ -25,7 +28,7 @@ Font::Font(const char *fontName,
 Font::~Font()
 {
 	for (int i = minGlyph; i < maxGlyph + 1; i++) {
-		if (glyphs[i].pic != NULL) {
+		if (glyphs[i].pic != nullptr) {
 			SDL_FreeSurface(glyphs[i].pic);
 			glDeleteTextures( 1, & (glyphs[i].tex) );
 		}
@@ -37,8 +40,8 @@ Font::~Font()
 void Font::initFont()
 {
 	ttfFont = TTF_OpenFont(fontName, pointSize);
-	
-	if (NULL == ttfFont)
+
+	if (nullptr == ttfFont)
 	{
 		printf("Can't open font file\n");
 		//TODO :: errorExit("Can't open font file");
@@ -55,7 +58,7 @@ void Font::initFont()
 
 	for (int i = minGlyph; i <= maxGlyph; i++)
 	{
-		glyphs[i].pic = NULL;
+		glyphs[i].pic = nullptr;
 		glyphs[i].tex = 0;
 	}
 
@@ -64,40 +67,40 @@ void Font::initFont()
     	GLfloat texcoord[4];
     	char letter[2] = {0, 0};
 
-		SDL_Surface *g0 = NULL;
-		SDL_Surface *g1 = NULL;
+		SDL_Surface *g0 = nullptr;
+		SDL_Surface *g1 = nullptr;
 
 		letter[0] = c;
 
 		TTF_GlyphMetrics(ttfFont,
 				(Uint16)c,
-				&glyphs[((int)c)].minx,
-				&glyphs[((int)c)].maxx,
-				&glyphs[((int)c)].miny,
-				&glyphs[((int)c)].maxy,
-				&glyphs[((int)c)].advance);
+				&glyphs[static_cast<int>(c)].minx,
+				&glyphs[static_cast<int>(c)].maxx,
+				&glyphs[static_cast<int>(c)].miny,
+				&glyphs[static_cast<int>(c)].maxy,
+				&glyphs[static_cast<int>(c)].advance);
 
 		g0 = TTF_RenderText_Blended(ttfFont,
 				letter,
 				foreground);
 
-		if (NULL != g0)
+		if (nullptr != g0)
 		{
 			g1 = SDL_DisplayFormatAlpha(g0);
 			SDL_FreeSurface(g0);
 		}
 
-		if (NULL != g1)
+		if (nullptr != g1)
 		{
-			glyphs[((int)c)].pic = g1;
-			glyphs[((int)c)].tex = SDL_GL_LoadTexture(g1, texcoord);
-			glyphs[((int)c)].texMinX = texcoord[0];
-			glyphs[((int)c)].texMinY = texcoord[1];
-			glyphs[((int)c)].texMaxX = texcoord[2];
-			glyphs[((int)c)].texMaxY = texcoord[3];
+			glyphs[static_cast<int>(c)].pic = g1;
+			glyphs[static_cast<int>(c)].tex = SDL_GL_LoadTexture(g1, texcoord);
+			glyphs[static_cast<int>(c)].texMinX = texcoord[0];
+			glyphs[static_cast<int>(c)].texMinY = texcoord[1];
+			glyphs[static_cast<int>(c)].texMaxX = texcoord[2];
+			glyphs[static_cast<int>(c)].texMaxY = texcoord[3];
 		}
 	}
-	
+
 	TTF_CloseFont(ttfFont);
 }
 
@@ -111,7 +114,7 @@ int Font::getHeight()
 	return height;
 }
 
-void Font::textSize(char *text, 
+void Font::textSize(char *text,
 		SDL_Rect *r)
 {
 	int maxx = 0;
@@ -134,8 +137,8 @@ void Font::textSize(char *text,
 				if (r->w > w_largest) w_largest = r->w;
 				r->w = 0;
 			} else {
-                maxx = glyphs[((int)*text)].maxx;
-				advance = glyphs[((int)*text)].advance;
+                maxx = glyphs[static_cast<unsigned char>(*text)].maxx;
+				advance = glyphs[static_cast<unsigned char>(*text)].advance;
 				r->w += advance;
 			}
 		}
@@ -165,11 +168,11 @@ void Font::drawText(const char *text, int x, int y, bool centered, bool upsidedo
 	GLfloat baseleft = x;
 
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
-	
+
 	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_TEXTURE_2D);
-	
+
 	if (centered) {
 		GLfloat widthX = 0;
 		std::string strText(text);
@@ -177,36 +180,36 @@ void Font::drawText(const char *text, int x, int y, bool centered, bool upsidedo
 			int ch = strText.at(i);
 			if ((minGlyph <= ch) && (ch <= maxGlyph) ){
 				widthX += glyphs[ch].pic->w;
-			}				
+			}
 		}
-		x = (int)(baseleft - (widthX / 2));
+		x = static_cast<int>(baseleft - (widthX / 2));
 	}
 
 	//alpha channel needs help
-	GLfloat arr0[4] = { fgRed, fgGreen, fgBlue,1.0f }; 
-	
+	GLfloat arr0[4] = { fgRed, fgGreen, fgBlue,1.0f };
+
 	while (0 != *text) {
 		if (*text == '\n') {
-			x = (int)baseleft;
+			x = static_cast<int>(baseleft);
 			if (upsidedown) {
 				y -= lineSkip;
 			} else {
 				y += lineSkip;
 			}
 		} else if ((minGlyph <= *text) && (*text < maxGlyph)) {
-			texMinX = glyphs[((int)*text)].texMinX;
-			texMinY = glyphs[((int)*text)].texMinY;
-			texMaxX = glyphs[((int)*text)].texMaxX;
-			texMaxY = glyphs[((int)*text)].texMaxY;
+			texMinX = glyphs[static_cast<unsigned char>(*text)].texMinX;
+			texMinY = glyphs[static_cast<unsigned char>(*text)].texMinY;
+			texMaxX = glyphs[static_cast<unsigned char>(*text)].texMaxX;
+			texMaxY = glyphs[static_cast<unsigned char>(*text)].texMaxY;
 
-			minx = glyphs[((int)*text)].minx;
+			minx = glyphs[static_cast<unsigned char>(*text)].minx;
 
 			left   = x + minx;
-			right  = x + glyphs[((int)*text)].pic->w + minx;
+			right  = x + glyphs[static_cast<unsigned char>(*text)].pic->w + minx;
 			top    = y;
-			bottom = y + glyphs[((int)*text)].pic->h;
+			bottom = y + glyphs[static_cast<unsigned char>(*text)].pic->h;
 
-			glBindTexture(GL_TEXTURE_2D, glyphs[((int)*text)].tex);
+			glBindTexture(GL_TEXTURE_2D, glyphs[static_cast<unsigned char>(*text)].tex);
 
 			glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE);
 			glTexEnvi(GL_TEXTURE_ENV, GL_COMBINE_RGB, GL_MODULATE);
@@ -216,17 +219,17 @@ void Font::drawText(const char *text, int x, int y, bool centered, bool upsidedo
 			glTexEnvi(GL_TEXTURE_ENV, GL_OPERAND1_RGB, GL_SRC_COLOR);
 			glTexEnvfv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_COLOR, arr0);
 			glTexEnvi(GL_TEXTURE_ENV, GL_RGB_SCALE, 1);
-			
+
 			glBegin(GL_TRIANGLE_STRIP);
 
 			glTexCoord2f(texMinX, texMinY); glVertex2f( left,    bottom);
 			glTexCoord2f(texMaxX, texMinY); glVertex2f(right,    bottom);
 			glTexCoord2f(texMinX, texMaxY); glVertex2f( left, top);
 			glTexCoord2f(texMaxX, texMaxY); glVertex2f(right, top);
-			
+
 			glEnd();
 
-			x += glyphs[((int)*text)].advance;
+			x += glyphs[static_cast<unsigned char>(*text)].advance;
 		}
 
 		text++;
@@ -249,3 +252,5 @@ void Font::drawText(const char *text, int x, int y,float r, float g, float b) {
 	fgGreen = tmpG;
 	fgBlue = tmpB;
 }
+
+} // namespace Hunchback::Framework

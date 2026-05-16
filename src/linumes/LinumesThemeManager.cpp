@@ -1,22 +1,29 @@
 #include "LinumesThemeManager.h"
 
-LinumesThemeManager::LinumesThemeManager(std::string file) : ThemeManager(file), _highScoreManager(NULL) {
-	
-}
 
+namespace Hunchback::Linumes {
+namespace HF = Hunchback::Framework;
+
+
+LinumesThemeManager::LinumesThemeManager(std::string file) : HF::ThemeManager(file) {
+}
 
 LinumesThemeManager::~LinumesThemeManager()
 {
-	_highScoreManager->release();
-	delete _highScoreManager;
+	if (_highScoreManager) {
+		_highScoreManager->release();
+	}
 }
 
 bool LinumesThemeManager::init() {
 	bool bRetVal = false;
-	if (ThemeManager::init()) {
-		_highScoreManager = new HighScoreManager(_baseTheme);
+	if (HF::ThemeManager::init()) {
+		_highScoreManager = std::make_unique<HighScoreManager>(_baseTheme.get());
 		_highScoreManager->init();
 		bRetVal = true;
 	}
 	return bRetVal;
 }
+
+
+} // namespace Hunchback::Linumes

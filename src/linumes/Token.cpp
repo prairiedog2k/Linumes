@@ -3,6 +3,11 @@
 #include "GameBoard.h"
 #include "BoardTypes.h"
 
+
+namespace Hunchback::Linumes {
+namespace HF = Hunchback::Framework;
+
+
 Token::Token() : Block(), _brokenWait(50), _fallWait(400), _mblock(), _isActive(false) {
 }
 
@@ -16,7 +21,7 @@ Token::~Token()
 
 }
 
-void Token::setTheme (Theme *theTheme) {
+void Token::setTheme (HF::Theme *theTheme) {
 	_mblock.setTheme(theTheme);
 	_mblock.setRenderable(true);
 	for (int i = 0; i < 4; i++) {
@@ -285,7 +290,7 @@ void Token::update(unsigned int currTime) {
 	if ( _leftLanded && _rightLanded) {
 		if ((_leftBottom >= _board->_ry) || (_rightBottom >= _board->_ry)) {
 #ifdef DEBUG
-			std::cout << "Game Should Be Over " << endl;
+			std::cout << "Game Should Be Over " << std::endl;
 #endif
 			_board->setGameOver(true);
 		}
@@ -306,7 +311,7 @@ void Token::slide(Slide dir, unsigned int currTime) {
 	}
 	if ((nextXPos > 0) && (nextXPos < _board->_rx)) {
 		if (_leftBottom >= _board->_ry) {
-			setX( getX() + (float)(mult * _dim) );
+			setX( getX() + static_cast<float>(mult * _dim) );
 			_posX = nextXPos;
 			_timerx.setInitialTime( currTime );
 
@@ -321,7 +326,7 @@ void Token::slide(Slide dir, unsigned int currTime) {
 					return;				
 				}				 
 			}
-			setX( getX() + (float)(mult * _dim) );
+			setX( getX() + static_cast<float>(mult * _dim) );
 			_posX = nextXPos;
 			_timerx.setInitialTime(currTime);
 		}
@@ -332,10 +337,13 @@ void Token::slide(Slide dir, unsigned int currTime) {
 
 void Token::dump() {
 #ifdef DEBUG
-		std::cout << "------" << endl;
-		std::cout << "|" << (_pieces[0]->isSpecial() ? "T" : "F") << "|"<< (_pieces[1]->isSpecial() ? "T" : "F") << "|" << "|" << (_pieces[0]->getColor()) << "|"<< (_pieces[1]->getColor()) << "|" << endl;
-		std::cout << "------" << endl;
-		std::cout << "|" << (_pieces[2]->isSpecial() ? "T" : "F") << "|"<< (_pieces[3]->isSpecial() ? "T" : "F") << "|" << "|" << (_pieces[2]->getColor()) << "|"<< (_pieces[3]->getColor()) << "|" << endl;
-		std::cout << "------" << endl;
+		std::cout << "------" << std::endl;
+		std::cout << "|" << (_pieces[0]->isSpecial() ? "T" : "F") << "|"<< (_pieces[1]->isSpecial() ? "T" : "F") << "|" << "|" << (_pieces[0]->getColor()) << "|"<< (_pieces[1]->getColor()) << "|" << std::endl;
+		std::cout << "------" << std::endl;
+		std::cout << "|" << (_pieces[2]->isSpecial() ? "T" : "F") << "|"<< (_pieces[3]->isSpecial() ? "T" : "F") << "|" << "|" << (_pieces[2]->getColor()) << "|"<< (_pieces[3]->getColor()) << "|" << std::endl;
+		std::cout << "------" << std::endl;
 #endif
 	}
+
+
+} // namespace Hunchback::Linumes

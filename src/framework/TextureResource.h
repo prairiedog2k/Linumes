@@ -1,3 +1,4 @@
+﻿#include "framework/OpenGLHeaders.h"
 /***************************************************************************
  *   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
@@ -17,17 +18,13 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef TEXTURE_RESOURCE_H
-#define TEXTURE_RESOURCE_H
+#pragma once
 
 #include <string>
-#include <GL/gl.h>
-#include <GL/glu.h>
 #include "GenericResource.h"
 #include "TextureInfo.h"
 
-
-using namespace std;
+namespace Hunchback::Framework {
 
 class TextureResource : public GenericResource<GLuint> {
 public:
@@ -40,10 +37,11 @@ public:
   virtual ~TextureResource();
 	bool load();
 	bool release();
-private:	
+private:
 	TextureInfo *textureInfo;
 	GLuint loadPNG();
 	GLuint loadBMP();
 	int getTextureType();
 };
-#endif
+
+} // namespace Hunchback::Framework

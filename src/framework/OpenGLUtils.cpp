@@ -1,16 +1,18 @@
 #include "OpenGLUtils.h"
 #include "Utils.h"
 
+namespace Hunchback::Framework {
+
 void glEnable2D()
 {
 	int vPort[4];
-  
+
 	glGetIntegerv(GL_VIEWPORT, vPort);
-  
+
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glLoadIdentity();
-  
+
 	glOrtho(0, vPort[2], 0, vPort[3], -1, 1);
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
@@ -20,9 +22,9 @@ void glEnable2D()
 void glDisable2D()
 {
 	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();   
+	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
-	glPopMatrix();	
+	glPopMatrix();
 }
 
 GLuint SDL_GL_LoadTexture(SDL_Surface *surface, GLfloat *texcoord)
@@ -31,43 +33,37 @@ GLuint SDL_GL_LoadTexture(SDL_Surface *surface, GLfloat *texcoord)
         int w, h;
         SDL_Surface *image;
         SDL_Rect area;
-        Uint32 saved_flags;
-        Uint8  saved_alpha;
 
         /* Use the surface width and height expanded to powers of 2 */
         w = power_of_two(surface->w);
         h = power_of_two(surface->h);
         texcoord[0] = 0.0f;                    /* Min X */
         texcoord[1] = 0.0f;                    /* Min Y */
-        texcoord[2] = (GLfloat)surface->w / w; /* Max X */
-        texcoord[3] = (GLfloat)surface->h / h; /* Max Y */
+        texcoord[2] = static_cast<GLfloat>(surface->w) / w; /* Max X */
+        texcoord[3] = static_cast<GLfloat>(surface->h) / h; /* Max Y */
 
         image = SDL_CreateRGBSurface(
-                        SDL_SWSURFACE,
+                        0,
                         w, h,
                         32,
 #if SDL_BYTEORDER == SDL_LIL_ENDIAN /* OpenGL RGBA masks */
-                        0x000000FF, 
-                        0x0000FF00, 
-                        0x00FF0000, 
+                        0x000000FF,
+                        0x0000FF00,
+                        0x00FF0000,
                         0xFF000000
 #else
                         0xFF000000,
-                        0x00FF0000, 
-                        0x0000FF00, 
+                        0x00FF0000,
+                        0x0000FF00,
                         0x000000FF
 #endif
                        );
-        if ( image == NULL ) {
+        if ( image == nullptr ) {
                 return 0;
         }
 
-        /* Save the alpha blending attributes */
-        saved_flags = surface->flags&(SDL_SRCALPHA|SDL_RLEACCELOK);
-        saved_alpha = surface->format->alpha;
-        if ( (saved_flags & SDL_SRCALPHA) == SDL_SRCALPHA ) {
-                SDL_SetAlpha(surface, 0, 0);
-        }
+        /* Disable blending so pixels copy as-is into the GL texture */
+        SDL_SetSurfaceBlendMode(surface, SDL_BLENDMODE_NONE);
 
         /* Copy the surface into the GL texture image */
         area.x = 0;
@@ -75,11 +71,6 @@ GLuint SDL_GL_LoadTexture(SDL_Surface *surface, GLfloat *texcoord)
         area.w = surface->w;
         area.h = surface->h;
         SDL_BlitSurface(surface, &area, image, &area);
-
-        /* Restore the alpha blending attributes */
-        if ( (saved_flags & SDL_SRCALPHA) == SDL_SRCALPHA ) {
-                SDL_SetAlpha(surface, saved_flags, saved_alpha);
-        }
 
         /* Create an OpenGL texture for the image */
         glGenTextures(1, &texture);
@@ -99,3 +90,4 @@ GLuint SDL_GL_LoadTexture(SDL_Surface *surface, GLfloat *texcoord)
         return texture;
 }
 
+} // namespace Hunchback::Framework

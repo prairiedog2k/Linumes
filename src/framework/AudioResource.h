@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
  *   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
  *                                                                         *
@@ -17,8 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef AUDIO_RESOURCE_H
-#define AUDIO_RESOURCE_H
+#pragma once
 
 #include <string>
 #include "SDL.h"
@@ -26,8 +25,7 @@
 #include "GenericResource.h"
 #include "AudioInfo.h"
 
-
-using namespace std;
+namespace Hunchback::Framework {
 
 class AudioResource : public GenericResource<Mix_Chunk *> {
 public:
@@ -39,4 +37,5 @@ public:
 private:
 	AudioInfo *audioInfo;
 };
-#endif
+
+} // namespace Hunchback::Framework

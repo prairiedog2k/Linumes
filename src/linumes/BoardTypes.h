@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
  *   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
  *                                                                         *
@@ -17,8 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef BOARD_TYPES_H
-#define BOARD_TYPES_H
+#pragma once
 
 #define AUDIO_SONG "audio_song"
 #define AUDIO_DROP "audio_drop"
@@ -71,5 +70,3 @@
 
 #define BOARD_AUDIO_LEVEL "texture_audio_level"
 #define BOARD_AUDIO_LEVEL_MASK "texture_audio_level_mask"
-#endif
-

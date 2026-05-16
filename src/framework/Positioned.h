@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
  *   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
  *                                                                         *
@@ -17,11 +17,9 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef POSITIONED_H
-#define POSITIONED_H
+#pragma once
 
-
-using namespace std;
+namespace Hunchback::Framework {
 
 class Positioned {
 protected:
@@ -31,10 +29,11 @@ public:
   Positioned();
   Positioned(float x, float y);
   virtual ~Positioned() {};
-  const float getY() { return _y;};
-  const float getX() { return _x;};
+  float getY() const { return _y;};
+  float getX() const { return _x;};
   void setX(const float x) { _x = x; };
   void setY(const float y) { _y = y; };
   void setPiecePos (const float x, const float y) { _x = x; _y = y; };
 };
-#endif
+
+} // namespace Hunchback::Framework

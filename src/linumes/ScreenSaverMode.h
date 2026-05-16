@@ -1,7 +1,8 @@
-#ifndef SCREENSAVERMODE_H_
-#define SCREENSAVERMODE_H_
+﻿#pragma once
 
 #include "GameMode.h"
+
+namespace Hunchback::Linumes {
 
 class ScreenSaverMode : public GameMode
 {
@@ -14,9 +15,9 @@ public:
 	ScreenSaverMode();
 	virtual ~ScreenSaverMode();
 	virtual bool init();
-	virtual void handleKeyUp( SDL_keysym *keysym );
-	virtual void handleKeyDown( SDL_keysym *keysym );
-	
+	virtual void handleKeyUp( SDL_Keysym *keysym );
+	virtual void handleKeyDown( SDL_Keysym *keysym );
+
 };
 
-#endif /*SCREENSAVERMODE_H_*/
+} // namespace Hunchback::Linumes

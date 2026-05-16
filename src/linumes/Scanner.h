@@ -1,12 +1,14 @@
-#ifndef SCANNER_H_
-#define SCANNER_H_
+﻿#include "framework/OpenGLHeaders.h"
+#pragma once
 
 #include "framework/Rendered.h"
 #include "framework/TimePositioned.h"
 #include "framework/Themed.h"
-#include "GL/gl.h"
 
-class Scanner : public Rendered, public TimePositioned, public Themed
+namespace Hunchback::Linumes {
+namespace HF = Hunchback::Framework;
+
+class Scanner : public HF::Rendered, public HF::TimePositioned, public HF::Themed
 {
 private:
   float minimumx;
@@ -16,26 +18,26 @@ private:
   int columns;
   int colpos;
   bool reset;
-  
+
   bool hasMask;
 
-  float getBoardWidth() { return dimensionx * columns; };
+  float getBoardWidth() const { return dimensionx * columns; };
   GLuint getTexture();
-  GLuint getMask();  
+  GLuint getMask();
   bool paused;
-  
+
 public:
 	Scanner(float minx, float maxx, float posy, float ratex, float dimx, float dimy, int colcount);
 	virtual ~Scanner();
 	void update(unsigned int currTime);
-	
+
 	void togglePause();
-	
-	int getCurrentColumn() { return colpos; };
-	bool isReset() { return reset; };
-	virtual void setTheme(Theme *theme);	
+
+	int getCurrentColumn() const { return colpos; };
+	bool isReset()         const { return reset; };
+	virtual void setTheme(HF::Theme *theme);
 	//override
 	void Draw();
 };
 
-#endif /*SCANNER_H_*/
+} // namespace Hunchback::Linumes

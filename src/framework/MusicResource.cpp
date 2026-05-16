@@ -1,18 +1,20 @@
 #include "MusicResource.h"
 
-MusicResource::MusicResource(void *info, string argResourceFile) : 
-	GenericResource<void *>(argResourceFile), 
+namespace Hunchback::Framework {
+
+MusicResource::MusicResource(void *info, std::string argResourceFile) :
+	GenericResource<void *>(argResourceFile),
 	audioInfo((AudioInfo *)info) {
 };
 
 MusicResource::~MusicResource() {
-  if (audioInfo != NULL) {
-    delete audioInfo;
-  }
+  release();
+  delete audioInfo;
+  audioInfo = nullptr;
 }
 
 bool MusicResource::load() {
-	if (NULL == audioInfo) {
+	if (nullptr == audioInfo) {
 		return false;
 	}
 	if (audioInfo->getType() == MUS_WAV ) {
@@ -21,25 +23,26 @@ bool MusicResource::load() {
 		value_ = Mix_LoadMUS(resourceFile.c_str());
 	}
 #ifdef DEBUG
-  cout << "load music sample from ";
+  std::cout << "load music sample from ";
   reportResourceFile();
-#endif	
+#endif
 	return value_ != 0;
 }
 
 bool MusicResource::release() {
 #ifdef DEBUG
-   cout << "release music sample from ";
+   std::cout << "release music sample from ";
    reportResourceFile();
 #endif
-  if (value_ != 0) {
-  	if (audioInfo->getType() == MUS_WAV ) {
-			Mix_FreeChunk((Mix_Chunk *)value_);
-		} else if (audioInfo->getType() == MUS_MP3) {
-			Mix_FreeMusic((Mix_Music *)value_);
-		}
+  if (value_ && audioInfo) {
+    if (audioInfo->getType() == MUS_WAV) {
+      Mix_FreeChunk(static_cast<Mix_Chunk *>(value_));
+    } else if (audioInfo->getType() == MUS_MP3) {
+      Mix_FreeMusic(static_cast<Mix_Music *>(value_));
+    }
+    value_ = nullptr;
   }
-	return value_ == 0;
+  return true;
 }
 
-
+} // namespace Hunchback::Framework

@@ -1,5 +1,4 @@
-#ifndef BOSSMODETYPES_H_
-#define BOSSMODETYPES_H_
+﻿#pragma once
 
 #define BOSS_MODE "BossMode"
 
@@ -42,7 +41,3 @@
 
 #define BOSS_PATTERN "Pattern"
 #define BOSS_PATTERN_ROW "PatternRow"
-
-
-
-#endif /*BOSSMODETYPES_H_*/

@@ -1,5 +1,4 @@
-#ifndef TEXTDISPLAYTYPES_H_
-#define TEXTDISPLAYTYPES_H_
+﻿#pragma once
 
 #define TEXT_DISPLAY_ROOT "TextDisplayItems"
 #define TEXT_DISPLAY_NODE "TextDisplay"
@@ -12,5 +11,3 @@
 
 #define TEXT_DISPLAY_TYPE_INT "int"
 #define TEXT_DISPLAY_TYPE_STRING "string"
-
-#endif /*TEXTDISPLAYTYPES_H_*/

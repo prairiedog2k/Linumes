@@ -1,0 +1,57 @@
+name: Jublo
+dir: resources/jublo
+turn: 3
+attack: 20
+reduce: 2
+preferred_theme: Desktop
+media:
+  - type: texture
+    name: boss_color0
+    file: color0.png
+  - type: texture
+    name: boss_color1
+    file: color1.png
+  - type: texture
+    name: boss_attack_bg
+    file: attackbg.png
+  - type: texture
+    name: boss_attack_fg
+    file: attackfg.png
+  - type: texture
+    name: boss_attack_bg_mask
+    file: attackbg-mask.png
+  - type: texture
+    name: boss_attack_fg_mask
+    file: attackfg-mask.png
+  - type: texture
+    name: boss_icon
+    file: jublo-icon.png
+  - type: texture
+    name: boss_icon_mask
+    file: jublo-icon-mask.png
+  - type: audio
+    name: boss_attack
+    file: zombie-attack.wav
+  - type: audio
+    name: boss_damage
+    file: iceball.wav
+  - type: audio
+    name: boss_die
+    file: deatha.wav
+  - type: audio
+    name: boss_win
+    file: dwarf-laugh.wav
+shape:
+  - ".,.,.,.,.,.,.,.,.,.,.,.,.,.,.,."
+  - ".,.,.,.,.,.,.,.,.,.,.,.,.,.,.,."
+  - ".,.,.,.,.,.,.,.,.,.,.,.,.,.,.,."
+  - ".,.,.,.,.,.,.,.,.,.,.,.,.,.,.,."
+  - ".,.,.,.,.,.,0,.,.,0,.,.,.,.,.,."
+  - ".,.,.,.,.,0,0,0,0,0,0,.,.,.,.,."
+  - ".,.,.,.,0,0,0,0,0,0,0,0,.,.,.,."
+  - ".,.,.,.,.,0,.,.,.,.,0,.,.,.,.,."
+  - ".,.,.,0,.,.,0,0,0,0,.,.,0,.,.,."
+  - ".,.,.,.,0,0,.,.,.,.,0,0,.,.,.,."
+pattern:
+  - "X,X"
+  - "O,0"

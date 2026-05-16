@@ -1,16 +1,17 @@
-#ifndef STRINGRESOURCE_H_
-#define STRINGRESOURCE_H_
+﻿#pragma once
 
 #include "GenericResource.h"
 #include <string>
+
+namespace Hunchback::Framework {
 
 class StringResource : public  GenericResource<std::string>
 {
 public:
 	StringResource(std::string argResource) : GenericResource<std::string>(argResource){};
-	virtual ~StringResource() {};	
+	virtual ~StringResource() {};
 	bool load();
 	bool release();
 };
 
-#endif /*STRINGRESOURCE_H_*/
+} // namespace Hunchback::Framework

@@ -1,9 +1,8 @@
-#ifndef BASERESOURCE_
-#define BASERESOURCE_
+﻿#pragma once
 
 #include <iostream>
 
-using namespace std;
+namespace Hunchback::Framework {
 
 class BaseResource {
 public:
@@ -14,4 +13,4 @@ public:
 	virtual void reportResourceFile() = 0;
 };
 
-#endif /*BASERESOURCE_*/
+} // namespace Hunchback::Framework

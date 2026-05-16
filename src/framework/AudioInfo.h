@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
  *   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
  *                                                                         *
@@ -17,13 +17,12 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef AUDIO_INFO_H
-#define AUDIO_INFO_H
+#pragma once
 #include <string>
 #include <list>
 #include "SDL_mixer.h"
 
-using namespace std;
+namespace Hunchback::Framework {
 
 class AudioInfo {
 private:
@@ -37,29 +36,28 @@ private:
 	int  _songLength;
 	//whether or not prepare has been called
 	bool _wasInit;
-	
+
 	std::string _artist;
 	std::string _track;
-	
+
 public:
   AudioInfo();
-  ~AudioInfo(); 
+  ~AudioInfo();
 	void setMixer(std::string mixer) { _mixer = mixer; };
 	void setType(Mix_MusicType type) { _type = type; };
-	Mix_MusicType getType() { return _type; }; 
-	std::string getMixer() { return _mixer; };
+	Mix_MusicType getType() const { return _type; };
+	std::string getMixer()  const { return _mixer; };
 	void addTiming(int beatTime);
 	bool prepare();
 	int getNextBeat();
 	int getBeatCount();
 	void setSongLength(int songLength) { _songLength = songLength; };
-	int getSongLength() { return _songLength; };
+	int getSongLength() const { return _songLength; };
 	void resetBeats() { _wasInit = false; prepare(); };
-	std::string getArtist() { return _artist; };
-	std::string getTrack() { return _track; };
+	std::string getArtist() const { return _artist; };
+	std::string getTrack()  const { return _track; };
 	void setArtist( std::string artist) { _artist = artist; };
 	void setTrack (std::string track) { _track = track; };
 };
-#endif
 
-
+} // namespace Hunchback::Framework

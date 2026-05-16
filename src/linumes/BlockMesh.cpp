@@ -1,8 +1,11 @@
-#include <GL/gl.h>
-#include <GL/glu.h>
+#include "framework/OpenGLHeaders.h"
 #include <iostream>
 
 #include "BlockMesh.h"
+
+
+
+namespace Hunchback::Linumes {
 
 
 bool BlockMesh::isLoaded = false;
@@ -118,3 +121,6 @@ GLint BlockMesh::getListId() {
 
 
 
+
+
+} // namespace Hunchback::Linumes

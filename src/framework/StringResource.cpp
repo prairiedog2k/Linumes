@@ -1,5 +1,7 @@
 #include "StringResource.h"
 
+namespace Hunchback::Framework {
+
 bool StringResource::load() {
 	value_ = resourceFile;
 	return true;
@@ -10,3 +12,4 @@ bool StringResource::release(){
 	return true;
 }
 
+} // namespace Hunchback::Framework

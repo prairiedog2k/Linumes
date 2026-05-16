@@ -1,5 +1,4 @@
-#ifndef SELECTIONTYPES_H_
-#define SELECTIONTYPES_H_
+﻿#pragma once
 
 #define BASE_SELECTIONS "base_selections"
 #define CFG_SELECTIONS "configuration_selections"
@@ -24,4 +23,3 @@
 
 
 #define SEL_TYPE_EXIT "EXIT"
-#endif /*SELECTIONTYPES_H_*/

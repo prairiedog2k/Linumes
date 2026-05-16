@@ -1,24 +1,8 @@
-/***************************************************************************
+﻿/***************************************************************************
  *   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU General Public License     *
- *   along with this program; if not, write to the                         *
- *   Free Software Foundation, Inc.,                                       *
- *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef GAMEBOARD_H
-#define GAMEBOARD_H
+#pragma once
 
 #include "GamePiece.h"
 #include "framework/Rendered.h"
@@ -36,6 +20,7 @@
 #include "Icon.h"
 #include "MagicBlock.h"
 #include <memory>
+#include <vector>
 
 #define FROM_ORIGIN -1
 #define FROM_LEFT 0
@@ -45,49 +30,52 @@
 
 #define GAME_NAME "default"
 
-class GameBoard : public Rendered {
+namespace Hunchback::Linumes {
+namespace HF = Hunchback::Framework;
+
+class GameBoard : public HF::Rendered {
 protected:
 	//this is the name that will be registered in the highscores, descendants should define differently
 	std::string _gameName;
 	HighScoreTable *_hiScoreTable;
-	
+
 	Token _tokenSet[4];
 
-	GamePiece *_pieces;
-	Grid *_grid;
-	Scanner  *_scanner;
-	auto_ptr<SimpleBackground> _bg;
-	auto_ptr<FadingForeground> _fg;
-	auto_ptr<Icon>  _icon;  
-	auto_ptr<HUD> _hud;
+	std::vector<GamePiece> _pieces;
+	std::unique_ptr<Grid> _grid;
+	std::unique_ptr<Scanner> _scanner;
+	std::unique_ptr<SimpleBackground> _bg;
+	std::unique_ptr<FadingForeground> _fg;
+	std::unique_ptr<Icon> _icon;
+	std::unique_ptr<HUD> _hud;
 
 	MagicBlockSet _mbSet;
-	
+
 	//Input
 	bool downpressed;
 	bool leftpressed;
-	bool rightpressed;	  
+	bool rightpressed;
 
 	LinumesThemeManager *themeManager;
-	AudioManager *_audioManager;
-	Theme *currTheme;
+	std::unique_ptr<HF::AudioManager> _audioManager;
+	HF::Theme *currTheme;
 
 	float _dim;
 	int _rx;
 	int _ry ;
 	int _targetCount;
-	int lastscanned;	
+	int lastscanned;
 
 	bool _advanceScanner;
-	
+
 	//game time to be reported in seconds
 	unsigned int _gameTime;
 	unsigned int _pauseTime;
-	
-	bool _isThemeChanging;		
+
+	bool _isThemeChanging;
 	//score to report in units of 10
 	bool _gameOver;
-	
+
 	int _tokenCount;
 	int _pieceCount;
 	int _blockCount;
@@ -97,15 +85,15 @@ protected:
 	bool _canBonus;
 	bool _scoreChecked;
 	bool _midasMode;
-	
+
 	unsigned int _currentTick;
 	unsigned int _announceTime;
-	
+
 	virtual GamePiece *getPieceAt( int x, int y);
 
 	void drawPieces();
 	void drawGrid();
-	void drawScanner();	
+	void drawScanner();
 	void drawBackground();
 	void drawScoreTargets();
 	void drawTokens();
@@ -121,22 +109,22 @@ protected:
 	virtual void cleanScanned(int column);
 	virtual void dropPieces();
 	virtual void assignInitialTheme();
-	
+
 	virtual void updateContents();
 	//called to reset individual members in a subclass after a scanner pass
 	virtual void resetContents();
-	
-	virtual void updateHud();	
+
+	virtual void updateHud();
 	virtual void drawContents();
-	
-	
+
+
 	void resetScan();
 
 	virtual void markScoreTargets();
 
 	void createTokenSet(int tokenPos);
-	
-	//input events		
+
+	//input events
 	void rotateToken( Rotation dir);
 	void updateToken();
 
@@ -149,8 +137,8 @@ protected:
 public:
 	GameBoard( float dim, int rx, int ry);
 	virtual ~GameBoard();
-	virtual void init(); 
-	virtual void reset(); 
+	virtual void init();
+	virtual void reset();
 	void dump();
 
 	virtual void update(unsigned int currTick);
@@ -168,47 +156,48 @@ public:
 	void RightKeyUp(){rightpressed = false;};
 	void DownKeyUp(){downpressed = false;};
 	void RotateLeft() { if (!_gameOver) { rotateToken(CLOCKWISE); } };
-	void RotateRight(){ if (!_gameOver) { rotateToken(COUNTERCLOCKWISE); } };  
+	void RotateRight(){ if (!_gameOver) { rotateToken(COUNTERCLOCKWISE); } };
 
-	int getRowMax() { return _ry; };
-	int getColMax() { return _rx; };
-	
+	int getRowMax() const { return _ry; };
+	int getColMax() const { return _rx; };
+
 	void updateSpecialAt (int x, int y);
 
 	virtual void toggleScanner(unsigned int currTime);
-	void advanceToken();  
+	void advanceToken();
 	void updateTokens();
 	void markSpecial(int x, int y);
-	bool isGameOver() { return _gameOver; };
+	bool isGameOver() const { return _gameOver; };
 	void setGameOver( bool gameOver) { _gameOver = gameOver; if (_gameOver) { _audioManager->stopSong(); } };
-	
+
 	//score
-	int getHigh() { return _high; };
-	
-	int getScore() { return _score; };
-	int getBlockCount() { return _blockCount; };	
+	int getHigh()       const { return _high; };
+
+	int getScore()      const { return _score; };
+	int getBlockCount() const { return _blockCount; };
 
 	void setScore(int score) { _score = score; };
 	void setBlockCount (int count) { _blockCount = count; };
-	
+
 	void addToScore(int score) { _score += score; };
-	virtual void addToBlockCount (int count) { _blockCount += count; };	
-	
+	virtual void addToBlockCount (int count) { _blockCount += count; };
+
 	unsigned int getCurrentGameTime();
-	
+
 protected:
-	float getMinX();
-	float getMaxX();
-	float getMinY();
-	float getMaxY();
-	float getPieceX(int i);
-	float getPieceY(int j);
+	float getMinX() const;
+	float getMaxX() const;
+	float getMinY() const;
+	float getMaxY() const;
+	float getPieceX(int i) const;
+	float getPieceY(int j) const;
 
 	//scanner
-	float calculateRate(float ScanTime);
-	
-	Theme *getTheme() { return currTheme; };
-	
+	float calculateRate(float ScanTime) const;
+
+	HF::Theme *getTheme() const { return currTheme; };
+
 	friend class Token;
 };
-#endif
+
+} // namespace Hunchback::Linumes

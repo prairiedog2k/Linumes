@@ -21,9 +21,11 @@
 #include "MediaManager.h"
 #include "ScreenDimensions.h"
 
+namespace Hunchback::Framework {
+
 int roundi(double x)
 {
-	return (int)(x + 0.5);
+	return static_cast<int>(x + 0.5);
 }
 
 int nextpoweroftwo(int x)
@@ -44,11 +46,13 @@ int power_of_two(int input)
 }
 
 int xformX(int x) {
-	return (int)( (float((float)(x) / (float)(SCREEN_DIM_W)) * MediaManager::getScreenWidth()) );
+	return static_cast<int>(static_cast<float>(x) / static_cast<float>(SCREEN_DIM_W) * MediaManager::getScreenWidth());
 }
 
 int xformY(int y) {
-	return (int)( (float((float)(y) / (float)(SCREEN_DIM_H)) * MediaManager::getScreenHeight()) );
+	return static_cast<int>(static_cast<float>(y) / static_cast<float>(SCREEN_DIM_H) * MediaManager::getScreenHeight());
 }
+
+} // namespace Hunchback::Framework
 
 

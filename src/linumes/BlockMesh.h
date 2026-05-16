@@ -1,17 +1,15 @@
-#ifndef BLOCKMESH_H_
-#define BLOCKMESH_H_
+﻿#include "framework/OpenGLHeaders.h"
+#pragma once
 
-#include <GL/gl.h>
-
-using namespace std;
+namespace Hunchback::Linumes {
 
 class BlockMesh {
 private:
 	static bool isLoaded;
 	static GLint listID;
-	static GLint Gen3DObjectList();  
-public:  
+	static GLint Gen3DObjectList();
+public:
  	static GLint getListId();
 };
 
-#endif /*BLOCKMESH_H_*/
+} // namespace Hunchback::Linumes

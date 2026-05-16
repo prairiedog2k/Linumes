@@ -1,0 +1,46 @@
+text_displays:
+- name: hiscore_txt
+  text: High
+  type: int
+  x: '890'
+  y: '700'
+- name: hiscore_val
+  text: ' '
+  type: int
+  x: '890'
+  y: '650'
+- name: score_txt
+  text: Score
+  type: int
+  x: '890'
+  y: '600'
+- name: score_val
+  text: ' '
+  type: int
+  x: '890'
+  y: '550'
+- name: count_txt
+  text: Block
+  type: int
+  x: '890'
+  y: '500'
+- name: count_val
+  text: ' '
+  type: int
+  x: '890'
+  y: '450'
+- name: time_txt
+  text: Time
+  type: int
+  x: '890'
+  y: '400'
+- name: time_val
+  text: ' '
+  type: int
+  x: '890'
+  y: '350'
+- name: announce
+  text: ' '
+  type: string
+  x: '300'
+  y: '680'

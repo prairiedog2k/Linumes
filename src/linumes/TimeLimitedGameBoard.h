@@ -1,27 +1,28 @@
-#ifndef TIMELIMITEDGAMEBOARD_H_
-#define TIMELIMITEDGAMEBOARD_H_
+﻿#pragma once
 
 #include "GameBoard.h"
 #include "framework/TextureQuad.h"
 
+namespace Hunchback::Linumes {
+namespace HF = Hunchback::Framework;
 
 class TimeLimitedGameBoard : public GameBoard
 {
 private:
 	unsigned int _gameDuration;
 	bool _timeOver;
-	TextureQuad _quad;
+	HF::TextureQuad _quad;
 public:
 	TimeLimitedGameBoard();
 	TimeLimitedGameBoard(unsigned int gameDuration);
 	virtual ~TimeLimitedGameBoard();
 	virtual void update(unsigned int currTick);
-	virtual void reset();	
+	virtual void reset();
 protected:
 	virtual void updateHud();
 	virtual void drawContents();
-	virtual void checkHighScore();	
+	virtual void checkHighScore();
 	virtual void evaluateBonus() { }; //do not evaluate bonus
 };
 
-#endif /*TIMELIMITEDGAMEBOARD_H_*/
+} // namespace Hunchback::Linumes

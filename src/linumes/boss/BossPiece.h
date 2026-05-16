@@ -1,7 +1,8 @@
-#ifndef BOSSPIECE_H
-#define BOSSPIECE_H
+﻿#pragma once
 
 #include "linumes/GamePiece.h"
+
+namespace Hunchback::Linumes {
 
 class BossPiece : public GamePiece {
 private:
@@ -12,10 +13,10 @@ protected:
 public:
     BossPiece();
     virtual ~BossPiece();
-    bool isBoss() { return _boss; };
+    bool isBoss() const { return _boss; };
     void setBoss(bool boss) { _boss = boss; };
     void setBossTexture(GLuint texture) { _bossTexture = texture; };
-    virtual bool isStopped();
+    virtual bool isStopped() const;
 };
 
-#endif
+} // namespace Hunchback::Linumes

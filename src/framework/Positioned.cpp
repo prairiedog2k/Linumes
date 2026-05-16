@@ -19,8 +19,14 @@
  ***************************************************************************/
 #include "Positioned.h"
 
+
+namespace Hunchback::Framework {
+
 Positioned::Positioned() : _x(0.0f), _y(0.0f) {
 }
 
 Positioned::Positioned(float x, float y) : _x(x), _y(y){
 }
+
+
+} // namespace Hunchback::Framework

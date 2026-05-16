@@ -13,13 +13,15 @@ extern "C" {
 }
 #endif
 
+namespace Hunchback::Framework {
+
 void AudioManager::mixer_monitor(void *udata, Uint8 *_stream, int _len) {
 
 	//mix the music first.
 #ifndef MING_NO_PLUGIN
 	music_mixer(udata, _stream, _len);
 #endif
-	if ( NULL != udata) {
+	if ( nullptr != udata) {
 		AudioManager *am = (AudioManager *)udata;
 		am->calc_freq((Sint16 *)_stream);
 	}
@@ -35,7 +37,7 @@ float AudioManager::getSoundLevel(int band) {
 		levelsMax[band] = level;
 		return 1.0f;
 	}
-	return ((float)(float(level)/float(maxLevel)));
+	return float(level)/float(maxLevel);
 }
 
 void AudioManager::calc_freq(Sint16 *src)
@@ -52,14 +54,14 @@ void AudioManager::calc_freq(Sint16 *src)
 		*(d++) = (*(sl++) + *(sr++)) >> 1;
 	}
 
-	fft_perform(tmp,tmp_out,state);
+	_fft.perform(tmp, tmp_out);
 	int currLevel = 0;
 	float scale =  256  / log(256);
 	for(i = 0; i < 256; i++) {
-		currLevel = ((int)(sqrt(tmp_out[i + 1]))) >> 8;
+		currLevel = static_cast<int>(sqrt(tmp_out[i + 1])) >> 8;
 		currLevel >>= 7;
 		if(currLevel != 0) {
-			currLevel = (int)(log(currLevel) * scale);
+			currLevel = static_cast<int>(log(currLevel) * scale);
 		}
 		levels[i] = currLevel;
 	}
@@ -73,9 +75,9 @@ AudioManager::AudioManager() : Themed(), _lastChannel(2)
 AudioManager::~AudioManager()
 {
 #ifndef MING_NO_PLUGIN
-	Mix_HookMusic( NULL,NULL );
+	Mix_HookMusic( nullptr,nullptr );
 #else
-	Mix_SetPostMix (NULL, NULL );
+	Mix_SetPostMix (nullptr, nullptr );
 #endif
 }
 
@@ -84,7 +86,7 @@ void AudioManager::init() {
 		levels[i] = 0;
 		levelsMax[i] = 0;
 	}
-	state = fft_init();
+
 #ifndef MING_NO_PLUGIN
 	Mix_HookMusic( AudioManager::mixer_monitor,this );
 #else
@@ -132,9 +134,9 @@ void AudioManager::playSong(std::string song) {
 	Mix_HaltChannel(1);
 	_musicResource = ResourceHelper::getMusicResource(_theme,song);
 
-	if ( NULL != _musicResource) {
+	if ( nullptr != _musicResource) {
 		Mix_MusicType type = MUS_NONE;
-		if (_musicResource->getAudioInfo() != NULL) {
+		if (_musicResource->getAudioInfo() != nullptr) {
 			_trackLength = _musicResource->getAudioInfo()->getSongLength();
 			_musicResource->getAudioInfo()->resetBeats();
 			_nextBeat = _musicResource->getAudioInfo()->getNextBeat();
@@ -143,13 +145,13 @@ void AudioManager::playSong(std::string song) {
 		}
 
 		if (type == MUS_WAV) {
-			if(Mix_PlayChannel(1, (Mix_Chunk *)_musicResource->getResource(), -1)==-1) {
+			if(Mix_PlayChannel(1, static_cast<Mix_Chunk *>(_musicResource->getResource()), -1)==-1) {
 #ifdef DEBUG
 				std::cout << "Mix_PlayChannel: " << Mix_GetError() << std::endl;
 #endif
 			}
 		} else if (type == MUS_MP3) {
-			if(Mix_PlayMusic((Mix_Music *)_musicResource->getResource(), -1)==-1) {
+			if(Mix_PlayMusic(static_cast<Mix_Music *>(_musicResource->getResource()), -1)==-1) {
 #ifdef DEBUG
 				std::cout << "Mix_PlayMusic: " << Mix_GetError() << std::endl;
 #endif
@@ -160,7 +162,7 @@ void AudioManager::playSong(std::string song) {
 }
 
 void AudioManager::playAudioResource( AudioResource *resource) {
-	if ( NULL != resource) {
+	if ( nullptr != resource) {
 		Mix_HaltChannel(_lastChannel);
 		if(Mix_PlayChannel(_lastChannel, resource->getResource(), 0)==-1) {
 #ifdef DEBUG
@@ -179,3 +181,5 @@ void AudioManager::playSoundEffect(std::string sound) {
 	AudioResource *resource = ResourceHelper::getAudioResource(_theme,sound);
 	playAudioResource(resource);
 }
+
+} // namespace Hunchback::Framework

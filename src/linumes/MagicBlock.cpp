@@ -3,7 +3,12 @@
 #include "framework/ResourceHelper.h"
 #include <math.h>
 
-MagicBlock::MagicBlock(float x, float y, float dim, int boardpos) : Rendered(true), Themed(), TimeLimited(500), _state(NONE), _quad()
+
+namespace Hunchback::Linumes {
+namespace HF = Hunchback::Framework;
+
+
+MagicBlock::MagicBlock(float x, float y, float dim, int boardpos) : HF::Rendered(true), HF::Themed(), HF::TimeLimited(500), _state(NONE), _quad()
 {
 	_renderable = true;
 	_x = x;
@@ -12,7 +17,7 @@ MagicBlock::MagicBlock(float x, float y, float dim, int boardpos) : Rendered(tru
 	_boardpos = boardpos;
 }
 
-MagicBlock::MagicBlock() : Rendered(true), Themed(), TimeLimited(500), _state(NONE), _quad()
+MagicBlock::MagicBlock() : HF::Rendered(true), HF::Themed(), HF::TimeLimited(500), _state(NONE), _quad()
 {
 	_renderable = false;
 	_x = 0.0f;
@@ -25,13 +30,13 @@ MagicBlock::~MagicBlock()
 {
 }
 
-void MagicBlock::setTheme(Theme *theTheme) {
-	Themed::setTheme(theTheme);
+void MagicBlock::setTheme(HF::Theme *theTheme) {
+	HF::Themed::setTheme(theTheme);
 }
 
 GLuint MagicBlock::getNamedTexture(const char * arg) {
-	TextureResource * tr = ResourceHelper::getTextureResource(getTheme(), std::string(arg));
-	if (NULL == tr) {
+	HF::TextureResource * tr = HF::ResourceHelper::getTextureResource(getTheme(), std::string(arg));
+	if (nullptr == tr) {
 		return 0;
 	} else {
 		return tr->getResource();
@@ -67,7 +72,7 @@ GLuint MagicBlock::getStarMask() {
 void MagicBlock::drawShrinker() {
 	glLoadIdentity();
 
-	glTranslatef( (GLfloat)_x,(GLfloat) _y , -4.95f );
+	glTranslatef( static_cast<GLfloat>(_x),static_cast<GLfloat>(_y) , -4.95f );
 	glRotatef(90.0f * getPercentComplete(), 0.0f,0.0f,1.0f);		
     
 	glBindTexture( GL_TEXTURE_2D, getMask() );
@@ -91,7 +96,7 @@ void MagicBlock::drawShrinker() {
 void MagicBlock::drawLooper() {
 	glLoadIdentity();
 
-	glTranslatef( (GLfloat)_x,(GLfloat) _y , -4.95f );
+	glTranslatef( static_cast<GLfloat>(_x),static_cast<GLfloat>(_y) , -4.95f );
 	glRotatef(90.0f * getPercentComplete(), 0.0f,0.0f,1.0f);		
     
 	glBindTexture( GL_TEXTURE_2D, getMask() );
@@ -120,10 +125,10 @@ void MagicBlock::drawLooper() {
 void MagicBlock::drawSpark() {
 	glLoadIdentity();
 
-	glTranslatef( (GLfloat)_x ,(GLfloat) _y , -4.94f );
+	glTranslatef( static_cast<GLfloat>(_x) ,static_cast<GLfloat>(_y) , -4.94f );
 
-	int side = (int)(4.0f * getPercentComplete());
-	float sideComplete = (4.0f * getPercentComplete()) - ((float)side);
+	int side = static_cast<int>(4.0f * getPercentComplete());
+	float sideComplete = (4.0f * getPercentComplete()) - static_cast<float>(side);
 	float currx = 0.0f;
 	float curry = 0.0f;
 	if (side == 0) {
@@ -155,7 +160,7 @@ void MagicBlock::drawSpark() {
 void MagicBlock::drawStar() {
 	glLoadIdentity();
 
-	glTranslatef( (GLfloat)_x,(GLfloat) _y , -4.95f );
+	glTranslatef( static_cast<GLfloat>(_x),static_cast<GLfloat>(_y) , -4.95f );
 	glRotatef(-90.0f * getPercentComplete(), 0.0f,0.0f,1.0f);		
 
 	glBindTexture( GL_TEXTURE_2D, getStarMask() );
@@ -206,3 +211,6 @@ void MagicBlock::Draw() {
 		glDisable(GL_TEXTURE_2D);
 	}
 }
+
+
+} // namespace Hunchback::Linumes

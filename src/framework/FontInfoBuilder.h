@@ -1,14 +1,14 @@
-#ifndef FONTINFOBUILDER_H_
-#define FONTINFOBUILDER_H_
+﻿#pragma once
 
 #include "FontInfo.h"
-#include "xmlParser.h"
+#include <yaml-cpp/yaml.h>
+
+namespace Hunchback::Framework {
 
 class FontInfoBuilder
 {
 public:
-  static FontInfo createFontInfo(XMLNode fontNode);
+  static FontInfo createFontInfo(const YAML::Node& fontNode);
 };
 
-#endif /*FONTINFOBUILDER_H_*/
-
+} // namespace Hunchback::Framework

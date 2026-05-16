@@ -1,14 +1,15 @@
-#ifndef HIGHSCORETABLE_H_
-#define HIGHSCORETABLE_H_
+﻿#pragma once
 
 #include <string>
 #include <set>
-#include "xmlParser.h"
+#include <yaml-cpp/yaml.h>
+
+namespace Hunchback::Linumes {
 
 struct hscomp{
-	bool operator()(const std::pair<int, std::string> &lhs, const std::pair<int, std::string> &rhs) const{
-		return lhs.first > rhs.first;
-	};
+    bool operator()(const std::pair<int, std::string> &lhs, const std::pair<int, std::string> &rhs) const{
+        return lhs.first > rhs.first;
+    };
 };
 
 typedef std::set< std::pair<int, std::string>, hscomp > ScoreTable;
@@ -16,19 +17,19 @@ typedef std::set< std::pair<int, std::string>, hscomp > ScoreTable;
 class HighScoreTable
 {
 private:
-	unsigned int _maxSize;
-	std::string _tableName;
-	ScoreTable _scoreTable;
-	
+    unsigned int _maxSize;
+    std::string _tableName;
+    ScoreTable _scoreTable;
+
 public:
-	HighScoreTable();
-	HighScoreTable(std::string tableName, int maxSize );
-	virtual ~HighScoreTable();
-	void fillXml(XMLNode &topNode);
-	void fillTable( XMLNode node);
-	bool addScore(int score, std::string name = " ");
-	int getHighestScore();
-	std::string getTableString();	
+    HighScoreTable();
+    HighScoreTable(std::string tableName, int maxSize);
+    virtual ~HighScoreTable();
+    void fillYaml(YAML::Node& gameModes);
+    void fillTable(const YAML::Node& node);
+    bool addScore(int score, std::string name = "Player");
+    int getHighestScore();
+    std::string getTableString();
 };
 
-#endif /*HIGHSCORETABLE_H_*/
+} // namespace Hunchback::Linumes

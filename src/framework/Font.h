@@ -1,5 +1,4 @@
-#ifndef FONT_H_
-#define FONT_H_
+﻿#pragma once
 
 #include "SDL.h"
 #include "SDL_ttf.h"
@@ -8,7 +7,7 @@
 /** BTW, it is covered by the LGPL  ** Bob Pendleton **/
 /** http://www.devolution.com/pipermail/sdl/2004-December/066119.html **/
 
-/** 
+/**
 
   +--------------------------------------+
   + Bob Pendleton: writer and programmer +
@@ -24,6 +23,8 @@
 		now takes into account newline character
 
 **/
+
+namespace Hunchback::Framework {
 
 class Font
 {
@@ -61,7 +62,7 @@ private:
 public:
 
   Font(const char *fontName,
-       int pointSize, 
+       int pointSize,
        float fgRed, float fgGreen, float fgBlue);
 
   ~Font();
@@ -80,4 +81,4 @@ public:
 
 };
 
-#endif /*FONT_H_*/
+} // namespace Hunchback::Framework

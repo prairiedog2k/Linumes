@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
  *   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
  *                                                                         *
@@ -17,21 +17,21 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef THEME_MANAGER_H
-#define THEME_MANAGER_H
+#pragma once
 
 #include <string>
 #include <list>
+#include <memory>
 #include "Theme.h"
 
 #define DEFAULT_FILE "theme.list"
 
-using namespace std;
+namespace Hunchback::Framework {
 
 class ThemeManager{
 protected:
-  Theme *_baseTheme;
-  Theme *_currentTheme;
+  std::unique_ptr<Theme> _baseTheme;
+  std::unique_ptr<Theme> _currentTheme;
 public:
   ThemeManager();
   ThemeManager(std::string filename);
@@ -39,15 +39,16 @@ public:
   virtual bool init();
   Theme *getNamedTheme(std::string themeName);
   Theme *getNextTheme();
-  Theme *getBaseTheme() { return _baseTheme; };
-  Theme *getCurrentTheme() { return _currentTheme; };
+  Theme *getBaseTheme() { return _baseTheme.get(); };
+  Theme *getCurrentTheme() { return _currentTheme.get(); };
 private:
-  bool initXML();
+  bool initThemes();
   bool initData();
-  
+
   std::string themesFile;
-  std::list< std::pair< std::string, std::string> > nameList;    
-  std::list< std::pair< std::string, std::string> > themeList;  
-  std::list< std::pair< std::string, std::string> >::iterator themeIterator; 
+  std::list< std::pair< std::string, std::string> > nameList;
+  std::list< std::pair< std::string, std::string> > themeList;
+  std::list< std::pair< std::string, std::string> >::iterator themeIterator;
 };
-#endif
+
+} // namespace Hunchback::Framework

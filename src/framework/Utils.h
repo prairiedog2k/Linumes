@@ -1,9 +1,9 @@
-#ifndef UTILS_H
-#define UTILS_H
+﻿#pragma once
 
 #define FALSE 0
 #define TRUE 1
 
+namespace Hunchback::Framework {
 
 int roundi(double x);
 
@@ -16,4 +16,4 @@ int xformX(int x);
 
 int xformY(int y);
 
-#endif
+} // namespace Hunchback::Framework

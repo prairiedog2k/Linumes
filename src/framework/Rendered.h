@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
  *   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
  *                                                                         *
@@ -17,16 +17,19 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef RENDERED_H
-#define RENDERED_H
+#pragma once
+
+namespace Hunchback::Framework {
+
 class Rendered {
 protected:
 	bool _renderable;
 public:
   Rendered(bool renderable): _renderable(renderable){};
   virtual ~Rendered() {};
-	bool isRenderable() { return _renderable; };
+	bool isRenderable() const { return _renderable; };
 	void setRenderable( bool render ) { _renderable = render;};
-	virtual void Draw() = 0;	
+	virtual void Draw() = 0;
 };
-#endif
+
+} // namespace Hunchback::Framework

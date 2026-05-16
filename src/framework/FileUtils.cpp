@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 
+namespace Hunchback::Framework {
 
 bool fileExists(std::string myFileName) {
 	bool bRetVal = true;
@@ -12,6 +13,8 @@ bool fileExists(std::string myFileName) {
 	inp.close();
 	if (inp.fail() ) {
 		bRetVal = false;
-	}	
-	return bRetVal; 
+	}
+	return bRetVal;
 }
+
+} // namespace Hunchback::Framework

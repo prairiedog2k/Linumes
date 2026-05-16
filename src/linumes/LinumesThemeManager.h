@@ -1,18 +1,21 @@
-#ifndef LINUMESTHEMEMANAGER_H_
-#define LINUMESTHEMEMANAGER_H_
+﻿#pragma once
 
+#include <memory>
 #include "framework/ThemeManager.h"
 #include "HighScoreManager.h"
 
-class LinumesThemeManager : public ThemeManager
+namespace Hunchback::Linumes {
+namespace HF = Hunchback::Framework;
+
+class LinumesThemeManager : public HF::ThemeManager
 {
 private:
-	HighScoreManager *_highScoreManager;
+	std::unique_ptr<HighScoreManager> _highScoreManager;
 public:
 	LinumesThemeManager(std::string file);
 	virtual ~LinumesThemeManager();
-	HighScoreManager *getHighScoreManager() { return _highScoreManager; };
+	HighScoreManager *getHighScoreManager() { return _highScoreManager.get(); };
 	virtual bool init();
 };
 
-#endif /*LINUMESTHEMEMANAGER_H_*/
+} // namespace Hunchback::Linumes

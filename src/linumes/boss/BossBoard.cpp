@@ -9,30 +9,29 @@
 #include "linumes/BaseTextTypes.h"
 
 
-BossBoard::BossBoard() : 
-    GameBoard(0.2f,16,10), 
-    _boss("jublo.xml"),
-    _bossIcon( new BossIcon() ),
+
+namespace Hunchback::Linumes {
+namespace HF = Hunchback::Framework;
+
+
+BossBoard::BossBoard() :
+    GameBoard(0.2f, 16, 10),
+    _boss("resources/jublo.yaml"),
+    _bossPieces(16 * 10),
+    _bossIcon(std::make_unique<BossIcon>()),
     _bossAttacks(0),
     _attackStart(0),
     _attackDuration(250),
     _bossWinPlayed(false)
 {
-	
-	_bossPieces = new BossPiece[16 * 10];
 	_bossIcon->setRenderable(true);
-	_gameName = "jublo";	
+	_gameName = "jublo";
 }
 
-BossBoard::~BossBoard() {
-	if (_bossPieces != NULL)
-	{
-		delete[] _bossPieces;
-	}
-}
+BossBoard::~BossBoard() = default;
 
 void BossBoard::assignInitialTheme() {
-	if (currTheme == NULL)
+	if (currTheme == nullptr)
 	{
 		if ( _boss.getPreferredTheme().length() > 0) {
 			currTheme = themeManager->getNamedTheme( _boss.getPreferredTheme() );
@@ -171,9 +170,8 @@ void BossBoard::evaluateBonus() {
 	if (_bossAttacks > 0 ) {
 		_audioManager->playAudioResource(_boss.getDamageAudio());
 		_announceTime = _currentTick;
-		char temp[20];
-		sprintf(temp,"Boss Attack %d X 10K",_bossAttacks);
-		_hud->setValue("announce",temp);			
+		_hud->setValue("announce", "Boss Attack " + std::to_string(_bossAttacks) + " X 10K");
+
 		addToScore(10000 * _bossAttacks);
 		_bossAttacks = 0;
 	} 
@@ -186,52 +184,17 @@ void BossBoard::addToBlockCount (int count) {
 }
 
 void BossBoard::updateHud() {
-	std::string name = "";
-	std::string val = "";
-	char temp[10];
+	_hud->overrideText("hiscore_txt", "Score");
+	_hud->setValue("hiscore_val",    std::to_string(_score));
+	_hud->overrideText("time_txt", "Attack In");
 
-	name = "hiscore_txt";
-	val = "Score";
-	_hud->overrideText(name,val);
+	int turns = _boss.getNextAttackTurn();
+	_hud->setValue("time_val", std::to_string(turns) + (turns > 1 ? " Passes" : " Pass"));
 
-	name = "hiscore_val";
-	::sprintf(temp,"%d",_score);
-	val = temp;
-	_hud->setValue(name,val);
-
-	name = "time_txt";
-	val = "Attack In";
-	_hud->overrideText(name,val);
-
-	
-	name = "time_val";
-	if (_boss.getNextAttackTurn() > 1) {
-		::sprintf(temp,"%d Passes", _boss.getNextAttackTurn() );
-	} else {
-		::sprintf(temp,"%d Pass", _boss.getNextAttackTurn() );
-	}
-	val = temp;
-	_hud->setValue(name,val);
-
-	name = "score_txt";
-	val = "Attack";
-	_hud->overrideText(name,val);
-
-	name = "score_val";
-	::sprintf(temp,"%d",_boss.getCurrentAttack());
-	val = temp;
-	_hud->setValue(name,val);
-
-
-	name = "count_txt";
-	val = "Boss HP";
-    _hud->overrideText(name, val);
-    
-    
-	name = "count_val";
-	::sprintf(temp,"%d",_boss.getHitPoints());
-	val = temp;
-	_hud->setValue(name, val);
+	_hud->overrideText("score_txt", "Attack");
+	_hud->setValue("score_val",     std::to_string(_boss.getCurrentAttack()));
+	_hud->overrideText("count_txt", "Boss HP");
+	_hud->setValue("count_val",     std::to_string(_boss.getHitPoints()));
 
 	//only leave announcement up for a second
 	if (!_advanceScanner) {
@@ -239,7 +202,6 @@ void BossBoard::updateHud() {
 	} else if (_currentTick - _announceTime > 1000) {
 		_hud->setValue("announce"," ");
 	}
-
 }
 
 void BossBoard::resetContents() {
@@ -277,10 +239,10 @@ void BossBoard::drawGameOver() {
 		glEnable(GL_TEXTURE_2D);
 		glDisable(GL_DEPTH_TEST);
 
-		glBindTexture( GL_TEXTURE_2D, ResourceHelper::getTextureResource(getTheme(),  "hi_score_table" )->getResource());
+		glBindTexture( GL_TEXTURE_2D, HF::ResourceHelper::getTextureResource(getTheme(),  "hi_score_table" )->getResource());
 
 		glTranslatef( 0.0,0.0, -5.0f );
-		TextureQuad _quad;		
+		HF::TextureQuad _quad;		
 		_quad.setDimensionAndPosition2D(0.0,0.0,2.0f);
 		_quad.setZ(1.0f);
 		_quad.Draw();
@@ -289,32 +251,30 @@ void BossBoard::drawGameOver() {
 		glEnable(GL_DEPTH_TEST);
 
 		if (_boss.isDead()) {
-			Font *f1 = ResourceHelper::getFontResource(getTheme(),  BASE_FONT_48 )->getResource();
+			HF::Font *f1 = HF::ResourceHelper::getFontResource(getTheme(),  BASE_FONT_48 )->getResource();
 			f1->setRGB(0.0,1.0,0.0);
 			std::string win = "You Beat ";
-			f1->drawText(win.c_str(), xformX(512), xformY(690), true);
+			f1->drawText(win.c_str(), HF::xformX(512), HF::xformY(690), true);
 			win = _boss.getName();
-			f1->drawText(win.c_str(), xformX(512), xformY(630), true);
+			f1->drawText(win.c_str(), HF::xformX(512), HF::xformY(630), true);
 			
 			
-			char highs[300];
-			::sprintf( highs,"%s",_hiScoreTable->getTableString().c_str() );
-			Font *f3=ResourceHelper::getFontResource(getTheme(),  BASE_FONT_24 )->getResource();
-			f3->drawText(highs,xformX(400), xformY(600), true, true);
-			 
-			char score[64];
-			::sprintf(score,"[Score %d]", _score );
-			Font *f2 = ResourceHelper::getFontResource(getTheme(),  BASE_FONT_48 )->getResource();
-			f2->drawText(score, xformX(512), xformY(20), true);
+			std::string highs = _hiScoreTable->getTableString();
+			HF::Font *f3=HF::ResourceHelper::getFontResource(getTheme(),  BASE_FONT_24 )->getResource();
+			f3->drawText(highs.c_str(),HF::xformX(400), HF::xformY(600), true, true);
+
+			std::string score = "[Score " + std::to_string(_score) + "]";
+			HF::Font *f2 = HF::ResourceHelper::getFontResource(getTheme(),  BASE_FONT_48 )->getResource();
+			f2->drawText(score.c_str(), HF::xformX(512), HF::xformY(20), true);
 		} else {
-			Font *f1 = ResourceHelper::getFontResource(getTheme(),  BASE_FONT_72 )->getResource();
+			HF::Font *f1 = HF::ResourceHelper::getFontResource(getTheme(),  BASE_FONT_72 )->getResource();
 			f1->setRGB(1.0,0.0,0.0);
 			std::string fail = "Failed...";
-			f1->drawText(fail.c_str(), xformX(512), xformY(425),true);
+			f1->drawText(fail.c_str(), HF::xformX(512), HF::xformY(425),true);
 			fail =_boss.getName();
-			f1->drawText(fail.c_str(), xformX(512), xformY(350),true);
+			f1->drawText(fail.c_str(), HF::xformX(512), HF::xformY(350),true);
 			fail = " Wins!!!";
-			f1->drawText(fail.c_str(), xformX(512), xformY(275),true);
+			f1->drawText(fail.c_str(), HF::xformX(512), HF::xformY(275),true);
 									
 		}
 	}	
@@ -322,13 +282,13 @@ void BossBoard::drawGameOver() {
 
 void BossBoard::drawAttack() {
 	if ( isAttacking() ) {
-		float percentAttack = (float)( _currentTick -_attackStart) / (float)(_attackDuration);
+		float percentAttack = static_cast<float>(_currentTick - _attackStart) / static_cast<float>(_attackDuration);
 		float critDim = ( percentAttack - 0.5f ) * 2.0f;
 		critDim *= critDim;
 		critDim = ::sqrt(critDim);			
 		critDim = _dim + (critDim * _dim);
 		float dd = 1.25f * critDim;
-		TextureQuad _quad;
+		HF::TextureQuad _quad;
 		
 		glLoadIdentity();
 
@@ -341,7 +301,7 @@ void BossBoard::drawAttack() {
 		glRotatef(45.0f * percentAttack, 0.0f, 0.0f, 1.0f);
 
 		glPushMatrix();
-			glTranslatef( (GLfloat)- 2.0f * dd, (GLfloat) -2.0f * dd, -3.0f );
+			glTranslatef( -2.0f * dd, -2.0f * dd, -3.0f );
 			_quad.setZ(1.0f);
 			_quad.setDimensionAndPosition2D(2.0f * dd, 2.0f * dd, 4.0f * dd );
 			
@@ -356,7 +316,7 @@ void BossBoard::drawAttack() {
 		
 		glLoadIdentity();
 		glPushMatrix();
-			glTranslatef( (GLfloat)- 2.0f * critDim, (GLfloat) -2.0f * critDim, -3.0f );
+			glTranslatef( -2.0f * critDim, -2.0f * critDim, -3.0f );
 			_quad.setZ(1.0f);
 			_quad.setDimensionAndPosition2D(2.0f * critDim, 2.0f * critDim, 4.0f * critDim );
 			
@@ -395,3 +355,6 @@ void BossBoard::updateContents() {
 		}
 	}
 }
+
+
+} // namespace Hunchback::Linumes

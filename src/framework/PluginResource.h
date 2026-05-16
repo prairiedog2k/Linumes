@@ -1,17 +1,16 @@
-#ifndef PLUGINRESOURCE_H_
-#define PLUGINRESOURCE_H_
+﻿#pragma once
 
 #include "GenericResource.h"
 #include <string>
 
-using namespace std;
+namespace Hunchback::Framework {
 
 class PluginResource: public GenericResource<void *> {
 public:
-	PluginResource(void *info, string argResourceFile);
+	PluginResource(void *info, std::string argResourceFile);
 	virtual ~PluginResource();
 	bool load();
 	bool release();
 };
 
-#endif /*PLUGINRESOURCE_H_*/
+} // namespace Hunchback::Framework

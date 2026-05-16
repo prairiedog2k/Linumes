@@ -1,20 +1,21 @@
-#ifndef FONTRESOURCE_H_
-#define FONTRESOURCE_H_
+﻿#pragma once
 
 #include "GenericResource.h"
 #include "Font.h"
 #include "FontInfo.h"
+
+namespace Hunchback::Framework {
 
 class FontResource : public GenericResource<Font *>
 {
 private:
 	 FontInfo *fontInfo;
 public:
-	FontResource(void *info, string argResourceFile);
+	FontResource(void *info, std::string argResourceFile);
 	virtual ~FontResource();
 	bool load();
 	bool release();
-	
+
 };
 
-#endif /*FONTRESOURCE_H_*/
+} // namespace Hunchback::Framework

@@ -1,5 +1,4 @@
-#ifndef RESOURCEHELPER_H_
-#define RESOURCEHELPER_H_
+﻿#pragma once
 
 #include <iostream>
 
@@ -12,21 +11,20 @@
 #include "PluginResource.h"
 #include "Theme.h"
 
-using namespace std;
+namespace Hunchback::Framework {
 
 class ResourceHelper
 {
 public:
-  static TextureResource *getTextureResource( Theme * theme, const string resourceName );
-  static AudioResource *getAudioResource( Theme * theme, const string resourceName );
-  static MusicResource *getMusicResource( Theme * theme, const string resourceName );  
-  static FontResource *getFontResource( Theme * theme, const string resourceName );
-  static PluginResource *getPluginResource( Theme * theme, const string resourceName );
-  static StringResource *getStringResource( Theme *theme, const string resourceName);
+  static TextureResource *getTextureResource( Theme * theme, const std::string resourceName );
+  static AudioResource *getAudioResource( Theme * theme, const std::string resourceName );
+  static MusicResource *getMusicResource( Theme * theme, const std::string resourceName );
+  static FontResource *getFontResource( Theme * theme, const std::string resourceName );
+  static PluginResource *getPluginResource( Theme * theme, const std::string resourceName );
+  static StringResource *getStringResource( Theme *theme, const std::string resourceName);
 private:
-  static bool isValid( Theme * theme, const string resourceName );
-  static BaseResource *getBaseResource( Theme * theme, const string resourceName);
+  static bool isValid( Theme * theme, const std::string resourceName );
+  static BaseResource *getBaseResource( Theme * theme, const std::string resourceName);
 };
 
-#endif /*RESOURCEHELPER_H_*/
-
+} // namespace Hunchback::Framework

@@ -1,15 +1,16 @@
-#ifndef BOSSMODE_H_
-#define BOSSMODE_H_
+﻿#pragma once
 
 #include "linumes/GameMode.h"
+
+namespace Hunchback::Linumes {
 
 class BossMode : public GameMode
 {
 protected:
-    virtual void createGameBoard(); 
+    virtual void createGameBoard();
 public:
 	BossMode();
 	virtual ~BossMode();
 };
 
-#endif /*BOSSMODE_H_*/
+} // namespace Hunchback::Linumes

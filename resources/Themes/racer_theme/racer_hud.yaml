@@ -1,0 +1,55 @@
+text_displays:
+- dropshadow: 'true'
+  name: hiscore_txt
+  text: High
+  type: string
+  x: '890'
+  y: '700'
+- dropshadow: 'true'
+  name: hiscore_val
+  text: ' '
+  type: int
+  x: '890'
+  y: '650'
+- dropshadow: 'true'
+  name: score_txt
+  text: Score
+  type: string
+  x: '890'
+  y: '600'
+- dropshadow: 'true'
+  name: score_val
+  text: ' '
+  type: int
+  x: '890'
+  y: '550'
+- dropshadow: 'true'
+  name: count_txt
+  text: Block
+  type: string
+  x: '890'
+  y: '500'
+- dropshadow: 'true'
+  name: count_val
+  text: ' '
+  type: int
+  x: '890'
+  y: '450'
+- dropshadow: 'true'
+  name: time_txt
+  text: Time
+  type: string
+  x: '890'
+  y: '400'
+- dropshadow: 'true'
+  name: time_val
+  text: ' '
+  type: int
+  x: '890'
+  y: '350'
+- dropshadow: 'true'
+  name: announce
+  text: ' '
+  type: string
+  x: '400'
+  y: '680'

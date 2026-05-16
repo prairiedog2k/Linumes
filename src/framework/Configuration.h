@@ -1,16 +1,16 @@
-/*
+﻿/*
  * Configuration.h
  *
  *  Created on: Apr 7, 2011
  *      Author: rigriff
  */
 
-#ifndef CONFIGURATION_H_
-#define CONFIGURATION_H_
+#pragma once
 
 #include <string>
 #include <map>
 
+namespace Hunchback::Framework {
 
 class Configuration {
 private:
@@ -28,4 +28,4 @@ public:
 	void release();
 };
 
-#endif /* CONFIGURATION_H_ */
+} // namespace Hunchback::Framework

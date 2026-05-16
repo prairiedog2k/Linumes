@@ -24,18 +24,21 @@
 #include <string.h>
 #include "TextureResource.h"
 #include "AudioResource.h"
-#include "unistd.h"
+#ifdef _WIN32
+#include <direct.h>
+#define getcwd _getcwd
+#else
+#include <unistd.h>
+#endif
 
-using namespace std;
+namespace Hunchback::Framework {
 
-Theme::Theme(std::string filename): themefile(filename) {
-	_baseTheme = NULL;
-
+Theme::Theme(std::string filename): themefile(filename), _baseTheme(nullptr) {
 };
 
 Theme::~Theme()
 {
-
+	release();
 }
 
 void Theme::handleTag(const char *cwd, const char* tag, const char *target)
@@ -61,14 +64,14 @@ void Theme::handleTag(const char *cwd, const char* tag, const char *target)
 		if ( strTag.at(0) == 'a')
 		{
 			resourceCount++;
-			AudioResource *ar = new AudioResource(NULL, resourceFile);
+			AudioResource *ar = new AudioResource(nullptr, resourceFile);
 			ar->load();
 			resources[tag]= ar;
 		}
 		if ( strTag.at(0) == 't')
 		{
 			resourceCount++;
-			TextureResource *tr = new TextureResource(NULL,resourceFile);
+			TextureResource *tr = new TextureResource(nullptr,resourceFile);
 			tr->load();
 			resources[tag] = tr;
 		}
@@ -81,11 +84,8 @@ void Theme::handleTag(const char *cwd, const char* tag, const char *target)
 }
 
 BaseResource *Theme::getResource(std::string target) {
-	if (resources.find(target) != resources.end() ) {
-		return resources[target];
-	} else {
-		return NULL;
-	}
+	auto it = resources.find(target);
+	return (it != resources.end()) ? it->second : nullptr;
 }
 
 bool Theme::init()
@@ -105,7 +105,7 @@ bool Theme::init()
 			char *tag = strtok(buff,"=");
 			if (tag)
 			{
-				char* target = strtok(NULL,"\n");
+				char* target = strtok(nullptr,"\n");
 				if (target)
 				{
 					handleTag(currdir,tag,target);
@@ -115,8 +115,8 @@ bool Theme::init()
 		fclose(file);
 	}
 	else
-	{  	
-		cout << "Could not find file " << themefile << endl;
+	{
+		std::cout << "Could not find file " << themefile << std::endl;
 	}
 	return resourceCount > 0;
 }
@@ -124,21 +124,16 @@ bool Theme::init()
 
 void Theme::release()
 {
-
-	if (resourceCount == 0) {
-		return;
-	} 
-	for ( map<std::string,BaseResource *>::iterator iter = resources.begin(); iter != resources.end(); iter++)
-	{
-		BaseResource * resPtr = (*iter).second;
-		if (resPtr != NULL) {
-			resPtr->release();
-		}
+	if (resources.empty()) return;
+	for (auto& [key, resPtr] : resources) {
 		delete resPtr;
 	}
 	resources.clear();
+	resourceCount = 0;
 #ifdef DEBUG
-	std::cout << "Theme Release Complete. " << endl;
+	std::cout << "Theme Release Complete. " << std::endl;
 #endif
 }
+
+} // namespace Hunchback::Framework
 

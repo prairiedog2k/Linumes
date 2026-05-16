@@ -1,0 +1,25 @@
+game_modes:
+  - name: TimeLimited060
+    max_listing: 10
+    scores:
+      - name: " "
+        score: 191
+      - name: " "
+        score: 188
+      - name: " "
+        score: 173
+      - name: " "
+        score: 88
+      - name: " "
+        score: 65
+      - name: " "
+        score: 31
+      - name: " "
+        score: 18
+      - name: " "
+        score: 2
+      - name: " "
+        score: 0
+  - name: jublo
+    max_listing: 10
+    scores: ~

@@ -1,14 +1,13 @@
-#ifndef GENERICRESOURCE_H_
-#define GENERICRESOURCE_H_
+﻿#pragma once
 
 #include <iostream>
 #include <string>
 
 #include "BaseResource.h"
 
-using namespace std;
+namespace Hunchback::Framework {
 
-template<class T> 
+template<class T>
 class GenericResource : public BaseResource {
 protected:
 	T value_;
@@ -16,8 +15,8 @@ protected:
 public:
 	GenericResource( std::string argResourceFile) : BaseResource(), resourceFile(argResourceFile) {};
 	virtual ~GenericResource() {};
-	const T getResource() { return value_;};
-	virtual void reportResourceFile() { cout << "resource file : " << resourceFile << endl; }
+	const T getResource() const { return value_;};
+	virtual void reportResourceFile() { std::cout << "resource file : " << resourceFile << std::endl; }
 };
 
-#endif /*GENERICRESOURCE_H_*/
+} // namespace Hunchback::Framework

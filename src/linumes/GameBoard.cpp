@@ -1,3 +1,4 @@
+#include "framework/OpenGLHeaders.h"
 /*   Copyright (C) 2006 by developer   *
  *   developer@mountain   *
  *                                                                         *
@@ -18,9 +19,10 @@
  ***************************************************************************/
 #include <iostream>
 #include <cassert>
+#include <memory>
+#include <vector>
 #include "SDL.h"
-#include "GL/gl.h"
-#include "GL/glu.h"
+#include "framework/MediaManager.h"
 
 #include "GameBoard.h"
 #include "Block.h"
@@ -30,6 +32,11 @@
 #include "framework/ResourceHelper.h"
 
 #include "HighScoreManager.h"
+
+
+namespace Hunchback::Linumes {
+namespace HF = Hunchback::Framework;
+
 
 #ifdef DEBUG
 #define glError() { \
@@ -73,42 +80,43 @@
  */
 
 GameBoard::GameBoard( float dim, int rx, int ry):
-	Rendered(true),
-	_hiScoreTable(NULL),
-	_scanner(new Scanner( (float) - ( (rx * dim)  / 2.0f ),
-			(float)rx*dim - ( (rx * dim)  / 2.0f ),
-			(float)ry*dim - ( (ry * dim)  / 2.0f ),
-			1.0 ,
+	HF::Rendered(true),
+	_hiScoreTable(nullptr),
+	_pieces(rx * ry),
+	_scanner(std::make_unique<Scanner>(
+			- ( (rx * dim)  / 2.0f ),
+			static_cast<float>(rx)*dim - ( (rx * dim)  / 2.0f ),
+			static_cast<float>(ry)*dim - ( (ry * dim)  / 2.0f ),
+			1.0,
 			dim,
-			(float)ry * dim,
+			static_cast<float>(ry) * dim,
 			rx)),
-			_bg( new SimpleBackground(0.0,0.0) ),
-			_fg( new FadingForeground(0.0,0.0,1000)),
-			_icon( new Icon() ),
-			_hud( new HUD() ),
-			currTheme(NULL),
-			_isThemeChanging(false),
-			_gameOver(false),
-			_tokenCount(0),
-			_pieceCount(0),
-			_blockCount(0),
-			_totalBlockCount(0),
-			_high(0),
-			_score(0),			
-			_canBonus(false),
-			_scoreChecked(false),
-			_midasMode(false) {
+	_bg(std::make_unique<SimpleBackground>(0.0, 0.0)),
+	_fg(std::make_unique<FadingForeground>(0.0, 0.0, 1000)),
+	_icon(std::make_unique<Icon>()),
+	_hud(std::make_unique<HUD>()),
+	currTheme(nullptr),
+	_isThemeChanging(false),
+	_gameOver(false),
+	_tokenCount(0),
+	_pieceCount(0),
+	_blockCount(0),
+	_totalBlockCount(0),
+	_high(0),
+	_score(0),
+	_canBonus(false),
+	_scoreChecked(false),
+	_pauseTime(0),
+	_midasMode(false) {
 	downpressed = false;
 	leftpressed = false;
 	rightpressed = false;
 	_advanceScanner = true;
 	_dim = dim;
 	_rx = rx;
-	_ry = ry; 
+	_ry = ry;
 
-	_pieces = new GamePiece[ _rx * _ry];
-
-	_grid = new Grid(0.0,0.0,dim,rx,ry);
+	_grid = std::make_unique<Grid>(0.0, 0.0, dim, rx, ry);
 	_grid->setRenderable(true);
 
 	_icon->setRenderable(true);
@@ -116,7 +124,7 @@ GameBoard::GameBoard( float dim, int rx, int ry):
 	_scanner->setStopped(false);
 	_scanner->setXRate(calculateRate(5.0f));
 	lastscanned = 0;
-	_audioManager = new AudioManager();
+	_audioManager = std::make_unique<HF::AudioManager>();
 	_currentTick = SDL_GetTicks();
 	_gameTime = _currentTick;
 	_gameName = GAME_NAME;
@@ -125,59 +133,36 @@ GameBoard::GameBoard( float dim, int rx, int ry):
 //given a time in seconds that you want to scan the board in
 //this will provide the scanner with the appropriate rate for
 // the size of the board
-float GameBoard::calculateRate(float ScanTime) {
+float GameBoard::calculateRate(float ScanTime) const {
 	if ( ScanTime == 0.0f ) {
 		return 0.0f;
 	}
 	float distance = _rx * _dim;
 	float scanRate = ( distance / 1000.0f);
-	float frequency = 1.0f / (float)ScanTime;
+	float frequency = 1.0f / ScanTime;
 	return frequency * scanRate;
 }
 
 
-float GameBoard::getMinX() {
-	return  (float) - ( (_rx * _dim)  / 2.0f );
+float GameBoard::getMinX() const {
+	return  - ( (_rx * _dim)  / 2.0f );
 }
 
-float GameBoard::getMaxX() {
-	return (float)_rx*_dim - ( (_rx * _dim)  / 2.0f );
+float GameBoard::getMaxX() const {
+	return static_cast<float>(_rx)*_dim - ( (_rx * _dim)  / 2.0f );
 }
 
-float GameBoard::getMinY() {
-	return  (float) - ( (_ry * _dim)  / 2.0f );
+float GameBoard::getMinY() const {
+	return  - ( (_ry * _dim)  / 2.0f );
 }
 
-float GameBoard::getMaxY() {
-	return (float)_ry*_dim - ( (_ry * _dim)  / 2.0f );
+float GameBoard::getMaxY() const {
+	return static_cast<float>(_ry)*_dim - ( (_ry * _dim)  / 2.0f );
 }
 
 
 GameBoard::~GameBoard()
 {
-	if (_pieces != NULL)
-	{
-		delete[] _pieces;
-	}
-
-	if (_grid != NULL) {
-		delete _grid;
-	}
-
-	if (_audioManager != NULL) {
-		delete _audioManager;
-	}
-	
-	if (_scanner != NULL) {
-		delete _scanner;
-	}
-
-	/*  The following members are std::auto_ptr and do not need to be deleted
-	// _hud
-	// _bg
-	// _icon
-	
-	 */
 
 	_mbSet.clear();
 }
@@ -194,7 +179,7 @@ void GameBoard::createTokenSet(int tokenPos) {
 
 	if (tokenPos == 3) {
 		float halfway =  _rx / 2.0f;
-		float distance = (float) halfway * _dim;
+		float distance = halfway * _dim;
 		distance += getMinX();
 		distance -= _dim;
 		leftMostX = distance;
@@ -213,7 +198,7 @@ void GameBoard::createTokenSet(int tokenPos) {
 }
 
 void GameBoard::assignInitialTheme() {
-	if (currTheme == NULL)
+	if (currTheme == nullptr)
 	{
 		currTheme = themeManager->getCurrentTheme();
 	}
@@ -224,7 +209,7 @@ void GameBoard::init()
 	assignInitialTheme();
 
 	_audioManager->init();
-	_grid->setAudioManager(_audioManager);
+	_grid->setAudioManager(_audioManager.get());
 	
 	_icon->setDimension(3 * _dim);
 	_icon->setX(getMinX() - 2.90 * _dim);
@@ -244,7 +229,7 @@ void GameBoard::init()
 		}
 	}
 
-	if (currTheme != NULL) {
+	if (currTheme != nullptr) {
 		_audioManager->setTheme(currTheme);
 		_audioManager->playSong(AUDIO_SONG);
 		_grid->setTheme(currTheme);
@@ -265,7 +250,7 @@ void GameBoard::init()
 
 	HighScoreManager *hsm = themeManager->getHighScoreManager();
 	_hiScoreTable = hsm->getHighScoreTable(_gameName);
-	if (NULL == _hiScoreTable) {
+	if (nullptr == _hiScoreTable) {
 		_hiScoreTable = hsm->createHighScoreTable(_gameName);
 	}
 	_high = _hiScoreTable->getHighestScore();
@@ -275,25 +260,25 @@ void GameBoard::init()
 	}
 }
 
-float GameBoard::getPieceX(int i) {
-	return (float)i*_dim - ( (_rx * _dim)  / 2.0f );
+float GameBoard::getPieceX(int i) const {
+	return static_cast<float>(i)*_dim - ( (_rx * _dim)  / 2.0f );
 }
 
-float GameBoard::getPieceY(int j) {
-	return (float)j*_dim - ( (_ry * _dim)  / 2.0f );
+float GameBoard::getPieceY(int j) const {
+	return static_cast<float>(j)*_dim - ( (_ry * _dim)  / 2.0f );
 }
 
 void GameBoard::reset() {
 	if (isGameOver()) {
 		_gameOver = false;
-	
-		delete _scanner;
-		_scanner = new Scanner( (float) - ( (_rx * _dim)  / 2.0f ),
-								(float)_rx*_dim - ( (_rx * _dim)  / 2.0f ),
-								(float)_ry*_dim - ( (_ry * _dim)  / 2.0f ),
-								1.0 ,
+
+		_scanner = std::make_unique<Scanner>(
+								- ( (_rx * _dim)  / 2.0f ),
+								static_cast<float>(_rx)*_dim - ( (_rx * _dim)  / 2.0f ),
+								static_cast<float>(_ry)*_dim - ( (_ry * _dim)  / 2.0f ),
+								1.0,
 								_dim,
-								(float)_ry * _dim,
+								static_cast<float>(_ry) * _dim,
 								_rx);
 		_scanner->setStopped(false);
 		_scanner->setXRate(calculateRate(5.0f));
@@ -305,7 +290,7 @@ void GameBoard::reset() {
 		_mbSet.clear();
 		
 		_tokenCount = 0;
-		_pieceCount = 0,
+		_pieceCount = 0;
 		_blockCount = 0;
 		_totalBlockCount = 0;
 		_score = 0;		
@@ -361,8 +346,8 @@ void GameBoard::toggleScanner(unsigned int currTime) {
 
 void GameBoard::applyNextTheme()
 {
-	Theme *nextTheme = NULL;
-	if (themeManager != NULL)
+	HF::Theme *nextTheme = nullptr;
+	if (themeManager != nullptr)
 	{
 		nextTheme = themeManager->getNextTheme();
 	}
@@ -411,9 +396,13 @@ void GameBoard::applyNextTheme()
 	_fg->setDisplayInfo(displayInfo);
 
 
-	for ( std::set<MagicBlock>::iterator iter = _mbSet.begin(); iter != _mbSet.end(); iter++) {
-		((MagicBlock)*iter).setTheme(nextTheme);
+	MagicBlockSet updated;
+	for (auto it = _mbSet.begin(); it != _mbSet.end(); ) {
+		auto node = _mbSet.extract(it++);
+		node.value().setTheme(nextTheme);
+		updated.insert(std::move(node));
 	}
+	_mbSet = std::move(updated);
 
 	currTheme = nextTheme;
 }
@@ -528,8 +517,7 @@ void GameBoard::drawScoreTargets() {
 
 
 void GameBoard::drawMagicBlocks() {
-	for ( std::set<MagicBlock>::iterator iter = _mbSet.begin(); iter != _mbSet.end(); iter++) {
-		MagicBlock mb = (MagicBlock)*iter;
+	for (auto mb : _mbSet) {
 		if ( ! mb.isComplete() ) {
 			mb.setTheme(currTheme);
 			mb.Draw();
@@ -590,7 +578,7 @@ void GameBoard::Draw()
 	/* Draw it to the screen */
 	glError();
 	
-	SDL_GL_SwapBuffers( );
+	SDL_GL_SwapWindow(HF::MediaManager::getWindow());
 }
 
 int GameBoard::scanTo(int column) {
@@ -603,7 +591,7 @@ int GameBoard::scanTo(int column) {
 				getPieceAt(column,j)->setScanned(  true );
 				targetCount++;
 
-				MagicBlock mb(0.0f,0.0f,0.0f,(j *_rx) + column);
+				MagicBlock mb(0.0f,0.0f,0.0f,(column * _ry) + j);
 
 				std::set<MagicBlock>::iterator pos = _mbSet.find(mb);
 				if ( ! (pos == _mbSet.end() ) ){
@@ -657,7 +645,7 @@ void GameBoard::markScoreTargets() {
 					markSpecial(i + x, j - y);
 				}
 
-				MagicBlock mb(getPieceAt(i+1,j)->getX(),getPieceAt(i+1,j)->getY(),_dim,(j * _rx) + i);
+				MagicBlock mb(getPieceAt(i+1,j)->getX(),getPieceAt(i+1,j)->getY(),_dim,(i * _ry) + j);
 				mb.setState(MagicBlock::SHRINKER);
 				mb.setMaxTime(750);
 				mb.start();
@@ -681,14 +669,14 @@ void GameBoard::setPieceInMotion(int i, int j) {
 	//the height attributable to the number of pieces that don't exist beneath this piece
 
 	//the initial y for the given block
-	float yInitial = ( (float)(j) *_dim);
+	float yInitial = ( static_cast<float>(j) *_dim);
 	//centering
-	yInitial -= ( ( (float) (_ry * _dim) ) / 2.0f );
+	yInitial -= ( (_ry * _dim) / 2.0f );
 
 	//the final y position for this block
-	float yFinal = ( (float)(j - 1) *_dim);
+	float yFinal = ( static_cast<float>(j - 1) *_dim);
 	//centering
-	yFinal -= ( (float)(_ry * _dim) / 2.0f );
+	yFinal -= ( (_ry * _dim) / 2.0f );
 
 	getPieceAt(i,j-1)->setNextY( yFinal );
 	getPieceAt(i,j-1)->setY( yInitial  );
@@ -734,12 +722,11 @@ void GameBoard::cleanScanned(int column) {
 					getPieceAt(i,j)->setScanned( false );
 					_canBonus = true;
 				}
-
-				lastscanned = column + 1;
-				if (lastscanned >= _rx) {
-					lastscanned = 0;
-				}
 			}
+		}
+		lastscanned = column + 1;
+		if (lastscanned >= _rx) {
+			lastscanned = 0;
 		}
 		for (int i = 0; i < lastscanned; i++) {
 			for (int j = _ry - 1; j >= 0; j--) {
@@ -770,7 +757,7 @@ void GameBoard::evaluateBonus() {
 				}
 			}
 		}
-		if ( (allColor0) || (allColor1) ){
+		if ( (allColor0 || allColor1) && !allInvisible ){
 			_announceTime = _currentTick;
 			_hud->setValue("announce","Single Color Bonus 1K");
 			addToScore(1000);
@@ -822,12 +809,10 @@ void GameBoard::updateTokens() {
 }
 
 void GameBoard::midasLeft() {
-	GamePiece * leftPieces = new GamePiece[_ry];
-
-	for (int j = 0; j <_ry; j++) {
+	std::vector<GamePiece> leftPieces(_ry);
+	for (int j = 0; j < _ry; j++) {
 		leftPieces[j] = GamePiece(*getPieceAt(0, j));
 	}
-
 	for (int i = 0; i < _rx; i++) {
 		for (int j = 0; j < _ry; j++) {
 			if (i == _rx-1) {
@@ -840,13 +825,10 @@ void GameBoard::midasLeft() {
 }
 
 void GameBoard::midasRight() {
-	GamePiece * rightPieces = new GamePiece[_ry];
-
-	for (int j = 0; j <_ry; j++) {
+	std::vector<GamePiece> rightPieces(_ry);
+	for (int j = 0; j < _ry; j++) {
 		rightPieces[j] = GamePiece(*getPieceAt(_rx - 1, j));
 	}
-
-
 	for (int i = _rx-1; i >= 0; i--) {
 		for (int j = 0; j < _ry; j++) {
 			if (i == 0) {
@@ -863,30 +845,10 @@ unsigned int GameBoard::getCurrentGameTime() {
 }
 
 void GameBoard::updateHud() {
-	std::string name = "";
-	std::string val = "";
-	char temp[10];
-
-	name = "hiscore_val";
-	::sprintf(temp,"%d",getHigh());
-	val = temp;
-	_hud->setValue(name,val);
-
-
-	name = "time_val";
-	::sprintf(temp,"%d",getCurrentGameTime());
-	val = temp;
-	_hud->setValue(name,val);
-
-	name = "score_val";
-	::sprintf(temp,"%d",_score);
-	val = temp;
-	_hud->setValue(name, val);
-
-	name = "count_val";
-	::sprintf(temp,"%d",_totalBlockCount + _blockCount);
-	val = temp;
-	_hud->setValue(name, val);
+	_hud->setValue("hiscore_val", std::to_string(getHigh()));
+	_hud->setValue("time_val",    std::to_string(getCurrentGameTime()));
+	_hud->setValue("score_val",   std::to_string(_score));
+	_hud->setValue("count_val",   std::to_string(_totalBlockCount + _blockCount));
 
 	//only leave announcement up for a second
 	if (!_advanceScanner) {
@@ -920,7 +882,7 @@ void GameBoard::update(unsigned int currTick) {
 
 	if ( isGameOver() ){
 		if (! _scoreChecked) {
-			_fg->setDisplayInfo("Press 'BackSpace' to Return to Mode Selection.  Press 'Return' to Start");
+			_fg->setDisplayInfo("Press 'BackSpace' to Return to HF::Mode Selection.  Press 'Return' to Start");
 		}
 		checkHighScore();
 		return;
@@ -1176,3 +1138,6 @@ void GameBoard::updateSpecialAt(int x, int y) {
 	}
 }
 
+
+
+} // namespace Hunchback::Linumes

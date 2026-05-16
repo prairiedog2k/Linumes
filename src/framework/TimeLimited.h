@@ -1,5 +1,6 @@
-#ifndef TIMELIMITED_H_
-#define TIMELIMITED_H_
+﻿#pragma once
+
+namespace Hunchback::Framework {
 
 //A timer oriented class
 // all units are in milliseconds
@@ -12,10 +13,10 @@ public:
 	TimeLimited(unsigned int duration);
 	virtual ~TimeLimited();
 	void start();
-	float getPercentComplete();
-	bool isComplete();
+	float getPercentComplete() const;
+	bool isComplete() const;
 
 	void setMaxTime(unsigned int duration) { _duration = duration; };
 };
 
-#endif /*TIMELIMITED_H_*/
+} // namespace Hunchback::Framework

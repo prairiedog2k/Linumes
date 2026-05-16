@@ -1,22 +1,25 @@
-#ifndef BOSSBOARD_H
-#define BOSSBOARD_H
+﻿#pragma once
 
+#include <memory>
+#include <vector>
 #include "linumes/GameBoard.h"
 #include "Boss.h"
 #include "BossPiece.h"
 #include "BossIcon.h"
 
+namespace Hunchback::Linumes {
+
 class BossBoard : public GameBoard {
 private:
-    Boss _boss;   
-    BossPiece *_bossPieces;
-    auto_ptr<BossIcon>  _bossIcon;
+    Boss _boss;
+    std::vector<BossPiece> _bossPieces;
+    std::unique_ptr<BossIcon> _bossIcon;
     int _bossAttacks;
-    
+
     unsigned int _attackStart;
     unsigned int _attackDuration;
     bool _bossWinPlayed;
-    bool isAttacking() { return _currentTick - _attackStart < _attackDuration; }    
+    bool isAttacking() { return _currentTick - _attackStart < _attackDuration; }
     void drawAttack();
     void drawGameOver();
 protected:
@@ -31,10 +34,10 @@ protected:
 	virtual void evaluateBonus();
 public:
     BossBoard();
-    virtual ~BossBoard();    
+    virtual ~BossBoard();
    	virtual void init();
    	virtual void reset();
    	virtual void addToBlockCount (int count);
 };
 
-#endif
+} // namespace Hunchback::Linumes

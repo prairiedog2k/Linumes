@@ -7,13 +7,17 @@
 #include "HighScoreTypes.h"
 #include "framework/ResourceHelper.h"
 #include "framework/FileUtils.h"
+#include <yaml-cpp/yaml.h>
 
-HighScoreManager::HighScoreManager() : _baseTheme(NULL), _highScoreFile("") {
 
+namespace Hunchback::Linumes {
+namespace HF = Hunchback::Framework;
+
+
+HighScoreManager::HighScoreManager() : _baseTheme(nullptr), _highScoreFile("") {
 }
 
-HighScoreManager::HighScoreManager(Theme *baseTheme) : _baseTheme(baseTheme) , _highScoreFile(""){
-
+HighScoreManager::HighScoreManager(HF::Theme *baseTheme) : _baseTheme(baseTheme), _highScoreFile("") {
 }
 
 HighScoreManager::~HighScoreManager()
@@ -21,57 +25,55 @@ HighScoreManager::~HighScoreManager()
 }
 
 void HighScoreManager::loadHighScores() {
-	if (fileExists(_highScoreFile)) {
-		XMLNode xMainNode=XMLNode::openFileHelper(_highScoreFile.c_str(),HI_ROOT);
-		if (! xMainNode.isEmpty() ) {
-			int pos = 0;
-			XMLNode gameMode;
-			do { 
-				gameMode = xMainNode.getChildNode(HI_GAME_MODE, &pos);
-				if ( (!gameMode.isEmpty() ) && 
-				     ( ( NULL != gameMode.getAttribute(HI_ATTR_NAME) ) && 
-					   ( NULL != gameMode.getAttribute(HI_ATTR_MAX_LISTING) ) ) ) {
-					std::string modeName =  gameMode.getAttribute(HI_ATTR_NAME);
-					int maxListing = atoi( gameMode.getAttribute(HI_ATTR_MAX_LISTING) );
-					HighScoreTable *table = new HighScoreTable(modeName, maxListing);
-					table->fillTable( gameMode );
-					_tableMap[modeName] = table;
-				}
-			} while ( !gameMode.isEmpty());
-		}
-	} 
+    if (!HF::fileExists(_highScoreFile)) return;
+    YAML::Node root = YAML::LoadFile(_highScoreFile);
+    if (!root[HI_GAME_MODE]) return;
+    for (const auto& gm : root[HI_GAME_MODE]) {
+        if (!gm[HI_ATTR_NAME] || !gm[HI_ATTR_MAX_LISTING]) continue;
+        std::string modeName = gm[HI_ATTR_NAME].as<std::string>();
+        int maxListing = gm[HI_ATTR_MAX_LISTING].as<int>();
+        auto table = std::make_unique<HighScoreTable>(modeName, maxListing);
+        table->fillTable(gm);
+        _tableMap[modeName] = std::move(table);
+    }
 }
 
 HighScoreTable *HighScoreManager::createHighScoreTable(std::string tableName) {
-	return createHighScoreTable(tableName, 10);
-
+    return createHighScoreTable(tableName, 10);
 }
+
 HighScoreTable *HighScoreManager::createHighScoreTable(std::string tableName, unsigned int maxListings) {
-	return _tableMap[tableName] = new HighScoreTable(tableName, maxListings); 
+    auto table = std::make_unique<HighScoreTable>(tableName, maxListings);
+    HighScoreTable *raw = table.get();
+    _tableMap[tableName] = std::move(table);
+    return raw;
 }
 
 void HighScoreManager::init() {
-	if (NULL != _baseTheme) {
-		StringResource *sr = ResourceHelper::getStringResource(_baseTheme, BASE_HI_REF);
-		if (NULL != sr) {
-			_highScoreFile = sr->getResource();
-			if (_highScoreFile.size() > 0) {
-				loadHighScores();
-			}
-		} else {
-		}
-	}
+    if (_baseTheme) {
+        HF::StringResource *sr = HF::ResourceHelper::getStringResource(_baseTheme, BASE_HI_REF);
+        if (sr) {
+            _highScoreFile = sr->getResource();
+            if (!_highScoreFile.empty()) {
+                loadHighScores();
+            }
+        }
+    }
 }
 
 void HighScoreManager::release() {
-	XMLNode top = XMLNode::createXMLTopNode(HI_ROOT);
-	for (std::map<std::string, HighScoreTable*>::iterator iter = _tableMap.begin(); iter != _tableMap.end(); iter++) {
-		HighScoreTable *ptr = (*iter).second;
-		if (NULL != ptr) {
-			ptr->fillXml( top );
-		}
-		delete ptr;
-	}
-	top.writeToFile(_highScoreFile.c_str(),"utf-8");
-	_tableMap.clear();
+    YAML::Node root;
+    YAML::Node gameModes;
+    for (auto& kv : _tableMap) {
+        if (kv.second) {
+            kv.second->fillYaml(gameModes);
+        }
+    }
+    root[HI_GAME_MODE] = gameModes;
+    std::ofstream fout(_highScoreFile);
+    fout << root;
+    _tableMap.clear();
 }
+
+
+} // namespace Hunchback::Linumes

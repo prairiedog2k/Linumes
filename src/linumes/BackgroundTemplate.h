@@ -1,7 +1,9 @@
-#ifndef BACKGROUND_TEMPLATE_H
-#define BACKGROUND_TEMPLATE_H
+﻿#pragma once
 
 #include "framework/Theme.h"
+
+namespace Hunchback::Linumes {
+namespace HF = Hunchback::Framework;
 
 class BackgroundTemplate;
 
@@ -14,7 +16,7 @@ class BackgroundTemplate {
 public:
   BackgroundTemplate() {};
   virtual ~BackgroundTemplate() {};
-  virtual void setTheme(Theme *theme) = 0;
+  virtual void setTheme(HF::Theme *theme) = 0;
   virtual void init() = 0;
   virtual void release() = 0;
 	virtual void Draw() = 0;
@@ -25,4 +27,4 @@ public:
   virtual void update() = 0;
 };
 
-#endif /*BACKGROUND_*/
+} // namespace Hunchback::Linumes
