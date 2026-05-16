@@ -1,5 +1,5 @@
 base_theme:
-  dir: base
+  dir: resources/base
   resources:
     - type: font
       name: linumes_72
@@ -86,19 +86,19 @@ base_theme:
 themes:
   - name: CitrusBlend
     file: citrusblend_theme.yaml
-    dir: Themes
+    dir: resources/Themes
   - name: Desktop
     file: desktop_theme.yaml
-    dir: Themes
+    dir: resources/Themes
   - name: Racer
     file: racer_theme.yaml
-    dir: Themes
+    dir: resources/Themes
   - name: OneLaptop
     file: onelaptop_theme.yaml
-    dir: Themes
+    dir: resources/Themes
   - name: BubbleGum
     file: bubblegum_theme.yaml
-    dir: Themes
+    dir: resources/Themes
   - name: Nature
     file: nature_theme.yaml
-    dir: Themes
+    dir: resources/Themes

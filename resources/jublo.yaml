@@ -1,5 +1,5 @@
 name: Jublo
-dir: jublo
+dir: resources/jublo
 turn: 3
 attack: 20
 reduce: 2

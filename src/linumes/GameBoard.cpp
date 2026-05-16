@@ -106,6 +106,7 @@ GameBoard::GameBoard( float dim, int rx, int ry):
 	_score(0),
 	_canBonus(false),
 	_scoreChecked(false),
+	_pauseTime(0),
 	_midasMode(false) {
 	downpressed = false;
 	leftpressed = false;
@@ -289,7 +290,7 @@ void GameBoard::reset() {
 		_mbSet.clear();
 		
 		_tokenCount = 0;
-		_pieceCount = 0,
+		_pieceCount = 0;
 		_blockCount = 0;
 		_totalBlockCount = 0;
 		_score = 0;		
@@ -590,7 +591,7 @@ int GameBoard::scanTo(int column) {
 				getPieceAt(column,j)->setScanned(  true );
 				targetCount++;
 
-				MagicBlock mb(0.0f,0.0f,0.0f,(j *_rx) + column);
+				MagicBlock mb(0.0f,0.0f,0.0f,(column * _ry) + j);
 
 				std::set<MagicBlock>::iterator pos = _mbSet.find(mb);
 				if ( ! (pos == _mbSet.end() ) ){
@@ -644,7 +645,7 @@ void GameBoard::markScoreTargets() {
 					markSpecial(i + x, j - y);
 				}
 
-				MagicBlock mb(getPieceAt(i+1,j)->getX(),getPieceAt(i+1,j)->getY(),_dim,(j * _rx) + i);
+				MagicBlock mb(getPieceAt(i+1,j)->getX(),getPieceAt(i+1,j)->getY(),_dim,(i * _ry) + j);
 				mb.setState(MagicBlock::SHRINKER);
 				mb.setMaxTime(750);
 				mb.start();
@@ -721,12 +722,11 @@ void GameBoard::cleanScanned(int column) {
 					getPieceAt(i,j)->setScanned( false );
 					_canBonus = true;
 				}
-
-				lastscanned = column + 1;
-				if (lastscanned >= _rx) {
-					lastscanned = 0;
-				}
 			}
+		}
+		lastscanned = column + 1;
+		if (lastscanned >= _rx) {
+			lastscanned = 0;
 		}
 		for (int i = 0; i < lastscanned; i++) {
 			for (int j = _ry - 1; j >= 0; j--) {
@@ -757,7 +757,7 @@ void GameBoard::evaluateBonus() {
 				}
 			}
 		}
-		if ( (allColor0) || (allColor1) ){
+		if ( (allColor0 || allColor1) && !allInvisible ){
 			_announceTime = _currentTick;
 			_hud->setValue("announce","Single Color Bonus 1K");
 			addToScore(1000);

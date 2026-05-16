@@ -18,19 +18,19 @@ resources:
 - file: scan1.png
   name: texture_scanned1
   type: texture
-- altdir: base
+- altdir: resources/base
   file: shrinker.png
   name: texture_grid
   type: texture
-- altdir: base
+- altdir: resources/base
   file: shrinker-mask.png
   name: texture_grid_mask
   type: texture
-- altdir: base
+- altdir: resources/base
   file: shrinker.png
   name: texture_magicbox
   type: texture
-- altdir: base
+- altdir: resources/base
   file: shrinker-mask.png
   name: texture_magicbox_mask
   type: texture

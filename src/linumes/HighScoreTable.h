@@ -27,7 +27,7 @@ public:
     virtual ~HighScoreTable();
     void fillYaml(YAML::Node& gameModes);
     void fillTable(const YAML::Node& node);
-    bool addScore(int score, std::string name = " ");
+    bool addScore(int score, std::string name = "Player");
     int getHighestScore();
     std::string getTableString();
 };

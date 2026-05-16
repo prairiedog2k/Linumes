@@ -24,19 +24,19 @@ resources:
 - file: grid_originalmask.png
   name: texture_grid_mask
   type: texture
-- altdir: base
+- altdir: resources/base
   file: shrinker.png
   name: texture_magicbox
   type: texture
-- altdir: base
+- altdir: resources/base
   file: shrinker-mask.png
   name: texture_magicbox_mask
   type: texture
-- altdir: base
+- altdir: resources/base
   file: star.png
   name: texture_stars
   type: texture
-- altdir: base
+- altdir: resources/base
   file: star-mask.png
   name: texture_stars_mask
   type: texture

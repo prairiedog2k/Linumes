@@ -64,8 +64,6 @@ GLuint Scanner::getTexture() {
 }
 
 void Scanner::Draw() {
-	static GLfloat yrot = 0;
-	yrot += 0.01f;
 	if (isRenderable())
 	{
 		glLoadIdentity();
@@ -170,7 +168,7 @@ void Scanner::update(unsigned int currTime) {
 		this->setX(currX);
 		reset = false;
 	}
-	colpos = static_cast<int>((currX - minimumx) / (maximumx - minimumx) * columns);
+	colpos = std::min(static_cast<int>((currX - minimumx) / (maximumx - minimumx) * columns), columns - 1);
 }
 
 
